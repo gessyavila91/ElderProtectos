@@ -37,8 +37,7 @@
 
 <body>
 
-    <div class="hidden">
-
+    <div >
         <div class="intro">
             <img class="logo animated fadeIn slower" src="{{asset('assets/img/logo-white.svg')}}" alt="logotype">
         </div>
@@ -86,7 +85,7 @@
 
 <footer>
     <a  class="notice animated fadeInUp slower delay-2s" href="mailto:hi@elderprotectors.com">
-        <p class="animated fadeIn slower delay-5s">You want to be a reseller? [Contact us]</p>
+        <p class="animated fadeIn slower delay-5s">{{ __('elder.contactUs') }}</p>
     </a>
 </footer>
 

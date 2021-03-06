@@ -195,6 +195,10 @@ body {
     padding-bottom: 20px;
 }
 
+.logo {
+    margin:auto;
+}
+
 .logo:hover {
     transition: 0.5s;
     -moz-transition: 0.5s;
