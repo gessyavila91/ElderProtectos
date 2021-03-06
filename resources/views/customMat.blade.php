@@ -1,5 +1,5 @@
 <head>
-    <title>{{ config('app.name') }} Custom Mat</title>
+    <title>{{ config('app.name') }} - Custom Mat Maker</title>
 
     <meta charset="utf-8">
 
@@ -23,6 +23,42 @@
 
 </head>
 
+<script>
+    $(function() {
+
+        var origTitle, animatedTitle, timer;
+
+        function animateTitle(newTitle) {
+            var currentState = false;
+            origTitle = document.title;  // save original title
+            animatedTitle = "Hey There! " + origTitle;
+            timer = setInterval(startAnimation, 2000);
+
+            function startAnimation() {
+                // animate between the original and the new title
+                document.title = currentState ? origTitle : animatedTitle;
+                currentState = !currentState;
+            }
+        }
+
+        function restoreTitle() {
+            clearInterval(timer);
+            document.title = origTitle; // restore original title
+        }
+
+// Change page title on blur
+        $(window).blur(function() {
+            animateTitle();
+        });
+
+// Change page title back on focus
+        $(window).focus(function() {
+            restoreTitle();
+        });
+
+    });
+</script>
+
 <style>
 
     .fondo {
@@ -43,28 +79,29 @@
 
 </style>
 
-
 <div class="parent">
 
     <div id="matPreview">
-        <img id="fondo"  class="fondo"  src="{{asset('customMat/AppImg/fondo1.png')}}" />
-        <img id="marco"  class="marco"  src="{{asset('customMat/AppImg/marco1.png')}}" />
-        <img id="centro" class="centro" src="{{asset('customMat/AppImg/centro1.png')}}" />
+        <img id="fondo"  class="fondo"  src="{{asset('assets/img/customMat/AppImg/fondo1.png')}}" />
+        <img id="marco"  class="marco"  src="{{asset('assets/img/customMat/AppImg/marco1.png')}}" />
+        <img id="centro" class="centro" src="{{asset('assets/img/customMat/AppImg/centro1.png')}}" />
     </div>
+
     <div id="selectMatOpc">
         <select id="selecFondo" onchange="document.getElementById('fondo').src = this.value" name="selectFondo">
-            <option value="{{asset('customMat/AppImg/fondo1.png')}}">fondo1</option>
-            <option value="{{asset('customMat/AppImg/fondo2.png')}}">fondo2</option>
+            <option value="{{asset('assets/img/customMat/AppImg/fondo1.png')}}">fondo1</option>
+            <option value="{{asset('assets/img/customMat/AppImg/fondo2.png')}}">fondo2</option>
         </select>
 
         <select id="selecMarco" onchange="document.getElementById('marco').src = this.value" name="selectMarco">
-            <option value="{{asset('customMat/AppImg/marco1.png')}}">marco1</option>
-            <option value="{{asset('customMat/AppImg/marco2.png')}}">marco2</option>
+            <option value="{{asset('assets/img/customMat/AppImg/marco1.png')}}">marco1</option>
+            <option value="{{asset('assets/img/customMat/AppImg/marco2.png')}}">marco2</option>
         </select>
 
         <select id="selecCentro" onchange="document.getElementById('centro').src = this.value" name="selectCentro">
-            <option value="{{asset('customMat/AppImg/centro1.png')}}">centro1</option>
-            <option value="{{asset('customMat/AppImg/centro2.png')}}">centro2</option>
+            <option value="{{asset('assets/img/customMat/AppImg/centro1.png')}}">centro1</option>
+            <option value="{{asset('assets/img/customMat/AppImg/centro2.png')}}">centro2</option>
         </select>
     </div>
+
 </div>
