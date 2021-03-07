@@ -15,11 +15,7 @@ class CreateProductTable extends Migration
     {
         Schema::create('product', function (Blueprint $table) {
             $table->id();
-            $table->string('SKU')->unique();
-            $table->string('code')->unique();
-            $table->string('description');
-            $table->timestamp('create_at');
-            $table->timestamp('update_at');
+            $table->timestamps();
         });
     }
 
