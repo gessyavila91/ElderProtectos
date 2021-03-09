@@ -31,11 +31,49 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        var_dump($request);
+
+        if (isset($request->sku) && isset($request->code) && isset($request->active) && isset($request->price)) {
+
+            $validated = $request->validate([
+                'sku' => 'required|unique:posts|max:20',
+                'code' => 'required|unique:posts|max:20',
+                'active' => 'required',
+                'price' => 'required'
+
+            ]);
+
+            if($validated){
+                $product = new Product();
+                $product->setSku($request->sku);
+                $product->setCode($request->code);
+                $product->setActive($request->active);
+                $product->setPrice($request->price);
+
+                $product->save();
+
+                return response()->json([
+                    'code' => '200',
+                    'msg' => 'Everything fine',
+                ]);
+
+            }else{
+                return response()->json([
+                    'code' => '502',
+                    'msg' => 'request Failed',
+                ]);
+            }
+        }
+
+        return response()->json([
+            'code' => '501',
+            'msg' => 'error in creation',
+        ]);
+
     }
 
     /**
