@@ -49,6 +49,20 @@
       0 => 'Encore\\Admin\\ApiTester\\ApiTesterServiceProvider',
     ),
   ),
+  'laravel-admin-ext/media-manager' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Encore\\Admin\\Media\\MediaServiceProvider',
+    ),
+  ),
+  'laravel-admin-ext/scheduling' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Encore\\Admin\\Scheduling\\SchedulingServiceProvider',
+    ),
+  ),
   'laravel/breeze' => 
   array (
     'providers' => 

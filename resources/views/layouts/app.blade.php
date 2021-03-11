@@ -1,36 +1,50 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<html lang="{{str_replace('_', '-', app()->getLocale())}}">
+
     <head>
+        <title>{{config('app.name')}}</title>
+
+        {{--Metadata--}}
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="description" content="High Quality Game Supplies">
+        <meta name="author" content="Elder Protectors">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="robots" content="noindex, nofollow"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="mobile-web-app-capable" content="yes">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        {{--Fav Icon--}}
+        <link href="{{asset('assets/img/logo-icon.png')}}" rel="icon" type="image/x-icon"/>
+        <link href="{{asset('assets/img/logo-icon.png')}}" rel="icon" type="image/png"/>
+        <link href="{{asset('assets/img/logo-icon.png')}}" rel="icon" type="image/gif"/>
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        {{--Java Script--}}
+        <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
+        <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+        <!-- Scripts -->
+        <script src="{{asset('js/app.js')}}"></script>
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+
     </head>
+
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+        <div >
 
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
+            @if(!Request::is('/'))
+                @include('layouts.navigation')
+
+                <div class="container">
+                    @yield('content')
                 </div>
-            </header>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            @endif
+
         </div>
     </body>
 </html>

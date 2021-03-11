@@ -21,10 +21,3 @@ function gtag() {
 gtag('js', new Date());
 
 gtag('config', 'UA-106759176-1');
-
-$(window).ready(function() {
-
-    $('#onload').fadeOut();
-
-});
-

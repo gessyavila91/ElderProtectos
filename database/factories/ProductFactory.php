@@ -19,10 +19,14 @@ class ProductFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition(){
+
         return [
-            //
+            'sku'    => $this->faker->name,
+            'code'   => $this->faker->unique()->safeEmail,
+            'active' => 1,
+            'price'  => '100.00',
+
         ];
     }
 }
