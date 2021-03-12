@@ -248,12 +248,15 @@
 
                     </select>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Example textarea</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
+
 
                     <div class="d-block my-3">
+                        <div class="form-check">
+                            <input id="flexRadioDefault0" class="form-check-input" type="radio" name="textPosition">
+                            <label class="form-check-label" for="textPosition1">
+                                SinTexto
+                            </label>
+                        </div>
                         <div class="form-check">
                             <input id="flexRadioDefault1" class="form-check-input" type="radio" name="textPosition">
                             <label class="form-check-label" for="textPosition1">
@@ -279,11 +282,14 @@
                             </label>
                         </div>
                     </div>
-
+                    <div class="d-block my-3">
+                        <label for="matText">Mat Text</label>
+                        <input id="matText" type="text" class="form-control" placeholder="">
+                    </div>
 
                     </br></br>
-                    <button onclick="scrollcheckout()" type="button" class="w-100 btn btn-lg btn-outline-primary">i like
-                        it!
+                    <button onclick="scrollcheckout()" type="button" class="w-100 btn btn-lg btn-outline-primary">
+                        i like it!
                     </button>
                 </form>
             </div>
