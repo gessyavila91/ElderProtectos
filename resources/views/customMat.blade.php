@@ -4,104 +4,329 @@
         <!DOCTYPE html>
         <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
+
         <head>
             <title>{{ config('app.name') }} - Custom Mat Maker</title>
 
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-                  integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+                  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
                   crossorigin="anonymous">
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                    crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+                    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+                    crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+                    integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+                    crossorigin="anonymous"></script>
         </head>
 
         <style>
-            .container {
+            .container1 {
                 position: relative;
-                max-width: 100%;
-                min-height: 257px;
-                min-width: 331px;
+                min-height: 260px;
+                max-height: 450px;
+                margin-bottom: 20px;
+            }
+
+            .playmatPreview {
+                position: absolute;
+
+                max-height: 320px;
+                min-width: 218px;
                 height: auto;
 
-
             }
-
-            .Fondo {
-                position: absolute;
-                border: 1px red solid;
-                min-height: 257px;
-                min-width: 331px;
-            }
-
-            .Marco {
-                position: absolute;
-                border: 1px red solid;
-                min-height: 257px;
-                min-width: 331px;
-
-            }
-            .Logo {
-                position: absolute;
-                border: 1px red solid;
-                min-height: 257px;
-                min-width: 331px;
-
-            }
-
 
         </style>
 
         <body>
 
-        <div class="row">
 
-            <div class="col-sm-6" >
-                <div style=" border: 1px blue solid; min-width: 331px;">
-                    <select id="selectFondo" onchange="document.getElementById('fondo').src = this.value"
-                            name="selectFondo">
-                        <option value="{{asset('assets/img/customMat/AppImg/fondo1.png')}}">fondo1</option>
-                        <option value="{{asset('assets/img/customMat/AppImg/fondo2.png')}}">fondo2</option>
-                    </select>
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Custom Playmat</h1>
+            <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap
+                example. It’s built with default Bootstrap components and utilities with little customization.</p>
+        </div>
 
-                    <select id="selecMarco" onchange="document.getElementById('marco').src = this.value"
-                            name="selectMarco">
-                        <option value="{{asset('assets/img/customMat/AppImg/marco1.png')}}">marco1</option>
-                        <option value="{{asset('assets/img/customMat/AppImg/marco2.png')}}">marco2</option>
-                    </select>
+        <hr class="featurette-divider">
 
-                    <select id="selecCentro" onchange="document.getElementById('centro').src = this.value"
-                            name="selectCentro">
+        <div class="row featurette">
+            <div class="col-md-7">
+
+
+                <div class="col">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header">
+                            <h4 class="my-0 fw-normal">Preview</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="container1">
+                                <img class="playmatPreview" id="fondo"
+                                     src="{{asset('assets/img/customMat/AppImg/fondo1.png')}}"
+                                     alt=""/>
+                                <img class="playmatPreview" id="marco"
+                                     src="{{asset('assets/img/customMat/AppImg/marco1.png')}}"
+                                     alt=""/>
+                                <img class="playmatPreview" id="centro"
+                                     src="{{asset('assets/img/customMat/AppImg/centro1.png')}}"
+                                     alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-5 ">
+                <select id="selectFondo" class="custom-select d-block w-100"
+                        onchange="document.getElementById('fondo').src = this.value"
+                        name="selectFondo">
+                    <option value="{{asset('assets/img/customMat/AppImg/fondo1.png')}}">fondo1</option>
+                    <option value="{{asset('assets/img/customMat/AppImg/fondo2.png')}}">fondo2</option>
+                </select>
+                </br>
+                <select id="selecMarco" class="custom-select d-block w-100"
+                        onchange="document.getElementById('marco').src = this.value"
+                        name="selectMarco">
+                    <option value="{{asset('assets/img/customMat/AppImg/marco1.png')}}">marco1</option>
+                    <option value="{{asset('assets/img/customMat/AppImg/marco2.png')}}">marco2</option>
+                </select>
+                </br>
+                <select id="selecCentro" class="custom-select d-block w-100"
+                        onchange="document.getElementById('centro').src = this.value"
                         name="selectCentro">
-                        <option value="{{asset('assets/img/customMat/AppImg/centro1.png')}}">centro1</option>
-                        <option value="{{asset('assets/img/customMat/AppImg/centro2.png')}}">centro2</option>
-                    </select>
-                </div>
 
-                <div class="container"  style="border: 1px orange solid;">
-                    <img class="Fondo" id="fondo" src="{{asset('assets/img/customMat/AppImg/fondo1.png')}}"  alt=""/>
-                    <img class="Marco" id="marco" src="{{asset('assets/img/customMat/AppImg/marco1.png')}}"  alt=""/>
-                    <img class="Logo" id="centro" src="{{asset('assets/img/customMat/AppImg/centro1.png')}}" alt=""/>
-                </div>
-
+                    <option value="{{asset('assets/img/customMat/AppImg/centro1.png')}}">centro1</option>
+                    <option value="{{asset('assets/img/customMat/AppImg/centro2.png')}}">centro2</option>
+                </select>
+                </br></br>
+                <button type="button" class="w-100 btn btn-lg btn-outline-primary">i like it!</button>
             </div>
-            <div class="col" style="border: 1px green solid;min-width: 331px;">
-                <form>
-                    <label for="fname">First name:</label><br>
-                    <input type="text" id="fname" name="fname" value="John"><br>
-                    <label for="lname">Last name:</label><br>
-                    <input type="text" id="lname" name="lname" value="Doe"><br><br>
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
-
-        </div>
-        <div>
-
         </div>
 
+        <hr class="featurette-divider">
 
+
+        <div class="container">
+            <div class="py-5 text-center">
+                <h2>Checkout form</h2>
+                <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required
+                    form group has a validation state that can be triggered by attempting to submit the form without
+                    completing it.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 order-md-2 mb-4">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Your cart</span>
+                        <span class="badge badge-secondary badge-pill">3</span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Product name</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">$12</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Second product</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">$8</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Third item</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">$5</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-success">
+                                <h6 class="my-0">Promo code</h6>
+                                <small>EXAMPLECODE</small>
+                            </div>
+                            <span class="text-success">-$5</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total (USD)</span>
+                            <strong>$20</strong>
+                        </li>
+                    </ul>
+
+                    <form class="card p-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Promo code">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-secondary">Redeem</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-8 order-md-1">
+                    <h4 class="mb-3">Billing address</h4>
+                    <form class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">First name</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid first name is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Last name</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid last name is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="username">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@</span>
+                                </div>
+                                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                                <div class="invalid-feedback" style="width: 100%;">
+                                    Your username is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                            <div class="invalid-feedback">
+                                Please enter a valid email address for shipping updates.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                            <div class="invalid-feedback">
+                                Please enter your shipping address.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                            <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5 mb-3">
+                                <label for="country">Country</label>
+                                <select class="custom-select d-block w-100" id="country" required>
+                                    <option value="">Choose...</option>
+                                    <option>United States</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select a valid country.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="state">State</label>
+                                <select class="custom-select d-block w-100" id="state" required>
+                                    <option value="">Choose...</option>
+                                    <option>California</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please provide a valid state.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="zip">Zip</label>
+                                <input type="text" class="form-control" id="zip" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Zip code required.
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mb-4">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="same-address">
+                            <label class="custom-control-label" for="same-address">Shipping address is the same as my
+                                billing address</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="save-info">
+                            <label class="custom-control-label" for="save-info">Save this information for next
+                                time</label>
+                        </div>
+                        <hr class="mb-4">
+
+                        <h4 class="mb-3">Payment</h4>
+
+                        <div class="d-block my-3">
+                            <div class="custom-control custom-radio">
+                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input"
+                                       checked required>
+                                <label class="custom-control-label" for="credit">Credit card</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input"
+                                       required>
+                                <label class="custom-control-label" for="debit">Debit card</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input"
+                                       required>
+                                <label class="custom-control-label" for="paypal">PayPal</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-name">Name on card</label>
+                                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                                <small class="text-muted">Full name as displayed on card</small>
+                                <div class="invalid-feedback">
+                                    Name on card is required
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-number">Credit card number</label>
+                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Credit card number is required
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-expiration">Expiration</label>
+                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Expiration date required
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-cvv">CVV</label>
+                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Security code required
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mb-4">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                    </form>
+                </div>
+            </div>
+
+            <hr class="featurette-divider">
+
+
+        </div>
         </body>
-
-
         </html>
-
     @endsection
 </x-app-layout>
-
