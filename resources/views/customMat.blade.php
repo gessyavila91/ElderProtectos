@@ -204,11 +204,11 @@
                                     <img class="playmatPreview" id="centro"
                                          src="{{asset('assets/img/customMat/AppImg/centro1.png')}}"
                                          alt=""/>
-                                    <div class="top-left">TL12345678901234567890123</div>
-                                    <div class="bottom-left">BL12345678901234567890123</div>
-                                    <div class="top-right">TR12345678901234567890123</div>
-                                    <div class="bottom-right">BR12345678901234567890123</div>
-                                    <div class="centered">C12345678901234567890123</div>
+                                    <div id="top-left"     class="top-left">TL12345678901234567890123</div>
+                                    <div id="bottom-left"  class="bottom-left">BL12345678901234567890123</div>
+                                    <div id="top-right"    class="top-right">TR12345678901234567890123</div>
+                                    <div id="bottom-right" class="bottom-right">BR12345678901234567890123</div>
+                                    <div id="centered"     class="centered">C12345678901234567890123</div>
 
                                 </block>
                             </div>
@@ -284,7 +284,7 @@
                     </div>
                     <div class="d-block my-3">
                         <label for="matText">Mat Text</label>
-                        <input id="matText" type="text" class="form-control" placeholder="">
+                        <input id="matText" onkeypress="customTextLabel()" type="text" class="form-control" placeholder="" maxlength="25">
                     </div>
 
                     </br></br>
@@ -545,6 +545,10 @@
                 });
 
             }
+            function  customTextLabel(){
+                console.log("customTextLabel()");
+            }
+
         </script>
     @endsection
 </x-app-layout>
