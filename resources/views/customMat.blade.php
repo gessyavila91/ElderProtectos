@@ -25,17 +25,16 @@
         <style>
             .container1 {
                 position: relative;
-                min-height: 260px;
-                max-height: 450px;
-                margin-bottom: 20px;
+            }
+
+            .Fondo {
+
             }
 
             .playmatPreview {
                 position: absolute;
+                top:0px;
 
-                max-height: 320px;
-                min-width: 218px;
-                height: auto;
 
             }
 
@@ -61,9 +60,10 @@
                         <div class="card-header">
                             <h4 class="my-0 fw-normal">Preview</h4>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body ">
                             <div class="container1">
-                                <img class="playmatPreview" id="fondo"
+                            <block style="text-align: center;">
+                                <img class="fondo" id="fondo"
                                      src="{{asset('assets/img/customMat/AppImg/fondo1.png')}}"
                                      alt=""/>
                                 <img class="playmatPreview" id="marco"
@@ -72,6 +72,7 @@
                                 <img class="playmatPreview" id="centro"
                                      src="{{asset('assets/img/customMat/AppImg/centro1.png')}}"
                                      alt=""/>
+                             </block>
                             </div>
                         </div>
                     </div>
@@ -127,10 +128,31 @@
                     <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div>
-                                <h6 class="my-0">Product name</h6>
+                                <h6 class="my-0">Custom Mat de Ruben</h6>
+                                <small class="text-muted">Code: asdasdagvsesdfdasc</small>
+                            </div>
+                            <span class="text-muted">$70</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Second product</h6>
                                 <small class="text-muted">Brief description</small>
                             </div>
-                            <span class="text-muted">$12</span>
+                            <span class="text-muted">$8</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Second product</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">$8</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Second product</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">$8</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div>
