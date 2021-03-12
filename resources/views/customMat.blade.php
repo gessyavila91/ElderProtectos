@@ -27,15 +27,147 @@
                 position: relative;
             }
 
-            .Fondo {
-
-            }
-
             .playmatPreview {
                 position: absolute;
-                top:0px;
+                top: 0px;
+            }
+            /*Small*/
+            @media screen and (min-width: 575px) {
+                .top-left {
+                    position: absolute;
+                    top: 36px;
+                    left: 27px;
+                    font-size: 12px;
+                }
+                .top-right {
+                    position: absolute;
+                    top: 36px;
+                    right: 27px;
+                    font-size: 12px;
+                }
+                .bottom-left {
+                    position: absolute;
+                    bottom: 36px;
+                    left: 27px;
+                    font-size: 12px;
+                }
+                .bottom-right {
+                    position: absolute;
+                    bottom: 36px;
+                    right: 27px;
+                    font-size: 12px;
+                }
+                .centered {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 12px;
+                }
+            }
+            /*Medium*/
+            @media screen and (min-width: 767px) {
+                .top-left {
+                    position: absolute;
+                    top: 28px;
+                    left: 20px;
+                    font-size: 8px;
+                }
+                .top-right {
+                    position: absolute;
+                    top: 28px;
+                    right: 20px;
+                    font-size: 8px;
+                }
+                .bottom-left {
+                    position: absolute;
+                    bottom: 28px;
+                    left: 20px;
+                    font-size: 8px;
+                }
+                .bottom-right {
+                    position: absolute;
+                    bottom: 28px;
+                    right: 20px;
+                    font-size: 8px;
+                }
+                .centered {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 8px;
+                }
+            }
+            /*Large 990*/
+            @media screen and (min-width: 991px) {
+                .top-left {
+                    position: absolute;
+                    top: 40px;
+                    left: 27px;
+                    font-size: 12px;
+                }
+                .top-right {
+                    position: absolute;
+                    top: 40px;
+                    right: 27px;
+                    font-size: 12px;
+                }
+                .bottom-left {
+                    position: absolute;
+                    bottom: 38px;;
+                    left: 27px;
+                    font-size: 12px;
 
+                }
+                .bottom-right {
+                    position: absolute;
+                    bottom: 38px;;
+                    right: 27px;
+                    font-size: 12px;
+                }
+                .centered {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 12px;
+                }
+            }
+            /*XL 1200+*/
+            @media screen and (min-width: 1200px) {
+                .top-left {
+                    position: absolute;
+                    top: 48px;
+                    left: 33px;
+                    font-size: 16px;
+                }
+                .top-right {
+                    position: absolute;
+                    top: 48px;
+                    right: 33px;
+                    font-size: 16px;
+                }
+                .bottom-left {
+                    position: absolute;
+                    bottom: 48px;
+                    left: 33px;
+                    font-size: 16px;
 
+                }
+                .bottom-right {
+                    position: absolute;
+                    bottom: 48px;
+                    right: 33px;
+                    font-size: 16px;
+                }
+                .centered {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 16px;
+                }
             }
 
         </style>
@@ -62,17 +194,23 @@
                         </div>
                         <div class="card-body ">
                             <div class="container1">
-                            <block style="text-align: center;">
-                                <img class="fondo" id="fondo"
-                                     src="{{asset('assets/img/customMat/AppImg/fondo1.png')}}"
-                                     alt=""/>
-                                <img class="playmatPreview" id="marco"
-                                     src="{{asset('assets/img/customMat/AppImg/marco1.png')}}"
-                                     alt=""/>
-                                <img class="playmatPreview" id="centro"
-                                     src="{{asset('assets/img/customMat/AppImg/centro1.png')}}"
-                                     alt=""/>
-                             </block>
+                                <block style="text-align: center;">
+                                    <img class="fondo" id="fondo"
+                                         src="{{asset('assets/img/customMat/AppImg/fondo1.png')}}"
+                                         alt=""/>
+                                    <img class="playmatPreview" id="marco"
+                                         src="{{asset('assets/img/customMat/AppImg/marco1.png')}}"
+                                         alt=""/>
+                                    <img class="playmatPreview" id="centro"
+                                         src="{{asset('assets/img/customMat/AppImg/centro1.png')}}"
+                                         alt=""/>
+                                    <div class="top-left">TL12345678901234567890123</div>
+                                    <div class="bottom-left">BL12345678901234567890123</div>
+                                    <div class="top-right">TR12345678901234567890123</div>
+                                    <div class="bottom-right">BR12345678901234567890123</div>
+                                    <div class="centered">C12345678901234567890123</div>
+
+                                </block>
                             </div>
                         </div>
                     </div>
@@ -82,29 +220,72 @@
             </div>
 
             <div class="col-md-5 ">
-                <select id="selectFondo" class="custom-select d-block w-100"
-                        onchange="document.getElementById('fondo').src = this.value"
-                        name="selectFondo">
-                    <option value="{{asset('assets/img/customMat/AppImg/fondo1.png')}}">fondo1</option>
-                    <option value="{{asset('assets/img/customMat/AppImg/fondo2.png')}}">fondo2</option>
-                </select>
-                </br>
-                <select id="selecMarco" class="custom-select d-block w-100"
-                        onchange="document.getElementById('marco').src = this.value"
-                        name="selectMarco">
-                    <option value="{{asset('assets/img/customMat/AppImg/marco1.png')}}">marco1</option>
-                    <option value="{{asset('assets/img/customMat/AppImg/marco2.png')}}">marco2</option>
-                </select>
-                </br>
-                <select id="selecCentro" class="custom-select d-block w-100"
-                        onchange="document.getElementById('centro').src = this.value"
-                        name="selectCentro">
+                <form>
+                    <select id="selectFondo" class="custom-select d-block w-100"
+                            onchange="document.getElementById('fondo').src = this.value"
+                            name="selectFondo">
+                        <option value="{{asset('assets/img/customMat/AppImg/fondo1.png')}}">fondo1</option>
+                        <option value="{{asset('assets/img/customMat/AppImg/fondo2.png')}}">fondo2</option>
+                    </select>
+                    </br>
+                    <select id="selecMarco" class="custom-select d-block w-100"
+                            onchange="document.getElementById('marco').src = this.value"
+                            name="selectMarco">
 
-                    <option value="{{asset('assets/img/customMat/AppImg/centro1.png')}}">centro1</option>
-                    <option value="{{asset('assets/img/customMat/AppImg/centro2.png')}}">centro2</option>
-                </select>
-                </br></br>
-                <button type="button" class="w-100 btn btn-lg btn-outline-primary">i like it!</button>
+                        <option value="{{asset('assets/img/customMat/AppImg/marco1.png')}}">marco1</option>
+                        <option value="{{asset('assets/img/customMat/AppImg/marco2.png')}}">marco2</option>
+                        <option value="SM">SM</option>
+
+                    </select>
+                    </br>
+                    <select id="selecCentro" class="custom-select d-block w-100"
+                            onchange="document.getElementById('centro').src = this.value"
+                            name="selectCentro">
+
+                        <option value="{{asset('assets/img/customMat/AppImg/centro1.png')}}">centro1</option>
+                        <option value="{{asset('assets/img/customMat/AppImg/centro2.png')}}">centro2</option>
+                        <option value="SC" selected>SC</option>
+
+                    </select>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Example textarea</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+
+                    <div class="d-block my-3">
+                        <div class="form-check">
+                            <input id="flexRadioDefault1" class="form-check-input" type="radio" name="textPosition">
+                            <label class="form-check-label" for="textPosition1">
+                                TopLeft
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input id="flexRadioDefault2" class="form-check-input" type="radio" name="textPosition">
+                            <label class="form-check-label" for="textPosition2">
+                                TopRight
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input id="flexRadioDefault3" class="form-check-input" type="radio" name="textPosition">
+                            <label class="form-check-label" for="textPosition3">
+                                BottomLeft
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input id="flexRadioDefault4" class="form-check-input" type="radio" name="textPosition">
+                            <label class="form-check-label" for="textPosition4">
+                                BottomRight
+                            </label>
+                        </div>
+                    </div>
+
+
+                    </br></br>
+                    <button onclick="scrollcheckout()" type="button" class="w-100 btn btn-lg btn-outline-primary">i like
+                        it!
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -112,7 +293,7 @@
 
 
         <div class="container">
-            <div class="py-5 text-center">
+            <div class="py-5 text-center" id="checkout">
                 <h2>Checkout form</h2>
                 <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required
                     form group has a validation state that can be triggered by attempting to submit the form without
@@ -350,5 +531,14 @@
         </div>
         </body>
         </html>
+        <script>
+            function scrollcheckout() {
+                var elmnt = document.getElementById("checkout");
+                elmnt.scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+            }
+        </script>
     @endsection
 </x-app-layout>
