@@ -204,8 +204,8 @@
                                     <img class="playmatPreview" id="centro"
                                          src="{{asset('assets/img/customMat/AppImg/centro1.png')}}"
                                          alt=""/>
-                                    <div id="top-left"     class="top-left">TL12345678901234567890123</div>
-                                    <div id="bottom-left"  class="bottom-left">BL12345678901234567890123</div>
+                                    <div id="top-left"     class="top-left">Elder</div>
+                                    <div id="bottom-left"  class="bottom-left">Elder</div>
                                     <div id="top-right"    class="top-right">TR12345678901234567890123</div>
                                     <div id="bottom-right" class="bottom-right">BR12345678901234567890123</div>
                                     <div id="centered"     class="centered">C12345678901234567890123</div>
