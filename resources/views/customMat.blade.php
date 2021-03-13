@@ -23,6 +23,16 @@
         </head>
 
         <style>
+            @font-face {
+   font-family: elderfont;
+   src: url(fonts/elderfont.woff);
+   font-weight: bold;
+}
+
+
+            .b1 {
+            font-family: elderfont;
+            }
             .container1 {
                 position: relative;
             }
@@ -204,11 +214,11 @@
                                     <img class="playmatPreview" id="centro"
                                          src="{{asset('assets/img/customMat/AppImg/centro1.png')}}"
                                          alt=""/>
-                                    <div id="top-left"     class="top-left">TL12345678901234567890123</div>
-                                    <div id="bottom-left"  class="bottom-left">BL12345678901234567890123</div>
-                                    <div id="top-right"    class="top-right">TR12345678901234567890123</div>
-                                    <div id="bottom-right" class="bottom-right">BR12345678901234567890123</div>
-                                    <div id="centered"     class="centered">C12345678901234567890123</div>
+                                    <div id="top-left"     class="top-left b1">Lord of the Rings</div>
+                                    <div id="bottom-left"  class="bottom-left b1">BL12345678901234567890123</div>
+                                    <div id="top-right"    class="top-right b1">TR12345678901234567890123</div>
+                                    <div id="bottom-right" class="bottom-right b1">BR12345678901234567890123</div>
+                                    <div id="centered"     class="centered b1">C12345678901234567890123</div>
 
                                 </block>
                             </div>
