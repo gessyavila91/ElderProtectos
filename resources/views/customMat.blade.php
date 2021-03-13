@@ -286,7 +286,10 @@
                     </div>
                     <div class="d-block my-3">
                         <label for="matText">Mat Text</label>
-                        <input id="matText" onkeypress="customTextLabel()" type="text" class="form-control" placeholder="" maxlength="25">
+                        <input id="matText" onkeydown="customTextLabel()"
+                               onkeyup="customTextLabel()"
+                               onkeypress="customTextLabel()"
+                               type="text" class="form-control" placeholder="" maxlength="25">
                     </div>
 
                     </br></br>
@@ -548,7 +551,15 @@
 
             }
             function  customTextLabel(){
-                console.log("customTextLabel()");
+
+                
+
+                document.getElementById("top-left").innerHTML = document.getElementById("matText").value;
+                document.getElementById("bottom-left").innerHTML = document.getElementById("matText").value;
+                document.getElementById("top-right").innerHTML = document.getElementById("matText").value;
+                document.getElementById("bottom-right").innerHTML = document.getElementById("matText").value;
+                document.getElementById("centered").innerHTML = document.getElementById("matText").value;
+
             }
 
         </script>
