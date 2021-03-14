@@ -23,15 +23,30 @@
         </head>
 
         <style>
+            @font-face {
+                font-family: elderfont;
+                src: url(fonts/elderfont.woff);
+                font-weight: bold;
+            }
+
+
+            .epFont {
+                font-family: elderfont;
+
+            }
+
             .container1 {
                 position: relative;
             }
 
             .playmatPreview {
                 position: absolute;
-                top: 0px;
+                top: 0;
             }
-            /*Small*/
+
+            /*TODO make a Dynamic BreakPoint*/
+
+            /*Small 575*/
             @media screen and (min-width: 575px) {
                 .top-left {
                     position: absolute;
@@ -39,24 +54,28 @@
                     left: 27px;
                     font-size: 12px;
                 }
+
                 .top-right {
                     position: absolute;
                     top: 36px;
                     right: 27px;
                     font-size: 12px;
                 }
+
                 .bottom-left {
                     position: absolute;
                     bottom: 36px;
                     left: 27px;
                     font-size: 12px;
                 }
+
                 .bottom-right {
                     position: absolute;
                     bottom: 36px;
                     right: 27px;
                     font-size: 12px;
                 }
+
                 .centered {
                     position: absolute;
                     top: 50%;
@@ -65,7 +84,8 @@
                     font-size: 12px;
                 }
             }
-            /*Medium*/
+
+            /*Medium 767*/
             @media screen and (min-width: 767px) {
                 .top-left {
                     position: absolute;
@@ -73,24 +93,28 @@
                     left: 20px;
                     font-size: 8px;
                 }
+
                 .top-right {
                     position: absolute;
                     top: 28px;
                     right: 20px;
                     font-size: 8px;
                 }
+
                 .bottom-left {
                     position: absolute;
                     bottom: 28px;
                     left: 20px;
                     font-size: 8px;
                 }
+
                 .bottom-right {
                     position: absolute;
                     bottom: 28px;
                     right: 20px;
                     font-size: 8px;
                 }
+
                 .centered {
                     position: absolute;
                     top: 50%;
@@ -99,7 +123,8 @@
                     font-size: 8px;
                 }
             }
-            /*Large 990*/
+
+            /*Large 991*/
             @media screen and (min-width: 991px) {
                 .top-left {
                     position: absolute;
@@ -107,12 +132,14 @@
                     left: 27px;
                     font-size: 12px;
                 }
+
                 .top-right {
                     position: absolute;
                     top: 40px;
                     right: 27px;
                     font-size: 12px;
                 }
+
                 .bottom-left {
                     position: absolute;
                     bottom: 38px;;
@@ -120,12 +147,14 @@
                     font-size: 12px;
 
                 }
+
                 .bottom-right {
                     position: absolute;
                     bottom: 38px;;
                     right: 27px;
                     font-size: 12px;
                 }
+
                 .centered {
                     position: absolute;
                     top: 50%;
@@ -134,6 +163,7 @@
                     font-size: 12px;
                 }
             }
+
             /*XL 1200+*/
             @media screen and (min-width: 1200px) {
                 .top-left {
@@ -142,12 +172,14 @@
                     left: 33px;
                     font-size: 16px;
                 }
+
                 .top-right {
                     position: absolute;
                     top: 48px;
                     right: 33px;
                     font-size: 16px;
                 }
+
                 .bottom-left {
                     position: absolute;
                     bottom: 48px;
@@ -155,12 +187,14 @@
                     font-size: 16px;
 
                 }
+
                 .bottom-right {
                     position: absolute;
                     bottom: 48px;
                     right: 33px;
                     font-size: 16px;
                 }
+
                 .centered {
                     position: absolute;
                     top: 50%;
@@ -204,11 +238,14 @@
                                     <img class="playmatPreview" id="centro"
                                          src="{{asset('assets/img/customMat/AppImg/centro1.png')}}"
                                          alt=""/>
-                                    <div id="top-left"     class="top-left">Elder</div>
-                                    <div id="bottom-left"  class="bottom-left">Elder</div>
-                                    <div id="top-right"    class="top-right">TR12345678901234567890123</div>
-                                    <div id="bottom-right" class="bottom-right">BR12345678901234567890123</div>
-                                    <div id="centered"     class="centered">C12345678901234567890123</div>
+
+                                    <div id="divText_top-left" class="top-left epFont" style="display: block"></div>
+                                    <div id="divText_top-right" class="top-right epFont" style="display: none"></div>
+                                    <div id="divText_bottom-left" class="bottom-left epFont"
+                                         style="display: none"></div>
+                                    <div id="divText_bottom-right" class="bottom-right epFont"
+                                         style="display: none"></div>
+                                    <div id="divText_centered" class="centered epFont" style="display: none"></div>
 
                                 </block>
                             </div>
@@ -217,82 +254,99 @@
                 </div>
 
 
-
-
             </div>
 
             <div class="col-md-5 ">
                 <form>
+                    <label for="selectFondo">
+                        Fondo
+                    </label>
                     <select id="selectFondo" class="custom-select d-block w-100"
                             onchange="document.getElementById('fondo').src = this.value"
                             name="selectFondo">
-                        <option value="{{asset('assets/img/customMat/AppImg/fondo1.png')}}">fondo1</option>
+                        <option value="{{asset('assets/img/customMat/AppImg/fondo1.png')}}" selected>fondo1</option>
                         <option value="{{asset('assets/img/customMat/AppImg/fondo2.png')}}">fondo2</option>
                     </select>
-                    </br>
+                    <br>
+                    <label for="selecMarco">
+                        Marco
+                    </label>
                     <select id="selecMarco" class="custom-select d-block w-100"
                             onchange="document.getElementById('marco').src = this.value"
                             name="selectMarco">
 
-                        <option value="{{asset('assets/img/customMat/AppImg/marco1.png')}}">marco1</option>
+                        <option value="{{asset('assets/img/customMat/AppImg/marco1.png')}}" selected>marco1</option>
                         <option value="{{asset('assets/img/customMat/AppImg/marco2.png')}}">marco2</option>
                         <option value="SM">SM</option>
 
                     </select>
-                    </br>
+                    <br>
+                    <label for="selecCentro">
+                        Centro
+                    </label>
                     <select id="selecCentro" class="custom-select d-block w-100"
                             onchange="document.getElementById('centro').src = this.value"
                             name="selectCentro">
 
-                        <option value="{{asset('assets/img/customMat/AppImg/centro1.png')}}">centro1</option>
+                        <option value="{{asset('assets/img/customMat/AppImg/centro1.png')}}" selected>centro1</option>
                         <option value="{{asset('assets/img/customMat/AppImg/centro2.png')}}">centro2</option>
-                        <option value="SC" selected>SC</option>
+                        <option value="SC">SC</option>
 
                     </select>
 
-
-
-                    <div class="d-block my-3">
-                        <div class="form-check">
-                            <input id="flexRadioDefault0" class="form-check-input" type="radio" name="textPosition">
-                            <label class="form-check-label" for="textPosition1">
-                                SinTexto
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input id="flexRadioDefault1" class="form-check-input" type="radio" name="textPosition">
-                            <label class="form-check-label" for="textPosition1">
-                                TopLeft
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input id="flexRadioDefault2" class="form-check-input" type="radio" name="textPosition">
-                            <label class="form-check-label" for="textPosition2">
-                                TopRight
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input id="flexRadioDefault3" class="form-check-input" type="radio" name="textPosition">
-                            <label class="form-check-label" for="textPosition3">
-                                BottomLeft
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input id="flexRadioDefault4" class="form-check-input" type="radio" name="textPosition">
-                            <label class="form-check-label" for="textPosition4">
-                                BottomRight
-                            </label>
-                        </div>
-                    </div>
                     <div class="d-block my-3">
                         <label for="matText">Mat Text</label>
-                        <input id="matText" onkeydown="customTextLabel()"
+                        <input id="matText"
                                onkeyup="customTextLabel()"
-                               onkeypress="customTextLabel()"
                                type="text" class="form-control" placeholder="" maxlength="25">
                     </div>
 
-                    </br></br>
+                    <div id="TextLabelRadiobutton" style="display: none">
+                        <div class="d-block my-3">
+                            <div class="form-check">
+                                <input id="rb_top-left"
+                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                       class="form-check-input" type="radio" name="textPosition" checked>
+                                <label class="form-check-label" for="rb_bottom-left">
+                                    TopLeft
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input id="rb_top-right"
+                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                       class="form-check-input" type="radio" name="textPosition">
+                                <label class="form-check-label" for="rb_top-right">
+                                    TopRight
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input id="rb_bottom-left"
+                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                       class="form-check-input" type="radio" name="textPosition">
+                                <label class="form-check-label" for="rb_bottom-left">
+                                    BottomLeft
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input id="rb_bottom-right"
+                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                       class="form-check-input" type="radio" name="textPosition">
+                                <label class="form-check-label" for="rb_bottom-right">
+                                    BottomRight
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input id="rb_centered"
+                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                       class="form-check-input" type="radio" name="textPosition">
+                                <label class="form-check-label" for="rb_center">
+                                    Center
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br><br>
                     <button onclick="scrollcheckout()" type="button" class="w-100 btn btn-lg btn-outline-primary">
                         i like it!
                     </button>
@@ -315,9 +369,16 @@
                 <div class="col-md-4 order-md-2 mb-4">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Your cart</span>
-                        <span class="badge badge-secondary badge-pill">3</span>
+
+                        {{-- TODO Count CarItems --}}
+                        <span class="badge badge-secondary badge-pill">1</span>
+
+
                     </h4>
                     <ul class="list-group mb-3">
+
+                        {{-- TODO Add quantity in product li --}}
+                        {{-- Standar li 4 Product --}}
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div>
                                 <h6 class="my-0">Custom Mat de Ruben</h6>
@@ -325,41 +386,8 @@
                             </div>
                             <span class="text-muted">$70</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Second product</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Second product</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Second product</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Second product</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Third item</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$5</span>
-                        </li>
+
+                        {{-- Standar li 4 PromoCode --}}
                         <li class="list-group-item d-flex justify-content-between bg-light">
                             <div class="text-success">
                                 <h6 class="my-0">Promo code</h6>
@@ -367,15 +395,19 @@
                             </div>
                             <span class="text-success">-$5</span>
                         </li>
+
+                        {{-- Standar li 4 Total un USD --}}
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Total (USD)</span>
                             <strong>$20</strong>
                         </li>
+
                     </ul>
 
                     <form class="card p-2">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Promo code">
+
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-secondary">Redeem</button>
                             </div>
@@ -436,6 +468,7 @@
                             <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
                         </div>
 
+                        {{-- TODO crea auto Metohd 4 fill it --}}
                         <div class="row">
                             <div class="col-md-5 mb-3">
                                 <label for="country">Country</label>
@@ -466,7 +499,7 @@
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <div class="custom-control custom-checkbox">
+                        {{--<div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="same-address">
                             <label class="custom-control-label" for="same-address">Shipping address is the same as my
                                 billing address</label>
@@ -476,12 +509,12 @@
                             <label class="custom-control-label" for="save-info">Save this information for next
                                 time</label>
                         </div>
-                        <hr class="mb-4">
+                        <hr class="mb-4">--}}
 
                         <h4 class="mb-3">Payment</h4>
 
                         <div class="d-block my-3">
-                            <div class="custom-control custom-radio">
+                            {{--<div class="custom-control custom-radio">
                                 <input id="credit" name="paymentMethod" type="radio" class="custom-control-input"
                                        checked required>
                                 <label class="custom-control-label" for="credit">Credit card</label>
@@ -495,9 +528,16 @@
                                 <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input"
                                        required>
                                 <label class="custom-control-label" for="paypal">PayPal</label>
+                            </div>--}}
+
+                            <div class="custom-control custom-radio">
+                                <img src="https://logos-marcas.com/wp-content/uploads/2020/04/PayPal-Logo.png"
+                                     width="30%">
                             </div>
                         </div>
-                        <div class="row">
+
+                        {{-- Remove Credit Card Forms --}}
+                        {{--<div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="cc-name">Name on card</label>
                                 <input type="text" class="form-control" id="cc-name" placeholder="" required>
@@ -529,7 +569,7 @@
                                     Security code required
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                         <hr class="mb-4">
                         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
                     </form>
@@ -544,21 +584,38 @@
         </html>
         <script>
             function scrollcheckout() {
-                var elmnt = document.getElementById("checkout");
+                let elmnt = document.getElementById("checkout");
                 elmnt.scrollIntoView({
                     behavior: 'smooth'
                 });
 
             }
-            function  customTextLabel(){
 
-                
+            function customTextLabel() {
+                if (document.getElementById("matText").value.length > 0) {
 
-                document.getElementById("top-left").innerHTML = document.getElementById("matText").value;
-                document.getElementById("bottom-left").innerHTML = document.getElementById("matText").value;
-                document.getElementById("top-right").innerHTML = document.getElementById("matText").value;
-                document.getElementById("bottom-right").innerHTML = document.getElementById("matText").value;
-                document.getElementById("centered").innerHTML = document.getElementById("matText").value;
+                    document.getElementById("TextLabelRadiobutton").style.display = "block";
+
+                    document.getElementById("divText_top-left").innerHTML = document.getElementById("matText").value;
+                    document.getElementById("divText_top-right").innerHTML = document.getElementById("matText").value;
+                    document.getElementById("divText_bottom-left").innerHTML = document.getElementById("matText").value;
+                    document.getElementById("divText_bottom-right").innerHTML = document.getElementById("matText").value;
+                    document.getElementById("divText_centered").innerHTML = document.getElementById("matText").value;
+
+                } else {
+                    document.getElementById("TextLabelRadiobutton").style.display = "none";
+                }
+            }
+
+            function rbCustomTextPosition_Onchange(rbCustomText) {
+
+                document.getElementById("divText_top-left").style.display = "none";
+                document.getElementById("divText_top-right").style.display = "none";
+                document.getElementById("divText_bottom-left").style.display = "none";
+                document.getElementById("divText_bottom-right").style.display = "none";
+                document.getElementById("divText_centered").style.display = "none";
+
+                document.getElementById("divText_" + rbCustomText.id.replace('rb_', '')).style.display = "block";
 
             }
 
