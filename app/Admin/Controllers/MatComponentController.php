@@ -100,15 +100,28 @@ class MatComponentController extends AdminController {
     protected function form () {
         $form = new Form(new matComponent());
 
-        $form->text('code', __('Code'));
-        $form->text('enable', 'Enable');
-        //$form->text('fileName', __('FileName'));
+        $form->text('code', 'Code')->rules('required|min:3|max:10|regex:/^[A-Z]{3,10}/',[
+            'regex' => 'Code must be UpperCase Characters.',
+            'min'   => 'Code can not be less than 3 characters.',
+            'max'   => 'The Code may not be greater than 10 characters.',
+        ]);
+
+        $states = [
+            'off' => ['value' => 0, 'text' => 'disable', 'color' => 'danger'],
+            'on'  => ['value' => 1, 'text' => 'enable', 'color' => 'success'],
+        ];
+        $form->switch('enable', 'Enable')->states($states);
+
         $form->image('fileName', 'FileName')
             ->thumbnail('small', $width = 300, $height = 300)
             ->move($this->assetPath)
-            ->removable();
+            ->removable()
+            ->rules('required');
 
-        $form->text('description', __('Description'));
+        $form->text('description', 'Description')->rules('required|min:3|max:255',[
+            'min'   => 'Code can not be less than 3 characters.',
+            'max'   => 'The Code may not be greater than 255 characters.',
+        ]);
 
         $form->radio('type', 'Type')
             ->options([

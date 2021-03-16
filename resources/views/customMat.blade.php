@@ -3,7 +3,7 @@
 use App\Models\matComponent;
 use Illuminate\Support\Facades\DB;
 
-$matComponent = DB::table('mat_components')->get();
+$matComponents = matComponent::where('enable', 1)->get();
 
 ?>
 
@@ -280,8 +280,8 @@ $matComponent = DB::table('mat_components')->get();
                             onchange="sl_OnChange(this)"
                             name="selectFondo">
                         <?php
-                        foreach ($matComponent->where('type', 'C') as $Component) {
-                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
+                        foreach ($matComponents->where('type', 'C') as $Component) {
+                            echo '<option value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->code)).'</option>';
                         }
                         ?>
 
@@ -295,8 +295,8 @@ $matComponent = DB::table('mat_components')->get();
                             name="selectMarco">
 
                         <?php
-                        foreach ($matComponent->where('type', 'F') as $Component) {
-                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
+                        foreach ($matComponents->where('type', 'F') as $Component) {
+                            echo '<option value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->code)).'</option>';
                         }
                         ?>
                         <option value="SM">SM</option>
@@ -311,9 +311,9 @@ $matComponent = DB::table('mat_components')->get();
                             name="selectCentro">
 
                         <?php
-                        foreach ($matComponent->where('type', 'L') as $Component) {
+                        foreach ($matComponents->where('type', 'L') as $Component) {
 
-                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
+                            echo '<option value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->code)).'</option>';
 
                         }
                         ?>
@@ -398,7 +398,7 @@ $matComponent = DB::table('mat_components')->get();
                         <span class="text-muted">Your cart</span>
 
                         {{-- TODO Count CarItems --}}
-                        <span class="badge badge-secondary badge-pill">1</span>
+                        <span class="badge badge-primary badge-pill">3</span>
 
 
                     </h4>
@@ -408,10 +408,28 @@ $matComponent = DB::table('mat_components')->get();
                         {{-- Standar li 4 Product --}}
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div>
-                                <h6 class="my-0">Custom Mat de Ruben</h6>
-                                <small class="text-muted">Code: asdasdagvsesdfdasc</small>
+                                <h6 class="my-0">Custom Mat </h6>
+                                <small class="text-muted">Code: M-CBRW-FCLT-LCHDRG</small>
                             </div>
                             <span class="text-muted">$70</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Custom Mat de whit text</h6>
+                                <div>
+                                    <small class="text-muted">Code: M-CYLW-FELD-LPWELD</small>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Text Top Left: CustomText</small>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge badge-primary badge-pill">X2</span>
+                                {{--<span class="text-muted">X2</span>--}}
+                                <span class="text-muted">$70</span>
+                            </div>
+
                         </li>
 
                         {{-- Standar li 4 PromoCode --}}
@@ -631,7 +649,7 @@ $matComponent = DB::table('mat_components')->get();
                 fetch('http://127.0.0.1:8000/api/product/valid', {
                     method: 'POST',
                     headers: {
-                        "Content-type": "application/json", // We are sending JSON data
+                        "Content-type": "application/json",
                         credentials: 'include'
                     },
                     body: JSON.stringify({ matCode: MatCode})
@@ -641,7 +659,6 @@ $matComponent = DB::table('mat_components')->get();
                     })
                     .then(function (payload) {
                         console.log("API response", payload);
-                        // ... do other things here
                     })
             }
 

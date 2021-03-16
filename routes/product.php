@@ -14,7 +14,7 @@ use App\Http\Controllers\ProductController;
 
 //Route::post('/product', function () {});
 
-Route::get('/product/{id}', [ProductController::class, 'show']);
-Route::post('/product', [ProductController::class, 'store']);
+//Route::get('/product/{id}', [ProductController::class, 'show']);
+//Route::post('/product', [ProductController::class, 'store']);
 
-Route::resource('product', ProductController::class);
+//Route::resource('product', ProductController::class);

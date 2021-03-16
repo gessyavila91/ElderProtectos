@@ -3,7 +3,10 @@
 namespace Tests\Feature;
 
 use App\Providers\RouteServiceProvider;
+use Database\Seeders\MatComponentSeeder;
+use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class RegistrationTest extends TestCase
@@ -19,6 +22,10 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register()
     {
+
+        DB::table('users')->truncate();
+        $this->seed(UserSeeder::class);
+
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',
@@ -28,5 +35,6 @@ class RegistrationTest extends TestCase
 
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
+
     }
 }
