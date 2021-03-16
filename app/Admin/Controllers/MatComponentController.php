@@ -1,0 +1,122 @@
+<?php
+
+namespace App\Admin\Controllers;
+
+use App\Models\matComponent;
+use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Form;
+use Encore\Admin\Grid;
+use Encore\Admin\Show;
+
+
+class MatComponentController extends AdminController {
+
+    private $assetPath = 'assets/img/customMat';
+
+    /**
+     * Title for current resource.
+     *
+     * @var string
+     */
+    protected $title = 'matComponent';
+
+    /**
+     * Make a grid builder.
+     *
+     * @return Grid
+     */
+    protected function grid () {
+
+        $grid = new Grid(new matComponent());
+        $states = [
+            'on' => ['value' => '1', 'text' => 'Enable', 'color' => 'success'],
+            'off' => ['value' => '0', 'text' => 'Disable', 'color' => 'warning'],
+        ];
+        
+        $grid->column('id', 'Id')->sortable();
+        $grid->column('code', 'Code');
+        $grid->column('enable', 'Enable')
+            /*->switch($states)*/
+           ->display(function () {
+            if ($this->enable == 1){
+                    return '<a class="label label-success"><i class="fa fa-check"></i></a>';
+                }else{
+                    return '<a class="label label-warning"><i class="fa fa-ban"></i></a>';
+                }
+            });
+        $grid->column('fileName', __('FileName'))->display(function ($logo) {
+            return "<img height='25px' src=".env('APP_URL')."/".$this->assetPath.$logo .">";
+        });
+        
+        $grid->column('description', 'Description')
+            ->editable();
+        
+        $grid->column('type', 'Type')
+            ->editable('select', [
+                'C' => 'Color',
+                'L' => 'Logo',
+                'F' => 'Frame']);
+
+
+        return $grid;
+    }
+
+    /**
+     * Make a show builder.
+     *
+     * @param mixed $id
+     * @return Show
+     */
+    protected function detail ($id) {
+        $show = new Show(matComponent::findOrFail($id));
+
+        $show->field('id', __('Id'));
+        $show->field('code', __('Code'));
+        $show->label('enable', 'Enable')->as(function ($content) {
+            if ($content == 1){
+                return '<i class="fa fa-check"></i>';
+            }else{
+                return '<i class="fa fa-ban"></i>';
+            }
+        })->label();
+
+        $show->field('fileName', __('FileName'))->image();
+        $show->field('description', __('Description'));
+        $show->field('type','Type')
+            ->using(['C' => 'Color', 'F' => 'Frame', 'L' => 'Logo'])
+            ->label();
+
+        $show->field('created_at', __('Created at'));
+        $show->field('updated_at', __('Updated at'));
+
+        return $show;
+    }
+
+    /**
+     * Make a form builder.
+     *
+     * @return Form
+     */
+    protected function form () {
+        $form = new Form(new matComponent());
+
+        $form->text('code', __('Code'));
+        $form->text('enable', 'Enable');
+        //$form->text('fileName', __('FileName'));
+        $form->image('fileName', 'FileName')
+            ->thumbnail('small', $width = 300, $height = 300)
+            ->move($this->assetPath)
+            ->removable();
+
+        $form->text('description', __('Description'));
+
+        $form->radio('type', 'Type')
+            ->options([
+                'C' => 'Color',
+                'L' => 'Logo',
+                'F' => 'Frame'])
+            ->default('C');
+
+        return $form;
+    }
+}

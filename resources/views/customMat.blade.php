@@ -1,3 +1,13 @@
+<?php
+
+use App\Models\matComponent;
+use Illuminate\Support\Facades\DB;
+
+$matComponent = DB::table('mat_components')->get();
+
+?>
+
+
 <x-app-layout>
 
     @section('content')
@@ -28,7 +38,6 @@
                 src: url(fonts/elderfont.woff);
                 font-weight: bold;
             }
-
 
             .epFont {
                 font-family: elderfont;
@@ -229,14 +238,14 @@
                         <div class="card-body ">
                             <div class="container1">
                                 <block style="text-align: center;">
-                                    <img class="fondo" id="fondo"
-                                         src="{{asset('assets/img/customMat/AppImg/fondo1.png')}}"
+                                    <img class="fondo" id="img_Fondo"
+                                         src="{{asset('assets/img/customMat/fondo1.png')}}"
                                          alt=""/>
-                                    <img class="playmatPreview" id="marco"
-                                         src="{{asset('assets/img/customMat/AppImg/marco1.png')}}"
+                                    <img class="playmatPreview" id="img_Marco"
+                                         src="{{asset('assets/img/customMat/marco1.png')}}"
                                          alt=""/>
-                                    <img class="playmatPreview" id="centro"
-                                         src="{{asset('assets/img/customMat/AppImg/centro1.png')}}"
+                                    <img class="playmatPreview" id="img_Centro"
+                                         src="{{asset('assets/img/customMat/centro1.png')}}"
                                          alt=""/>
 
                                     <div id="divText_top-left" class="top-left epFont" style="display: block"></div>
@@ -246,6 +255,12 @@
                                     <div id="divText_bottom-right" class="bottom-right epFont"
                                          style="display: none"></div>
                                     <div id="divText_centered" class="centered epFont" style="display: none"></div>
+
+                                    <h6>
+                                        <span class="badge badge-primary">Code:</span>
+                                        <a id="code">M-CXXX-FXXX-LXXX</a>
+                                    </h6>
+
 
                                 </block>
                             </div>
@@ -258,38 +273,50 @@
 
             <div class="col-md-5 ">
                 <form>
-                    <label for="selectFondo">
+                    <label for="select_Fondo">
                         Fondo
                     </label>
-                    <select id="selectFondo" class="custom-select d-block w-100"
-                            onchange="document.getElementById('fondo').src = this.value"
+                    <select id="select_Fondo" class="custom-select d-block w-100"
+                            onchange="sl_OnChange(this)"
                             name="selectFondo">
-                        <option value="{{asset('assets/img/customMat/AppImg/fondo1.png')}}" selected>fondo1</option>
-                        <option value="{{asset('assets/img/customMat/AppImg/fondo2.png')}}">fondo2</option>
+                        <?php
+                        foreach ($matComponent->where('type', 'C') as $Component) {
+                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
+                        }
+                        ?>
+
                     </select>
                     <br>
-                    <label for="selecMarco">
+                    <label for="select_Marco">
                         Marco
                     </label>
-                    <select id="selecMarco" class="custom-select d-block w-100"
-                            onchange="document.getElementById('marco').src = this.value"
+                    <select id="select_Marco" class="custom-select d-block w-100"
+                            onchange="sl_OnChange(this)"
                             name="selectMarco">
 
-                        <option value="{{asset('assets/img/customMat/AppImg/marco1.png')}}" selected>marco1</option>
-                        <option value="{{asset('assets/img/customMat/AppImg/marco2.png')}}">marco2</option>
+                        <?php
+                        foreach ($matComponent->where('type', 'F') as $Component) {
+                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
+                        }
+                        ?>
                         <option value="SM">SM</option>
 
                     </select>
                     <br>
-                    <label for="selecCentro">
+                    <label for="select_Centro">
                         Centro
                     </label>
-                    <select id="selecCentro" class="custom-select d-block w-100"
-                            onchange="document.getElementById('centro').src = this.value"
+                    <select id="select_Centro" class="custom-select d-block w-100"
+                            onchange="sl_OnChange(this)"
                             name="selectCentro">
 
-                        <option value="{{asset('assets/img/customMat/AppImg/centro1.png')}}" selected>centro1</option>
-                        <option value="{{asset('assets/img/customMat/AppImg/centro2.png')}}">centro2</option>
+                        <?php
+                        foreach ($matComponent->where('type', 'L') as $Component) {
+
+                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
+
+                        }
+                        ?>
                         <option value="SC">SC</option>
 
                     </select>
@@ -307,7 +334,7 @@
                                 <input id="rb_top-left"
                                        onchange="rbCustomTextPosition_Onchange(this)"
                                        class="form-check-input" type="radio" name="textPosition" checked>
-                                <label class="form-check-label" for="rb_bottom-left">
+                                <label class="form-check-label" for="rb_top-left">
                                     TopLeft
                                 </label>
                             </div>
@@ -339,7 +366,7 @@
                                 <input id="rb_centered"
                                        onchange="rbCustomTextPosition_Onchange(this)"
                                        class="form-check-input" type="radio" name="textPosition">
-                                <label class="form-check-label" for="rb_center">
+                                <label class="form-check-label" for="rb_centered">
                                     Center
                                 </label>
                             </div>
@@ -347,7 +374,7 @@
                     </div>
 
                     <br><br>
-                    <button onclick="scrollcheckout()" type="button" class="w-100 btn btn-lg btn-outline-primary">
+                    <button onclick="bt_ILikeIt_action()" type="button" class="w-100 btn btn-lg btn-outline-primary">
                         i like it!
                     </button>
                 </form>
@@ -532,7 +559,7 @@
 
                             <div class="custom-control custom-radio">
                                 <img src="https://logos-marcas.com/wp-content/uploads/2020/04/PayPal-Logo.png"
-                                     width="30%">
+                                     width="30%" alt="Paypal Logo">
                             </div>
                         </div>
 
@@ -583,12 +610,46 @@
         </body>
         </html>
         <script>
-            function scrollcheckout() {
-                let elmnt = document.getElementById("checkout");
-                elmnt.scrollIntoView({
+
+            function init(){
+
+                let select_Fondo = document.getElementById('select_Fondo');
+                let select_Marco = document.getElementById('select_Marco');
+                let select_Centro = document.getElementById('select_Centro');
+
+                document.getElementById('code').textContent ='M-C'+select_Fondo[select_Fondo.selectedIndex].text+'-F'+select_Marco[select_Marco.selectedIndex].text+'-L'+select_Centro[select_Centro.selectedIndex].text+'';
+            }
+
+            init();
+
+            function bt_ILikeIt_action() {
+                testPostRoute(document.getElementById('code').textContent)
+                LikeItscroll();
+            }
+
+            function testPostRoute(MatCode = '') {
+                fetch('http://127.0.0.1:8000/api/product/valid', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json", // We are sending JSON data
+                        credentials: 'include'
+                    },
+                    body: JSON.stringify({ matCode: MatCode})
+                })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function (payload) {
+                        console.log("API response", payload);
+                        // ... do other things here
+                    })
+            }
+
+
+            function LikeItscroll(){
+                document.getElementById("checkout").scrollIntoView({
                     behavior: 'smooth'
                 });
-
             }
 
             function customTextLabel() {
@@ -605,6 +666,28 @@
                 } else {
                     document.getElementById("TextLabelRadiobutton").style.display = "none";
                 }
+
+            }
+
+            function sl_OnChange(slComponent){
+
+                if (slComponent.value === 'SC' || slComponent.value === 'SM'){
+                    document.getElementById( slComponent.id.replace('select_', 'img_')).src = '';
+                }else{
+                    document.getElementById( slComponent.id.replace('select_', 'img_')).src = slComponent.value;
+                }
+
+                codeModify();
+            }
+
+            function codeModify(){
+
+                let select_Fondo = document.getElementById('select_Fondo');
+                let select_Marco = document.getElementById('select_Marco');
+                let select_Centro = document.getElementById('select_Centro');
+
+                document.getElementById('code').textContent ='M-C'+select_Fondo[select_Fondo.selectedIndex].text+'-F'+select_Marco[select_Marco.selectedIndex].text+'-L'+select_Centro[select_Centro.selectedIndex].text+'';
+
             }
 
             function rbCustomTextPosition_Onchange(rbCustomText) {
@@ -616,6 +699,14 @@
                 document.getElementById("divText_centered").style.display = "none";
 
                 document.getElementById("divText_" + rbCustomText.id.replace('rb_', '')).style.display = "block";
+
+            }
+
+            function regexCodeMat(){
+                let codeRGEX = /^M-C[A-Z]+-F[A-Z]+-L[A-Z]+(-T[A-Z ]+){0,1}$/;
+                var codeResult = codeRGEX.test(document.getElementById('code').textContent);
+
+                alert("code:"+codeResult );
 
             }
 

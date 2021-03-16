@@ -1,5 +1,7 @@
 <?php
 
+use Encore\Admin\Grid\Displayers\DropdownActions;
+
 return [
 
     /*
@@ -275,7 +277,7 @@ return [
     |    "skin-red", "skin-red-light", "skin-black", "skin-black-light".
     |
     */
-    'skin' => 'skin-blue-light',
+    'skin' => 'skin-black-light',
 
     /*
     |--------------------------------------------------------------------------
@@ -373,7 +375,7 @@ return [
     | The global Grid action display class.
     |--------------------------------------------------------------------------
     */
-    'grid_action_class' => \Encore\Admin\Grid\Displayers\DropdownActions::class,
+    'grid_action_class' => DropdownActions::class,
 
     /*
     |--------------------------------------------------------------------------
