@@ -268,21 +268,20 @@ $matComponents = matComponent::where('enable', 1)->get();
                                     <h6>
                                         <span class="badge badge-primary">Code:</span>
                                         <a id="code">M-CXXX-FXXX-LXXX</a>
-                                        {{--add input--}}
                                     </h6>
 
 
-
                                     <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Code</span>
-                                     </div>
-                                        <input type="text" class="form-control" id="code" placeholder="M-CXXX-FXXX-LXXX" required>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="button" id="button-addon2"><i class="fas fa-check"></i></button>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Code</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="code" placeholder="M-CXXX-FXXX-LXXX"
+                                               required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-primary" type="button" id="button-addon2"><i
+                                                        class="fas fa-check"></i></button>
+                                        </div>
                                     </div>
-                                    </div>
-
 
 
                                 </block>
@@ -396,16 +395,17 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                     <br><br>
                     <button onclick="bt_ILikeIt_action()" type="button" class="w-100 btn btn-lg btn-outline-primary">
-                    i like it!
+                        i like it!
                     </button>
 
                     <div class="d-flex justify-content-around">
-                    <button onclick="bt_ILikeIt_action()" type="button" class="btn btn-lg btn-outline-success col-6">
-                    modify!
-                    </button>
-                    <button onclick="bt_ILikeIt_action()" type="button" class="btn btn-lg btn-outline-danger col-6">
-                     cancel!
-                    </button>
+                        <button onclick="bt_ILikeIt_action()" type="button"
+                                class="btn btn-lg btn-outline-success col-6">
+                            modify!
+                        </button>
+                        <button onclick="bt_ILikeIt_action()" type="button" class="btn btn-lg btn-outline-danger col-6">
+                            cancel!
+                        </button>
                     </div>
 
                 </form>
@@ -435,83 +435,86 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                         <div id="div_ProductCar">
                             <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Custom Mat de whit text</h6>
                                 <div>
-                                    <small class="text-muted">Code: M-CYLW-FELD-LPWELD</small>
+                                    <h6 class="my-0">Custom Mat de whit text</h6>
+                                    <div>
+                                        <small class="text-muted">Code: M-CYLW-FELD-LPWELD</small>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">Text Top Left: CustomText</small>
+                                    </div>
                                 </div>
                                 <div>
-                                    <small class="text-muted">Text Top Left: CustomText</small>
-                                </div>
-                            </div>
-                            <div>
-                                <a href="#" class="badge badge-light"><i class="fas fa-minus"></i></a>
-                                <span class="badge badge-pill badge-primary">2</span>
-                                <a href="#" class="badge badge-light"><i class="fas fa-plus"></i></a>
+                                    <a href="#" class="badge badge-light"><i class="fas fa-minus"></i></a>
+                                    <span class="badge badge-pill badge-primary">2</span>
+                                    <a href="#" class="badge badge-light"><i class="fas fa-plus"></i></a>
 
-                                {{--<span class="text-muted">X2</span>--}}
-                                <span class="text-muted">$70</span>
-<br />
-                                <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></button>
-                                <button type="button" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></button>
-                                <button type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </li>
+                                    {{--<span class="text-muted">X2</span>--}}
+                                    <span class="text-muted">$70</span>
+                                    <br/>
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal"
+                                            data-target="#exampleModal"><i class="fas fa-eye"></i></button>
+                                    <button type="button" class="btn btn-primary btn-xs"><i
+                                                class="fas fa-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </li>
                         </div>
 
 
-<!-- Modal Preview -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-                                    <div class="container1">
-                                        <block style="text-align: center;">
-                                            <img class="fondo" id="img_Fondo"
-                                                 src="{{asset('assets/img/customMat/fondo1.png')}}"
-                                                 alt=""/>
-                                            <img class="playmatPreview" id="img_Marco"
-                                                 src="{{asset('assets/img/customMat/marco1.png')}}"
-                                                 alt=""/>
-                                            <img class="playmatPreview" id="img_Centro"
-                                                 src="{{asset('assets/img/customMat/centro1.png')}}"
-                                                 alt=""/>
-
-                                            <div id="divText_top-left" class="top-left epFont" style="display: block"></div>
-                                            <div id="divText_top-right" class="top-right epFont" style="display: none"></div>
-                                            <div id="divText_bottom-left" class="bottom-left epFont"
-                                                 style="display: none"></div>
-                                            <div id="divText_bottom-right" class="bottom-right epFont"
-                                                 style="display: none"></div>
-                                            <div id="divText_centered" class="centered epFont" style="display: none"></div>
-
-                                            <h6>
-                                                <span class="badge badge-primary">Code:</span>
-                                                <a id="code">M-CXXX-FXXX-LXXX</a>
-                                            </h6>
-                                        </block>
+                        <!-- Modal Preview -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End Modal Preview -->
+                                    <div class="modal-body">
+                                        <div class="card-body">
+                                            <div class="container1">
+                                                <block style="text-align: center;">
+                                                    <img class="fondo" id="img_Fondo"
+                                                         src="{{asset('assets/img/customMat/fondo1.png')}}"
+                                                         alt=""/>
+                                                    <img class="playmatPreview" id="img_Marco"
+                                                         src="{{asset('assets/img/customMat/marco1.png')}}"
+                                                         alt=""/>
+                                                    <img class="playmatPreview" id="img_Centro"
+                                                         src="{{asset('assets/img/customMat/centro1.png')}}"
+                                                         alt=""/>
 
+                                                    <div id="divText_top-left" class="top-left epFont"
+                                                         style="display: block"></div>
+                                                    <div id="divText_top-right" class="top-right epFont"
+                                                         style="display: none"></div>
+                                                    <div id="divText_bottom-left" class="bottom-left epFont"
+                                                         style="display: none"></div>
+                                                    <div id="divText_bottom-right" class="bottom-right epFont"
+                                                         style="display: none"></div>
+                                                    <div id="divText_centered" class="centered epFont"
+                                                         style="display: none"></div>
 
-
-
-
+                                                    <h6>
+                                                        <span class="badge badge-primary">Code:</span>
+                                                        <a id="code">M-CXXX-FXXX-LXXX</a>
+                                                    </h6>
+                                                </block>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Modal Preview -->
 
 
                         {{-- Standar li 4 PromoCode --}}
@@ -634,67 +637,87 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                         <div class="my-3">
 
-<div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-           <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
-                                     <label class="form-check-label" for="paypal" ><i class="fab fa-cc-paypal fa-2x"></i></label>
-        </button>
-      </h2>
-    </div>
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link btn-block text-left" type="button"
+                                                    data-toggle="collapse" data-target="#collapseOne"
+                                                    aria-expanded="true" aria-controls="collapseOne">
+                                                <input id="paypal" name="paymentMethod" type="radio"
+                                                       class="form-check-input" checked="" required="">
+                                                <label class="form-check-label" for="paypal"><i
+                                                            class="fab fa-cc-paypal fa-2x"></i></label>
+                                            </button>
+                                        </h2>
+                                    </div>
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-        Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          <input id="amazon" name="paymentMethod" type="radio" class="form-check-input" required="">
-                                  <label class="form-check-label" for="amazon"><i class="fab fa-cc-amazon-pay fa-2x"></i></label>
-        </button>
-      </h2>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-        Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingThree">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          <input id="apple" name="paymentMethod" type="radio" class="form-check-input" required="">
-                                  <label class="form-check-label" for="apple"><i class="fab fa-apple-pay fa-2x"></i></label>
-        </button>
-      </h2>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-        Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-      </div>
-    </div>
-  </div>
-</div>
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch.
+                                            Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                            aliqua put a bird on it squid single-origin coffee nulla assumenda
+                                            shoreditch et.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                                    data-toggle="collapse" data-target="#collapseTwo"
+                                                    aria-expanded="false" aria-controls="collapseTwo">
+                                                <input id="amazon" name="paymentMethod" type="radio"
+                                                       class="form-check-input" required="">
+                                                <label class="form-check-label" for="amazon"><i
+                                                            class="fab fa-cc-amazon-pay fa-2x"></i></label>
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch.
+                                            Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                            aliqua put a bird on it squid single-origin coffee nulla assumenda
+                                            shoreditch et.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                                    data-toggle="collapse" data-target="#collapseThree"
+                                                    aria-expanded="false" aria-controls="collapseThree">
+                                                <input id="apple" name="paymentMethod" type="radio"
+                                                       class="form-check-input" required="">
+                                                <label class="form-check-label" for="apple"><i
+                                                            class="fab fa-apple-pay fa-2x"></i></label>
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch.
+                                            Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                            aliqua put a bird on it squid single-origin coffee nulla assumenda
+                                            shoreditch et.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
-
-
-                       </div>
-
-
-
-
-
+                        </div>
 
 
                         <hr class="mb-4">
