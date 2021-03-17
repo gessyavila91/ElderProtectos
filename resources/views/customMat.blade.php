@@ -259,6 +259,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                                     <h6>
                                         <span class="badge badge-primary">Code:</span>
                                         <a id="code">M-CXXX-FXXX-LXXX</a>
+                                        {{--add input--}}
                                     </h6>
                                 </block>
                             </div>
