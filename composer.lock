@@ -1,20 +1,20 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "a291d333c0957197c7c6d6e472930115",
-    "packages": [
-        {
-            "name": "asm89/stack-cors",
-            "version": "v2.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/asm89/stack-cors.git",
-                "reference": "9cb795bf30988e8c96dd3c40623c48a877bc6714"
-            },
-            "dist": {
+  "_readme": [
+    "This file locks the dependencies of your project to a known state",
+    "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+    "This file is @generated automatically"
+  ],
+  "content-hash": "5781f9908b83c7a09fd190cf16636296",
+  "packages": [
+    {
+      "name": "asm89/stack-cors",
+      "version": "v2.0.3",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/asm89/stack-cors.git",
+        "reference": "9cb795bf30988e8c96dd3c40623c48a877bc6714"
+      },
+      "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/asm89/stack-cors/zipball/9cb795bf30988e8c96dd3c40623c48a877bc6714",
                 "reference": "9cb795bf30988e8c96dd3c40623c48a877bc6714",
@@ -1518,20 +1518,20 @@
             },
             "time": "2019-12-11T02:46:10+00:00"
         },
-        {
-            "name": "laravel/framework",
-            "version": "v8.32.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "7c37b64f8153c16b6406f5c28cf37828ebbe8846"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/7c37b64f8153c16b6406f5c28cf37828ebbe8846",
-                "reference": "7c37b64f8153c16b6406f5c28cf37828ebbe8846",
-                "shasum": ""
-            },
+    {
+      "name": "laravel/framework",
+      "version": "v8.33.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/laravel/framework.git",
+        "reference": "354c57b8cb457549114074c500944455a288d6cc"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/laravel/framework/zipball/354c57b8cb457549114074c500944455a288d6cc",
+        "reference": "354c57b8cb457549114074c500944455a288d6cc",
+        "shasum": ""
+      },
             "require": {
                 "doctrine/inflector": "^1.4|^2.0",
                 "dragonmantank/cron-expression": "^3.0.2",
@@ -1684,7 +1684,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-03-09T15:37:45+00:00"
+      "time": "2021-03-16T19:42:32+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2689,20 +2689,20 @@
             },
             "time": "2017-10-23T01:57:42+00:00"
         },
-        {
-            "name": "psy/psysh",
-            "version": "v0.10.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "6f990c19f91729de8b31e639d6e204ea59f19cf3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/6f990c19f91729de8b31e639d6e204ea59f19cf3",
-                "reference": "6f990c19f91729de8b31e639d6e204ea59f19cf3",
-                "shasum": ""
-            },
+    {
+      "name": "psy/psysh",
+      "version": "v0.10.7",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/bobthecow/psysh.git",
+        "reference": "a395af46999a12006213c0c8346c9445eb31640c"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/bobthecow/psysh/zipball/a395af46999a12006213c0c8346c9445eb31640c",
+        "reference": "a395af46999a12006213c0c8346c9445eb31640c",
+        "shasum": ""
+      },
             "require": {
                 "dnoegel/php-xdg-base-dir": "0.1.*",
                 "ext-json": "*",
@@ -2761,9 +2761,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.10.6"
+              "source": "https://github.com/bobthecow/psysh/tree/v0.10.7"
             },
-            "time": "2021-01-18T15:53:43+00:00"
+      "time": "2021-03-14T02:14:56+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -5566,52 +5566,56 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "barryvdh/laravel-ide-helper",
-            "version": "v2.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "64a6b902583802c162cdccf7e76dc8619368bf1a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/64a6b902583802c162cdccf7e76dc8619368bf1a",
-                "reference": "64a6b902583802c162cdccf7e76dc8619368bf1a",
-                "shasum": ""
-            },
+      {
+        "name": "barryvdh/laravel-ide-helper",
+        "version": "v2.9.1",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/barryvdh/laravel-ide-helper.git",
+          "reference": "8d8302ff6adb55f8b844c798b8b1ffdee142f7e5"
+        },
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/8d8302ff6adb55f8b844c798b8b1ffdee142f7e5",
+          "reference": "8d8302ff6adb55f8b844c798b8b1ffdee142f7e5",
+          "shasum": ""
+        },
             "require": {
-                "barryvdh/reflection-docblock": "^2.0.6",
-                "composer/composer": "^1.6 || ^2",
-                "doctrine/dbal": "^2.6 || ^3",
-                "ext-json": "*",
-                "illuminate/console": "^8",
-                "illuminate/filesystem": "^8",
-                "illuminate/support": "^8",
-                "php": "^7.3 || ^8.0",
-                "phpdocumentor/type-resolver": "^1.1.0"
+              "barryvdh/reflection-docblock": "^2.0.6",
+              "composer/composer": "^1.6 || ^2",
+              "doctrine/dbal": "^2.6 || ^3",
+              "ext-json": "*",
+              "illuminate/console": "^8",
+              "illuminate/filesystem": "^8",
+              "illuminate/support": "^8",
+              "nikic/php-parser": "^4.7",
+              "php": "^7.3 || ^8.0",
+              "phpdocumentor/type-resolver": "^1.1.0"
             },
             "require-dev": {
-                "ext-pdo_sqlite": "*",
-                "friendsofphp/php-cs-fixer": "^2",
-                "illuminate/config": "^8",
-                "illuminate/view": "^8",
-                "mockery/mockery": "^1.4",
-                "orchestra/testbench": "^6",
-                "phpunit/phpunit": "^8.5 || ^9",
-                "spatie/phpunit-snapshot-assertions": "^3 || ^4",
-                "vimeo/psalm": "^3.12"
+              "ext-pdo_sqlite": "*",
+              "friendsofphp/php-cs-fixer": "^2",
+              "illuminate/config": "^8",
+              "illuminate/view": "^8",
+              "mockery/mockery": "^1.4",
+              "orchestra/testbench": "^6",
+              "phpunit/phpunit": "^8.5 || ^9",
+              "spatie/phpunit-snapshot-assertions": "^3 || ^4",
+              "vimeo/psalm": "^3.12"
             },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.9-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider"
-                    ]
-                }
+        "suggest": {
+          "illuminate/events": "Required for automatic helper generation (^6|^7|^8)."
+        },
+        "type": "library",
+        "extra": {
+          "branch-alias": {
+            "dev-master": "2.9-dev"
+          },
+          "laravel": {
+            "providers": [
+              "Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider"
+            ]
+          }
             },
             "autoload": {
                 "psr-4": {
@@ -5642,7 +5646,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-ide-helper/issues",
-                "source": "https://github.com/barryvdh/laravel-ide-helper/tree/v2.9.0"
+              "source": "https://github.com/barryvdh/laravel-ide-helper/tree/v2.9.1"
             },
             "funding": [
                 {
@@ -5650,7 +5654,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-12-29T10:11:05+00:00"
+        "time": "2021-03-15T19:22:08+00:00"
         },
         {
             "name": "barryvdh/reflection-docblock",
@@ -6416,20 +6420,20 @@
             },
             "time": "2020-12-18T16:50:48+00:00"
         },
-        {
-            "name": "filp/whoops",
-            "version": "2.9.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filp/whoops.git",
-                "reference": "df7933820090489623ce0be5e85c7e693638e536"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/df7933820090489623ce0be5e85c7e693638e536",
-                "reference": "df7933820090489623ce0be5e85c7e693638e536",
-                "shasum": ""
-            },
+      {
+        "name": "filp/whoops",
+        "version": "2.10.0",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/filp/whoops.git",
+          "reference": "6ecda5217bf048088b891f7403b262906be5a957"
+        },
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/filp/whoops/zipball/6ecda5217bf048088b891f7403b262906be5a957",
+          "reference": "6ecda5217bf048088b891f7403b262906be5a957",
+          "shasum": ""
+        },
             "require": {
                 "php": "^5.5.9 || ^7.0 || ^8.0",
                 "psr/log": "^1.0.1"
@@ -6477,7 +6481,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.9.2"
+              "source": "https://github.com/filp/whoops/tree/2.10.0"
             },
             "funding": [
                 {
@@ -6485,7 +6489,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-24T12:00:00+00:00"
+        "time": "2021-03-16T12:00:00+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -6664,20 +6668,20 @@
             },
             "time": "2021-02-18T15:47:31+00:00"
         },
-        {
-            "name": "laravel/sail",
-            "version": "v1.4.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/sail.git",
-                "reference": "c57927e1e3919a317034ff706c684f01f15c10d8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/c57927e1e3919a317034ff706c684f01f15c10d8",
-                "reference": "c57927e1e3919a317034ff706c684f01f15c10d8",
-                "shasum": ""
-            },
+      {
+        "name": "laravel/sail",
+        "version": "v1.4.8",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/laravel/sail.git",
+          "reference": "66b26181c3e86266b0b98f45a3398b090f37dee9"
+        },
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/laravel/sail/zipball/66b26181c3e86266b0b98f45a3398b090f37dee9",
+          "reference": "66b26181c3e86266b0b98f45a3398b090f37dee9",
+          "shasum": ""
+        },
             "require": {
                 "illuminate/console": "^8.0|^9.0",
                 "illuminate/contracts": "^8.0|^9.0",
@@ -6722,7 +6726,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2021-03-09T19:15:10+00:00"
+        "time": "2021-03-16T16:28:57+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -8943,7 +8947,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0"
+      "php": "^7.3|^8.0",
+      "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
