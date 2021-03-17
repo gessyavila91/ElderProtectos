@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function PHPUnit\Framework\returnArgument;
 
 class ProductController extends Controller {
 
@@ -26,6 +27,32 @@ class ProductController extends Controller {
             'msg' => 'Error',
         ];
 
+        //TODO create cookeMaker Oven|Horno
+        $produc = [
+            'id' => 1,//random This
+            'matCode' => $request->matCode,
+            'quantity' => $request->quantity,
+            'customMsg' => $request->customMsg,
+        ];
+
+        $carCookie = array();
+
+        if (!isset($_COOKIE["productCodeJson"])) {
+
+            array_push($carCookie, $produc);
+
+        } else {
+            //comparar faltantes para marcar eliminar
+
+            $carCookie = (json_decode($_COOKIE["productCodeJson"]));
+            array_push($carCookie, $produc);
+
+        }
+        $cookie = cookie('productCodeJson', json_encode($carCookie, true), 0, null, null, null, false);
+        //$cookie = cookie('productCodeJson', json_encode($carCookie,true),  $httpOnly = false);
+
+        //var_dump(json_encode($carCookie,true));
+
         if ($this->ValidCode($request->matCode)) {
             $separeCode = explode("-", $request->matCode);
 
@@ -43,7 +70,12 @@ class ProductController extends Controller {
             $response['msg'] = 'invalid Code';
         }
 
-        return response()->json($response);
+        if (isset($cookie)) {
+            return response()->json($response)->cookie($cookie);
+        } else {
+            return response()->json($response);
+        }
+
 
     }
 

@@ -547,34 +547,55 @@ $matComponents = matComponent::where('enable', 1)->get();
                 let select_Marco = document.getElementById('select_Marco');
                 let select_Centro = document.getElementById('select_Centro');
 
-                document.getElementById('code').textContent = 'M-C' + select_Fondo[select_Fondo.selectedIndex].text + '-F' + select_Marco[select_Marco.selectedIndex].text + '-L' + select_Centro[select_Centro.selectedIndex].text + '';
+                document.getElementById('code').textContent =
+                    'M-C' + select_Fondo[select_Fondo.selectedIndex].text +
+                    '-F' + select_Marco[select_Marco.selectedIndex].text +
+                    '-L' + select_Centro[select_Centro.selectedIndex].text;
             }
 
             init();
 
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
             function bt_ILikeIt_action() {
 
-                if (addProduct2Car(document.getElementById('code').textContent)) {
+
+                let product = {
+                    matCode: document.getElementById('code').textContent,
+                    quantity: 1,
+                    customMsg: getCustomText(),
+                };
+
+                //let  myJSON = JSON.stringify(product);
+
+                if (addProduct2Car(product)) {
                     LikeItscroll();
                 }
 
+                console.log(document.cookie);
+
             }
 
-            function addProduct2Car(MatCode = '') {
+            function addProduct2Car(MatCode = null) {
                 var retCallBack = false;
 
+                //TODO Cambiar direccion para tomar valores de ENV
                 fetch('http://127.0.0.1:8000/api/product/valid', {
                     method: 'POST',
                     headers: {
                         "Content-type": "application/json",
                         credentials: 'include'
                     },
-                    body: JSON.stringify({matCode: MatCode})
+                    body: JSON.stringify(MatCode)
                 }).then(function (response) {
                     return response.text();
                 })
                     .then(function (payload) {
-                        console.log("API response", payload);
+                        //console.log("API response", payload);
 
                         var obj = JSON.parse(payload);
 
@@ -617,6 +638,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                             spanProductPrice.classList.add('text-muted');
                             spanProductPrice.append('$70')
 
+                            //TODO refactor this with new Function getCustomText()
                             //customText matText
                             if (document.getElementById("matText").value.length > 0 && document.getElementById("matText").value.length <= 25) {
                                 h6Product.append(' w/cText');
@@ -661,12 +683,12 @@ $matComponents = matComponent::where('enable', 1)->get();
                             div.append(liProduct);
 
                             retCallBack = true;
-                            Swal.fire({
+                            /*Swal.fire({
                                 title: 'success',
                                 text: 'Producto Agregado al carrito',
                                 icon: 'success',
                                 confirmButtonText: 'Cool!'
-                            })
+                            })*/
                             return true;
                         } else {
                             Swal.fire({
@@ -686,6 +708,28 @@ $matComponents = matComponent::where('enable', 1)->get();
                         })
                     });
                 return true;
+            }
+
+            function getCustomText() {
+
+                if (document.getElementById("matText").value.length > 0 && document.getElementById("matText").value.length <= 25) {
+                    if (document.getElementById('rb_top-left').checked) {
+                        return 'Top Left: ' + document.getElementById("matText").value;
+                    }
+                    if (document.getElementById('rb_top-right').checked) {
+                        return 'Top Right: ' + document.getElementById("matText").value;
+                    }
+                    if (document.getElementById('rb_bottom-left').checked) {
+                        return 'Bottom Left: ' + document.getElementById("matText").value;
+                    }
+                    if (document.getElementById('rb_bottom-right').checked) {
+                        return 'Bottom Right: ' + document.getElementById("matText").value;
+                    }
+                    if (document.getElementById('rb_centered').checked) {
+                        return 'Centered: ' + document.getElementById("matText").value;
+                    }
+                }
+                return null;
             }
 
 
@@ -752,6 +796,19 @@ $matComponents = matComponent::where('enable', 1)->get();
                 alert("code:" + codeResult);
 
             }
+
+            async function asyncSweetAlert() {
+                const text = await swal({
+                    title: 'Whoops!!',
+                    text: 'Codigo de Producto no Valido: ' + obj.msg,
+                    icon: 'error',
+                    confirmButtonText: 'oh no'
+                })
+                if (text) {
+                    swal(text)
+                }
+            }
+
 
         </script>
     @endsection

@@ -11,12 +11,30 @@ use Tests\TestCase;
 
 class ProductTest extends TestCase {
 
-    public function test_productApiValid(){
-        $response = $this->postJson('/api/product/valid', ['matCode' => 'M-CBRW-FCLT-LCHDRG']);
+    public function test_productApivalidProduct () {
+
+        $producArray1 = [
+            'matCode' => 'M-CBRW-FCLT-LCHDRG',
+            'quantity' => 1,
+            'customMsg' => 'Top Left: This is a Messaje 4 you'
+        ];
+        $producArray2 = [
+            'matCode' => 'M-CBRW-FCLT-LCHDRG',
+            'quantity' => 1,
+            'customMsg' => null
+        ];
+
+        $response = $this->postJson('/api/product/valid', $producArray1);
         $response->assertStatus(200);
+
+        $response = $this->postJson('/api/product/valid', $producArray2);
+        $response->assertStatus(200);
+        //TODO add assertCookie
+        //$response->assertCookie();
+
     }
 
-    public function test_ProductControllerValidCode() {
+    public function test_ProductControllerValidCode () {
 
         DB::table('mat_components')->truncate();
         $this->seed(MatComponentSeeder::class);
@@ -46,6 +64,7 @@ class ProductTest extends TestCase {
         $this->assertTrue($ProductController->ValidCode($stdCodeGreen));
         //Impostor Code Funar
         $this->assertFalse($ProductController->ValidCode('M-BRW-FCLT-CHDRG'));
+
         $this->assertFalse($ProductController->ValidCode($stdCodeGreenNull));
 
 

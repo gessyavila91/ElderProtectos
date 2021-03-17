@@ -15,8 +15,9 @@ class CreateMatComponentsTable extends Migration
     {
         Schema::create('mat_components', function (Blueprint $table) {
             $table->id();
-            /*TODO Estableser numero Maximo/minimo de caracteres*/
+            /*TODO Estableser numero minimo de caracteres*/
             $table->string('code',10)->unique();
+            /*Poner Default a el Enable*/
             $table->boolean('enable');
             $table->string('fileName')->unique();
             $table->string('description');
