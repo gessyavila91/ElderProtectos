@@ -19,7 +19,7 @@ class ProductController extends Controller {
         return view('product.show', compact('product'));
     }
 
-    public function valid (Request $request) {
+    public function validProduct (Request $request) {
         $response = [
             'data' => null,
             'result' => false,

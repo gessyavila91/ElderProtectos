@@ -7,13 +7,11 @@ $matComponents = matComponent::where('enable', 1)->get();
 
 ?>
 
-
 <x-app-layout>
 
     @section('content')
         <!DOCTYPE html>
         <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 
         <head>
             <title>{{ config('app.name') }} - Custom Mat Maker</title>
@@ -30,6 +28,8 @@ $matComponents = matComponent::where('enable', 1)->get();
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
                     integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
                     crossorigin="anonymous"></script>
+            {{--TODO ADD SweetAlert2--}}
+            {{--<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>--}}
         </head>
 
         <style>
@@ -217,7 +217,6 @@ $matComponents = matComponent::where('enable', 1)->get();
 
         <body>
 
-
         <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
             <h1 class="display-4">Custom Playmat</h1>
             <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap
@@ -227,9 +226,8 @@ $matComponents = matComponent::where('enable', 1)->get();
         <hr class="featurette-divider">
 
         <div class="row featurette">
+
             <div class="col-md-7">
-
-
                 <div class="col">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-header">
@@ -260,15 +258,11 @@ $matComponents = matComponent::where('enable', 1)->get();
                                         <span class="badge badge-primary">Code:</span>
                                         <a id="code">M-CXXX-FXXX-LXXX</a>
                                     </h6>
-
-
                                 </block>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
             <div class="col-md-5 ">
@@ -281,7 +275,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                             name="selectFondo">
                         <?php
                         foreach ($matComponents->where('type', 'C') as $Component) {
-                            echo '<option value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->code)).'</option>';
+                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
                         }
                         ?>
 
@@ -296,7 +290,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                         <?php
                         foreach ($matComponents->where('type', 'F') as $Component) {
-                            echo '<option value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->code)).'</option>';
+                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
                         }
                         ?>
                         <option value="SM">SM</option>
@@ -313,7 +307,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                         <?php
                         foreach ($matComponents->where('type', 'L') as $Component) {
 
-                            echo '<option value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->code)).'</option>';
+                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
 
                         }
                         ?>
@@ -383,7 +377,6 @@ $matComponents = matComponent::where('enable', 1)->get();
 
         <hr class="featurette-divider">
 
-
         <div class="container">
             <div class="py-5 text-center" id="checkout">
                 <h2>Checkout form</h2>
@@ -400,46 +393,41 @@ $matComponents = matComponent::where('enable', 1)->get();
                         {{-- TODO Count CarItems --}}
                         <span class="badge badge-primary badge-pill">3</span>
 
-
                     </h4>
-                    <ul class="list-group mb-3">
+                    <ul class="list-group mb-3" id="ul_productList">
 
-                        {{-- TODO Add quantity in product li --}}
-                        {{-- Standar li 4 Product --}}
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Custom Mat </h6>
-                                <small class="text-muted">Code: M-CBRW-FCLT-LCHDRG</small>
-                            </div>
-                            <span class="text-muted">$70</span>
-                        </li>
+                        <div id="div_ProductCar">
 
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Custom Mat de whit text</h6>
+                            {{-- TODO Add quantity in product li --}}
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
                                 <div>
-                                    <small class="text-muted">Code: M-CYLW-FELD-LPWELD</small>
+                                    <h6 class="my-0">Custom Mat whit text</h6>
+                                    <div>
+                                        <small class="text-muted">Code: M-CYLW-FELD-LPWELD</small>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">Text Top Left: CustomText</small>
+                                    </div>
                                 </div>
                                 <div>
-                                    <small class="text-muted">Text Top Left: CustomText</small>
+                                    <span class="badge badge-primary badge-pill">X1</span>
+                                    <span class="text-muted">$70</span>
                                 </div>
-                            </div>
-                            <div>
-                                <span class="badge badge-primary badge-pill">X2</span>
-                                {{--<span class="text-muted">X2</span>--}}
-                                <span class="text-muted">$70</span>
-                            </div>
+                            </li>
 
-                        </li>
+                        </div>
 
                         {{-- Standar li 4 PromoCode --}}
-                        <li class="list-group-item d-flex justify-content-between bg-light">
-                            <div class="text-success">
-                                <h6 class="my-0">Promo code</h6>
-                                <small>EXAMPLECODE</small>
-                            </div>
-                            <span class="text-success">-$5</span>
-                        </li>
+                        <div id="divPromoCode">
+                            <li class="list-group-item d-flex justify-content-between bg-light">
+                                <div class="text-success">
+                                    <h6 class="my-0">Promo code</h6>
+                                    <small>EXAMPLECODE</small>
+                                </div>
+                                <span class="text-success">-$5</span>
+                            </li>
+
+                        </div>
 
                         {{-- Standar li 4 Total un USD --}}
                         <li class="list-group-item d-flex justify-content-between">
@@ -544,77 +532,17 @@ $matComponents = matComponent::where('enable', 1)->get();
                             </div>
                         </div>
                         <hr class="mb-4">
-                        {{--<div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="same-address">
-                            <label class="custom-control-label" for="same-address">Shipping address is the same as my
-                                billing address</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="save-info">
-                            <label class="custom-control-label" for="save-info">Save this information for next
-                                time</label>
-                        </div>
-                        <hr class="mb-4">--}}
 
                         <h4 class="mb-3">Payment</h4>
 
                         <div class="d-block my-3">
-                            {{--<div class="custom-control custom-radio">
-                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input"
-                                       checked required>
-                                <label class="custom-control-label" for="credit">Credit card</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input"
-                                       required>
-                                <label class="custom-control-label" for="debit">Debit card</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input"
-                                       required>
-                                <label class="custom-control-label" for="paypal">PayPal</label>
-                            </div>--}}
 
                             <div class="custom-control custom-radio">
                                 <img src="https://logos-marcas.com/wp-content/uploads/2020/04/PayPal-Logo.png"
                                      width="30%" alt="Paypal Logo">
                             </div>
-                        </div>
 
-                        {{-- Remove Credit Card Forms --}}
-                        {{--<div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="cc-name">Name on card</label>
-                                <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                                <small class="text-muted">Full name as displayed on card</small>
-                                <div class="invalid-feedback">
-                                    Name on card is required
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="cc-number">Credit card number</label>
-                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Credit card number is required
-                                </div>
-                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <label for="cc-expiration">Expiration</label>
-                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Expiration date required
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="cc-cvv">CVV</label>
-                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Security code required
-                                </div>
-                            </div>
-                        </div>--}}
                         <hr class="mb-4">
                         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
                     </form>
@@ -623,47 +551,116 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             <hr class="featurette-divider">
 
-
         </div>
         </body>
         </html>
         <script>
 
-            function init(){
+            function init() {
 
                 let select_Fondo = document.getElementById('select_Fondo');
                 let select_Marco = document.getElementById('select_Marco');
                 let select_Centro = document.getElementById('select_Centro');
 
-                document.getElementById('code').textContent ='M-C'+select_Fondo[select_Fondo.selectedIndex].text+'-F'+select_Marco[select_Marco.selectedIndex].text+'-L'+select_Centro[select_Centro.selectedIndex].text+'';
+                document.getElementById('code').textContent = 'M-C' + select_Fondo[select_Fondo.selectedIndex].text + '-F' + select_Marco[select_Marco.selectedIndex].text + '-L' + select_Centro[select_Centro.selectedIndex].text + '';
             }
 
             init();
 
             function bt_ILikeIt_action() {
-                testPostRoute(document.getElementById('code').textContent)
+                addProduct2Car(document.getElementById('code').textContent)
                 LikeItscroll();
             }
 
-            function testPostRoute(MatCode = '') {
+            function addProduct2Car(MatCode = '') {
                 fetch('http://127.0.0.1:8000/api/product/valid', {
                     method: 'POST',
                     headers: {
                         "Content-type": "application/json",
                         credentials: 'include'
                     },
-                    body: JSON.stringify({ matCode: MatCode})
+                    body: JSON.stringify({matCode: MatCode})
+                }).then(function (response) {
+                    return response.text();
                 })
-                    .then(function(response) {
-                        return response.json();
-                    })
                     .then(function (payload) {
                         console.log("API response", payload);
+
+                        var obj = JSON.parse(payload);
+
+                        if (obj.result) {
+
+                            /*TODO Refactor*/
+
+                            var div = document.getElementById('div_ProductCar');
+
+                            var liProduct = document.createElement('li');
+                            var divProductDescription = document.createElement('div');
+                            var divProductSpan = document.createElement('div');
+
+                            var divSmallProductCode = document.createElement('div');
+                            var divSmallProductCustomText = document.createElement('div');
+
+                            var h6Product = document.createElement('h6');
+
+                            var spanProductQuantity = document.createElement('span');
+                            var spanProductPrice = document.createElement('span');
+
+                            var smallProductCode = document.createElement('small');
+                            var smallProductCustomText = document.createElement('small');
+
+                            liProduct.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'lh-condensed');
+
+                            h6Product.classList.add('my-0')
+                            h6Product.append('Custom Mat');
+
+                            smallProductCode.classList.add('text-muted');
+                            smallProductCode.append('Code: M-CBRW-FCLT-LCHDRG');
+
+                            spanProductQuantity.classList.add('badge', 'badge-primary', 'badge-pill');
+                            spanProductQuantity.append('X2');
+
+                            spanProductPrice.classList.add('text-muted');
+                            spanProductPrice.append('$70')
+
+                            //customText
+                            if (true) {
+                                h6Product.append(' w/cText');
+
+                                smallProductCustomText.classList.add('text-muted');
+                                smallProductCustomText.append('Text Top Left: CustomText');
+                            }
+
+                            divSmallProductCode.appendChild(smallProductCode);
+                            divSmallProductCustomText.appendChild(smallProductCustomText);
+
+                            divProductDescription.appendChild(h6Product);
+                            divProductDescription.appendChild(divSmallProductCode);
+                            divProductDescription.appendChild(divSmallProductCustomText);
+
+                            divProductSpan.appendChild(spanProductQuantity);
+                            divProductSpan.appendChild(spanProductPrice);
+
+                            liProduct.append(divProductDescription);
+                            liProduct.append(divProductSpan);
+
+                            div.append(liProduct);
+
+                            alert('Producto Agregado al carrito');
+                            return true;
+                        } else {
+                            alert('Codigo de Producto no Valido: ' + obj.msg);
+                            return false;
+                        }
                     })
+                    .catch(function (err) {
+                        alert(err);
+                    });
+                return false;
             }
 
 
-            function LikeItscroll(){
+            function LikeItscroll() {
                 document.getElementById("checkout").scrollIntoView({
                     behavior: 'smooth'
                 });
@@ -686,24 +683,24 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             }
 
-            function sl_OnChange(slComponent){
+            function sl_OnChange(slComponent) {
 
-                if (slComponent.value === 'SC' || slComponent.value === 'SM'){
-                    document.getElementById( slComponent.id.replace('select_', 'img_')).src = '';
-                }else{
-                    document.getElementById( slComponent.id.replace('select_', 'img_')).src = slComponent.value;
+                if (slComponent.value === 'SC' || slComponent.value === 'SM') {
+                    document.getElementById(slComponent.id.replace('select_', 'img_')).src = '';
+                } else {
+                    document.getElementById(slComponent.id.replace('select_', 'img_')).src = slComponent.value;
                 }
 
                 codeModify();
             }
 
-            function codeModify(){
+            function codeModify() {
 
                 let select_Fondo = document.getElementById('select_Fondo');
                 let select_Marco = document.getElementById('select_Marco');
                 let select_Centro = document.getElementById('select_Centro');
 
-                document.getElementById('code').textContent ='M-C'+select_Fondo[select_Fondo.selectedIndex].text+'-F'+select_Marco[select_Marco.selectedIndex].text+'-L'+select_Centro[select_Centro.selectedIndex].text+'';
+                document.getElementById('code').textContent = 'M-C' + select_Fondo[select_Fondo.selectedIndex].text + '-F' + select_Marco[select_Marco.selectedIndex].text + '-L' + select_Centro[select_Centro.selectedIndex].text + '';
 
             }
 
@@ -719,11 +716,11 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             }
 
-            function regexCodeMat(){
+            function regexCodeMat() {
                 let codeRGEX = /^M-C[A-Z]+-F[A-Z]+-L[A-Z]+(-T[A-Z ]+){0,1}$/;
                 var codeResult = codeRGEX.test(document.getElementById('code').textContent);
 
-                alert("code:"+codeResult );
+                alert("code:" + codeResult);
 
             }
 

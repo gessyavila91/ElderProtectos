@@ -25,5 +25,5 @@ Route::get('matComponent', function() {
 
 
 Route::post('/product/valid',
-    [\App\Http\Controllers\ProductController::class, 'valid']
+    [\App\Http\Controllers\ProductController::class, 'validProduct']
 );
