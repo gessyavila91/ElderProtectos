@@ -25,6 +25,10 @@ Route::get('/custom', function () {
     return view('customMat');
 });
 
+Route::get('/orders', function () {
+    return view('orders');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
