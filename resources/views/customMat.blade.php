@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\matComponent;
-use Illuminate\Support\Facades\DB;
 
 $matComponents = matComponent::where('enable', 1)->get();
 
@@ -28,8 +27,11 @@ $matComponents = matComponent::where('enable', 1)->get();
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
                     integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
                     crossorigin="anonymous"></script>
-            {{--TODO ADD SweetAlert2--}}
-            {{--<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>--}}
+
+            {{--<script src="sweetalert2.all.min.js"></script>--}}
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+            <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+
         </head>
 
         <style>
@@ -398,27 +400,10 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                         <div id="div_ProductCar">
 
-                            {{-- TODO Add quantity in product li --}}
-                            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                <div>
-                                    <h6 class="my-0">Custom Mat whit text</h6>
-                                    <div>
-                                        <small class="text-muted">Code: M-CYLW-FELD-LPWELD</small>
-                                    </div>
-                                    <div>
-                                        <small class="text-muted">Text Top Left: CustomText</small>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="badge badge-primary badge-pill">X1</span>
-                                    <span class="text-muted">$70</span>
-                                </div>
-                            </li>
-
                         </div>
 
                         {{-- Standar li 4 PromoCode --}}
-                        <div id="divPromoCode">
+                        <div id="div_PromoCode">
                             <li class="list-group-item d-flex justify-content-between bg-light">
                                 <div class="text-success">
                                     <h6 class="my-0">Promo code</h6>
@@ -430,7 +415,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                         </div>
 
                         {{-- Standar li 4 Total un USD --}}
-                        <li class="list-group-item d-flex justify-content-between">
+                        <li id="div_TotalCar" class="list-group-item d-flex justify-content-between">
                             <span>Total (USD)</span>
                             <strong>$20</strong>
                         </li>
@@ -568,11 +553,16 @@ $matComponents = matComponent::where('enable', 1)->get();
             init();
 
             function bt_ILikeIt_action() {
-                addProduct2Car(document.getElementById('code').textContent)
-                LikeItscroll();
+
+                if (addProduct2Car(document.getElementById('code').textContent)) {
+                    LikeItscroll();
+                }
+
             }
 
             function addProduct2Car(MatCode = '') {
+                var retCallBack = false;
+
                 fetch('http://127.0.0.1:8000/api/product/valid', {
                     method: 'POST',
                     headers: {
@@ -611,24 +601,48 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                             liProduct.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'lh-condensed');
 
+                            /*TODO Add id to li and onClick event*/
+
                             h6Product.classList.add('my-0')
                             h6Product.append('Custom Mat');
 
                             smallProductCode.classList.add('text-muted');
-                            smallProductCode.append('Code: M-CBRW-FCLT-LCHDRG');
+
+                            smallProductCode.append('Code: ' + obj['data']['matCode']);
+
 
                             spanProductQuantity.classList.add('badge', 'badge-primary', 'badge-pill');
-                            spanProductQuantity.append('X2');
+                            spanProductQuantity.append('X1');
 
                             spanProductPrice.classList.add('text-muted');
                             spanProductPrice.append('$70')
 
-                            //customText
-                            if (true) {
+                            //customText matText
+                            if (document.getElementById("matText").value.length > 0 && document.getElementById("matText").value.length <= 25) {
                                 h6Product.append(' w/cText');
-
                                 smallProductCustomText.classList.add('text-muted');
-                                smallProductCustomText.append('Text Top Left: CustomText');
+                                // Check Position
+                                // rb_top-left
+                                if (document.getElementById('rb_top-left').checked) {
+                                    smallProductCustomText.append('Text Top Left: ' + document.getElementById("matText").value);
+                                }
+                                // rb_top-right
+                                if (document.getElementById('rb_top-right').checked) {
+                                    smallProductCustomText.append('Text Top Right: ' + document.getElementById("matText").value);
+                                }
+                                // rb_bottom-left
+                                if (document.getElementById('rb_bottom-left').checked) {
+                                    smallProductCustomText.append('Text Bottom Left: ' + document.getElementById("matText").value);
+                                }
+                                // rb_bottom-right
+                                if (document.getElementById('rb_bottom-right').checked) {
+                                    smallProductCustomText.append('Text Bottom Right: ' + document.getElementById("matText").value);
+                                }
+                                // rb_centered
+                                if (document.getElementById('rb_centered').checked) {
+                                    smallProductCustomText.append('Text Centered: ' + document.getElementById("matText").value);
+                                }
+
                             }
 
                             divSmallProductCode.appendChild(smallProductCode);
@@ -646,17 +660,32 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                             div.append(liProduct);
 
-                            alert('Producto Agregado al carrito');
+                            retCallBack = true;
+                            Swal.fire({
+                                title: 'success',
+                                text: 'Producto Agregado al carrito',
+                                icon: 'success',
+                                confirmButtonText: 'Cool!'
+                            })
                             return true;
                         } else {
-                            alert('Codigo de Producto no Valido: ' + obj.msg);
-                            return false;
+                            Swal.fire({
+                                title: 'Whoops!!',
+                                text: 'Codigo de Producto no Valido: ' + obj.msg,
+                                icon: 'error',
+                                confirmButtonText: 'oh no'
+                            })
+                            retCallBack = false;
                         }
                     })
                     .catch(function (err) {
-                        alert(err);
+                        Swal.fire({
+                            title: 'Whoops!!',
+                            text: err,
+                            icon: 'error'
+                        })
                     });
-                return false;
+                return true;
             }
 
 
