@@ -31,6 +31,7 @@ class ProductTest extends TestCase {
         $response->assertStatus(200);
         //TODO add assertCookie
         //$response->assertCookie();
+        //$response->dump();
 
     }
 
@@ -39,7 +40,9 @@ class ProductTest extends TestCase {
         DB::table('mat_components')->truncate();
         $this->seed(MatComponentSeeder::class);
 
-        $stdCodeGreen    = 'M-CBRW-FCLT-LCHDRG';
+        $stdCodeGreen = 'M-CBRW-FCLT-LCHDRG';
+        $stdCodeCustomTextGreen = 'M-CBRW-FCLT-LCHDRG-TREa"!@#$%^&*()_+|/\+ ';
+
         $stdCodeGreenNull = null;
         $stdComponenCode = 'BRW';
 
@@ -57,8 +60,9 @@ class ProductTest extends TestCase {
         ];
 
         //TODO Crear Codigos con seeders o random o algo despues eliminar los mismos
-        $this->assertSame($array,$ProductController->ExistComponent($stdComponenCode,'C'));
+        $this->assertSame($array, $ProductController->ExistComponent($stdComponenCode, 'C'));
         $this->assertTrue($ProductController->ValidCodePatter($stdCodeGreen));
+        $this->assertTrue($ProductController->ValidCodePatter($stdCodeCustomTextGreen));
 
         //100% Real No Fake True Code
         $this->assertTrue($ProductController->ValidCode($stdCodeGreen));

@@ -4,23 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminTables extends Migration
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function getConnection()
-    {
+class CreateAdminTables extends Migration {
+
+    public function getConnection () {
         return config('admin.database.connection') ?: config('database.default');
     }
 
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
+    public function up () {
+
         Schema::create(config('admin.database.users_table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('username', 190)->unique();
@@ -99,13 +90,7 @@ class CreateAdminTables extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
+    public function down () {
         Schema::dropIfExists(config('admin.database.users_table'));
         Schema::dropIfExists(config('admin.database.roles_table'));
         Schema::dropIfExists(config('admin.database.permissions_table'));
