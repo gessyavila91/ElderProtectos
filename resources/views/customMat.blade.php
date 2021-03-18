@@ -55,7 +55,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                 top: 0;
             }
 
-            .btn-xs{
+            .btn-xs {
                 padding: 3px;
                 font-size: 12px;
                 border-radius: 5px;
@@ -221,7 +221,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                 }
 
 
-
             }
 
         </style>
@@ -230,8 +229,9 @@ $matComponents = matComponent::where('enable', 1)->get();
 
         <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
             <h1 class="display-4">Custom Playmat</h1>
-            <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap
-                example. It’s built with default Bootstrap components and utilities with little customization.</p>
+            <p class="lead">Browse through the options we offer and choose the perfect combination.<br>
+                The possibilities are many, but if you want something even more unique send us a e-mail: <a
+                        href="mailto:hi@elderprotectors.com">hi@elderprotectors.com</a></p>
         </div>
 
         <hr class="featurette-divider">
@@ -398,12 +398,13 @@ $matComponents = matComponent::where('enable', 1)->get();
                         i like it!
                     </button>
 
-                    <div class="d-flex justify-content-around">
+                    <div class="d-flex justify-content-around" style="visibility: hidden">
                         <button onclick="bt_ILikeIt_action()" type="button"
-                                class="btn btn-lg btn-outline-success col-6">
+                                class="btn btn-lg btn-outline-success">
                             modify!
                         </button>
-                        <button onclick="bt_ILikeIt_action()" type="button" class="btn btn-lg btn-outline-danger col-6">
+                        <button onclick="bt_ILikeIt_action()" type="button"
+                                class="btn btn-lg btn-outline-danger">
                             cancel!
                         </button>
                     </div>
@@ -416,10 +417,10 @@ $matComponents = matComponent::where('enable', 1)->get();
 
         <div class="container">
             <div class="py-5 text-center" id="checkout">
-                <h2>Checkout form</h2>
-                <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required
-                    form group has a validation state that can be triggered by attempting to submit the form without
-                    completing it.</p>
+                <h2>Checkout</h2>
+                <p class="lead">Check your shopping cart, have a preview <i class="fas fa-eye fa-xs text-success "></i>
+                    (if necessary, edit your playmat <i class="fas fa-pencil-alt fa-xs text-primary"></i>).<br>
+                    Complete the form with your details and choose the payment method you prefer.</p>
             </div>
 
             <div class="row">
@@ -434,31 +435,100 @@ $matComponents = matComponent::where('enable', 1)->get();
                     <ul class="list-group mb-3" id="ul_productList">
 
                         <div id="div_ProductCar">
-                            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                <div>
-                                    <h6 class="my-0">Custom Mat de whit text</h6>
-                                    <div>
-                                        <small class="text-muted">Code: M-CYLW-FELD-LPWELD</small>
+                            <li class="list-group-item lh-condensed">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h6 class="my-0">Custom Mat de whit text</h6>
+                                        <small class="">Code:</small> <small
+                                                class="text-muted">M-CYLW-FELD-LPWELD</small><br>
+                                        <small class="">Text Top Left:</small> <small
+                                                class="text-muted">CustomText</small>
+                                        <br>
+                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal"
+                                                data-target="#exampleModal"><i class="fas fa-eye"></i></button>
+                                        <button type="button" class="btn btn-primary btn-xs"><i
+                                                    class="fas fa-pencil-alt"></i></button>
+                                        <button type="button" class="btn btn-danger btn-xs"><i
+                                                    class="fas fa-trash"></i>
+                                        </button>
                                     </div>
-                                    <div>
-                                        <small class="text-muted">Text Top Left: CustomText</small>
-                                    </div>
-                                </div>
-                                <div>
-                                    <a href="#" class="badge badge-light"><i class="fas fa-minus"></i></a>
-                                    <span class="badge badge-pill badge-primary">2</span>
-                                    <a href="#" class="badge badge-light"><i class="fas fa-plus"></i></a>
 
-                                    {{--<span class="text-muted">X2</span>--}}
-                                    <span class="text-muted">$70</span>
-                                    <br/>
-                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal"
-                                            data-target="#exampleModal"><i class="fas fa-eye"></i></button>
-                                    <button type="button" class="btn btn-primary btn-xs"><i
-                                                class="fas fa-pencil-alt"></i></button>
-                                    <button type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i>
-                                    </button>
+
+                                    <div class="col-4">
+                                        {{--<span class="text-muted">X2</span>--}}
+                                        <span class="text-muted d-flex justify-content-end"> $70 </span>
+                                    </div>
+
+
                                 </div>
+
+
+                            </li>
+                        </div>
+
+
+                        <div id="div_ProductCar">
+                            <li class="list-group-item lh-condensed">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h6 class="my-0">Custom Mat de whit text</h6>
+                                        <small class="">Code:</small> <small
+                                                class="text-muted">M-CYLW-FELD-LPWELD</small><br>
+                                        <small class="">Text Top Left:</small> <small
+                                                class="text-muted">CustomText</small>
+                                        <br>
+                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal"
+                                                data-target="#exampleModal"><i class="fas fa-eye"></i></button>
+                                        <button type="button" class="btn btn-primary btn-xs"><i
+                                                    class="fas fa-pencil-alt"></i></button>
+                                        <button type="button" class="btn btn-danger btn-xs"><i
+                                                    class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+
+
+                                    <div class="col-4">
+                                        {{--<span class="text-muted">X2</span>--}}
+                                        <span class="text-muted d-flex justify-content-end"> $70 </span>
+                                    </div>
+
+
+                                </div>
+
+
+                            </li>
+                        </div>
+
+
+                        <div id="div_ProductCar">
+                            <li class="list-group-item lh-condensed">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h6 class="my-0">Custom Mat de whit text</h6>
+                                        <small class="">Code:</small> <small
+                                                class="text-muted">M-CYLW-FELD-LPWELD</small><br>
+                                        <small class="">Text Top Left:</small> <small
+                                                class="text-muted">CustomText</small>
+                                        <br>
+                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal"
+                                                data-target="#exampleModal"><i class="fas fa-eye"></i></button>
+                                        <button type="button" class="btn btn-primary btn-xs"><i
+                                                    class="fas fa-pencil-alt"></i></button>
+                                        <button type="button" class="btn btn-danger btn-xs"><i
+                                                    class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+
+
+                                    <div class="col-4">
+                                        {{--<span class="text-muted">X2</span>--}}
+                                        <span class="text-muted d-flex justify-content-end"> $70 </span>
+                                    </div>
+
+
+                                </div>
+
+
                             </li>
                         </div>
 
@@ -548,7 +618,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                     </form>
                 </div>
                 <div class="col-md-8 order-md-1">
-                    <h4 class="mb-3">Billing address</h4>
+                    <h4 class="mb-3">Shipping address</h4>
                     <form class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -567,24 +637,27 @@ $matComponents = matComponent::where('enable', 1)->get();
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="username">Username</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">@</span>
-                                </div>
-                                <input type="text" class="form-control" id="username" placeholder="Username" required>
-                                <div class="invalid-feedback" style="width: 100%;">
-                                    Your username is required.
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email">Email</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                    </div>
+                                    <input type="email" class="form-control" id="email" placeholder="you@example.com"
+                                           required>
+                                    <div class="invalid-feedback" style="width: 100%;">
+                                        Your username is required.
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3">
-                            <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                            <div class="invalid-feedback">
-                                Please enter a valid email address for shipping updates.
+                            <div class="col-md-6 mb-3">
+                                <label for="phone">Phone <span class="text-muted">(Optional)</span></label>
+                                <input type="tel" class="form-control" id="phone" placeholder="1-(555)-555-5555">
+                                <div class="invalid-feedback">
+                                    Please enter a valid email address for shipping updates.
+                                </div>
                             </div>
                         </div>
 
@@ -596,34 +669,32 @@ $matComponents = matComponent::where('enable', 1)->get();
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                            <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-                        </div>
 
                         {{-- TODO crea auto Metohd 4 fill it --}}
                         <div class="row">
-                            <div class="col-md-5 mb-3">
+                            <div class="col-md-3 mb-6">
                                 <label for="country">Country</label>
-                                <select class="custom-select d-block w-100" id="country" required>
-                                    <option value="">Choose...</option>
-                                    <option>United States</option>
-                                </select>
+                                <input type="text" class="form-control" id="country" placeholder="" required>
                                 <div class="invalid-feedback">
-                                    Please select a valid country.
+                                    Please provide a valid country.
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-6">
                                 <label for="state">State</label>
-                                <select class="custom-select d-block w-100" id="state" required>
-                                    <option value="">Choose...</option>
-                                    <option>California</option>
-                                </select>
+                                <input type="text" class="form-control" id="state" placeholder="" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid state.
                                 </div>
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-3 mb-6">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    City required.
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 mb-6">
                                 <label for="zip">Zip</label>
                                 <input type="text" class="form-control" id="zip" placeholder="" required>
                                 <div class="invalid-feedback">
@@ -655,12 +726,9 @@ $matComponents = matComponent::where('enable', 1)->get();
                                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                          data-parent="#accordionExample">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                            dolor brunch.
-                                            Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
-                                            aliqua put a bird on it squid single-origin coffee nulla assumenda
-                                            shoreditch et.
+                                            PayPal allows you to make payments using a variety of methods including:
+                                            PayPal Cash or PayPal Cash Plus account balance,
+                                            a bank account, PayPal Credit, debit or credit cards, and rewards balance.
                                         </div>
                                     </div>
                                 </div>
@@ -671,8 +739,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                                                     data-toggle="collapse" data-target="#collapseTwo"
                                                     aria-expanded="false" aria-controls="collapseTwo">
                                                 <input id="amazon" name="paymentMethod" type="radio"
-                                                       class="form-check-input" required="">
-                                                <label class="form-check-label" for="amazon"><i
+                                                       class="form-check-input " required="">
+                                                <label class="form-check-label " for="amazon"><i
                                                             class="fab fa-cc-amazon-pay fa-2x"></i></label>
                                             </button>
                                         </h2>
@@ -680,12 +748,11 @@ $matComponents = matComponent::where('enable', 1)->get();
                                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                          data-parent="#accordionExample">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                            dolor brunch.
-                                            Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
-                                            aliqua put a bird on it squid single-origin coffee nulla assumenda
-                                            shoreditch et.
+                                            Amazon Pay accepts credit and debit cards and transfers from your available
+                                            Amazon Pay account balance.
+                                            Credit cards currently accepted include Visa, Mastercard, Discover, American
+                                            Express, Diners Club, and JCB.
+                                            An Amazon.com store card is available for use with selected merchants.
                                         </div>
                                     </div>
                                 </div>
@@ -705,12 +772,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                                          data-parent="#accordionExample">
                                         <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                            dolor brunch.
-                                            Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
-                                            aliqua put a bird on it squid single-origin coffee nulla assumenda
-                                            shoreditch et.
+                                            With your Mac, iPhone, iPad, and Apple Watch, you can use Apple Pay to pay
+                                            within apps when you see Apple Pay as a payment option.
                                         </div>
                                     </div>
                                 </div>
@@ -727,6 +790,16 @@ $matComponents = matComponent::where('enable', 1)->get();
             </div>
 
             <hr class="featurette-divider">
+
+
+            <footer class="my-5 pt-5 text-muted text-center text-small">
+                <p class="mb-1">© 2017-2021 Elder Protectors</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Privacy</a></li>
+                    <li class="list-inline-item"><a href="#">Terms</a></li>
+                    <li class="list-inline-item"><a href="#">Support</a></li>
+                </ul>
+            </footer>
 
         </div>
         </body>
