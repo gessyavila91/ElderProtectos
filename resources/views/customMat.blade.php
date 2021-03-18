@@ -28,7 +28,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                     integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
                     crossorigin="anonymous"></script>
 
-            {{--<script src="sweetalert2.all.min.js"></script>--}}
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
             <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
 
@@ -55,7 +54,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                 top: 0;
             }
 
-            .btn-xs{
+            .btn-xs {
                 padding: 3px;
                 font-size: 12px;
                 border-radius: 5px;
@@ -219,9 +218,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                     transform: translate(-50%, -50%);
                     font-size: 16px;
                 }
-
-
-
             }
 
         </style>
@@ -265,24 +261,19 @@ $matComponents = matComponent::where('enable', 1)->get();
                                          style="display: none"></div>
                                     <div id="divText_centered" class="centered epFont" style="display: none"></div>
 
-                                    <h6>
-                                        <span class="badge badge-primary">Code:</span>
-                                        <a id="code">M-CXXX-FXXX-LXXX</a>
-                                    </h6>
-
-
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Code</span>
                                         </div>
-                                        <input type="text" class="form-control" id="code" placeholder="M-CXXX-FXXX-LXXX"
-                                               required>
+
+                                        <input id="in_matCode" class="form-control" type="text"
+                                               placeholder="M-CXXX-FXXX-LXXX" required>
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-primary" type="button" id="button-addon2"><i
-                                                        class="fas fa-check"></i></button>
+                                            <button onclick="matCodeFetch()" id="btn_matCodeCheck" type="button"
+                                                    class="btn btn-outline-primary">
+                                                <i class="fas fa-search"></i></button>
                                         </div>
                                     </div>
-
 
                                 </block>
                             </div>
@@ -293,110 +284,87 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             <div class="col-md-5 ">
                 <form>
-                    <label for="select_Fondo">
-                        Fondo
-                    </label>
-                    <select id="select_Fondo" class="custom-select d-block w-100"
-                            onchange="sl_OnChange(this)"
+
+                    <label for="select_Fondo">Fondo</label>
+                    <select id="select_Fondo" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
                             name="selectFondo">
                         <?php
                         foreach ($matComponents->where('type', 'C') as $Component) {
                             echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
                         }
                         ?>
-
                     </select>
                     <br>
-                    <label for="select_Marco">
-                        Marco
-                    </label>
-                    <select id="select_Marco" class="custom-select d-block w-100"
-                            onchange="sl_OnChange(this)"
-                            name="selectMarco">
 
+                    <label for="select_Marco">Marco</label>
+                    <select id="select_Marco" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
+                            name="selectMarco">
                         <?php
                         foreach ($matComponents->where('type', 'F') as $Component) {
                             echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
                         }
                         ?>
                         <option value="SM">SM</option>
-
                     </select>
                     <br>
-                    <label for="select_Centro">
-                        Centro
-                    </label>
-                    <select id="select_Centro" class="custom-select d-block w-100"
-                            onchange="sl_OnChange(this)"
-                            name="selectCentro">
 
+                    <label for="select_Centro">Centro</label>
+                    <select id="select_Centro" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
+                            name="selectCentro">
                         <?php
                         foreach ($matComponents->where('type', 'L') as $Component) {
-
                             echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
-
                         }
                         ?>
                         <option value="SC">SC</option>
-
                     </select>
 
                     <div class="d-block my-3">
                         <label for="matText">Mat Text</label>
-                        <input id="matText"
-                               onkeyup="customTextLabel()"
-                               type="text" class="form-control" placeholder="" maxlength="25">
+                        <input id="matText" onkeyup="customTextLabel()" type="text" class="form-control" placeholder=""
+                               maxlength="25">
                     </div>
 
                     <div id="TextLabelRadiobutton" style="display: none">
                         <div class="d-block my-3">
+
                             <div class="form-check">
-                                <input id="rb_top-left"
-                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                <input id="rb_top-left" onchange="rbCustomTextPosition_Onchange(this)"
                                        class="form-check-input" type="radio" name="textPosition" checked>
-                                <label class="form-check-label" for="rb_top-left">
-                                    TopLeft
-                                </label>
+                                <label class="form-check-label" for="rb_top-left">TopLeft</label>
                             </div>
                             <div class="form-check">
-                                <input id="rb_top-right"
-                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                <input id="rb_top-right" onchange="rbCustomTextPosition_Onchange(this)"
                                        class="form-check-input" type="radio" name="textPosition">
-                                <label class="form-check-label" for="rb_top-right">
-                                    TopRight
-                                </label>
+                                <label class="form-check-label" for="rb_top-right">TopRight</label>
                             </div>
                             <div class="form-check">
-                                <input id="rb_bottom-left"
-                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                <input id="rb_bottom-left" onchange="rbCustomTextPosition_Onchange(this)"
                                        class="form-check-input" type="radio" name="textPosition">
-                                <label class="form-check-label" for="rb_bottom-left">
-                                    BottomLeft
-                                </label>
+                                <label class="form-check-label" for="rb_bottom-left">BottomLeft</label>
                             </div>
                             <div class="form-check">
-                                <input id="rb_bottom-right"
-                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                <input id="rb_bottom-right" onchange="rbCustomTextPosition_Onchange(this)"
                                        class="form-check-input" type="radio" name="textPosition">
-                                <label class="form-check-label" for="rb_bottom-right">
-                                    BottomRight
-                                </label>
+                                <label class="form-check-label" for="rb_bottom-right">BottomRight</label>
                             </div>
                             <div class="form-check">
-                                <input id="rb_centered"
-                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                <input id="rb_centered" onchange="rbCustomTextPosition_Onchange(this)"
                                        class="form-check-input" type="radio" name="textPosition">
-                                <label class="form-check-label" for="rb_centered">
-                                    Center
-                                </label>
+                                <label class="form-check-label" for="rb_centered">Center</label>
                             </div>
+
                         </div>
                     </div>
 
                     <br><br>
-                    <button onclick="bt_ILikeIt_action()" type="button" class="w-100 btn btn-lg btn-outline-primary">
-                        i like it!
-                    </button>
+
+                    <div>
+                        <button onclick="bt_ILikeIt_action()" type="button"
+                                class="w-100 btn btn-lg btn-outline-primary">
+                            i like it!
+                        </button>
+                    </div>
 
                     <div class="d-flex justify-content-around">
                         <button onclick="bt_ILikeIt_action()" type="button"
@@ -431,6 +399,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                         <span class="badge badge-primary badge-pill">3</span>
 
                     </h4>
+
                     <ul class="list-group mb-3" id="ul_productList">
 
                         <div id="div_ProductCar">
@@ -546,6 +515,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                             </div>
                         </div>
                     </form>
+
                 </div>
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Billing address</h4>
@@ -715,10 +685,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
-
 
                         <hr class="mb-4">
                         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
@@ -739,7 +706,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                 let select_Marco = document.getElementById('select_Marco');
                 let select_Centro = document.getElementById('select_Centro');
 
-                document.getElementById('code').textContent =
+                document.getElementById('in_matCode').value =
                     'M-C' + select_Fondo[select_Fondo.selectedIndex].text +
                     '-F' + select_Marco[select_Marco.selectedIndex].text +
                     '-L' + select_Centro[select_Centro.selectedIndex].text;
@@ -755,24 +722,26 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             function bt_ILikeIt_action() {
 
+                console.log($("input[type='radio'][name='textPosition']:checked").getId());
+
+                return;
+
 
                 let product = {
-                    matCode: document.getElementById('code').textContent,
+                    /*Cambiar por in_matCode*/
+                    matCode: document.getElementById('in_matCode').value,
                     quantity: 1,
                     customMsg: getCustomText(),
                 };
-
-                //let  myJSON = JSON.stringify(product);
 
                 if (addProduct2Car(product)) {
                     LikeItscroll();
                 }
 
                 console.log(document.cookie);
-
             }
 
-            function addProduct2Car(MatCode = null) {
+            function addProduct2Car(PriducCode = null) {
                 var retCallBack = false;
 
                 //TODO Cambiar direccion para tomar valores de ENV
@@ -782,7 +751,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                         "Content-type": "application/json",
                         credentials: 'include'
                     },
-                    body: JSON.stringify(MatCode)
+                    body: JSON.stringify(PriducCode)
                 }).then(function (response) {
                     return response.text();
                 })
@@ -905,20 +874,23 @@ $matComponents = matComponent::where('enable', 1)->get();
             function getCustomText() {
 
                 if (document.getElementById("matText").value.length > 0 && document.getElementById("matText").value.length <= 25) {
+
+                    let matText = document.getElementById("matText").value;
+
                     if (document.getElementById('rb_top-left').checked) {
-                        return 'Top Left: ' + document.getElementById("matText").value;
+                        return 'Top Left: ' + matText;
                     }
                     if (document.getElementById('rb_top-right').checked) {
-                        return 'Top Right: ' + document.getElementById("matText").value;
+                        return 'Top Right: ' + matText;
                     }
                     if (document.getElementById('rb_bottom-left').checked) {
-                        return 'Bottom Left: ' + document.getElementById("matText").value;
+                        return 'Bottom Left: ' + matText;
                     }
                     if (document.getElementById('rb_bottom-right').checked) {
-                        return 'Bottom Right: ' + document.getElementById("matText").value;
+                        return 'Bottom Right: ' + matText;
                     }
                     if (document.getElementById('rb_centered').checked) {
-                        return 'Centered: ' + document.getElementById("matText").value;
+                        return 'Centered: ' + matText;
                     }
                 }
                 return null;
@@ -965,7 +937,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                 let select_Marco = document.getElementById('select_Marco');
                 let select_Centro = document.getElementById('select_Centro');
 
-                document.getElementById('code').textContent = 'M-C' + select_Fondo[select_Fondo.selectedIndex].text + '-F' + select_Marco[select_Marco.selectedIndex].text + '-L' + select_Centro[select_Centro.selectedIndex].text + '';
+                document.getElementById('in_matCode').value = 'M-C' + select_Fondo[select_Fondo.selectedIndex].text + '-F' + select_Marco[select_Marco.selectedIndex].text + '-L' + select_Centro[select_Centro.selectedIndex].text + '';
 
             }
 
@@ -981,11 +953,66 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             }
 
-            function regexCodeMat() {
-                let codeRGEX = /^M-C[A-Z]+-F[A-Z]+-L[A-Z]+(-T[A-Z ]+){0,1}$/;
-                var codeResult = codeRGEX.test(document.getElementById('code').textContent);
+            function matCodeFetch() {
 
-                alert("code:" + codeResult);
+                let product = {
+                    /*Cambiar por in_matCode*/
+                    matCode: document.getElementById('in_matCode').value,
+                    quantity: 1,
+                    customMsg: null,
+                };
+
+                //TODO Cambiar direccion para tomar valores de ENV
+                fetch('http://127.0.0.1:8000/api/product/valid', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
+                        credentials: 'include'
+                    },
+                    body: JSON.stringify(product)
+                }).then(function (response) {
+                    return response.text();
+                })
+                    .then(function (payload) {
+                        console.log("API response", payload);
+
+                        var obj = JSON.parse(payload);
+
+                        if (obj.result) {
+                            setSelectsByMatCode(obj);
+                            Swal.fire({
+                                title: 'Cool',
+                                text: 'Codigo de Producto encontrado: ' + obj.msg,
+                                icon: 'success',
+                            })
+
+                        } else {
+                            Swal.fire({
+                                title: 'Whoops!!',
+                                text: 'Codigo de Producto no Valido: ' + obj.msg,
+                                icon: 'error',
+                                confirmButtonText: 'oh no'
+                            })
+                        }
+                    })
+                    .catch(function (err) {
+                        Swal.fire({
+                            title: 'Whoops!!',
+                            text: err,
+                            icon: 'error'
+                        })
+                    });
+            }
+
+            function setSelectsByMatCode(obj) {
+
+                $('#select_Fondo').val(obj['data']['matComponnentColor']['fileName']);
+                $('#select_Marco').val(obj['data']['matComponnentFrame']['fileName']);
+                $('#select_Centro').val(obj['data']['matComponnentLogo']['fileName']);
+
+                sl_OnChange(document.getElementById('select_Fondo'));
+                sl_OnChange(document.getElementById('select_Marco'));
+                sl_OnChange(document.getElementById('select_Centro'));
 
             }
 
