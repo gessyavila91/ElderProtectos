@@ -574,6 +574,31 @@ $matComponents = matComponent::where('enable', 1)->get();
                         </li>
 
                     </ul>
+                    <ul>
+                        <li id="input-group" class="list-group-item d-flex justify-content-between">
+
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="checkbox" name="giftpaper" class="custom-control-input" id="giftpaper" data-toggle="collapse" data-target="#collapseGift"
+                                       aria-expanded="true" aria-controls="collapseGift">
+                                <label class="custom-control-label" for="giftpaper">
+                                    <span class="label-description">Gift Paper</span></label>
+
+
+                            </div>
+                            <span class="text-success d-flex justify-content-end"> FREE </span>
+                        </li>
+
+
+                        <form class="list-group-item p-2">
+                        <div id="collapseGift" class="collapse" data-parent="#collapseGift">
+                                <textarea id="giftText" type="text" class="form-control" maxlength="125"> With love from:</textarea>
+                        </div>
+
+                        </form>
+
+                    </ul>
+
 
                     <form class="card p-2">
                         <div class="input-group">
@@ -672,7 +697,32 @@ $matComponents = matComponent::where('enable', 1)->get();
                             </div>
                         </div>
                         <hr class="mb-4">
+                        <h4 class="mb-3">Shipping method</h4>
 
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="customRadioInline1" class="custom-control-input"
+                                           id="freeship" checked>
+                                    <label class="custom-control-label" for="freeship"><strong>Ecconomy Shipping - <a
+                                                    style="color: green">Free </a></strong><br>
+                                        <span class="label-description">Sent by national post service, it takes 20 to 40 business days.<br><small
+                                                    style="color: red">Due to Covid-19 may take longer than normal.</small></span></label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="customRadioInline1" class="custom-control-input"
+                                           id="dhlship">
+                                    <label class="custom-control-label" for="dhlship"><strong>DHL - $50</strong><br>
+                                        <span class="label-description">Shipping by DHL-Express 3 to 6 days - fastest option possible.<br><small
+                                                    style="color: red">Due to Covid-19 may take longer than normal.</small></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <hr class="mb-4">
                         <h4 class="mb-3">Payment</h4>
 
                         <div class="my-3">
@@ -687,7 +737,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                                                 <input id="paypal" name="paymentMethod" type="radio"
                                                        class="form-check-input" checked="" required="">
                                                 <label class="form-check-label" for="paypal"><i
-                                                            class="fab fa-cc-paypal fa-2x"></i></label>
+                                                            class="fab fa-cc-paypal fa-2x"
+                                                            style="color:dodgerblue;"></i></label>
                                             </button>
                                         </h2>
                                     </div>
@@ -710,7 +761,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                                                 <input id="amazon" name="paymentMethod" type="radio"
                                                        class="form-check-input" required="">
                                                 <label class="form-check-label" for="amazon"><i
-                                                            class="fab fa-cc-amazon-pay fa-2x"></i></label>
+                                                            class="fab fa-cc-amazon-pay fa-2x"
+                                                            style="color:orange;"></i></label>
                                             </button>
                                         </h2>
                                     </div>
@@ -734,7 +786,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                                                 <input id="apple" name="paymentMethod" type="radio"
                                                        class="form-check-input" required="">
                                                 <label class="form-check-label" for="apple"><i
-                                                            class="fab fa-apple-pay fa-2x"></i></label>
+                                                            class="fab fa-apple-pay fa-2x"
+                                                            style="color:grey;"></i></label>
                                             </button>
                                         </h2>
                                     </div>
