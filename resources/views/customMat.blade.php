@@ -60,6 +60,92 @@ $matComponents = matComponent::where('enable', 1)->get();
                 border-radius: 5px;
             }
 
+            ul.social-network {
+                list-style: none;
+                display: inline;
+                margin-left: 0 !important;
+                padding: 0;
+            }
+
+            ul.social-network li {
+                display: inline;
+                margin: 0 5px;
+            }
+
+            .social-network a.icoRss:hover {
+                background-color: #05a9f5;
+            }
+
+            .social-network a.icoFacebook:hover {
+                background-color: #3B5998;
+            }
+
+            .social-network a.icoTwitter:hover {
+                background-color: #33ccff;
+            }
+
+            .social-network a.icoGoogle:hover {
+                background-color: #00a208;
+            }
+
+            .social-network a.icoVimeo:hover {
+                background-color: #0590B8;
+            }
+
+            .social-network a.icoLinkedin:hover {
+                background-color: #ff0059;
+            }
+
+            .social-network a.icoRss:hover i, .social-network a.icoFacebook:hover i, .social-network a.icoTwitter:hover i,
+            .social-network a.icoGoogle:hover i, .social-network a.icoVimeo:hover i, .social-network a.icoLinkedin:hover i {
+                color: #fff;
+            }
+
+            a.socialIcon:hover, .socialHoverClass {
+                color: #44BCDD;
+            }
+
+            .social-circle li a {
+                display: inline-block;
+                position: relative;
+                margin: 0 auto 0 auto;
+                -moz-border-radius: 50%;
+                -webkit-border-radius: 50%;
+                border-radius: 50%;
+                text-align: center;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                background-color: #D3D3D3;
+            }
+
+            .social-circle li i {
+                margin: 0;
+                line-height: 50px;
+                text-align: center;
+            }
+
+            .social-circle li a:hover i, .triggeredHover {
+                -moz-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                -ms--transform: rotate(360deg);
+                transform: rotate(360deg);
+                -webkit-transition: all 0.2s;
+                -moz-transition: all 0.2s;
+                -o-transition: all 0.2s;
+                -ms-transition: all 0.2s;
+                transition: all 0.2s;
+            }
+
+            .social-circle i {
+                color: #fff;
+                -webkit-transition: all 0.8s;
+                -moz-transition: all 0.8s;
+                -o-transition: all 0.8s;
+                -ms-transition: all 0.8s;
+                transition: all 0.8s;
+            }
+
             /*TODO make a Dynamic BreakPoint*/
 
             /*Small 575*/
@@ -238,8 +324,10 @@ $matComponents = matComponent::where('enable', 1)->get();
             <div class="col-md-7">
                 <div class="col">
                     <div class="card mb-4 shadow-sm">
-                        <div class="card-header">
+                        <div class="card-header d-flex justify-content-between">
                             <h4 class="my-0 fw-normal">Preview</h4>
+                            <button class="btn btn-outline-dark" data-toggle="modal" data-target="#sharemodal"
+                                    title="Share"><i class="fas fa-share-alt fa-lg"></i></button>
                         </div>
                         <div class="card-body">
                             <div class="container1">
@@ -261,28 +349,27 @@ $matComponents = matComponent::where('enable', 1)->get();
                                     <div id="divText_bottom-right" class="bottom-right epFont"
                                          style="display: none"></div>
                                     <div id="divText_centered" class="centered epFont" style="display: none"></div>
-
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Code</span>
-                                        </div>
-
-                                        {{--Code MatFinder/FasCreate--}}
-                                        <input id="in_matCode" class="form-control" type="text"
-                                               placeholder="M-CXXX-FXXX-LXXX" required>
-                                        <div class="input-group-append">
-                                            <button onclick="matCodeFetch()" id="btn_matCodeCheck" type="button"
-                                                    class="btn btn-outline-primary">
-                                                <i class="fas fa-search"></i></button>
-                                        </div>
-                                    </div>
-
                                 </block>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Code</span>
+                                </div>
+
+                                {{--Code MatFinder/FasCreate--}}
+                                <input id="in_matCode" class="form-control" type="text"
+                                       placeholder="M-CXXX-FXXX-LXXX" required>
+                                <div class="input-group-append">
+                                    <button onclick="matCodeFetch()" id="btn_matCodeCheck" type="button"
+                                            class="btn btn-outline-primary">
+                                        <i class="fas fa-search"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <div class="col-md-5 ">
                 <form>
@@ -363,16 +450,18 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                     <div>
                         <button onclick="bt_ILikeIt_action()" type="button"
-                                class="w-100 btn btn-lg btn-outline-primary">
+                                class="w-100 btn btn-lg btn-primary">
                             i like it!
                         </button>
                     </div>
 
                     <div class="d-flex justify-content-around" style="visibility: hidden">
-                        <button type="button" class="btn btn-lg btn-outline-success">
+                        <button onclick="bt_ILikeIt_action()" type="button"
+                                class="btn btn-lg btn-success">
                             modify!
                         </button>
-                        <button type="button" class="btn btn-lg btn-outline-danger">
+                        <button onclick="bt_ILikeIt_action()" type="button"
+                                class="btn btn-lg btn-danger">
                             cancel!
                         </button>
                     </div>
@@ -573,7 +662,23 @@ $matComponents = matComponent::where('enable', 1)->get();
                         </li>
 
                     </ul>
-
+                    <ul>
+                        <li id="input-group" class="list-group-item d-flex justify-content-between">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="checkbox" name="giftpaper" class="custom-control-input" id="giftpaper"
+                                       data-toggle="collapse" data-target="#collapseGift"
+                                       aria-expanded="true" aria-controls="collapseGift">
+                                <label class="custom-control-label" for="giftpaper">
+                                    <span class="label-description">Gift Paper</span></label>
+                            </div>
+                            <span class="text-success d-flex justify-content-end"> FREE </span>
+                        </li>
+                        <form class="list-group-item p-2">
+                            <div id="collapseGift" class="collapse" data-parent="#collapseGift">
+                                <textarea id="giftText" type="text" class="form-control" maxlength="125"> With love from:</textarea>
+                            </div>
+                        </form>
+                    </ul>
                     <form class="card p-2">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Promo code">
@@ -583,8 +688,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                             </div>
                         </div>
                     </form>
-
                 </div>
+
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Shipping address</h4>
                     <form class="needs-validation" novalidate>
@@ -671,7 +776,32 @@ $matComponents = matComponent::where('enable', 1)->get();
                             </div>
                         </div>
                         <hr class="mb-4">
+                        <h4 class="mb-3">Shipping method</h4>
 
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="customRadioInline1" class="custom-control-input"
+                                           id="freeship" checked>
+                                    <label class="custom-control-label" for="freeship"><strong>Ecconomy Shipping - <a
+                                                    style="color: green">Free </a></strong><br>
+                                        <span class="label-description">Sent by national post service, it takes 20 to 40 business days.<br><small
+                                                    style="color: red">Due to Covid-19 may take longer than normal.</small></span></label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="customRadioInline1" class="custom-control-input"
+                                           id="dhlship">
+                                    <label class="custom-control-label" for="dhlship"><strong>DHL - $50</strong><br>
+                                        <span class="label-description">Shipping by DHL-Express 3 to 6 days - fastest option possible.<br><small
+                                                    style="color: red">Due to Covid-19 may take longer than normal.</small></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <hr class="mb-4">
                         <h4 class="mb-3">Payment</h4>
 
                         <div class="my-3">
@@ -686,7 +816,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                                                 <input id="paypal" name="paymentMethod" type="radio"
                                                        class="form-check-input" checked="" required="">
                                                 <label class="form-check-label" for="paypal"><i
-                                                            class="fab fa-cc-paypal fa-2x"></i></label>
+                                                            class="fab fa-cc-paypal fa-2x"
+                                                            style="color:dodgerblue;"></i></label>
                                             </button>
                                         </h2>
                                     </div>
@@ -709,7 +840,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                                                 <input id="amazon" name="paymentMethod" type="radio"
                                                        class="form-check-input" required="">
                                                 <label class="form-check-label" for="amazon"><i
-                                                            class="fab fa-cc-amazon-pay fa-2x"></i></label>
+                                                            class="fab fa-cc-amazon-pay fa-2x"
+                                                            style="color:orange;"></i></label>
                                             </button>
                                         </h2>
                                     </div>
@@ -733,7 +865,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                                                 <input id="apple" name="paymentMethod" type="radio"
                                                        class="form-check-input" required="">
                                                 <label class="form-check-label" for="apple"><i
-                                                            class="fab fa-apple-pay fa-2x"></i></label>
+                                                            class="fab fa-apple-pay fa-2x"
+                                                            style="color:grey;"></i></label>
                                             </button>
                                         </h2>
                                     </div>
@@ -767,6 +900,55 @@ $matComponents = matComponent::where('enable', 1)->get();
             </footer>
 
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="sharemodal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-light">
+                        <h5 class="modal-title" id="shareModalLabel">Share</h5>
+                        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times fa-xs"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-dark text-light">
+                        <div class="d-flex justify-content-around">
+                            <ul class="social-network social-circle">
+
+                                <li><a href="#" class="icoFacebook" title="Facebook"><i
+                                                class="fab fa-facebook-f fa-lg"></i></a></li>
+                                <li><a href="#" class="icoTwitter" title="Twitter"><i
+                                                class="fab fa-twitter fa-lg"></i></a></li>
+                                <li><a href="#" class="icoGoogle" title="Whatsapp"><i
+                                                class="fab fa-whatsapp fa-lg"></i></a></li>
+                                <li><a href="#" class="icoLinkedin" title="Instagram"><i
+                                                class="fab fa-instagram fa-lg"></i></a></li>
+                                <li><a href="#" class="icoRss" title="Telegram"><i
+                                                class="fab fa-telegram-plane fa-lg"></i></a></li>
+                            </ul>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Code</span>
+                            </div>
+
+                            <input id="in_matCode" class="form-control" type="text"
+                                   placeholder="M-CXXX-FXXX-LXXX" required>
+                            <div class="input-group-append">
+                                <button onclick="copy" id="copy" type="button"
+                                        class="btn btn-primary">
+                                    <i class="far fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- END Modal -->
+
         </body>
         </html>
         <script>
