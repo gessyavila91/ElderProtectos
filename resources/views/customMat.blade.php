@@ -28,8 +28,10 @@ $matComponents = matComponent::where('enable', 1)->get();
                     integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
                     crossorigin="anonymous"></script>
 
+
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
             <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+
 
         </head>
 
@@ -313,160 +315,166 @@ $matComponents = matComponent::where('enable', 1)->get();
         <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
             <h1 class="display-4">Custom Playmat</h1>
             <p class="lead">Browse through the options we offer and choose the perfect combination.<br>
-                The possibilities are many, but if you want something even more unique send us a e-mail: <a
-                        href="mailto:hi@elderprotectors.com">hi@elderprotectors.com</a></p>
+                The possibilities are many, but if you want something even more unique send us a e-mail:
+                <a href="mailto:hi@elderprotectors.com">hi@elderprotectors.com</a></p>
         </div>
 
         <hr class="featurette-divider">
 
         <div class="row featurette">
 
-            <div class="col-md-7">
-                <div class="col">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-header d-flex justify-content-between">
-                            <h4 class="my-0 fw-normal">Preview</h4>
-                            <button class="btn btn-outline-dark" data-toggle="modal" data-target="#sharemodal"
-                                    title="Share"><i class="fas fa-share-alt fa-lg"></i></button>
+
+            {{--Preview mat --}}
+            <div class="col col-md-7">
+                <div class="card mb-4 shadow-sm ">
+                    <div class="card-header d-flex justify-content-between">
+                        <h4 class="my-0 fw-normal">Preview</h4>
+                        <button class="btn btn-outline-dark" data-toggle="modal" data-target="#sharemodal"
+                                title="Share"><i class="fas fa-share-alt fa-lg"></i></button>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="container1">
+                            <block style="text-align: center;">
+
+                                <img class="background" id="img_Background"
+                                     src="{{asset('assets/img/customMat/fondo1.png')}}"
+                                     alt=""/>
+                                <img class="playmatPreview" id="img_Frame"
+                                     src="{{asset('assets/img/customMat/marco1.png')}}"
+                                     alt=""/>
+                                <img class="playmatPreview" id="img_Logo"
+                                     src="{{asset('assets/img/customMat/centro1.png')}}"
+                                     alt=""/>
+
+                                <div id="divText_top-left" class="top-left epFont" style="display: block"></div>
+                                <div id="divText_top-right" class="top-right epFont" style="display: none"></div>
+                                <div id="divText_bottom-left" class="bottom-left epFont"
+                                     style="display: none"></div>
+                                <div id="divText_bottom-right" class="bottom-right epFont"
+                                     style="display: none"></div>
+                                <div id="divText_centered" class="centered epFont" style="display: none"></div>
+
+                            </block>
                         </div>
-                        <div class="card-body">
-                            <div class="container1">
-                                <block style="text-align: center;">
-                                    <img class="fondo" id="img_Fondo"
-                                         src="{{asset('assets/img/customMat/fondo1.png')}}"
-                                         alt=""/>
-                                    <img class="playmatPreview" id="img_Marco"
-                                         src="{{asset('assets/img/customMat/marco1.png')}}"
-                                         alt=""/>
-                                    <img class="playmatPreview" id="img_Centro"
-                                         src="{{asset('assets/img/customMat/centro1.png')}}"
-                                         alt=""/>
 
-                                    <div id="divText_top-left" class="top-left epFont" style="display: block"></div>
-                                    <div id="divText_top-right" class="top-right epFont" style="display: none"></div>
-                                    <div id="divText_bottom-left" class="bottom-left epFont"
-                                         style="display: none"></div>
-                                    <div id="divText_bottom-right" class="bottom-right epFont"
-                                         style="display: none"></div>
-                                    <div id="divText_centered" class="centered epFont" style="display: none"></div>
-                                </block>
+                        <div class="input-group">
+                            {{--Code MatFinder/FasCreate--}}
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Code</span>
                             </div>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Code</span>
-                                </div>
-
-                                {{--Code MatFinder/FasCreate--}}
-                                <input id="in_matCode" class="form-control" type="text"
-                                       placeholder="M-CXXX-FXXX-LXXX" required>
-                                <div class="input-group-append">
-                                    <button onclick="matCodeFetch()" id="btn_matCodeCheck" type="button"
-                                            class="btn btn-outline-primary">
-                                        <i class="fas fa-search"></i></button>
-                                </div>
+                            <input id="in_matCode" class="form-control" type="text"
+                                   placeholder="M-CXXX-FXXX-LXXX" required>
+                            <div class="input-group-append">
+                                <button onclick="matCodeFetch()" id="btn_matCodeCheck" type="button"
+                                        class="btn btn-outline-primary">
+                                    <i class="fas fa-search"></i></button>
                             </div>
+                            {{--Code MatFinder/FasCreate--}}
                         </div>
                     </div>
                 </div>
             </div>
+            {{--Preview mat End--}}
 
 
             <div class="col-md-5 ">
-                <form>
+                {{--<form>--}}
 
-                    <label for="select_Fondo">Fondo</label>
-                    <select id="select_Fondo" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
-                            name="selectFondo">
-                        <?php
-                        foreach ($matComponents->where('type', 'C') as $Component) {
-                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
-                        }
-                        ?>
-                    </select>
-                    <br>
+                <label for="select_Background">Background</label>
+                <select id="select_Background" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
+                        name="selectBackground">
+                    <?php
+                    foreach ($matComponents->where('type', 'B') as $Component) {
+                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
+                    }
+                    ?>
+                </select>
+                <br>
 
-                    <label for="select_Marco">Marco</label>
-                    <select id="select_Marco" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
-                            name="selectMarco">
-                        <?php
-                        foreach ($matComponents->where('type', 'F') as $Component) {
-                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
-                        }
-                        ?>
-                        <option value="SM">SM</option>
-                    </select>
-                    <br>
+                <label for="select_Frame">Frame</label>
+                <select id="select_Frame" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
+                        name="selectFrame">
+                    <?php
+                    foreach ($matComponents->where('type', 'F') as $Component) {
+                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
+                    }
+                    ?>
+                    <option id='SM' value="SM">SM</option>
+                </select>
+                <br>
 
-                    <label for="select_Centro">Centro</label>
-                    <select id="select_Centro" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
-                            name="selectCentro">
-                        <?php
-                        foreach ($matComponents->where('type', 'L') as $Component) {
-                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
-                        }
-                        ?>
-                        <option value="SC">SC</option>
-                    </select>
+                <label for="select_Logo">Logo</label>
+                <select id="select_Logo" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
+                        name="selectLogo">
+                    <?php
+                    foreach ($matComponents->where('type', 'L') as $Component) {
+                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
+                    }
+                    ?>
+                    <option id='SC' value="SC">SC</option>
+                </select>
 
+                <div class="d-block my-3">
+                    <label for="matText">Mat Custom Text</label>
+                    <input id="matText" onkeyup="customTextLabel()" type="text" class="form-control" placeholder=""
+                           maxlength="25">
+                </div>
+
+                <div id="TextLabelRadiobutton" style="display: none">
                     <div class="d-block my-3">
-                        <label for="matText">Mat_Text</label>
-                        <input id="matText" onkeyup="customTextLabel()" type="text" class="form-control" placeholder=""
-                               maxlength="25">
-                    </div>
 
-                    <div id="TextLabelRadiobutton" style="display: none">
-                        <div class="d-block my-3">
-
-                            <div class="form-check">
-                                <input id="rb_top-left" onchange="rbCustomTextPosition_Onchange(this)"
-                                       class="form-check-input" type="radio" name="textPosition" checked>
-                                <label class="form-check-label" for="rb_top-left">TopLeft</label>
-                            </div>
-                            <div class="form-check">
-                                <input id="rb_top-right" onchange="rbCustomTextPosition_Onchange(this)"
-                                       class="form-check-input" type="radio" name="textPosition">
-                                <label class="form-check-label" for="rb_top-right">TopRight</label>
-                            </div>
-                            <div class="form-check">
-                                <input id="rb_bottom-left" onchange="rbCustomTextPosition_Onchange(this)"
-                                       class="form-check-input" type="radio" name="textPosition">
-                                <label class="form-check-label" for="rb_bottom-left">BottomLeft</label>
-                            </div>
-                            <div class="form-check">
-                                <input id="rb_bottom-right" onchange="rbCustomTextPosition_Onchange(this)"
-                                       class="form-check-input" type="radio" name="textPosition">
-                                <label class="form-check-label" for="rb_bottom-right">BottomRight</label>
-                            </div>
-                            <div class="form-check">
-                                <input id="rb_centered" onchange="rbCustomTextPosition_Onchange(this)"
-                                       class="form-check-input" type="radio" name="textPosition">
-                                <label class="form-check-label" for="rb_centered">Center</label>
-                            </div>
-
+                        <div class="form-check">
+                            <input id="rb_top-left" onchange="rbCustomTextPosition_Onchange(this)"
+                                   class="form-check-input" type="radio" name="textPosition" checked>
+                            <label class="form-check-label" for="rb_top-left">TopLeft</label>
                         </div>
+                        <div class="form-check">
+                            <input id="rb_top-right" onchange="rbCustomTextPosition_Onchange(this)"
+                                   class="form-check-input" type="radio" name="textPosition">
+                            <label class="form-check-label" for="rb_top-right">TopRight</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="rb_bottom-left" onchange="rbCustomTextPosition_Onchange(this)"
+                                   class="form-check-input" type="radio" name="textPosition">
+                            <label class="form-check-label" for="rb_bottom-left">BottomLeft</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="rb_bottom-right" onchange="rbCustomTextPosition_Onchange(this)"
+                                   class="form-check-input" type="radio" name="textPosition">
+                            <label class="form-check-label" for="rb_bottom-right">BottomRight</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="rb_centered" onchange="rbCustomTextPosition_Onchange(this)"
+                                   class="form-check-input" type="radio" name="textPosition">
+                            <label class="form-check-label" for="rb_centered">Center</label>
+                        </div>
+
                     </div>
+                </div>
 
-                    <br><br>
+                <br><br>
 
-                    <div>
-                        <button onclick="bt_ILikeIt_action()" type="button"
-                                class="w-100 btn btn-lg btn-primary">
-                            i like it!
-                        </button>
-                    </div>
+                <div>
+                    <button onclick="bt_ILikeIt_action()" type="button"
+                            class="w-100 btn btn-lg btn-primary">
+                        i like it!
+                    </button>
+                </div>
 
-                    <div class="d-flex justify-content-around" style="visibility: hidden">
-                        <button onclick="bt_ILikeIt_action()" type="button"
-                                class="btn btn-lg btn-success">
-                            modify!
-                        </button>
-                        <button onclick="bt_ILikeIt_action()" type="button"
-                                class="btn btn-lg btn-danger">
-                            cancel!
-                        </button>
-                    </div>
+                <div class="d-flex justify-content-around" style="visibility: hidden">
+                    <button onclick="bt_ILikeIt_action()" type="button"
+                            class="btn btn-lg btn-success">
+                        modify!
+                    </button>
+                    <button onclick="bt_ILikeIt_action()" type="button"
+                            class="btn btn-lg btn-danger">
+                        cancel!
+                    </button>
+                </div>
 
-                </form>
+                {{--</form>--}}
             </div>
         </div>
 
@@ -484,167 +492,37 @@ $matComponents = matComponent::where('enable', 1)->get();
                 <div class="col-md-4 order-md-2 mb-4">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Your cart</span>
-
                         {{-- TODO Count CarItems --}}
-                        <span class="badge badge-primary badge-pill">3</span>
+                        <span id="span_itemsCarChopCount" class="badge badge-primary badge-pill">0</span>
 
                     </h4>
 
-                    <ul class="list-group mb-3" id="ul_productList">
+                    <ul class="list-group mb-3" id="ul_shopingCar">
+                        {{--Car Items List Start--}}
 
-                        <div id="div_ProductCar">
-                            <li class="list-group-item lh-condensed">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h6 class="my-0">Custom Mat de whit text</h6>
-                                        <small class="">Code:</small> <small
-                                                class="text-muted">M-CYLW-FELD-LPWELD</small><br>
-                                        <small class="">Text Top Left:</small> <small
-                                                class="text-muted">CustomText</small>
-                                        <br>
-                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal"
-                                                data-target="#exampleModal"><i class="fas fa-eye"></i></button>
-                                        <button type="button" class="btn btn-primary btn-xs"><i
-                                                    class="fas fa-pencil-alt"></i></button>
-                                        <button type="button" class="btn btn-danger btn-xs"><i
-                                                    class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
+                        {{--                        <li class="list-group-item lh-condensed">
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <h6 class="my-0">Custom Mat de whit text</h6>
+                                                            <small class="">Code:</small> <small class="text-muted">M-CYLW-FELD-LPWELD</small><br>
+                                                            <small class="">Text Top Left:</small> <small class="text-muted">CustomText</small>
+                                                            <br>
+                                                            <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></button>
+                                                            <button type="button" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></button>
+                                                            <button type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
 
+                                                        <div class="col-4">
+                                                            <span class="text-muted d-flex justify-content-end"> $70 </span>
+                                                        </div>
+                                                    </div>
+                                                </li>--}}
 
-                                    <div class="col-4">
-                                        {{--<span class="text-muted">X2</span>--}}
-                                        <span class="text-muted d-flex justify-content-end"> $70 </span>
-                                    </div>
+                        {{--Car Items List End--}}
 
-
-                                </div>
-
-
-                            </li>
-                        </div>
-
-
-                        <div id="div_ProductCar">
-                            <li class="list-group-item lh-condensed">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h6 class="my-0">Custom Mat de whit text</h6>
-                                        <small class="">Code:</small> <small
-                                                class="text-muted">M-CYLW-FELD-LPWELD</small><br>
-                                        <small class="">Text Top Left:</small> <small
-                                                class="text-muted">CustomText</small>
-                                        <br>
-                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal"
-                                                data-target="#exampleModal"><i class="fas fa-eye"></i></button>
-                                        <button type="button" class="btn btn-primary btn-xs"><i
-                                                    class="fas fa-pencil-alt"></i></button>
-                                        <button type="button" class="btn btn-danger btn-xs"><i
-                                                    class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-
-
-                                    <div class="col-4">
-                                        {{--<span class="text-muted">X2</span>--}}
-                                        <span class="text-muted d-flex justify-content-end"> $70 </span>
-                                    </div>
-
-
-                                </div>
-
-
-                            </li>
-                        </div>
-
-
-                        <div id="div_ProductCar">
-                            <li class="list-group-item lh-condensed">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h6 class="my-0">Custom Mat de whit text</h6>
-                                        <small class="">Code:</small> <small
-                                                class="text-muted">M-CYLW-FELD-LPWELD</small><br>
-                                        <small class="">Text Top Left:</small> <small
-                                                class="text-muted">CustomText</small>
-                                        <br>
-                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal"
-                                                data-target="#exampleModal"><i class="fas fa-eye"></i></button>
-                                        <button type="button" class="btn btn-primary btn-xs"><i
-                                                    class="fas fa-pencil-alt"></i></button>
-                                        <button type="button" class="btn btn-danger btn-xs"><i
-                                                    class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-
-
-                                    <div class="col-4">
-                                        {{--<span class="text-muted">X2</span>--}}
-                                        <span class="text-muted d-flex justify-content-end"> $70 </span>
-                                    </div>
-
-
-                                </div>
-                            </li>
-                        </div>
-
-
-                        <!-- Modal Preview -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="card-body">
-                                            <div class="container1">
-                                                <block style="text-align: center;">
-                                                    <img class="fondo" id="img_Fondo"
-                                                         src="{{asset('assets/img/customMat/fondo1.png')}}"
-                                                         alt=""/>
-                                                    <img class="playmatPreview" id="img_Marco"
-                                                         src="{{asset('assets/img/customMat/marco1.png')}}"
-                                                         alt=""/>
-                                                    <img class="playmatPreview" id="img_Centro"
-                                                         src="{{asset('assets/img/customMat/centro1.png')}}"
-                                                         alt=""/>
-
-                                                    <div id="divText_top-left" class="top-left epFont"
-                                                         style="display: block"></div>
-                                                    <div id="divText_top-right" class="top-right epFont"
-                                                         style="display: none"></div>
-                                                    <div id="divText_bottom-left" class="bottom-left epFont"
-                                                         style="display: none"></div>
-                                                    <div id="divText_bottom-right" class="bottom-right epFont"
-                                                         style="display: none"></div>
-                                                    <div id="divText_centered" class="centered epFont"
-                                                         style="display: none"></div>
-
-                                                    <h6>
-                                                        <span class="badge badge-primary">Code:</span>
-                                                        <a id="code">M-CXXX-FXXX-LXXX</a>
-                                                    </h6>
-                                                </block>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Modal Preview -->
-
-
-                        {{-- Standar li 4 PromoCode --}}
-                        <div id="div_PromoCode">
+                        {{-- Standar li 4 PromoCode start--}}
+                        {{--<div id="div_PromoCode">
                             <li class="list-group-item d-flex justify-content-between bg-light">
                                 <div class="text-success">
                                     <h6 class="my-0">Promo code</h6>
@@ -653,16 +531,38 @@ $matComponents = matComponent::where('enable', 1)->get();
                                 <span class="text-success">-$5</span>
                             </li>
 
-                        </div>
-
+                        </div>--}}
+                        {{-- Standar li 4 PromoCode End--}}
                         {{-- Standar li 4 Total un USD --}}
+                        <li class="list-group-item lh-condensed">
+
+                        </li>
                         <li id="div_TotalCar" class="list-group-item d-flex justify-content-between">
                             <span>Total (USD)</span>
-                            <strong>$20</strong>
+                            <strong id="strong_totalPriceCar">$ 0</strong>
                         </li>
+                        {{-- Standar li 4 Total un USD End--}}
 
                     </ul>
                     <ul>
+                        {{--Promo Code Input--}}
+                        <div>
+                            <div class="card p-2">
+                                <div class="input-group">
+                                    <input id="in_promoCode" type="text" class="form-control" placeholder="Promo code"
+                                           value="PROMOVALIDA2">
+
+                                    <div class="input-group-append">
+                                        <button onclick="addpromoCode()" type="submit" class="btn btn-secondary">Redeem
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{--Promo Code Input END--}}
+
+                        {{--Gif Box Colapse--}}
+
                         <li id="input-group" class="list-group-item d-flex justify-content-between">
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="checkbox" name="giftpaper" class="custom-control-input" id="giftpaper"
@@ -678,25 +578,19 @@ $matComponents = matComponent::where('enable', 1)->get();
                                 <textarea id="giftText" type="text" class="form-control" maxlength="125"> With love from:</textarea>
                             </div>
                         </form>
-                    </ul>
-                    <form class="card p-2">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Promo code">
 
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-secondary">Redeem</button>
-                            </div>
-                        </div>
-                    </form>
+                        {{--Gif Box Colapse END--}}
+                    </ul>
+
                 </div>
 
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Shipping address</h4>
-                    <form class="needs-validation" novalidate>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">First name</label>
-                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                    {{--<form class="needs-validation" novalidate>--}}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">First name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
@@ -883,25 +777,16 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                         <hr class="mb-4">
                         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-                    </form>
+                    {{--</form>--}}
                 </div>
+
             </div>
 
             <hr class="featurette-divider">
 
-
-            <footer class="my-5 pt-5 text-muted text-center text-small">
-                <p class="mb-1">© 2017-2021 Elder Protectors</p>
-                <ul class="list-inline">
-                    <li class="list-inline-item"><a href="#">Privacy</a></li>
-                    <li class="list-inline-item"><a href="#">Terms</a></li>
-                    <li class="list-inline-item"><a href="#">Support</a></li>
-                </ul>
-            </footer>
-
         </div>
 
-        <!-- Modal -->
+        <!-- Modal Share -->
         <div class="modal fade" id="sharemodal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -934,7 +819,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                                 <span class="input-group-text">Code</span>
                             </div>
 
-                            <input id="in_matCode" class="form-control" type="text"
+                            <input class="form-control" type="text"
                                    placeholder="M-CXXX-FXXX-LXXX" required>
                             <div class="input-group-append">
                                 <button onclick="copy" id="copy" type="button"
@@ -947,24 +832,86 @@ $matComponents = matComponent::where('enable', 1)->get();
                 </div>
             </div>
         </div>
-        <!-- END Modal -->
+        <!-- END Modal Share -->
+
+        <!-- Modal Preview -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <div class="container1">
+                                <block style="text-align: center;">
+                                    <img class="background" id="img_Background"
+                                         src="{{asset('assets/img/customMat/fondo1.png')}}"
+                                         alt=""/>
+                                    <img class="playmatPreview" id="img_Frame"
+                                         src="{{asset('assets/img/customMat/marco1.png')}}"
+                                         alt=""/>
+                                    <img class="playmatPreview" id="img_Logo"
+                                         src="{{asset('assets/img/customMat/centro1.png')}}"
+                                         alt=""/>
+
+                                    <div id="divText_top-left" class="top-left epFont"
+                                         style="display: block"></div>
+                                    <div id="divText_top-right" class="top-right epFont"
+                                         style="display: none"></div>
+                                    <div id="divText_bottom-left" class="bottom-left epFont"
+                                         style="display: none"></div>
+                                    <div id="divText_bottom-right" class="bottom-right epFont"
+                                         style="display: none"></div>
+                                    <div id="divText_centered" class="centered epFont"
+                                         style="display: none"></div>
+
+                                    <h6>
+                                        <span class="badge badge-primary">Code:</span>
+                                        <a id="code">M-CXXX-FXXX-LXXX</a>
+                                    </h6>
+                                </block>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal Preview -->
 
         </body>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">© 2017-2021 {{ config('app.name') }}</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer>
+
         </html>
         <script>
 
             function init() {
 
-                let select_Fondo = document.getElementById('select_Fondo');
-                let select_Marco = document.getElementById('select_Marco');
-                let select_Centro = document.getElementById('select_Centro');
+                let select_Background = document.getElementById('select_Background');
+                let select_Frame = document.getElementById('select_Frame');
+                let select_Logo = document.getElementById('select_Logo');
 
                 document.getElementById('in_matCode').value =
-                    'M-C' + select_Fondo[select_Fondo.selectedIndex].text +
-                    '-F' + select_Marco[select_Marco.selectedIndex].text +
-                    '-L' + select_Centro[select_Centro.selectedIndex].text;
+                    'M-B' + select_Background[select_Background.selectedIndex].id +
+                    '-F' + select_Frame[select_Frame.selectedIndex].id +
+                    '-L' + select_Logo[select_Logo.selectedIndex].id;
 
-                document.getElementById('in_matCode').value = 'M-CBRW-FCLT-LCHDRG-TL-This is a Messaje 4 you';
+                document.getElementById('in_matCode').value = 'M-BBRW-FCLT-LCHDRG-TL-This is a Messaje 4 you';
             }
 
             init();
@@ -995,7 +942,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                 return null;
             }
 
-            /*Funcion del Input de Mat_Text*/
             function customTextLabel() {
 
                 if (document.getElementById("matText").value.length > 0) {
@@ -1035,24 +981,22 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             function codeModify() {
 
-                let select_Fondo = document.getElementById('select_Fondo');
-                let select_Marco = document.getElementById('select_Marco');
-                let select_Centro = document.getElementById('select_Centro');
+                let select_Background = document.getElementById('select_Background');
+                let select_Frame = document.getElementById('select_Frame');
+                let select_Logo = document.getElementById('select_Logo');
 
                 if (document.getElementById('matText').value.length > 0) {
-                    document.getElementById('in_matCode').value = 'M-C' +
-                        select_Fondo[select_Fondo.selectedIndex].text +
-                        '-F' + select_Marco[select_Marco.selectedIndex].text +
-                        '-L' + select_Centro[select_Centro.selectedIndex].text +
+                    document.getElementById('in_matCode').value = 'M-B' +
+                        select_Background[select_Background.selectedIndex].id +
+                        '-F' + select_Frame[select_Frame.selectedIndex].id +
+                        '-L' + select_Logo[select_Logo.selectedIndex].id +
                         '-' + getCustomText();
                 } else {
-                    document.getElementById('in_matCode').value = 'M-C' +
-                        select_Fondo[select_Fondo.selectedIndex].text +
-                        '-F' + select_Marco[select_Marco.selectedIndex].text +
-                        '-L' + select_Centro[select_Centro.selectedIndex].text;
+                    document.getElementById('in_matCode').value = 'M-B' +
+                        select_Background[select_Background.selectedIndex].id +
+                        '-F' + select_Frame[select_Frame.selectedIndex].id +
+                        '-L' + select_Logo[select_Logo.selectedIndex].id;
                 }
-
-
             }
 
             function matCodeFetch() {
@@ -1071,47 +1015,45 @@ $matComponents = matComponent::where('enable', 1)->get();
                     body: JSON.stringify(product)
                 }).then(function (response) {
                     return response.text();
-                })
-                    .then(function (payload) {
-                        //console.log("API response", payload);
+                }).then(function (payload) {
+                    //console.log("API response", payload);
 
-                        var obj = JSON.parse(payload);
+                    var obj = JSON.parse(payload);
 
-                        if (obj.result) {
-                            setSelectsByMatCode(obj);
-                            Swal.fire({
-                                title: 'Cool',
-                                text: 'Codigo de Producto encontrado: ' + obj.msg,
-                                icon: 'success',
-                            })
+                    if (obj.result) {
+                        setSelectsByMatCode(obj);
+                        Swal.fire({
+                            title: 'Cool',
+                            text: 'Codigo de Producto encontrado: ' + obj.msg,
+                            icon: 'success',
+                        })
 
-                        } else {
-                            Swal.fire({
-                                title: 'Whoops!!',
-                                text: 'Codigo de Producto no Valido: ' + obj.msg,
-                                icon: 'error',
-                                confirmButtonText: 'oh no'
-                            })
-                        }
-                    })
-                    .catch(function (err) {
+                    } else {
                         Swal.fire({
                             title: 'Whoops!!',
-                            text: err,
-                            icon: 'error'
+                            text: 'Codigo de Producto no Valido: ' + obj.msg,
+                            icon: 'error',
+                            confirmButtonText: 'oh no'
                         })
-                    });
+                    }
+                }).catch(function (err) {
+                    Swal.fire({
+                        title: 'Whoops!!',
+                        text: err,
+                        icon: 'error'
+                    })
+                });
             }
 
             function setSelectsByMatCode(obj) {
 
-                $('#select_Fondo').val(obj['data']['matComponnentColor']['fileName']);
-                $('#select_Marco').val(obj['data']['matComponnentFrame']['fileName']);
-                $('#select_Centro').val(obj['data']['matComponnentLogo']['fileName']);
+                $('#select_Background').val(obj['data']['matComponnentBackground']['fileName']);
+                $('#select_Frame').val(obj['data']['matComponnentFrame']['fileName']);
+                $('#select_Logo').val(obj['data']['matComponnentLogo']['fileName']);
 
-                sl_OnChange(document.getElementById('select_Fondo'));
-                sl_OnChange(document.getElementById('select_Marco'));
-                sl_OnChange(document.getElementById('select_Centro'));
+                sl_OnChange(document.getElementById('select_Background'));
+                sl_OnChange(document.getElementById('select_Frame'));
+                sl_OnChange(document.getElementById('select_Logo'));
 
                 document.getElementById("in_matCode").value = '';
                 document.getElementById("matText").value = '';
@@ -1163,18 +1105,6 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             }
 
-            async function asyncSweetAlert() {
-                const text = await swal({
-                    title: 'Whoops!!',
-                    text: 'Codigo de Producto no Valido: ' + obj.msg,
-                    icon: 'error',
-                    confirmButtonText: 'oh no'
-                })
-                if (text) {
-                    swal(text)
-                }
-            }
-
             function bt_ILikeIt_action() {
 
                 let product = {
@@ -1188,7 +1118,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             }
 
-            function addProduct2Car(PriducCode = null) {
+            function addProduct2Car(ProductCode = null) {
                 var retCallBack = false;
 
                 //TODO Cambiar direccion para tomar valores de ENV
@@ -1198,7 +1128,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                         "Content-type": "application/json",
                         credentials: 'include'
                     },
-                    body: JSON.stringify(PriducCode)
+                    body: JSON.stringify(ProductCode)
                 }).then(function (response) {
                     return response.text();
                 })
@@ -1206,6 +1136,17 @@ $matComponents = matComponent::where('enable', 1)->get();
                         //console.log("API response", payload);
 
                         var obj = JSON.parse(payload);
+
+                        if (obj['result']) {
+                            document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shopingCarCountItems'];
+                            setShopingCarItems(obj['data']['shopingCar']);
+
+                            console.log('true');
+                            setPromoCode(obj['data']['promoCode']);
+
+
+                            setShopingCarTotalPromo(obj['data']);
+                        }
 
                         if (obj.result) {
 
@@ -1235,6 +1176,111 @@ $matComponents = matComponent::where('enable', 1)->get();
                     });
                 return true;
             }
+
+            function addpromoCode() {
+                var retCallBack = false;
+
+                let promoCode = {
+                    promoCode: document.getElementById('in_promoCode').value,
+                };
+                //TODO Cambiar direccion para tomar valores de ENV
+                fetch('http://127.0.0.1:8000/api/product/addPromoCode', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
+                        credentials: 'include'
+                    },
+                    body: JSON.stringify(promoCode)
+                }).then(function (response) {
+                    return response.text();
+                }).then(function (payload) {
+                    console.log("API response", payload);
+
+                    var obj = JSON.parse(payload);
+
+                    if (obj['result']) {
+
+
+                        document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shopingCarCountItems'];
+                        setShopingCarItems(obj['data']['shopingCar']);
+
+                        console.log('true');
+                        setPromoCode(obj['data']['promoCode']);
+
+
+                        setShopingCarTotalPromo(obj['data']);
+
+
+                    }
+                }).catch(function (err) {
+                    Swal.fire({
+                        title: 'Whoops!!',
+                        text: err,
+                        icon: 'error'
+                    })
+                });
+                return true;
+            }
+
+            function setPromoCode(PromoCode) {
+                $('#li_promoCode').remove();
+                $('#ul_shopingCar').append(
+                    '<li id="li_promoCode" class="list-group-item d-flex justify-content-between bg-light">' +
+                    '<div class="text-success">' +
+                    '<h6 class="my-0">Promo code</h6>' +
+                    '<small>EXAMPLECODE</small>' +
+                    '</div>' +
+                    '<span class="text-success">-$5</span>' +
+                    '</li>'
+                );
+            }
+
+            function setShopingCarItems(ShopigCar) {
+                //console.log(ShopigCar);
+                $('#ul_shopingCar').empty();
+
+                ShopigCar.forEach(product => (
+                    $('#ul_shopingCar').append(
+                        '<li id="li_shopingCar_' + product['id'] + '" class="list-group-item lh-condensed">' +
+                        '<div class="row">' +
+                        '<div class="col-8">' +
+                        '<h6 class="my-0">Custom Mat</h6>' +
+                        '<small class="">Code:</small> <small class="text-muted">' + product['matCode'] + '</small><br>' +
+                        '<small class="">Custom Text:</small> <small class="text-muted">' + product['customMessage'] + '</small><br> ' +
+                        '<button id="btn_product_View' + product['id'] + '" onclick="chopingCarView(this)" type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></button>' +
+                        '<button id="btn_product_Edit' + product['id'] + '" onclick="chopingCarEdit(this)" type="button" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></button>' +
+                        '<button id="btn_product_Delete' + product['id'] + '" onclick="chopingCarDelete(this)" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></button>' +
+                        '</div>' +
+                        '<div class="col-4">' +
+                        '<span class="text-muted d-flex justify-content-end">$' + product['price'] + '</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</li>'
+                    ))
+                );
+            }
+
+            function setShopingCarTotalPromo(Data) {
+                $('#ul_shopingCar').append(
+                    '<li id="div_TotalCar" class="list-group-item d-flex justify-content-between">' +
+                    '<span>Total (USD)</span>' +
+                    '<strong id="strong_totalPriceCar">$' + Data['shopingCarTotalPrice'] + '</strong>' +
+                    '</li>'
+                )
+            }
+
+            function chopingCarView(button) {
+                console.log('ShopingCar Button View:' + button.id);
+            }
+
+            function chopingCarEdit(button) {
+                console.log('ShopingCar Button Edit:' + button.id);
+            }
+
+            function chopingCarDelete(button) {
+                console.log('ShopingCar Button Delete:' + button.id);
+            }
+
 
             function LikeItscroll() {
                 document.getElementById("checkout").scrollIntoView({

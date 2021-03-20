@@ -2,84 +2,161 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\PromoCodeController;
 use App\Models\Product;
 use http\Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\EventListener\ValidateRequestListener;
 use function PHPUnit\Framework\returnArgument;
 
 class ProductController extends Controller {
 
+    private $response = [
+        'data' => null,
+        'result' => false,
+        'msg' => 'Error',
+    ];
+
+    public function addPromoCode (Request $request) {
+
+        $promoCodeC = new PromoCodeController();
+
+        if ($promoCodeC->validPromoCode($request->promoCode)) {
+
+            $data['promoCode'] = $promoCodeC->information($request->promoCode);
+
+            $cookiePromoCode = $this->OvenCookePromoCode($request);
+
+            /*TODO Validar Condicion del CodigoPromo*/
+            /*TODO validar que si tengas carrito*/
+            if (isset($data['promoCode']['condition'])) {
+
+            }
+            /*validar yh regresar carrito */
+            if (isset($_COOKIE['shopingCar'])) {
+                $data['shopingCar'] = (array)json_decode($_COOKIE['shopingCar']);
+                $data['shopingCarCountItems'] = count($data['shopingCar']);
+                $data['shopingCarTotalPrice'] = 0;
+
+                foreach ($data['shopingCar'] as $ProductObj) {
+                    $products = (array)$ProductObj;
+                    $data['shopingCarTotalPrice'] = $data['shopingCarTotalPrice'] + $products['price'];
+                }
+            }
+
+
+            $this->response['data'] = $data;
+            $this->response['msg'] = 'Promo Code Valid';
+            $this->response['result'] = true;
+        }
+
+        if (isset($cookiePromoCode)) {
+            return response()->json($this->response)->cookie($cookiePromoCode);
+        } else {
+            return response()->json($this->response);
+        }
+    }
+
+    public function OvenCookePromoCode (Request $request) {
+
+        $promoCodeC = new PromoCodeController();
+
+        $promo = $promoCodeC->information($request->promoCode);
+
+        return cookie('promoCode', json_encode($promo, JSON_FORCE_OBJECT));
+
+    }
+
     public function fetchProduct (Request $request) {
-        $response = [
-            'data' => null,
-            'result' => false,
-            'msg' => 'Error',
-        ];
 
         if ($this->ValidCode($request->matCode)) {
             $separeCode = explode("-", $request->matCode);
 
             $data['matCode'] = $request->matCode;
 
-            $data['matComponnentColor'] = $this->ExistComponent(substr($separeCode[1], 1, strlen($separeCode[1]) - 1), 'C');
+            $data['matComponnentBackground'] = $this->ExistComponent(substr($separeCode[1], 1, strlen($separeCode[1]) - 1), 'B');
             $data['matComponnentFrame'] = $this->ExistComponent(substr($separeCode[2], 1, strlen($separeCode[2]) - 1), 'F');
             $data['matComponnentLogo'] = $this->ExistComponent(substr($separeCode[3], 1, strlen($separeCode[3]) - 1), 'L');
             $data['matComponnentMsg'] = null;
             if (isset($separeCode[4])) {
-                /*TODO validar la longitud completa del Mensaje se puede cortar si entra con -*/
-                $data['matComponnentMsg'] = $separeCode[5];
+                $data['matComponnentMsg'] = $this->getCustomMessageFromRequest($data['matCode']);
                 $data['matMsgPosition'] = $separeCode[4];
             }
 
-
-            $response['data'] = $data;
-            $response['msg'] = 'Mat Code Find';
-            $response['result'] = true;
+            $this->response['data'] = $data;
+            $this->response['msg'] = 'Mat Code Find';
+            $this->response['result'] = true;
 
         } else {
-            $response['msg'] = 'No Fetch this Product';
+            $this->response['msg'] = 'No Fetch this Product';
         }
 
-        if (isset($cookie)) {
-            return response()->json($response)->cookie($cookie);
-        } else {
-            return response()->json($response);
-        }
+
+        return response()->json($this->response);
+
 
     }
 
+    function getCustomMessageFromRequest ($matCode) {
+        $separeCode = explode("-", $matCode);
+
+        $matCodeLen =
+            strlen($separeCode[0]) +
+            strlen($separeCode[1]) +
+            strlen($separeCode[2]) +
+            strlen($separeCode[3]) + 4;
+
+        return substr($matCode, $matCodeLen + strlen($separeCode[4]) + 1, strlen($matCode));
+    }
+
     public function validProduct (Request $request) {
-        $response = [
-            'data' => null,
-            'result' => false,
-            'msg' => 'Error',
-        ];
+
+        $promoCodeC = new PromoCodeController();
 
         if ($this->ValidCode($request->matCode)) {
 
-            if (isset($_COOKIE['shopingCar'])) {
-                $cookie = $this->OvenCooke($request, $_COOKIE['shopingCar']);
+            /*descomentar*/
+            /*if (isset($_COOKIE['shopingCar'])) {
+                $cookie = $this->OvenCookeShopingCar($request, $_COOKIE['shopingCar']);
                 $data['shopingCar'] = $this->shopingCarGet($request, $_COOKIE['shopingCar']);
             } else {
-                $cookie = $this->OvenCooke($request);
+                $cookie = $this->OvenCookeShopingCar($request);
                 $data['shopingCar'] = $this->shopingCarGet($request);
+            }*/
+
+
+            if (isset($_COOKIE['shopingCar'])) {
+                $data['shopingCar'] = (array)json_decode($_COOKIE['shopingCar']);
             }
 
-            $response['data'] = $data;
-            $response['msg'] = 'Mat Code Fine';
-            $response['result'] = true;
+
+            if (isset($_COOKIE['promoCode'])) {
+                $data['promoCode'] = $promoCodeC->information($request->promoCode);
+            }
+
+
+            $data['shopingCarCountItems'] = count($data['shopingCar']);
+            $data['shopingCarTotalPrice'] = 0;
+
+            foreach ($data['shopingCar'] as $ProductObj) {
+                $products = (array)$ProductObj;
+                $data['shopingCarTotalPrice'] = $data['shopingCarTotalPrice'] + $products['price'];
+            }
+
+            $this->response['data'] = $data;
+            $this->response['msg'] = 'Mat Code Fine';
+            $this->response['result'] = true;
 
         } else {
-            $response['msg'] = 'invalid Code';
+            $this->response['msg'] = 'invalid Code';
         }
 
         if (isset($cookie)) {
-            return response()->json($response)->cookie($cookie);
+            return response()->json($this->response)->cookie($cookie);
         } else {
-            return response()->json($response);
+            return response()->json($this->response);
         }
-
     }
 
 
@@ -88,7 +165,9 @@ class ProductController extends Controller {
         $produc = [
             'id' => uniqid(),
             'matCode' => $request->matCode,
-            'quantity' => 1 /*$request->quantity*/
+            'quantity' => 1, /*$request->quantity*/
+            'price' => 70.00, /*TODO create a config 4 standar Price*/
+            'customMessage' => $this->getCustomMessageFromRequest($request->matCode) /*$request->quantity*/
         ];
         $carCookie = array();
 
@@ -102,12 +181,14 @@ class ProductController extends Controller {
         return $carCookie;
     }
 
-    public function OvenCooke (Request $request, $oldCookie = null) {
+    public function OvenCookeShopingCar (Request $request, $oldCookie = null) {
 
         $produc = [
             'id' => uniqid(),
             'matCode' => $request->matCode,
             'quantity' => $request->quantity,
+            'price' => 70.00,
+            'customMessage' => $this->getCustomMessageFromRequest($request->matCode)
         ];
         $carCookie = array();
 
@@ -117,14 +198,14 @@ class ProductController extends Controller {
             $carCookie = ((array)json_decode($oldCookie));
             array_push($carCookie, $produc);
         }
-        return cookie('shopingCar', json_encode($carCookie, JSON_FORCE_OBJECT), 0, null, null, null, false);
+        return cookie('shopingCar', json_encode($carCookie, JSON_FORCE_OBJECT));
 
     }
 
     public function ValidCode ($code) {
         if ($this->ValidCodePatter($code)) {
             $separeCode = explode("-", $code);
-            if (!$this->ExistComponent(substr($separeCode[1], 1, strlen($separeCode[1]) - 1), 'C')) {
+            if (!$this->ExistComponent(substr($separeCode[1], 1, strlen($separeCode[1]) - 1), 'B')) {
                 return false;
             }
             if (!$this->ExistComponent(substr($separeCode[2], 1, strlen($separeCode[2]) - 1), 'F')) {
@@ -153,7 +234,7 @@ class ProductController extends Controller {
     }
 
     public function ValidCodePatter ($Code) {
-        if (preg_match('/(M-C[A-Z]{3,10}-F[A-Z]{3,10}-L[A-Z]{3,10})((TL|TL|BL|BR|C)-[\w\s\d]{1,25}){0,1}/', $Code)) {
+        if (preg_match('/(M-B[A-Z]{3,10}-F([A-Z]{3,10}|SM)-L([A-Z]{3,10}|SL))((TL|TR|BL|BR|C)-[\w\s\d]{1,25}){0,1}/', $Code)) {
             return true;
         }
         return false;

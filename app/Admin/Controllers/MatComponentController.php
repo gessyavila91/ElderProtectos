@@ -53,9 +53,9 @@ class MatComponentController extends AdminController {
         
         $grid->column('type', 'Type')
             ->editable('select', [
-                'C' => 'Color',
-                'L' => 'Logo',
-                'F' => 'Frame']);
+                'B' => 'Background',
+                'F' => 'Frame',
+                'L' => 'Logo']);
 
 
         return $grid;
@@ -82,8 +82,8 @@ class MatComponentController extends AdminController {
 
         $show->field('fileName', __('FileName'))->image();
         $show->field('description', __('Description'));
-        $show->field('type','Type')
-            ->using(['C' => 'Color', 'F' => 'Frame', 'L' => 'Logo'])
+        $show->field('type', 'Type')
+            ->using(['B' => 'Background', 'F' => 'Frame', 'L' => 'Logo'])
             ->label();
 
         $show->field('created_at', __('Created at'));
@@ -125,10 +125,10 @@ class MatComponentController extends AdminController {
 
         $form->radio('type', 'Type')
             ->options([
-                'C' => 'Color',
-                'L' => 'Logo',
-                'F' => 'Frame'])
-            ->default('C');
+                'B' => 'Background',
+                'F' => 'Frame',
+                'L' => 'Logo'])
+            ->default('B');
 
         return $form;
     }

@@ -14,6 +14,7 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('home');
 
     $router->resource('/matComponent', MatComponentController::class);
+    $router->resource('/promoCodes', PromoCodeController::class);
 
 
 });

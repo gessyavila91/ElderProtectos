@@ -26,3 +26,6 @@ Route::post('/product/fetch',
 Route::post('/product/valid',
     [\App\Http\Controllers\ProductController::class, 'validProduct']
 );
+Route::post('/product/addPromoCode',
+    [\App\Http\Controllers\ProductController::class, 'addPromoCode']
+);
