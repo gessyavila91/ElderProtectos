@@ -23,9 +23,15 @@ Route::post('/product/fetch',
     [\App\Http\Controllers\ProductController::class, 'fetchProduct']
 );
 
-Route::post('/product/valid',
-    [\App\Http\Controllers\ProductController::class, 'validProduct']
+Route::post('/product/addProduct',
+    [\App\Http\Controllers\ProductController::class, 'addProduct']
 );
 Route::post('/product/addPromoCode',
     [\App\Http\Controllers\ProductController::class, 'addPromoCode']
+);
+Route::post('/product/removeProduct',
+    [\App\Http\Controllers\ProductController::class, 'removeProductFromshoppingCar']
+);
+Route::get('/product/initShoppingCar',
+    [\App\Http\Controllers\ProductController::class, 'initShoppingCar']
 );

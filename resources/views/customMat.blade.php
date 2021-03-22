@@ -497,27 +497,26 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                     </h4>
 
-                    <ul class="list-group mb-3" id="ul_shopingCar">
+                    <ul class="list-group mb-3" id="ul_shoppingCar">
                         {{--Car Items List Start--}}
 
-                        {{--                        <li class="list-group-item lh-condensed">
-                                                    <div class="row">
-                                                        <div class="col-8">
-                                                            <h6 class="my-0">Custom Mat de whit text</h6>
-                                                            <small class="">Code:</small> <small class="text-muted">M-CYLW-FELD-LPWELD</small><br>
-                                                            <small class="">Text Top Left:</small> <small class="text-muted">CustomText</small>
-                                                            <br>
-                                                            <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></button>
-                                                            <button type="button" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></button>
-                                                            <button type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i>
-                                                            </button>
-                                                        </div>
-
-                                                        <div class="col-4">
-                                                            <span class="text-muted d-flex justify-content-end"> $70 </span>
-                                                        </div>
-                                                    </div>
-                                                </li>--}}
+                        {{--<li class="list-group-item lh-condensed">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h6 class="my-0">Custom Mat de whit text</h6>
+                                    <small class="">Code:</small> <small class="text-muted">M-CYLW-FELD-LPWELD</small><br>
+                                    <small class="">Text Top Left:</small> <small class="text-muted">CustomText</small>
+                                    <br>
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></button>
+                                    <button type="button" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <span class="text-muted d-flex justify-content-end"> $70 </span>
+                                </div>
+                            </div>
+                        </li>--}}
 
                         {{--Car Items List End--}}
 
@@ -553,7 +552,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                                            value="PROMOVALIDA2">
 
                                     <div class="input-group-append">
-                                        <button onclick="addpromoCode()" type="submit" class="btn btn-secondary">Redeem
+                                        <button onclick="addPromoCode()" type="submit" class="btn btn-secondary">Redeem
                                         </button>
                                     </div>
                                 </div>
@@ -591,192 +590,192 @@ $matComponents = matComponent::where('enable', 1)->get();
                         <div class="col-md-6 mb-3">
                             <label for="firstName">First name</label>
                             <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="lastName">Last name</label>
-                                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid last name is required.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="email">Email</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">@</span>
-                                    </div>
-                                    <input type="email" class="form-control" id="email" placeholder="you@example.com"
-                                           required>
-                                    <div class="invalid-feedback" style="width: 100%;">
-                                        Your username is required.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="phone">Phone <span class="text-muted">(Optional)</span></label>
-                                <input type="tel" class="form-control" id="phone" placeholder="1-(555)-555-5555">
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address for shipping updates.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
                             <div class="invalid-feedback">
-                                Please enter your shipping address.
+                                Valid first name is required.
                             </div>
                         </div>
-
-
-                        {{-- TODO crea auto Metohd 4 fill it --}}
-                        <div class="row">
-                            <div class="col-md-3 mb-6">
-                                <label for="country">Country</label>
-                                <input type="text" class="form-control" id="country" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Please provide a valid country.
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-6">
-                                <label for="state">State</label>
-                                <input type="text" class="form-control" id="state" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Please provide a valid state.
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-6">
-                                <label for="city">City</label>
-                                <input type="text" class="form-control" id="city" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    City required.
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 mb-6">
-                                <label for="zip">Zip</label>
-                                <input type="text" class="form-control" id="zip" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Zip code required.
-                                </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Last name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Valid last name is required.
                             </div>
                         </div>
-                        <hr class="mb-4">
-                        <h4 class="mb-3">Shipping method</h4>
+                    </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" name="customRadioInline1" class="custom-control-input"
-                                           id="freeship" checked>
-                                    <label class="custom-control-label" for="freeship"><strong>Ecconomy Shipping - <a
-                                                    style="color: green">Free </a></strong><br>
-                                        <span class="label-description">Sent by national post service, it takes 20 to 40 business days.<br><small
-                                                    style="color: red">Due to Covid-19 may take longer than normal.</small></span></label>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email">Email</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@</span>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" name="customRadioInline1" class="custom-control-input"
-                                           id="dhlship">
-                                    <label class="custom-control-label" for="dhlship"><strong>DHL - $50</strong><br>
-                                        <span class="label-description">Shipping by DHL-Express 3 to 6 days - fastest option possible.<br><small
-                                                    style="color: red">Due to Covid-19 may take longer than normal.</small></span></label>
+                                <input type="email" class="form-control" id="email" placeholder="you@example.com"
+                                       required>
+                                <div class="invalid-feedback" style="width: 100%;">
+                                    Your username is required.
                                 </div>
                             </div>
                         </div>
 
+                        <div class="col-md-6 mb-3">
+                            <label for="phone">Phone <span class="text-muted">(Optional)</span></label>
+                            <input type="tel" class="form-control" id="phone" placeholder="1-(555)-555-5555">
+                            <div class="invalid-feedback">
+                                Please enter a valid email address for shipping updates.
+                            </div>
+                        </div>
+                    </div>
 
-                        <hr class="mb-4">
-                        <h4 class="mb-3">Payment</h4>
+                    <div class="mb-3">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
 
-                        <div class="my-3">
 
-                            <div class="accordion" id="accordionExample">
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link btn-block text-left" type="button"
-                                                    data-toggle="collapse" data-target="#collapseOne"
-                                                    aria-expanded="true" aria-controls="collapseOne">
-                                                <input id="paypal" name="paymentMethod" type="radio"
-                                                       class="form-check-input" checked="" required="">
-                                                <label class="form-check-label" for="paypal"><i
-                                                            class="fab fa-cc-paypal fa-2x"
-                                                            style="color:dodgerblue;"></i></label>
-                                            </button>
-                                        </h2>
-                                    </div>
+                    {{-- TODO crea auto Metohd 4 fill it --}}
+                    <div class="row">
+                        <div class="col-md-3 mb-6">
+                            <label for="country">Country</label>
+                            <input type="text" class="form-control" id="country" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid country.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-6">
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" id="state" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-6">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" placeholder="" required>
+                            <div class="invalid-feedback">
+                                City required.
+                            </div>
+                        </div>
 
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                         data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            PayPal allows you to make payments using a variety of methods including:
-                                            PayPal Cash or PayPal Cash Plus account balance,
-                                            a bank account, PayPal Credit, debit or credit cards, and rewards balance.
-                                        </div>
+                        <div class="col-md-3 mb-6">
+                            <label for="zip">Zip</label>
+                            <input type="text" class="form-control" id="zip" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Zip code required.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <h4 class="mb-3">Shipping method</h4>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" name="customRadioInline1" class="custom-control-input"
+                                       id="freeship" checked>
+                                <label class="custom-control-label" for="freeship"><strong>Ecconomy Shipping - <a
+                                                style="color: green">Free </a></strong><br>
+                                    <span class="label-description">Sent by national post service, it takes 20 to 40 business days.<br><small
+                                                style="color: red">Due to Covid-19 may take longer than normal.</small></span></label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" name="customRadioInline1" class="custom-control-input"
+                                       id="dhlship">
+                                <label class="custom-control-label" for="dhlship"><strong>DHL - $50</strong><br>
+                                    <span class="label-description">Shipping by DHL-Express 3 to 6 days - fastest option possible.<br><small
+                                                style="color: red">Due to Covid-19 may take longer than normal.</small></span></label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <hr class="mb-4">
+                    <h4 class="mb-3">Payment</h4>
+
+                    <div class="my-3">
+
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne">
+                                            <input id="paypal" name="paymentMethod" type="radio"
+                                                   class="form-check-input" checked="" required="">
+                                            <label class="form-check-label" for="paypal"><i
+                                                        class="fab fa-cc-paypal fa-2x"
+                                                        style="color:dodgerblue;"></i></label>
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        PayPal allows you to make payments using a variety of methods including:
+                                        PayPal Cash or PayPal Cash Plus account balance,
+                                        a bank account, PayPal Credit, debit or credit cards, and rewards balance.
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingTwo">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                                    data-toggle="collapse" data-target="#collapseTwo"
-                                                    aria-expanded="false" aria-controls="collapseTwo">
-                                                <input id="amazon" name="paymentMethod" type="radio"
-                                                       class="form-check-input" required="">
-                                                <label class="form-check-label" for="amazon"><i
-                                                            class="fab fa-cc-amazon-pay fa-2x"
-                                                            style="color:orange;"></i></label>
-                                            </button>
-                                        </h2>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                         data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            Amazon Pay accepts credit and debit cards and transfers from your available
-                                            Amazon Pay account balance.
-                                            Credit cards currently accepted include Visa, Mastercard, Discover, American
-                                            Express, Diners Club, and JCB.
-                                            An Amazon.com store card is available for use with selected merchants.
-                                        </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                                data-toggle="collapse" data-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                            <input id="amazon" name="paymentMethod" type="radio"
+                                                   class="form-check-input" required="">
+                                            <label class="form-check-label" for="amazon"><i
+                                                        class="fab fa-cc-amazon-pay fa-2x"
+                                                        style="color:orange;"></i></label>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        Amazon Pay accepts credit and debit cards and transfers from your available
+                                        Amazon Pay account balance.
+                                        Credit cards currently accepted include Visa, Mastercard, Discover, American
+                                        Express, Diners Club, and JCB.
+                                        An Amazon.com store card is available for use with selected merchants.
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingThree">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                                    data-toggle="collapse" data-target="#collapseThree"
-                                                    aria-expanded="false" aria-controls="collapseThree">
-                                                <input id="apple" name="paymentMethod" type="radio"
-                                                       class="form-check-input" required="">
-                                                <label class="form-check-label" for="apple"><i
-                                                            class="fab fa-apple-pay fa-2x"
-                                                            style="color:grey;"></i></label>
-                                            </button>
-                                        </h2>
-                                    </div>
-                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                         data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            With your Mac, iPhone, iPad, and Apple Watch, you can use Apple Pay to pay
-                                            within apps when you see Apple Pay as a payment option.
-                                        </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                                data-toggle="collapse" data-target="#collapseThree"
+                                                aria-expanded="false" aria-controls="collapseThree">
+                                            <input id="apple" name="paymentMethod" type="radio"
+                                                   class="form-check-input" required="">
+                                            <label class="form-check-label" for="apple"><i
+                                                        class="fab fa-apple-pay fa-2x"
+                                                        style="color:grey;"></i></label>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        With your Mac, iPhone, iPad, and Apple Watch, you can use Apple Pay to pay
+                                        within apps when you see Apple Pay as a payment option.
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
                     {{--</form>--}}
                 </div>
 
@@ -911,10 +910,235 @@ $matComponents = matComponent::where('enable', 1)->get();
                     '-F' + select_Frame[select_Frame.selectedIndex].id +
                     '-L' + select_Logo[select_Logo.selectedIndex].id;
 
-                document.getElementById('in_matCode').value = 'M-BBRW-FCLT-LCHDRG-TL-This is a Messaje 4 you';
+                document.getElementById('in_matCode').value = 'M-BBRW-FCLT-LCHDRG-TL-This is a Message 4 you';
+
+                InitShoppingCar();
             }
 
             init();
+
+            function InitShoppingCar() {
+                fetch('http://127.0.0.1:8000/api/product/initShoppingCar', {
+                    method: 'GET',
+                    headers: {
+                        "Content-type": "application/json",
+                        credentials: 'include'
+                    }
+                }).then(function (response) {
+                    return response.text();
+                }).then(function (payload) {
+                    //console.log("API response", payload);
+                    var obj = JSON.parse(payload);
+
+                    if (obj['result']) {
+                        if ('shoppingCar' in obj['data']) {
+                            setShoppingCarItems(obj['data']['shoppingCar']);
+                        }
+                        if ('promoCode' in obj['data']) {
+                            setPromoCode(obj['data']['promoCode']);
+                        }
+                        if ('shoppingCarTotalPrice' in obj['data']) {
+                            setShoppingCarTotal(obj['data']['shoppingCarTotalPrice']);
+                        }
+                        if ('shoppingCarCountItems' in obj['data']) {
+                            document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shoppingCarCountItems'];
+                        }
+                    }
+                }).catch(function (err) {
+                    Swal.fire({
+                        title: 'Whoops!!',
+                        text: err,
+                        icon: 'error'
+                    })
+                });
+
+                return true;
+            }
+
+            function matCodeFetch() {
+
+                let product = {
+                    matCode: document.getElementById('in_matCode').value
+                };
+
+                fetch('http://127.0.0.1:8000/api/product/fetch', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
+                        credentials: 'include'
+                    },
+                    body: JSON.stringify(product)
+                }).then(function (response) {
+                    return response.text();
+                }).then(function (payload) {
+                    //console.log("API response", payload);
+
+                    var obj = JSON.parse(payload);
+                    if (obj.result) {
+                        setSelectsByMatCode(obj);
+                        Swal.fire({
+                            title: 'Cool',
+                            text: 'Codigo de Producto encontrado: ' + obj.msg,
+                            icon: 'success',
+                        })
+
+                    } else {
+                        Swal.fire({
+                            title: 'Whoops!!',
+                            text: 'Codigo de Producto no Valido: ' + obj.msg,
+                            icon: 'error',
+                            confirmButtonText: 'oh no'
+                        })
+                    }
+                }).catch(function (err) {
+                    Swal.fire({
+                        title: 'Whoops!!',
+                        text: err,
+                        icon: 'error'
+                    })
+                });
+            }
+
+            function bt_ILikeIt_action() {
+
+                addProduct2Car();
+                LikeItscroll();
+
+            }
+
+            function addProduct2Car() {
+
+                let product = {
+                    matCode: document.getElementById('in_matCode').value,
+                    quantity: 1
+                };
+
+                fetch('http://127.0.0.1:8000/api/product/addProduct', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
+                        credentials: 'include'
+                    },
+                    body: JSON.stringify(ProductCode)
+                }).then(function (response) {
+                    return response.text();
+                }).then(function (payload) {
+                    //console.log("API response", payload);
+
+                    var obj = JSON.parse(payload);
+
+                    if (obj['result']) {
+                        if ('shoppingCar' in obj['data']) {
+                            setShoppingCarItems(obj['data']['shoppingCar']);
+                        }
+                        if ('promoCode' in obj['data']) {
+                            setPromoCode(obj['data']['promoCode']);
+                        }
+                        if ('shoppingCarTotalPrice' in obj['data']) {
+                            setShoppingCarTotal(obj['data']['shoppingCarTotalPrice']);
+                        }
+                        if ('shoppingCarCountItems' in obj['data']) {
+                            document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shoppingCarCountItems'];
+                        }
+                    }
+                }).catch(function (err) {
+                    Swal.fire({
+                        title: 'Whoops!!',
+                        text: err,
+                        icon: 'error'
+                    })
+                });
+                return true;
+            }
+
+            function shoppingCarDelete(button) {
+                //console.log('ShoppingCar Button Delete:' + button.id);
+                let product = {
+                    id: button.id.replace('btn_product_Delete', '')
+                };
+
+                fetch('http://127.0.0.1:8000/api/product/removeProduct', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
+                        credentials: 'include'
+                    },
+                    body: JSON.stringify(product)
+                }).then(function (response) {
+                    return response.text();
+                }).then(function (payload) {
+                    console.log("API response", payload);
+
+                    var obj = JSON.parse(payload);
+
+                    if (obj['result']) {
+                        if ('shoppingCar' in obj['data']) {
+                            setShoppingCarItems(obj['data']['shoppingCar']);
+                        }
+                        if ('promoCode' in obj['data']) {
+                            setPromoCode(obj['data']['promoCode']);
+                        }
+                        if ('shoppingCarTotalPrice' in obj['data']) {
+                            setShoppingCarTotal(obj['data']['shoppingCarTotalPrice']);
+                        }
+                        if ('shoppingCarCountItems' in obj['data']) {
+                            document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shoppingCarCountItems'];
+                        }
+                    }
+                }).catch(function (err) {
+                    Swal.fire({
+                        title: 'Whoops!!',
+                        text: err,
+                        icon: 'error'
+                    })
+                });
+                return true;
+            }
+
+            function addPromoCode() {
+                var retCallBack = false;
+
+                let promoCode = {
+                    promoCode: document.getElementById('in_promoCode').value,
+                };
+                //TODO Cambiar direccion para tomar valores de ENV
+                fetch('http://127.0.0.1:8000/api/product/addPromoCode', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
+                        credentials: 'include'
+                    },
+                    body: JSON.stringify(promoCode)
+                }).then(function (response) {
+                    return response.text();
+                }).then(function (payload) {
+                    //console.log("API response", payload);
+
+                    var obj = JSON.parse(payload);
+
+                    if (obj['result']) {
+                        if ('shoppingCar' in obj['data']) {
+                            setShoppingCarItems(obj['data']['shoppingCar']);
+                        }
+                        if ('promoCode' in obj['data']) {
+                            setPromoCode(obj['data']['promoCode']);
+                        }
+                        if ('shoppingCarTotalPrice' in obj['data']) {
+                            setShoppingCarTotal(obj['data']['shoppingCarTotalPrice']);
+                        }
+                        if ('shoppingCarCountItems' in obj['data']) {
+                            document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shoppingCarCountItems'];
+                        }
+                    }
+                }).catch(function (err) {
+                    Swal.fire({
+                        title: 'Whoops!!',
+                        text: err,
+                        icon: 'error'
+                    })
+                });
+                return true;
+            }
 
             function getCustomText() {
 
@@ -999,52 +1223,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                 }
             }
 
-            function matCodeFetch() {
-
-                let product = {
-                    matCode: document.getElementById('in_matCode').value
-                };
-
-                //TODO Cambiar direccion para tomar valores de ENV
-                fetch('http://127.0.0.1:8000/api/product/fetch', {
-                    method: 'POST',
-                    headers: {
-                        "Content-type": "application/json",
-                        credentials: 'include'
-                    },
-                    body: JSON.stringify(product)
-                }).then(function (response) {
-                    return response.text();
-                }).then(function (payload) {
-                    //console.log("API response", payload);
-
-                    var obj = JSON.parse(payload);
-
-                    if (obj.result) {
-                        setSelectsByMatCode(obj);
-                        Swal.fire({
-                            title: 'Cool',
-                            text: 'Codigo de Producto encontrado: ' + obj.msg,
-                            icon: 'success',
-                        })
-
-                    } else {
-                        Swal.fire({
-                            title: 'Whoops!!',
-                            text: 'Codigo de Producto no Valido: ' + obj.msg,
-                            icon: 'error',
-                            confirmButtonText: 'oh no'
-                        })
-                    }
-                }).catch(function (err) {
-                    Swal.fire({
-                        title: 'Whoops!!',
-                        text: err,
-                        icon: 'error'
-                    })
-                });
-            }
-
             function setSelectsByMatCode(obj) {
 
                 $('#select_Background').val(obj['data']['matComponnentBackground']['fileName']);
@@ -1105,182 +1283,64 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             }
 
-            function bt_ILikeIt_action() {
-
-                let product = {
-                    matCode: document.getElementById('in_matCode').value,
-                    quantity: 1,
-                    customMsg: getCustomText(),
-                };
-
-                addProduct2Car(product);
-                LikeItscroll();
-
-            }
-
-            function addProduct2Car(ProductCode = null) {
-                var retCallBack = false;
-
-                //TODO Cambiar direccion para tomar valores de ENV
-                fetch('http://127.0.0.1:8000/api/product/valid', {
-                    method: 'POST',
-                    headers: {
-                        "Content-type": "application/json",
-                        credentials: 'include'
-                    },
-                    body: JSON.stringify(ProductCode)
-                }).then(function (response) {
-                    return response.text();
-                })
-                    .then(function (payload) {
-                        //console.log("API response", payload);
-
-                        var obj = JSON.parse(payload);
-
-                        if (obj['result']) {
-                            document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shopingCarCountItems'];
-                            setShopingCarItems(obj['data']['shopingCar']);
-
-                            console.log('true');
-                            setPromoCode(obj['data']['promoCode']);
-
-
-                            setShopingCarTotalPromo(obj['data']);
-                        }
-
-                        if (obj.result) {
-
-                            Swal.fire({
-                                title: 'success',
-                                text: 'Producto Agregado al carrito',
-                                icon: 'success',
-                                confirmButtonText: 'Cool!'
-                            })
-                            return true;
-                        } else {
-                            Swal.fire({
-                                title: 'Whoops!!',
-                                text: 'Codigo de Producto no Valido: ' + obj.msg,
-                                icon: 'error',
-                                confirmButtonText: 'oh no'
-                            })
-                            retCallBack = false;
-                        }
-                    })
-                    .catch(function (err) {
-                        Swal.fire({
-                            title: 'Whoops!!',
-                            text: err,
-                            icon: 'error'
-                        })
-                    });
-                return true;
-            }
-
-            function addpromoCode() {
-                var retCallBack = false;
-
-                let promoCode = {
-                    promoCode: document.getElementById('in_promoCode').value,
-                };
-                //TODO Cambiar direccion para tomar valores de ENV
-                fetch('http://127.0.0.1:8000/api/product/addPromoCode', {
-                    method: 'POST',
-                    headers: {
-                        "Content-type": "application/json",
-                        credentials: 'include'
-                    },
-                    body: JSON.stringify(promoCode)
-                }).then(function (response) {
-                    return response.text();
-                }).then(function (payload) {
-                    console.log("API response", payload);
-
-                    var obj = JSON.parse(payload);
-
-                    if (obj['result']) {
-
-
-                        document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shopingCarCountItems'];
-                        setShopingCarItems(obj['data']['shopingCar']);
-
-                        console.log('true');
-                        setPromoCode(obj['data']['promoCode']);
-
-
-                        setShopingCarTotalPromo(obj['data']);
-
-
-                    }
-                }).catch(function (err) {
-                    Swal.fire({
-                        title: 'Whoops!!',
-                        text: err,
-                        icon: 'error'
-                    })
-                });
-                return true;
-            }
-
             function setPromoCode(PromoCode) {
+
                 $('#li_promoCode').remove();
-                $('#ul_shopingCar').append(
+                $('#ul_shoppingCar').append(
                     '<li id="li_promoCode" class="list-group-item d-flex justify-content-between bg-light">' +
                     '<div class="text-success">' +
                     '<h6 class="my-0">Promo code</h6>' +
-                    '<small>EXAMPLECODE</small>' +
+                    '<small>' + PromoCode['code'] + '</small>' +
                     '</div>' +
-                    '<span class="text-success">-$5</span>' +
+                    '<span class="text-success">-' + PromoCode['value'] + '</span>' +
                     '</li>'
                 );
             }
 
-            function setShopingCarItems(ShopigCar) {
-                //console.log(ShopigCar);
-                $('#ul_shopingCar').empty();
+            function setShoppingCarItems(ShopigCar) {
 
-                ShopigCar.forEach(product => (
-                    $('#ul_shopingCar').append(
-                        '<li id="li_shopingCar_' + product['id'] + '" class="list-group-item lh-condensed">' +
-                        '<div class="row">' +
-                        '<div class="col-8">' +
-                        '<h6 class="my-0">Custom Mat</h6>' +
-                        '<small class="">Code:</small> <small class="text-muted">' + product['matCode'] + '</small><br>' +
-                        '<small class="">Custom Text:</small> <small class="text-muted">' + product['customMessage'] + '</small><br> ' +
-                        '<button id="btn_product_View' + product['id'] + '" onclick="chopingCarView(this)" type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></button>' +
-                        '<button id="btn_product_Edit' + product['id'] + '" onclick="chopingCarEdit(this)" type="button" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></button>' +
-                        '<button id="btn_product_Delete' + product['id'] + '" onclick="chopingCarDelete(this)" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></button>' +
-                        '</div>' +
-                        '<div class="col-4">' +
-                        '<span class="text-muted d-flex justify-content-end">$' + product['price'] + '</span>' +
-                        '</div>' +
-                        '</div>' +
-                        '</li>'
-                    ))
-                );
+                $('#ul_shoppingCar').empty();
+                if (ShopigCar.length > 0) {
+                    ShopigCar.forEach(product => (
+                        $('#ul_shoppingCar').append(
+                            '<li id="li_shoppingCar_' + product['id'] + '" class="list-group-item lh-condensed">' +
+                            '<div class="row">' +
+                            '<div class="col-8">' +
+                            '<h6 class="my-0">Custom Mat</h6>' +
+                            '<small class="">Code:</small> <small class="text-muted">' + product['matCode'] + '</small><br>' +
+                            '<small class="">Custom Text:</small> <small class="text-muted">' + product['customMessage'] + '</small><br> ' +
+                            '<button id="btn_product_View' + product['id'] + '" onclick="shoppingCarView(this)" type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></button>' +
+                            '<button id="btn_product_Edit' + product['id'] + '" onclick="shoppingCarEdit(this)" type="button" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></button>' +
+                            '<button id="btn_product_Delete' + product['id'] + '" onclick="shoppingCarDelete(this)" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></button>' +
+                            '</div>' +
+                            '<div class="col-4">' +
+                            '<span class="text-muted d-flex justify-content-end">$' + product['price'] + '</span>' +
+                            '</div>' +
+                            '</div>' +
+                            '</li>'
+                        ))
+                    );
+                }
+
             }
 
-            function setShopingCarTotalPromo(Data) {
-                $('#ul_shopingCar').append(
+            function setShoppingCarTotal(amount) {
+
+                $('#ul_shoppingCar').append(
                     '<li id="div_TotalCar" class="list-group-item d-flex justify-content-between">' +
                     '<span>Total (USD)</span>' +
-                    '<strong id="strong_totalPriceCar">$' + Data['shopingCarTotalPrice'] + '</strong>' +
+                    '<strong id="strong_totalPriceCar">$' + amount + '</strong>' +
                     '</li>'
                 )
             }
 
-            function chopingCarView(button) {
-                console.log('ShopingCar Button View:' + button.id);
+            function shoppingCarView(button) {
+                console.log('ShoppingCar Button View:' + button.id);
             }
 
-            function chopingCarEdit(button) {
-                console.log('ShopingCar Button Edit:' + button.id);
+            function shoppingCarEdit(button) {
+                console.log('ShoppingCar Button Edit:' + button.id);
             }
-
-            function chopingCarDelete(button) {
-                console.log('ShopingCar Button Delete:' + button.id);
-            }
-
 
             function LikeItscroll() {
                 document.getElementById("checkout").scrollIntoView({
