@@ -916,25 +916,25 @@ $matComponents = matComponent::where('enable', 1)->get();
                                         <div class="card-body">
                                             <div class="container1">
                                                 <block style="text-align: center;">
-                                                    <img class="fondo" id="img_Fondo"
+                                                    <img class="fondo"
                                                          src="{{asset('assets/img/customMat/fondo1.png')}}"
                                                          alt=""/>
-                                                    <img class="playmatPreview" id="img_Marco"
+                                                    <img class="playmatPreview"
                                                          src="{{asset('assets/img/customMat/marco1.png')}}"
                                                          alt=""/>
-                                                    <img class="playmatPreview" id="img_Centro"
+                                                    <img class="playmatPreview"
                                                          src="{{asset('assets/img/customMat/centro1.png')}}"
                                                          alt=""/>
 
-                                                    <div id="divText_top-left" class="top-left epFont"
+                                                    <div class="top-left epFont"
                                                          style="display: block"></div>
-                                                    <div id="divText_top-right" class="top-right epFont"
+                                                    <div class="top-right epFont"
                                                          style="display: none"></div>
-                                                    <div id="divText_bottom-left" class="bottom-left epFont"
+                                                    <div class="bottom-left epFont"
                                                          style="display: none"></div>
-                                                    <div id="divText_bottom-right" class="bottom-right epFont"
+                                                    <div class="bottom-right epFont"
                                                          style="display: none"></div>
-                                                    <div id="divText_centered" class="centered epFont"
+                                                    <div class="centered epFont"
                                                          style="display: none"></div>
                                                 </block>
                                             </div>
@@ -948,8 +948,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                             <div class="col-md-5 ">
                                 <form>
 
-                                    <label for="select_Fondo">Fondo</label>
-                                    <select id="select_Fondo" class="custom-select d-block w-100"
+                                    <label>Fondo</label>
+                                    <select class="custom-select d-block w-100"
                                             onchange="sl_OnChange(this)"
                                             name="selectFondo">
                                         <?php
@@ -961,7 +961,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                                     <br>
 
                                     <label for="select_Marco">Marco</label>
-                                    <select id="select_Marco" class="custom-select d-block w-100"
+                                    <select class="custom-select d-block w-100"
                                             onchange="sl_OnChange(this)"
                                             name="selectMarco">
                                         <?php
@@ -974,12 +974,12 @@ $matComponents = matComponent::where('enable', 1)->get();
                                     <br>
 
                                     <label for="select_Centro">Centro</label>
-                                    <select id="select_Centro" class="custom-select d-block w-100"
+                                    <select class="custom-select d-block w-100"
                                             onchange="sl_OnChange(this)"
                                             name="selectCentro">
                                         <?php
                                         foreach ($matComponents->where('type', 'L') as $Component) {
-                                            echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
+                                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
                                         }
                                         ?>
                                         <option value="SC">SC</option>
@@ -987,40 +987,38 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                                     <div class="d-block my-3">
                                         <label for="matText">Mat_Text</label>
-                                        <input id="matText" onkeyup="customTextLabel()" type="text" class="form-control"
+                                        <input onkeyup="customTextLabel()" type="text" class="form-control"
                                                placeholder=""
                                                maxlength="25">
                                     </div>
 
-                                    <div id="TextLabelRadiobutton" style="display: none">
+                                    <div style="display: none">
                                         <div class="d-block my-3">
 
                                             <div class="form-check">
-                                                <input id="rb_top-left" onchange="rbCustomTextPosition_Onchange(this)"
+                                                <input onchange="rbCustomTextPosition_Onchange(this)"
                                                        class="form-check-input" type="radio" name="textPosition"
                                                        checked>
                                                 <label class="form-check-label" for="rb_top-left">TopLeft</label>
                                             </div>
                                             <div class="form-check">
-                                                <input id="rb_top-right" onchange="rbCustomTextPosition_Onchange(this)"
+                                                <input onchange="rbCustomTextPosition_Onchange(this)"
                                                        class="form-check-input" type="radio" name="textPosition">
                                                 <label class="form-check-label" for="rb_top-right">TopRight</label>
                                             </div>
                                             <div class="form-check">
-                                                <input id="rb_bottom-left"
-                                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                                <input onchange="rbCustomTextPosition_Onchange(this)"
                                                        class="form-check-input" type="radio" name="textPosition">
                                                 <label class="form-check-label" for="rb_bottom-left">BottomLeft</label>
                                             </div>
                                             <div class="form-check">
-                                                <input id="rb_bottom-right"
-                                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                                <input onchange="rbCustomTextPosition_Onchange(this)"
                                                        class="form-check-input" type="radio" name="textPosition">
                                                 <label class="form-check-label"
                                                        for="rb_bottom-right">BottomRight</label>
                                             </div>
                                             <div class="form-check">
-                                                <input id="rb_centered" onchange="rbCustomTextPosition_Onchange(this)"
+                                                <input onchange="rbCustomTextPosition_Onchange(this)"
                                                        class="form-check-input" type="radio" name="textPosition">
                                                 <label class="form-check-label" for="rb_centered">Center</label>
                                             </div>
