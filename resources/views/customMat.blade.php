@@ -885,6 +885,166 @@ $matComponents = matComponent::where('enable', 1)->get();
         </div>
         <!-- End Modal Preview -->
 
+
+        <!-- Button trigger modal -->
+
+
+
+
+        <!-- Modal MODIFY -->
+        <div class="modal fade" id="ModalModify" data-backdrop="static" data-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modify</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="row featurette">
+
+                            <div class="col-md-7">
+                                <div class="col">
+                                    <div class="card mb-4 shadow-sm">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <h4 class="my-0 fw-normal">Preview</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="container1">
+                                                <block style="text-align: center;">
+                                                    <img class="fondo" id="img_Fondo"
+                                                         src="{{asset('assets/img/customMat/fondo1.png')}}"
+                                                         alt=""/>
+                                                    <img class="playmatPreview" id="img_Marco"
+                                                         src="{{asset('assets/img/customMat/marco1.png')}}"
+                                                         alt=""/>
+                                                    <img class="playmatPreview" id="img_Centro"
+                                                         src="{{asset('assets/img/customMat/centro1.png')}}"
+                                                         alt=""/>
+
+                                                    <div id="divText_top-left" class="top-left epFont"
+                                                         style="display: block"></div>
+                                                    <div id="divText_top-right" class="top-right epFont"
+                                                         style="display: none"></div>
+                                                    <div id="divText_bottom-left" class="bottom-left epFont"
+                                                         style="display: none"></div>
+                                                    <div id="divText_bottom-right" class="bottom-right epFont"
+                                                         style="display: none"></div>
+                                                    <div id="divText_centered" class="centered epFont"
+                                                         style="display: none"></div>
+                                                </block>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-5 ">
+                                <form>
+
+                                    <label for="select_Fondo">Fondo</label>
+                                    <select id="select_Fondo" class="custom-select d-block w-100"
+                                            onchange="sl_OnChange(this)"
+                                            name="selectFondo">
+                                        <?php
+                                        foreach ($matComponents->where('type', 'C') as $Component) {
+                                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                    <br>
+
+                                    <label for="select_Marco">Marco</label>
+                                    <select id="select_Marco" class="custom-select d-block w-100"
+                                            onchange="sl_OnChange(this)"
+                                            name="selectMarco">
+                                        <?php
+                                        foreach ($matComponents->where('type', 'F') as $Component) {
+                                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
+                                        }
+                                        ?>
+                                        <option value="SM">SM</option>
+                                    </select>
+                                    <br>
+
+                                    <label for="select_Centro">Centro</label>
+                                    <select id="select_Centro" class="custom-select d-block w-100"
+                                            onchange="sl_OnChange(this)"
+                                            name="selectCentro">
+                                        <?php
+                                        foreach ($matComponents->where('type', 'L') as $Component) {
+                                            echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
+                                        }
+                                        ?>
+                                        <option value="SC">SC</option>
+                                    </select>
+
+                                    <div class="d-block my-3">
+                                        <label for="matText">Mat_Text</label>
+                                        <input id="matText" onkeyup="customTextLabel()" type="text" class="form-control"
+                                               placeholder=""
+                                               maxlength="25">
+                                    </div>
+
+                                    <div id="TextLabelRadiobutton" style="display: none">
+                                        <div class="d-block my-3">
+
+                                            <div class="form-check">
+                                                <input id="rb_top-left" onchange="rbCustomTextPosition_Onchange(this)"
+                                                       class="form-check-input" type="radio" name="textPosition"
+                                                       checked>
+                                                <label class="form-check-label" for="rb_top-left">TopLeft</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input id="rb_top-right" onchange="rbCustomTextPosition_Onchange(this)"
+                                                       class="form-check-input" type="radio" name="textPosition">
+                                                <label class="form-check-label" for="rb_top-right">TopRight</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input id="rb_bottom-left"
+                                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                                       class="form-check-input" type="radio" name="textPosition">
+                                                <label class="form-check-label" for="rb_bottom-left">BottomLeft</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input id="rb_bottom-right"
+                                                       onchange="rbCustomTextPosition_Onchange(this)"
+                                                       class="form-check-input" type="radio" name="textPosition">
+                                                <label class="form-check-label"
+                                                       for="rb_bottom-right">BottomRight</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input id="rb_centered" onchange="rbCustomTextPosition_Onchange(this)"
+                                                       class="form-check-input" type="radio" name="textPosition">
+                                                <label class="form-check-label" for="rb_centered">Center</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END Modal MODIFY-->
+
+
         </body>
 
         <footer class="my-5 pt-5 text-muted text-center text-small">
