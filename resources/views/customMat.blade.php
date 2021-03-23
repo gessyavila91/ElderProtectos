@@ -1179,7 +1179,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                         "Content-type": "application/json",
                         credentials: 'include'
                     },
-                    body: JSON.stringify(ProductCode)
+                    body: JSON.stringify(product)
                 }).then(function (response) {
                     return response.text();
                 }).then(function (payload) {
