@@ -161,8 +161,6 @@ class ProductController extends Controller {
 
         if (isset($_COOKIE['shoppingCar'])) {
 
-            var_dump($_COOKIE['shoppingCar']);
-
             $shoppingCar = json_decode($_COOKIE['shoppingCar'], true);
             foreach ($shoppingCar as $k => $Product) {
                 if ($Product['id'] === $request->id) {

@@ -885,12 +885,6 @@ $matComponents = matComponent::where('enable', 1)->get();
         </div>
         <!-- End Modal Preview -->
 
-
-        <!-- Button trigger modal -->
-
-
-
-
         <!-- Modal MODIFY -->
         <div class="modal fade" id="ModalModify" data-backdrop="static" data-keyboard="false" tabindex="-1"
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -1029,8 +1023,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                                 </form>
                             </div>
                         </div>
-
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
