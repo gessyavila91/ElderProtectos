@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Elder Protector'),
+    'name' => env('APP_NAME', 'Elder Protectors'),
 
     /*
     |--------------------------------------------------------------------------
