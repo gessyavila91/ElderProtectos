@@ -5,20 +5,25 @@
 
 <head>
 
-    <title>{{ config('app.name') }} - LP</title>
+    <title>{{ config('app.name') }}</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="{{asset('assets/css/animate.min.css')  }}" type="text/css"/>
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" type="text/css"/>
-
     <script src="{{asset('assets/js/particle/vector2.js')}}"></script>
     <script src="{{asset('assets/js/particle/perlin.js')}}"></script>
     <script src="{{asset('assets/js/particle/script.js')}}"></script>
-
     <script src="{{asset('assets/js/landing.js')}}"></script>
 
 </head>
 
 <body>
+
+<div class="loader-center" id="onload">
+    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
 
     <div >
         <div class="intro">
@@ -72,4 +77,15 @@
     </a>
 </footer>
 
+
+<script>
+    $(window).ready(function() {
+
+        $('#onload').fadeOut();
+
+    });
+</script>
+
 </html>
+
+
