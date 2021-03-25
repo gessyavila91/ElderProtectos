@@ -154,12 +154,6 @@ class ProductController extends Controller {
 
             $cookiePromoCode = $this->OvenCookePromoCode($request);
 
-            /*TODO Validar Condicion del CodigoPromo*/
-            /*TODO validar que si tengas carrito*/
-            if (isset($data['promoCode']['condition'])) {
-
-            }
-            /*TODO Mismo Codigo 1 Usar getShoppingCarFromCookie()*/
             if (isset($_COOKIE['shoppingCar'])) {
                 $data['shoppingCar'] = (array)json_decode($_COOKIE['shoppingCar']);
                 $data['shoppingCarCountItems'] = count($data['shoppingCar']);
@@ -167,11 +161,21 @@ class ProductController extends Controller {
 
                 foreach ($data['shoppingCar'] as $ProductObj) {
                     $products = (array)$ProductObj;
-                    /*calcular PromoCode*/
                     $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] + $products['price'];
                 }
-            }
+                /*CalculatePromoCode*/
+                if (isset($data['shoppingCarTotalPrice'])) {
 
+                    switch ($data['promoCode']['type']) {
+                        case '$':
+                            $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] - $data['promoCode']['value'];
+                            break;
+                        case  '%':
+                            $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] - ($data['promoCode']['value'] * 0.01) * $data['shoppingCarTotalPrice'];
+                            break;
+                    }
+                }
+            }
 
             $this->response['data'] = $data;
             $this->response['msg'] = 'Promo Code Valid';
