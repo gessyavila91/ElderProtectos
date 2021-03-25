@@ -90,7 +90,7 @@ class ProductController extends Controller {
 
     public function addProduct (Request $request) {
         $promoCodeC = new PromoCodeController();
-
+        /*fixme no funciona si lo mandas sin mensaje custom*/
         if ($this->ValidCode($request->matCode)) {
 
             /*descomentar*/
@@ -183,6 +183,34 @@ class ProductController extends Controller {
         } else {
             return response()->json($this->response);
         }
+    }
+
+    public function preview (Request $request) {
+
+        if (isset($_COOKIE['shoppingCar']) && isset($request->id)) {
+            $shoppingCar = json_decode($_COOKIE['shoppingCar'], true);
+
+            foreach ($shoppingCar as $k => $Product) {
+                if ($Product['id'] === $request->id) {
+                    $separeCode = explode("-", $Product['matCode']);
+
+                    $data['matCode'] = $Product['matCode'];
+
+                    $data['matComponnentBackground'] = $this->ExistComponent(substr($separeCode[1], 1, strlen($separeCode[1]) - 1), 'B');
+                    $data['matComponnentFrame'] = $this->ExistComponent(substr($separeCode[2], 1, strlen($separeCode[2]) - 1), 'F');
+                    $data['matComponnentLogo'] = $this->ExistComponent(substr($separeCode[3], 1, strlen($separeCode[3]) - 1), 'L');
+                }
+            }
+
+            $this->response['data'] = $data;
+            $this->response['msg'] = 'Mat Code Fetched';
+            $this->response['result'] = true;
+
+            return response()->json($this->response);
+        }
+        $this->response['msg'] = 'No Fetch this Product';
+
+        return response()->json($this->response);
     }
 
     public function removeProductFromshoppingCar (Request $request) {

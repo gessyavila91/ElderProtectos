@@ -847,13 +847,13 @@ $matComponents = matComponent::where('enable', 1)->get();
                         <div class="card-body">
                             <div class="container1">
                                 <block style="text-align: center;">
-                                    <img class="background" id="img_Background"
+                                    <img class="background" id="img_Background_preview"
                                          src="{{asset('assets/img/customMat/fondo1.png')}}"
                                          alt=""/>
-                                    <img class="playmatPreview" id="img_Frame"
+                                    <img class="playmatPreview" id="img_Frame_preview"
                                          src="{{asset('assets/img/customMat/marco1.png')}}"
                                          alt=""/>
-                                    <img class="playmatPreview" id="img_Logo"
+                                    <img class="playmatPreview" id="img_Logo_preview"
                                          src="{{asset('assets/img/customMat/centro1.png')}}"
                                          alt=""/>
 
@@ -870,7 +870,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                                     <h6>
                                         <span class="badge badge-primary">Code:</span>
-                                        <a id="code">M-CXXX-FXXX-LXXX</a>
+                                        <a id="code_preview">M-CXXX-FXXX-LXXX</a>
                                     </h6>
                                 </block>
                             </div>
@@ -1077,7 +1077,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                 }).then(function (response) {
                     return response.text();
                 }).then(function (payload) {
-                    console.log("API response", payload);
+                    //console.log("API response", payload);
                     var obj = JSON.parse(payload);
 
                     if (obj['result']) {
@@ -1311,7 +1311,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                 }
 
                 codeModify();
-
             }
 
             function sl_OnChange(slComponent) {
@@ -1457,7 +1456,57 @@ $matComponents = matComponent::where('enable', 1)->get();
             }
 
             function shoppingCarView(button) {
-                console.log('ShoppingCar Button View:' + button.id);
+                //console.log('ShoppingCar Button View:' + button.id);
+                let product = {
+                    id: button.id.replace('btn_product_View', '')
+                };
+
+                fetch('http://127.0.0.1:8000/api/product/preview', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
+                        credentials: 'include'
+                    },
+                    body: JSON.stringify(product)
+                }).then(function (response) {
+                    return response.text();
+                }).then(function (payload) {
+
+                    //console.log("API response", payload);
+                    var obj = JSON.parse(payload);
+
+                    if (obj.result) {
+
+                        setPreview(obj);
+
+                    } else {
+                        Swal.fire({
+                            title: 'Whoops!!',
+                            text: 'Codigo de Producto no Valido: ' + obj.msg,
+                            icon: 'error',
+                            confirmButtonText: 'oh no'
+                        })
+                    }
+                }).catch(function (err) {
+                    Swal.fire({
+                        title: 'Whoops!!',
+                        text: err,
+                        icon: 'error'
+                    })
+                });
+
+            }
+
+            function setPreview(obj) {
+
+                document.getElementById('img_Background_preview').src = obj['data']['matComponnentBackground']['fileName'];
+                document.getElementById('img_Frame_preview').src = obj['data']['matComponnentFrame']['fileName'];
+                ;
+                document.getElementById('img_Logo_preview').src = obj['data']['matComponnentLogo']['fileName'];
+                ;
+                //code_preview
+                document.getElementById('code_preview').innerText = obj['data']['matCode'];
+
             }
 
             function shoppingCarEdit(button) {

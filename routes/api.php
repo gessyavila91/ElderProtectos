@@ -18,11 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::post('/product/fetch',
     [\App\Http\Controllers\ProductController::class, 'fetchProduct']
 );
-
 Route::post('/product/addProduct',
     [\App\Http\Controllers\ProductController::class, 'addProduct']
 );
@@ -34,4 +32,7 @@ Route::post('/product/removeProduct',
 );
 Route::get('/product/initShoppingCar',
     [\App\Http\Controllers\ProductController::class, 'initShoppingCar']
+);
+Route::post('/product/preview',
+    [\App\Http\Controllers\ProductController::class, 'preview']
 );

@@ -110,6 +110,36 @@ class ProductTest extends TestCase {
         $response->dump();
     }
 
+    public function test_shoppingApiAddProductToCar2 () {
+
+        $producArray = [
+            'matCode' => 'M-BBRW-FCLT-LCHDRG',
+            'quantity' => 1,
+        ];
+
+        $response = $this->postJson('/api/product/addProduct', $producArray);
+
+        $response->assertStatus(200)->assertJson([
+            'data' => [
+                'shoppingCar' => [[
+                    'id' => true,
+                    'matCode' => 'M-BBRW-FCLT-LCHDRG',
+                    'quantity' => 1,
+                    'price' => 70.00,
+                    'customMessage' => null
+                ]],
+                'shoppingCarCountItems' => 1,
+                'shoppingCarTotalPrice' => true
+            ],
+            'result' => true,
+            'msg' => 'Mat Code Fine'
+        ]);
+
+        $response->assertCookie('shoppingCar');
+        $response->assertCookieNotExpired('shoppingCar');
+        $response->dump();
+    }
+
     public function test_shoppingApiAddPromoCode () {
 
         $producArray = [
