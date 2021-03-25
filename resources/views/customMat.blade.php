@@ -1081,18 +1081,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                     var obj = JSON.parse(payload);
 
                     if (obj['result']) {
-                        if ('shoppingCar' in obj['data']) {
-                            setShoppingCarItems(obj['data']['shoppingCar']);
-                        }
-                        if ('promoCode' in obj['data']) {
-                            setPromoCode(obj['data']['promoCode']);
-                        }
-                        if ('shoppingCarTotalPrice' in obj['data']) {
-                            setShoppingCarTotal(obj['data']['shoppingCarTotalPrice']);
-                        }
-                        if ('shoppingCarCountItems' in obj['data']) {
-                            document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shoppingCarCountItems'];
-                        }
+                        modShoppingCar(obj);
                     }
                 }).catch(function (err) {
                     Swal.fire({
@@ -1178,18 +1167,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                     var obj = JSON.parse(payload);
 
                     if (obj['result']) {
-                        if ('shoppingCar' in obj['data']) {
-                            setShoppingCarItems(obj['data']['shoppingCar']);
-                        }
-                        if ('promoCode' in obj['data']) {
-                            setPromoCode(obj['data']['promoCode']);
-                        }
-                        if ('shoppingCarTotalPrice' in obj['data']) {
-                            setShoppingCarTotal(obj['data']['shoppingCarTotalPrice']);
-                        }
-                        if ('shoppingCarCountItems' in obj['data']) {
-                            document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shoppingCarCountItems'];
-                        }
+                        modShoppingCar(obj);
                     }
                 }).catch(function (err) {
                     Swal.fire({
@@ -1199,6 +1177,22 @@ $matComponents = matComponent::where('enable', 1)->get();
                     })
                 });
                 return true;
+            }
+
+            function modShoppingCar(obj) {
+                $('#ul_shoppingCar').empty();
+                if ('shoppingCar' in obj['data']) {
+                    setShoppingCarItems(obj['data']['shoppingCar']);
+                }
+                if ('promoCode' in obj['data']) {
+                    setPromoCode(obj['data']['promoCode']);
+                }
+                if ('shoppingCarTotalPrice' in obj['data']) {
+                    setShoppingCarTotal(obj['data']['shoppingCarTotalPrice']);
+                }
+                if ('shoppingCarCountItems' in obj['data']) {
+                    document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shoppingCarCountItems'];
+                }
             }
 
             function shoppingCarDelete(button) {
@@ -1222,18 +1216,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                     var obj = JSON.parse(payload);
 
                     if (obj['result']) {
-                        if ('shoppingCar' in obj['data']) {
-                            setShoppingCarItems(obj['data']['shoppingCar']);
-                        }
-                        if ('promoCode' in obj['data']) {
-                            setPromoCode(obj['data']['promoCode']);
-                        }
-                        if ('shoppingCarTotalPrice' in obj['data']) {
-                            setShoppingCarTotal(obj['data']['shoppingCarTotalPrice']);
-                        }
-                        if ('shoppingCarCountItems' in obj['data']) {
-                            document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shoppingCarCountItems'];
-                        }
+                        modShoppingCar(obj);
                     }
                 }).catch(function (err) {
                     Swal.fire({
@@ -1267,18 +1250,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                     var obj = JSON.parse(payload);
 
                     if (obj['result']) {
-                        if ('shoppingCar' in obj['data']) {
-                            setShoppingCarItems(obj['data']['shoppingCar']);
-                        }
-                        if ('promoCode' in obj['data']) {
-                            setPromoCode(obj['data']['promoCode']);
-                        }
-                        if ('shoppingCarTotalPrice' in obj['data']) {
-                            setShoppingCarTotal(obj['data']['shoppingCarTotalPrice']);
-                        }
-                        if ('shoppingCarCountItems' in obj['data']) {
-                            document.getElementById('span_itemsCarChopCount').textContent = obj['data']['shoppingCarCountItems'];
-                        }
+                        modShoppingCar(obj);
                     }
                 }).catch(function (err) {
                     Swal.fire({
@@ -1449,7 +1421,6 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             function setShoppingCarItems(ShopigCar) {
 
-                $('#ul_shoppingCar').empty();
                 if (ShopigCar.length > 0) {
                     ShopigCar.forEach(product => (
                         $('#ul_shoppingCar').append(
