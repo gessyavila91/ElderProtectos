@@ -119,7 +119,8 @@ class ProductTest extends TestCase {
 
         $response = $this->postJson('/api/product/addProduct', $producArray);
 
-        $response->assertStatus(200)->assertJson([
+        $response->assertStatus(200);
+        $response->assertJson([
             'data' => [
                 'shoppingCar' => [[
                     'id' => true,
@@ -135,8 +136,8 @@ class ProductTest extends TestCase {
             'msg' => 'Mat Code Fine'
         ]);
 
-        $response->assertCookie('shoppingCar');
-        $response->assertCookieNotExpired('shoppingCar');
+        /*$response->assertCookie('shoppingCar');
+        $response->assertCookieNotExpired('shoppingCar');*/
         $response->dump();
     }
 

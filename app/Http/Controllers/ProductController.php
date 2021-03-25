@@ -312,13 +312,17 @@ class ProductController extends Controller {
     public function getCustomMessageFromRequest ($matCode) {
         $separeCode = explode("-", $matCode);
 
-        $matCodeLen =
-            strlen($separeCode[0]) +
-            strlen($separeCode[1]) +
-            strlen($separeCode[2]) +
-            strlen($separeCode[3]) + 4;
+        if (count($separeCode) > 4) {
+            $matCodeLen =
+                strlen($separeCode[0]) +
+                strlen($separeCode[1]) +
+                strlen($separeCode[2]) +
+                strlen($separeCode[3]) + 4;
 
-        return substr($matCode, $matCodeLen + strlen($separeCode[4]) + 1, strlen($matCode));
+            return substr($matCode, $matCodeLen + strlen($separeCode[4]) + 1, strlen($matCode));
+        }
+        return '';
+
     }
 
     public function shoppingCarGet (Request $request, $oldCookie = null) {
@@ -328,7 +332,7 @@ class ProductController extends Controller {
             'matCode' => $request->matCode,
             'quantity' => 1, /*$request->quantity*/
             'price' => 70.00, /*TODO create a config 4 standar Price*/
-            'customMessage' => $this->getCustomMessageFromRequest($request->matCode) /*$request->quantity*/
+            'customMessage' => $this->getCustomMessageFromRequest($request->matCode)
         ];
         $carCookie = array();
 
@@ -362,10 +366,7 @@ class ProductController extends Controller {
             }
             return cookie('shoppingCar', json_encode($carCookie, JSON_FORCE_OBJECT));
         }
-
         return cookie('shoppingCar', json_encode($oldCookie, JSON_FORCE_OBJECT));
-
-
     }
 
     public function OvenCookePromoCode (Request $request) {
