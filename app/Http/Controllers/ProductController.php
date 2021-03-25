@@ -33,7 +33,21 @@ class ProductController extends Controller {
         }
 
         if (isset($_COOKIE['promoCode'])) {
+            /*CalculatePromoCode*/
             $data['promoCode'] = (array)json_decode($_COOKIE['promoCode']);
+
+            if (isset($data['shoppingCarTotalPrice'])) {
+
+                switch ($data['promoCode']['type']) {
+                    case '$':
+                        $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] - $data['promoCode']['value'];
+                        break;
+                    case  '%':
+                        $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] - ($data['promoCode']['value'] * 0.01) * $data['shoppingCarTotalPrice'];
+                        break;
+                }
+
+            }
         }
 
         if (isset($data)) {
@@ -93,11 +107,26 @@ class ProductController extends Controller {
 
             foreach ($data['shoppingCar'] as $ProductObj) {
                 $products = (array)$ProductObj;
+                /*calcular PromoCode*/
                 $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] + $products['price'];
             }
 
             if (isset($_COOKIE['promoCode'])) {
+                /*CalculatePromoCode*/
                 $data['promoCode'] = (array)json_decode($_COOKIE['promoCode']);
+
+                if (isset($data['shoppingCarTotalPrice'])) {
+
+                    switch ($data['promoCode']['type']) {
+                        case '$':
+                            $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] - $data['promoCode']['value'];
+                            break;
+                        case  '%':
+                            $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] - ($data['promoCode']['value'] * 0.01) * $data['shoppingCarTotalPrice'];
+                            break;
+                    }
+
+                }
             }
 
             $this->response['data'] = $data;
@@ -138,6 +167,7 @@ class ProductController extends Controller {
 
                 foreach ($data['shoppingCar'] as $ProductObj) {
                     $products = (array)$ProductObj;
+                    /*calcular PromoCode*/
                     $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] + $products['price'];
                 }
             }
@@ -175,13 +205,28 @@ class ProductController extends Controller {
             $data['shoppingCarTotalPrice'] = 0;
             foreach ($data['shoppingCar'] as $ProductObj) {
                 $products = (array)$ProductObj;
+                /*calcular PromoCode*/
                 $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] + $products['price'];
             }
 
             $cookie = $this->OvenCookeShoppingCar(null, $data['shoppingCar']);
 
             if (isset($_COOKIE['promoCode'])) {
-                $data['promoCode'] = json_decode($_COOKIE['promoCode'], true);
+                /*CalculatePromoCode*/
+                $data['promoCode'] = (array)json_decode($_COOKIE['promoCode']);
+
+                if (isset($data['shoppingCarTotalPrice'])) {
+
+                    switch ($data['promoCode']['type']) {
+                        case '$':
+                            $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] - $data['promoCode']['value'];
+                            break;
+                        case  '%':
+                            $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] - ($data['promoCode']['value'] * 0.01) * $data['shoppingCarTotalPrice'];
+                            break;
+                    }
+
+                }
             }
 
             $this->response['data'] = $data;
@@ -307,6 +352,7 @@ class ProductController extends Controller {
 
     /*NewMethods*/
     public function getShoppingCarFromCookie ($_CookieShoppingCar) {
+        /*para remplazar codigo duplicado*/
         if (isset($_CookieShoppingCar)) {
             $data['shoppingCar'] = $_CookieShoppingCar;
             $data['shoppingCarCountItems'] = count($data['shoppingCar']);

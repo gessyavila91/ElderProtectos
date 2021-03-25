@@ -1077,7 +1077,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                 }).then(function (response) {
                     return response.text();
                 }).then(function (payload) {
-                    //console.log("API response", payload);
+                    console.log("API response", payload);
                     var obj = JSON.parse(payload);
 
                     if (obj['result']) {
@@ -1407,6 +1407,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             function setPromoCode(PromoCode) {
 
+                //console.log(PromoCode);
                 $('#li_promoCode').remove();
                 $('#ul_shoppingCar').append(
                     '<li id="li_promoCode" class="list-group-item d-flex justify-content-between bg-light">' +
@@ -1414,7 +1415,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                     '<h6 class="my-0">Promo code</h6>' +
                     '<small>' + PromoCode['code'] + '</small>' +
                     '</div>' +
-                    '<span class="text-success">-' + PromoCode['value'] + '</span>' +
+                    '<span class="text-success">-' + PromoCode['type'] + PromoCode['value'] + '</span>' +
                     '</li>'
                 );
             }

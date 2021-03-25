@@ -12,6 +12,7 @@ class CreatePromoCodesTable extends Migration {
             $table->string('code', 25)->unique();
             $table->string('description', 255)->nullable();
             $table->boolean('enable')->default(1);
+            $table->string('type', 2)->default('$');
             $table->string('value', 100);
             $table->date('endDate')->nullable();
             $table->string('condition', 100)->nullable();
