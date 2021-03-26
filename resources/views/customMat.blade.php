@@ -418,7 +418,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                 <div class="d-block my-3">
                     <label for="matText">Mat Custom Text</label>
-                    <input id="matText" onkeyup="customTextLabel()" type="text" class="form-control" placeholder=""
+                    <input id="matText" onkeyup="customTextLabel(this)" type="text" class="form-control" placeholder=""
                            maxlength="25">
                 </div>
 
@@ -834,11 +834,11 @@ $matComponents = matComponent::where('enable', 1)->get();
         <!-- END Modal Share -->
 
         <!-- Modal Preview -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="ModalPreview" tabindex="-1" aria-labelledby="ModalPreviewLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
+                        <h5 class="modal-title" id="ModalPreview">Preview</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -897,10 +897,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                         </button>
                     </div>
                     <div class="modal-body">
-
-
                         <div class="row featurette">
-
+                            {{--Preview Mat --}}
                             <div class="col-md-7">
                                 <div class="col">
                                     <div class="card mb-4 shadow-sm">
@@ -910,117 +908,139 @@ $matComponents = matComponent::where('enable', 1)->get();
                                         <div class="card-body">
                                             <div class="container1">
                                                 <block style="text-align: center;">
-                                                    <img class="fondo"
-                                                         src="{{asset('assets/img/customMat/fondo1.png')}}"
-                                                         alt=""/>
-                                                    <img class="playmatPreview"
-                                                         src="{{asset('assets/img/customMat/marco1.png')}}"
-                                                         alt=""/>
-                                                    <img class="playmatPreview"
-                                                         src="{{asset('assets/img/customMat/centro1.png')}}"
-                                                         alt=""/>
+                                                    <img id="img_Edit_Background" class="fondo"
+                                                         src="{{asset('assets/img/customMat/fondo1.png')}}" alt=""/>
+                                                    <img id="img_Edit_Frame" class="playmatPreview"
+                                                         src="{{asset('assets/img/customMat/marco1.png')}}" alt=""/>
+                                                    <img id="img_Edit_Logo" class="playmatPreview"
+                                                         src="{{asset('assets/img/customMat/centro1.png')}}" alt=""/>
 
-                                                    <div class="top-left epFont"
+                                                    {{--Custom Text Edit--}}
+                                                    <div id="divText_Edit_top-left" class="top-left epFont"
                                                          style="display: block"></div>
-                                                    <div class="top-right epFont"
+                                                    <div id="divText_Edit_top-right" class="top-right epFont"
                                                          style="display: none"></div>
-                                                    <div class="bottom-left epFont"
+                                                    <div id="divText_Edit_bottom-left" class="bottom-left epFont"
                                                          style="display: none"></div>
-                                                    <div class="bottom-right epFont"
+                                                    <div id="divText_Edit_bottom-right" class="bottom-right epFont"
                                                          style="display: none"></div>
-                                                    <div class="centered epFont"
+                                                    <div id="divText_Edit_centered" class="centered epFont"
                                                          style="display: none"></div>
+                                                    {{--Custom Text Edit End--}}
                                                 </block>
+                                            </div>
+                                            <div class="input-group">
+                                                {{--Code MatFinder/FasCreate--}}
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Code</span>
+                                                </div>
+                                                <input id="in_Edit_matCode" class="form-control" type="text"
+                                                       placeholder="M-CXXX-FXXX-LXXX" required>
+                                                <div class="input-group-append">
+                                                    <button onclick="matCodeFetch()" id="btn_Edit_matCodeCheck"
+                                                            type="button"
+                                                            class="btn btn-outline-primary">
+                                                        <i class="fas fa-search"></i></button>
+                                                </div>
+                                                {{--Code MatFinder/FasCreate--}}
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                            {{--Preview Mat End--}}
 
                             <div class="col-md-5 ">
-                                <form>
 
-                                    <label>Fondo</label>
-                                    <select class="custom-select d-block w-100"
-                                            onchange="sl_OnChange(this)"
-                                            name="selectFondo">
-                                        <?php
-                                        foreach ($matComponents->where('type', 'C') as $Component) {
-                                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                    <br>
+                                {{--EditSelectore End--}}
+                                <label for="select_Edit_Background">Fondo</label>
+                                <select id="select_Edit_Background" class="custom-select d-block w-100"
+                                        onchange="sl_OnChange(this)"
+                                        name="selectFondo">
+                                    <?php
+                                    foreach ($matComponents->where('type', 'B') as $Component) {
+                                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                                <br>
 
-                                    <label for="select_Marco">Marco</label>
-                                    <select class="custom-select d-block w-100"
-                                            onchange="sl_OnChange(this)"
-                                            name="selectMarco">
-                                        <?php
-                                        foreach ($matComponents->where('type', 'F') as $Component) {
-                                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->code)) . '</option>';
-                                        }
-                                        ?>
-                                        <option value="SM">SM</option>
-                                    </select>
-                                    <br>
+                                <label for="select_Edit_Frame">Marco</label>
+                                <select id="select_Edit_Frame" class="custom-select d-block w-100"
+                                        onchange="sl_OnChange(this)"
+                                        name="selectMarco">
+                                    <?php
+                                    foreach ($matComponents->where('type', 'F') as $Component) {
+                                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
+                                    }
+                                    ?>
+                                    <option value="SM">SM</option>
+                                </select>
+                                <br>
 
-                                    <label for="select_Centro">Centro</label>
-                                    <select class="custom-select d-block w-100"
-                                            onchange="sl_OnChange(this)"
-                                            name="selectCentro">
-                                        <?php
-                                        foreach ($matComponents->where('type', 'L') as $Component) {
-                                            echo '<option value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
-                                        }
-                                        ?>
-                                        <option value="SC">SC</option>
-                                    </select>
+                                <label for="select_Edit_Logo">Centro</label>
+                                <select id="select_Edit_Logo" class="custom-select d-block w-100"
+                                        onchange="sl_OnChange(this)"
+                                        name="selectCentro">
+                                    <?php
+                                    foreach ($matComponents->where('type', 'L') as $Component) {
+                                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
+                                    }
+                                    ?>
+                                    <option value="SC">SC</option>
+                                </select>
 
+                                <div class="d-block my-3">
+                                    <label for="matEditText">Mat Custom Text</label>
+                                    <input id="matEditText" onkeyup="customTextLabel(this)" type="text"
+                                           class="form-control"
+                                           placeholder=""
+                                           maxlength="25">
+                                </div>
+
+                                <div id="CustomTextRadioButtonsEdit"
+                                     style="display: none"
+                                >
                                     <div class="d-block my-3">
-                                        <label for="matText">Mat_Text</label>
-                                        <input onkeyup="customTextLabel()" type="text" class="form-control"
-                                               placeholder=""
-                                               maxlength="25">
-                                    </div>
 
-                                    <div style="display: none">
-                                        <div class="d-block my-3">
-
-                                            <div class="form-check">
-                                                <input onchange="rbCustomTextPosition_Onchange(this)"
-                                                       class="form-check-input" type="radio" name="textPosition"
-                                                       checked>
-                                                <label class="form-check-label" for="rb_top-left">TopLeft</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input onchange="rbCustomTextPosition_Onchange(this)"
-                                                       class="form-check-input" type="radio" name="textPosition">
-                                                <label class="form-check-label" for="rb_top-right">TopRight</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input onchange="rbCustomTextPosition_Onchange(this)"
-                                                       class="form-check-input" type="radio" name="textPosition">
-                                                <label class="form-check-label" for="rb_bottom-left">BottomLeft</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input onchange="rbCustomTextPosition_Onchange(this)"
-                                                       class="form-check-input" type="radio" name="textPosition">
-                                                <label class="form-check-label"
-                                                       for="rb_bottom-right">BottomRight</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input onchange="rbCustomTextPosition_Onchange(this)"
-                                                       class="form-check-input" type="radio" name="textPosition">
-                                                <label class="form-check-label" for="rb_centered">Center</label>
-                                            </div>
-
+                                        <div class="form-check">
+                                            <input id="rb_Edit_top-left"
+                                                   onchange="rbCustomTextPosition_Onchange(this)"
+                                                   class="form-check-input" type="radio" name="textPositionEdit"
+                                                   checked>
+                                            <label class="form-check-label" for="rb_Edit_top-left">TopLeft</label>
                                         </div>
-                                    </div>
+                                        <div class="form-check">
+                                            <input id="rb_Edit_top-right"
+                                                   onchange="rbCustomTextPosition_Onchange(this)"
+                                                   class="form-check-input" type="radio" name="textPositionEdit">
+                                            <label class="form-check-label" for="rb_Edit_top-right">TopRight</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="rb_Edit_bottom-left"
+                                                   onchange="rbCustomTextPosition_Onchange(this)"
+                                                   class="form-check-input" type="radio" name="textPositionEdit">
+                                            <label class="form-check-label" for="rb_Edit_bottom-left">BottomLeft</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="rb_Edit_bottom-right"
+                                                   onchange="rbCustomTextPosition_Onchange(this)"
+                                                   class="form-check-input" type="radio" name="textPositionEdit">
+                                            <label class="form-check-label"
+                                                   for="rb_Edit_bottom-right">BottomRight</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="rb_Edit_centered"
+                                                   onchange="rbCustomTextPosition_Onchange(this)"
+                                                   class="form-check-input" type="radio" name="textPositionEdit">
+                                            <label class="form-check-label" for="rb_Edit_centered">Center</label>
+                                        </div>
 
-                                </form>
+                                    </div>
+                                </div>
+                                {{--EditSelectore End--}}
+
                             </div>
                         </div>
                     </div>
@@ -1283,34 +1303,59 @@ $matComponents = matComponent::where('enable', 1)->get();
                     if (document.getElementById('rb_centered').checked) {
                         return 'C-' + matText;
                     }
-                    return null;
+                    return '';
                 }
                 return null;
             }
 
-            function customTextLabel() {
+            function customTextLabel(matText = null) {
+                console.log(matText.id);
+                if (matText.id === 'matText') {
+                    if (document.getElementById("matText").value.length > 0) {
 
-                if (document.getElementById("matText").value.length > 0) {
+                        document.getElementById("TextLabelRadiobutton").style.display = "block";
 
-                    document.getElementById("TextLabelRadiobutton").style.display = "block";
+                        document.getElementById("divText_top-left").innerHTML = document.getElementById("matText").value;
+                        document.getElementById("divText_top-right").innerHTML = document.getElementById("matText").value;
+                        document.getElementById("divText_bottom-left").innerHTML = document.getElementById("matText").value;
+                        document.getElementById("divText_bottom-right").innerHTML = document.getElementById("matText").value;
+                        document.getElementById("divText_centered").innerHTML = document.getElementById("matText").value;
 
-                    document.getElementById("divText_top-left").innerHTML = document.getElementById("matText").value;
-                    document.getElementById("divText_top-right").innerHTML = document.getElementById("matText").value;
-                    document.getElementById("divText_bottom-left").innerHTML = document.getElementById("matText").value;
-                    document.getElementById("divText_bottom-right").innerHTML = document.getElementById("matText").value;
-                    document.getElementById("divText_centered").innerHTML = document.getElementById("matText").value;
+                    } else {
+                        document.getElementById("TextLabelRadiobutton").style.display = "none";
 
-                } else {
-                    document.getElementById("TextLabelRadiobutton").style.display = "none";
+                        document.getElementById("divText_top-left").innerHTML = '';
+                        document.getElementById("divText_top-right").innerHTML = '';
+                        document.getElementById("divText_bottom-left").innerHTML = '';
+                        document.getElementById("divText_bottom-right").innerHTML = '';
+                        document.getElementById("divText_centered").innerHTML = '';
+                    }
 
-                    document.getElementById("divText_top-left").innerHTML = '';
-                    document.getElementById("divText_top-right").innerHTML = '';
-                    document.getElementById("divText_bottom-left").innerHTML = '';
-                    document.getElementById("divText_bottom-right").innerHTML = '';
-                    document.getElementById("divText_centered").innerHTML = '';
+                    codeModify(matText.id);
+                } else if (matText.id === 'matEditText') {
+                    console.log('matEditText');
+                    if (document.getElementById("matEditText").value.length > 0) {
+
+                        document.getElementById("CustomTextRadioButtonsEdit").style.display = "block";
+
+                        document.getElementById("divText_Edit_top-left").innerHTML = document.getElementById("matText").value;
+                        document.getElementById("divText_Edit_top-right").innerHTML = document.getElementById("matText").value;
+                        document.getElementById("divText_Edit_bottom-left").innerHTML = document.getElementById("matText").value;
+                        document.getElementById("divText_Edit_bottom-right").innerHTML = document.getElementById("matText").value;
+                        document.getElementById("divText_Edit_centered").innerHTML = document.getElementById("matText").value;
+
+                    } else {
+                        document.getElementById("CustomTextRadioButtonsEdit").style.display = "none";
+
+                        document.getElementById("divText_Edit_top-left").innerHTML = '';
+                        document.getElementById("divText_Edit_top-right").innerHTML = '';
+                        document.getElementById("divText_Edit_bottom-left").innerHTML = '';
+                        document.getElementById("divText_Edit_bottom-right").innerHTML = '';
+                        document.getElementById("divText_Edit_centered").innerHTML = '';
+                    }
+
+                    codeModify(matText.id);
                 }
-
-                codeModify();
             }
 
             function sl_OnChange(slComponent) {
@@ -1321,27 +1366,48 @@ $matComponents = matComponent::where('enable', 1)->get();
                     document.getElementById(slComponent.id.replace('select_', 'img_')).src = slComponent.value;
                 }
 
-                codeModify();
+                codeModify('matText');
             }
 
-            function codeModify() {
+            function codeModify(idPost) {
+                if (idPost === 'matText') {
+                    let select_Background = document.getElementById('select_Background');
+                    let select_Frame = document.getElementById('select_Frame');
+                    let select_Logo = document.getElementById('select_Logo');
 
-                let select_Background = document.getElementById('select_Background');
-                let select_Frame = document.getElementById('select_Frame');
-                let select_Logo = document.getElementById('select_Logo');
+                    if (document.getElementById('matText').value.length > 0) {
+                        document.getElementById('in_matCode').value = 'M-B' +
+                            select_Background[select_Background.selectedIndex].id +
+                            '-F' + select_Frame[select_Frame.selectedIndex].id +
+                            '-L' + select_Logo[select_Logo.selectedIndex].id +
+                            '-' + getCustomText();
+                    } else {
+                        document.getElementById('in_matCode').value = 'M-B' +
+                            select_Background[select_Background.selectedIndex].id +
+                            '-F' + select_Frame[select_Frame.selectedIndex].id +
+                            '-L' + select_Logo[select_Logo.selectedIndex].id;
+                    }
 
-                if (document.getElementById('matText').value.length > 0) {
-                    document.getElementById('in_matCode').value = 'M-B' +
-                        select_Background[select_Background.selectedIndex].id +
-                        '-F' + select_Frame[select_Frame.selectedIndex].id +
-                        '-L' + select_Logo[select_Logo.selectedIndex].id +
-                        '-' + getCustomText();
-                } else {
-                    document.getElementById('in_matCode').value = 'M-B' +
-                        select_Background[select_Background.selectedIndex].id +
-                        '-F' + select_Frame[select_Frame.selectedIndex].id +
-                        '-L' + select_Logo[select_Logo.selectedIndex].id;
+                } else if (idPost === 'matEditText') {
+                    let select_Background = document.getElementById('select_Edit_Background');
+                    let select_Frame = document.getElementById('select_Edit_Frame');
+                    let select_Logo = document.getElementById('select_Edit_Logo');
+
+                    if (document.getElementById('matEditText').value.length > 0) {
+                        document.getElementById('in_Edit_matCode').value = 'M-B' +
+                            select_Background[select_Background.selectedIndex].id +
+                            '-F' + select_Frame[select_Frame.selectedIndex].id +
+                            '-L' + select_Logo[select_Logo.selectedIndex].id +
+                            '-' + getCustomText();
+                    } else {
+                        document.getElementById('in_Edit_matCode').value = 'M-B' +
+                            select_Background[select_Background.selectedIndex].id +
+                            '-F' + select_Frame[select_Frame.selectedIndex].id +
+                            '-L' + select_Logo[select_Logo.selectedIndex].id;
+                    }
                 }
+
+
             }
 
             function setSelectsByMatCode(obj) {
@@ -1386,7 +1452,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                 document.getElementById("in_matCode").value = obj['data']['matCode'];
 
-                customTextLabel();
+                customTextLabel('in_matCode');
 
             }
 
@@ -1400,7 +1466,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                 document.getElementById("divText_" + rbCustomText.id.replace('rb_', '')).style.display = "block";
 
-                codeModify();
+                codeModify('matText');
 
             }
 
@@ -1430,8 +1496,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                             '<h6 class="my-0">Custom Mat</h6>' +
                             '<small class="">Code:</small> <small class="text-muted">' + product['matCode'] + '</small><br>' +
                             '<small class="">Custom Text:</small> <small class="text-muted">' + product['customMessage'] + '</small><br> ' +
-                            '<button id="btn_product_View' + product['id'] + '" onclick="shoppingCarView(this)" type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></button>' +
-                            '<button id="btn_product_Edit' + product['id'] + '" onclick="shoppingCarEdit(this)" type="button" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></button>' +
+                            '<button id="btn_product_View' + product['id'] + '" onclick="shoppingCarView(this)" type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#ModalPreview"><i class="fas fa-eye"></i></button>' +
+                            '<button id="btn_product_Edit' + product['id'] + '" onclick="shoppingCarEdit(this)" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#ModalModify"><i class="fas fa-pencil-alt"></i></button>' +
                             '<button id="btn_product_Delete' + product['id'] + '" onclick="shoppingCarDelete(this)" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></button>' +
                             '</div>' +
                             '<div class="col-4">' +
@@ -1472,7 +1538,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                     return response.text();
                 }).then(function (payload) {
 
-                    //console.log("API response", payload);
+                    console.log("API response", payload);
                     var obj = JSON.parse(payload);
 
                     if (obj.result) {
@@ -1498,19 +1564,106 @@ $matComponents = matComponent::where('enable', 1)->get();
             }
 
             function setPreview(obj) {
-
                 document.getElementById('img_Background_preview').src = obj['data']['matComponnentBackground']['fileName'];
                 document.getElementById('img_Frame_preview').src = obj['data']['matComponnentFrame']['fileName'];
-                ;
                 document.getElementById('img_Logo_preview').src = obj['data']['matComponnentLogo']['fileName'];
-                ;
                 //code_preview
                 document.getElementById('code_preview').innerText = obj['data']['matCode'];
 
             }
 
+            function setPreview2Edit(obj) {
+
+                document.getElementById('img_Edit_Background').src = obj['data']['matComponnentBackground']['fileName'];
+                document.getElementById('img_Edit_Frame').src = obj['data']['matComponnentFrame']['fileName'];
+                document.getElementById('img_Edit_Logo').src = obj['data']['matComponnentLogo']['fileName'];
+                //code_preview
+                document.getElementById('code_preview').innerText = obj['data']['matCode'];
+
+                $('#select_Edit_Background').val(obj['data']['matComponnentBackground']['fileName']);
+                $('#select_Edit_Frame').val(obj['data']['matComponnentFrame']['fileName']);
+                $('#select_Edit_Logo').val(obj['data']['matComponnentLogo']['fileName']);
+
+                sl_OnChange(document.getElementById('select_Edit_Background'));
+                sl_OnChange(document.getElementById('select_Edit_Frame'));
+                sl_OnChange(document.getElementById('select_Edit_Logo'));
+
+                document.getElementById("in_Edit_matCode").value = obj['data']['matCode'];
+                //$data['matMsgPosition'] = $separeCode[4];
+                document.getElementById("matEditText").value = '';
+                document.getElementById("CustomTextRadioButtonsEdit").style.display = "none";
+                if (obj['data']['CustomMsg'] != null) {
+
+                    document.getElementById("CustomTextRadioButtonsEdit").style.display = "block";
+                    document.getElementById("matEditText").value = obj['data']['CustomMsg'];/*Works?*/
+                    switch (obj['data']['matMsgPosition']) {
+                        case 'TL':
+                            document.getElementById("rb_Edit_top-left").checked = true;
+                            rbCustomTextPosition_Onchange(document.getElementById("rb_Edit_top-left"));
+                            break;
+                        case 'TR':
+                            document.getElementById("rb_Edit_top-right").checked = true;
+                            rbCustomTextPosition_Onchange(document.getElementById("rb_Edit_top-right"));
+                            break;
+                        case 'BL':
+                            document.getElementById("rb_Edit_bottom-left").checked = true;
+                            rbCustomTextPosition_Onchange(document.getElementById("rb_Edit_bottom-left"));
+                            break;
+                        case 'BR':
+                            document.getElementById("rb_Edit_bottom-right").checked = true;
+                            rbCustomTextPosition_Onchange(document.getElementById("rb_Edit_bottom-right"));
+                            break;
+                        case 'C':
+                            document.getElementById("rb_Edit_centered").checked = true;
+                            rbCustomTextPosition_Onchange(document.getElementById("rb_Edit_centered"));
+                            break;
+                    }
+                }
+
+
+            }
+
             function shoppingCarEdit(button) {
+
                 console.log('ShoppingCar Button Edit:' + button.id);
+                //console.log('ShoppingCar Button View:' + button.id);
+                let product = {
+                    id: button.id.replace('btn_product_Edit', '')
+                };
+
+                fetch('http://127.0.0.1:8000/api/product/preview', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
+                        credentials: 'include'
+                    },
+                    body: JSON.stringify(product)
+                }).then(function (response) {
+                    return response.text();
+                }).then(function (payload) {
+
+                    //console.log("API response", payload);
+                    var obj = JSON.parse(payload);
+
+                    if (obj.result) {
+
+                        setPreview2Edit(obj);
+
+                    } else {
+                        Swal.fire({
+                            title: 'Whoops!!',
+                            text: 'Codigo de Producto no Valido: ' + obj.msg,
+                            icon: 'error',
+                            confirmButtonText: 'oh no'
+                        })
+                    }
+                }).catch(function (err) {
+                    Swal.fire({
+                        title: 'Whoops!!',
+                        text: err,
+                        icon: 'error'
+                    })
+                });
             }
 
             function LikeItscroll() {

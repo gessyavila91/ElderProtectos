@@ -2,13 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\PromoCodeController;
-use App\Models\Product;
-use http\Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpKernel\EventListener\ValidateRequestListener;
-use function PHPUnit\Framework\returnArgument;
 
 class ProductController extends Controller {
 
@@ -203,6 +198,12 @@ class ProductController extends Controller {
                     $data['matComponnentBackground'] = $this->ExistComponent(substr($separeCode[1], 1, strlen($separeCode[1]) - 1), 'B');
                     $data['matComponnentFrame'] = $this->ExistComponent(substr($separeCode[2], 1, strlen($separeCode[2]) - 1), 'F');
                     $data['matComponnentLogo'] = $this->ExistComponent(substr($separeCode[3], 1, strlen($separeCode[3]) - 1), 'L');
+
+                    if (isset($separeCode[4])) {
+                        $data['CustomMsg'] = $this->getCustomMessageFromRequest($Product['matCode']);
+                        $data['matMsgPosition'] = $separeCode[4];
+                    }
+
                 }
             }
 
