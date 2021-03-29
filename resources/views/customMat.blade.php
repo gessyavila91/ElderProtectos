@@ -1231,7 +1231,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                 }).then(function (response) {
                     return response.text();
                 }).then(function (payload) {
-                    console.log("API response", payload);
 
                     var obj = JSON.parse(payload);
 
