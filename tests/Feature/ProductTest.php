@@ -22,9 +22,7 @@ class ProductTest extends TestCase {
             ->get('/api/product/initShoppingCar');
 
         $response->assertStatus(200);
-        /*$response->dumpHeaders();
-        $response->dumpSession();
-        $response->dump();*/
+        $response->dump();
 
     }
 
