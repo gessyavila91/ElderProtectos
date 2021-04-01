@@ -3,18 +3,20 @@
 namespace Tests\Feature;
 
 use App\Http\Controllers\ProductController;
+use Illuminate\Http\Client\Factory;
 use Database\Seeders\MatComponentSeeder;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
+use Illuminate\Http\Request;
 
 class ProductTest extends TestCase {
 
     public function test_InitShoppingCar () {
         $cookie = '{"0":{"id":"6059500c7e0bc","matCode":"M-BBRW-FELD-LCHDRG-TL-This is a -message 4 you","quantity":1,"price":70,"customMessage":"This is a -message 4 you"},"1":{"id":"60595281d0fbd","matCode":"M-BBRW-FELD-LCHDRG-TL-This is a -message 4 you","quantity":1,"price":70,"customMessage":"This is a -message 4 you"}}';
 
-        $response = $this->get('/api/product/initShoppingCar');
-
-        $response->withCookie('shoppingCar', '{"0":{"id":"6059500c7e0bc","matCode":"M-BBRW-FELD-LCHDRG-TL-This is a -message 4 you","quantity":1,"price":70,"customMessage":"This is a -message 4 you"},"1":{"id":"60595281d0fbd","matCode":"M-BBRW-FELD-LCHDRG-TL-This is a -message 4 you","quantity":1,"price":70,"customMessage":"This is a -message 4 you"}}');
+        $response = $this->withCookies(
+            ['shoppingCar' => $cookie]
+        )->get('/api/product/initShoppingCar');
 
         $response->assertStatus(200);
         $response->dump();
