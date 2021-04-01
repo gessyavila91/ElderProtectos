@@ -46,5 +46,8 @@
 
         </div>
     </body>
-    @include('layouts.footer')
+    @if(!Request::is('/'))
+        @include('layouts.footer')
+    @endif
+
 </html>
