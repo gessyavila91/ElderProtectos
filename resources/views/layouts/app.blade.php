@@ -37,14 +37,14 @@
         <div >
 
             @if(!Request::is('/'))
-                @include('layouts.navigation')
+                @include('components.headerbanner')
 
                 <div class="container">
                     @yield('content')
                 </div>
-
             @endif
 
         </div>
     </body>
+    @include('layouts.footer')
 </html>
