@@ -28,7 +28,18 @@ Route::get('/custom', function () {
 Route::get('/orders', function () {
     return view('orders');
 });
-
+Route::get('/myprofile', function () {
+    return view('myprofile');
+});
+Route::get('/success', function () {
+    return view('success');
+});
+Route::get('/terms', function () {
+    return view('terms');
+});
+Route::get('/404', function () {
+    return view('404');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
