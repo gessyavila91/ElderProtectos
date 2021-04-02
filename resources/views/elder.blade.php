@@ -22,12 +22,21 @@
 <body>
 
 <div class="loader-center" id="onload">
-    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </div>
 
-    <div >
-        <div class="intro">
-            <img class="logo animated fadeIn slower" src="{{asset('assets/img/logo-white.svg')}}" alt="logotype">
+<div>
+    <div class="intro">
+        <img class="logo animated fadeIn slower" src="{{asset('assets/img/logo-white.svg')}}" alt="logotype">
         </div>
 
         <div class="icon-list animated fadeIn slower delay-1s">

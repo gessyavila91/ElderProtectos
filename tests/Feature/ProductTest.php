@@ -3,32 +3,27 @@
 namespace Tests\Feature;
 
 use App\Http\Controllers\ProductController;
+use Illuminate\Http\Client\Factory;
 use Database\Seeders\MatComponentSeeder;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
-
-use Illuminate\Cookie\CookieJar;
-use Mockery as m;
-use ReflectionObject;
-use Symfony\Component\HttpFoundation\Cookie;
+use Illuminate\Http\Request;
 
 class ProductTest extends TestCase {
 
-    public function test_initShoppingCar () {
+    public function test_InitShoppingCar () {
         $cookie = '{"0":{"id":"6059500c7e0bc","matCode":"M-BBRW-FELD-LCHDRG-TL-This is a -message 4 you","quantity":1,"price":70,"customMessage":"This is a -message 4 you"},"1":{"id":"60595281d0fbd","matCode":"M-BBRW-FELD-LCHDRG-TL-This is a -message 4 you","quantity":1,"price":70,"customMessage":"This is a -message 4 you"}}';
 
-        $response = $this
-            ->withCookie('color', 'blue')
-            ->get('/api/product/initShoppingCar');
+        $response = $this->withCookies(
+            ['shoppingCar' => $cookie]
+        )->get('/api/product/initShoppingCar');
 
         $response->assertStatus(200);
-        /*$response->dumpHeaders();
-        $response->dumpSession();
-        $response->dump();*/
+        $response->dump();
 
     }
 
-    public function test_shoppingCartApiFetchProduct () {
+    public function test_fetchProduct () {
 
         $producArray1 = [
             'matCode' => 'M-BBRW-FCLT-LCHDRG-TL-This is a Message 4 you',
@@ -80,7 +75,7 @@ class ProductTest extends TestCase {
         $response->dump();
     }
 
-    public function test_shoppingApiAddProductToCar () {
+    public function test_addProduct () {
 
         $producArray = [
             'matCode' => 'M-BBRW-FCLT-LCHDRG-TREa"!@#$%^&*()_+|/\+',
@@ -110,7 +105,7 @@ class ProductTest extends TestCase {
         $response->dump();
     }
 
-    public function test_shoppingApiAddProductToCar2 () {
+    public function test_addProduct2 () {
 
         $producArray = [
             'matCode' => 'M-BBRW-FCLT-LCHDRG',
@@ -141,7 +136,7 @@ class ProductTest extends TestCase {
         $response->dump();
     }
 
-    public function test_shoppingApiAddPromoCode () {
+    public function test_addPromoCode () {
 
         $producArray = [
             'promoCode' => 'PROMOVALIDA2',
@@ -152,7 +147,7 @@ class ProductTest extends TestCase {
         $response->dump();
     }
 
-    public function test_shoppingRemoveItem () {
+    public function test_removeProductFromshoppingCar () {
 
         $cookie = '{"0":{"id":"6059500c7e0bc","matCode":"M-BBRW-FELD-LCHDRG-TL-This is a -message 4 you","quantity":1,"price":70,"customMessage":"This is a -message 4 you"},"1":{"id":"60595281d0fbd","matCode":"M-BBRW-FELD-LCHDRG-TL-This is a -message 4 you","quantity":1,"price":70,"customMessage":"This is a -message 4 you"}}';
 
@@ -171,12 +166,6 @@ class ProductTest extends TestCase {
         DB::table('mat_components')->truncate();
         $this->seed(MatComponentSeeder::class);
 
-        $stdCodeGreen = 'M-BBRW-FCLT-LCHDRG';
-        $stdCodeNoComponentGreen = 'M-BBRW-FSM-LSL';
-        $stdCodeCustomTextGreen = 'M-BBRW-FCLT-LCHDRG-TREa"!@#$%^&*()_+|/\+';
-
-        $stdComponenCode = 'BRW';
-
         $ProductController = new ProductController();
 
         $matComponent = [
@@ -191,20 +180,22 @@ class ProductTest extends TestCase {
         ];
 
         //100% Real No Fake True Code
-        $this->assertTrue($ProductController->ValidCode($stdCodeGreen));
+        $this->assertTrue($ProductController->ValidCode('M-BBRW-FCLT-LCHDRG'));
         //Impostor Code Funar
         $this->assertFalse($ProductController->ValidCode('M-BRW-FCLT-CHDRG'));
+        $this->assertFalse($ProductController->ValidCode(''));
         $this->assertFalse($ProductController->ValidCode(null));//
 
-        $this->assertSame($matComponent, $ProductController->ExistComponent($stdComponenCode, 'B'));
+        $this->assertTrue($ProductController->ValidCodePatter('M-BBRW-FCLT-LCHDRG'));
+        $this->assertTrue($ProductController->ValidCodePatter('M-BBRW-FCLT-LCHDRG-TREa"!@#$%^&*()_+|/\+'));
+        $this->assertTrue($ProductController->ValidCodePatter('M-BBRW-FSM-LSL'));
 
-        $this->assertTrue($ProductController->ValidCodePatter($stdCodeGreen));
-        $this->assertTrue($ProductController->ValidCodePatter($stdCodeCustomTextGreen));
-        $this->assertTrue($ProductController->ValidCodePatter($stdCodeNoComponentGreen));
+        $this->assertSame($matComponent, $ProductController->ExistComponent('BRW', 'B'));
+        $this->assertFalse($ProductController->ExistComponent('BRW', 'L'));
+
 
         $this->assertSame('This is a -message 4 you', $ProductController->getCustomMessageFromRequest('M-BBRW-FCLT-LCHDRG-TL-This is a -message 4 you'));
-        /* fixme somthing Wrong */
-        //$this->assertSame('a"!@#$%^&*()_+|/\+',$ProductController->getCustomMessageFromRequest('M-BBRW-FCLT-LCHDRG-TREa"!@#$%^&*()_+|/\+'));
+
 
         /*moreTest*/
 

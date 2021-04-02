@@ -25,6 +25,10 @@ Route::get('/custom', function () {
     return view('customMat');
 });
 
+Route::get('/aurora', function () {
+    return view('aurora');
+});
+
 Route::get('/orders', function () {
     return view('orders');
 });
@@ -44,6 +48,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 require __DIR__.'/product.php';
