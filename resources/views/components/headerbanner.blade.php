@@ -76,7 +76,6 @@
 
     .page-header:after {
         animation: grain 8s steps(10) infinite;
-        background-image: url(1.png);
         content: "";
         height: 300%;
         left: -50%;

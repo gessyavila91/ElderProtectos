@@ -498,44 +498,10 @@ $matComponents = matComponent::where('enable', 1)->get();
                     </h4>
 
                     <ul class="list-group mb-3" id="ul_shoppingCar">
-                        {{--Car Items List Start--}}
 
-                        {{--<li class="list-group-item lh-condensed">
-                            <div class="row">
-                                <div class="col-8">
-                                    <h6 class="my-0">Custom Mat de whit text</h6>
-                                    <small class="">Code:</small> <small class="text-muted">M-CYLW-FELD-LPWELD</small><br>
-                                    <small class="">Text Top Left:</small> <small class="text-muted">CustomText</small>
-                                    <br>
-                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></button>
-                                    <button type="button" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></button>
-                                    <button type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                                <div class="col-4">
-                                    <span class="text-muted d-flex justify-content-end"> $70 </span>
-                                </div>
-                            </div>
-                        </li>--}}
+                        <li class="list-group-item lh-condensed"></li>
 
-                        {{--Car Items List End--}}
-
-                        {{-- Standar li 4 PromoCode start--}}
-                        {{--<div id="div_PromoCode">
-                            <li class="list-group-item d-flex justify-content-between bg-light">
-                                <div class="text-success">
-                                    <h6 class="my-0">Promo code</h6>
-                                    <small>EXAMPLECODE</small>
-                                </div>
-                                <span class="text-success">-$5</span>
-                            </li>
-
-                        </div>--}}
-                        {{-- Standar li 4 PromoCode End--}}
                         {{-- Standar li 4 Total un USD --}}
-                        <li class="list-group-item lh-condensed">
-
-                        </li>
                         <li id="div_TotalCar" class="list-group-item d-flex justify-content-between">
                             <span>Total (USD)</span>
                             <strong id="strong_totalPriceCar">$ 0</strong>
@@ -543,6 +509,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                         {{-- Standar li 4 Total un USD End--}}
 
                     </ul>
+
                     <ul>
                         {{--Promo Code Input--}}
                         <div>
@@ -917,7 +884,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                                                     {{--Custom Text Edit--}}
                                                     <div id="divText_Edit_top-left" class="top-left epFont"
-                                                         style="display: block"></div>
+                                                         style="display: none"></div>
                                                     <div id="divText_Edit_top-right" class="top-right epFont"
                                                          style="display: none"></div>
                                                     <div id="divText_Edit_bottom-left" class="bottom-left epFont"
@@ -935,8 +902,9 @@ $matComponents = matComponent::where('enable', 1)->get();
                                                     <span class="input-group-text">Code</span>
                                                 </div>
                                                 <input id="in_Edit_matCode" class="form-control" type="text"
-                                                       placeholder="M-CXXX-FXXX-LXXX" required>
+                                                       placeholder="M-CXXX-FXXX-LXXX">
                                                 <div class="input-group-append">
+                                                    {{-- TODO agregar funcion de Fetch Solo para Editar --}}
                                                     <button onclick="matCodeFetch()" id="btn_Edit_matCodeCheck"
                                                             type="button"
                                                             class="btn btn-outline-primary">
@@ -956,7 +924,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                                 {{--EditSelectore End--}}
                                 <label for="select_Edit_Background">Fondo</label>
                                 <select id="select_Edit_Background" class="custom-select d-block w-100"
-                                        onchange="sl_OnChange(this)"
+                                        onchange="sl_OnChangeEdit(this)"
                                         name="selectFondo">
                                     <?php
                                     foreach ($matComponents->where('type', 'B') as $Component) {
@@ -968,7 +936,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                                 <label for="select_Edit_Frame">Marco</label>
                                 <select id="select_Edit_Frame" class="custom-select d-block w-100"
-                                        onchange="sl_OnChange(this)"
+                                        onchange="sl_OnChangeEdit(this)"
                                         name="selectMarco">
                                     <?php
                                     foreach ($matComponents->where('type', 'F') as $Component) {
@@ -981,7 +949,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                                 <label for="select_Edit_Logo">Centro</label>
                                 <select id="select_Edit_Logo" class="custom-select d-block w-100"
-                                        onchange="sl_OnChange(this)"
+                                        onchange="sl_OnChangeEdit(this)"
                                         name="selectCentro">
                                     <?php
                                     foreach ($matComponents->where('type', 'L') as $Component) {
@@ -1000,8 +968,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                                 </div>
 
                                 <div id="CustomTextRadioButtonsEdit"
-                                     style="display: none"
-                                >
+                                     style="display: none">
                                     <div class="d-block my-3">
 
                                         <div class="form-check">
@@ -1244,7 +1211,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                 let promoCode = {
                     promoCode: document.getElementById('in_promoCode').value,
                 };
-                //TODO Cambiar direccion para tomar valores de ENV
                 fetch('http://127.0.0.1:8000/api/product/addPromoCode', {
                     method: 'POST',
                     headers: {
@@ -1272,6 +1238,33 @@ $matComponents = matComponent::where('enable', 1)->get();
                 return true;
             }
 
+            function getCustomEditText() {
+
+                if (document.getElementById("matEditText").value.length > 0 && document.getElementById("matEditText").value.length <= 25) {
+
+                    let matText = document.getElementById("matEditText").value;
+
+                    if (document.getElementById('rb_Edit_top-left').checked) {
+                        return 'TL-' + matText;
+                    }
+                    if (document.getElementById('rb_Edit_top-right').checked) {
+                        return 'TR-' + matText;
+                    }
+                    if (document.getElementById('rb_Edit_bottom-left').checked) {
+                        return 'BL-' + matText;
+                    }
+                    if (document.getElementById('rb_Edit_bottom-right').checked) {
+                        return 'BR-' + matText;
+                    }
+                    if (document.getElementById('rb_Edit_centered').checked) {
+                        return 'C-' + matText;
+                    }
+                    return '';
+                }
+
+                return null;
+            }
+
             function getCustomText() {
 
                 if (document.getElementById("matText").value.length > 0 && document.getElementById("matText").value.length <= 25) {
@@ -1295,109 +1288,114 @@ $matComponents = matComponent::where('enable', 1)->get();
                     }
                     return '';
                 }
+
                 return null;
             }
 
-            function customTextLabel(matText = null) {
-                console.log(matText.id);
-                if (matText.id === 'matText') {
-                    if (document.getElementById("matText").value.length > 0) {
+            function customEditTextLabel() {
 
-                        document.getElementById("TextLabelRadiobutton").style.display = "block";
+                if (document.getElementById("matEditText").value.length > 0) {
 
-                        document.getElementById("divText_top-left").innerHTML = document.getElementById("matText").value;
-                        document.getElementById("divText_top-right").innerHTML = document.getElementById("matText").value;
-                        document.getElementById("divText_bottom-left").innerHTML = document.getElementById("matText").value;
-                        document.getElementById("divText_bottom-right").innerHTML = document.getElementById("matText").value;
-                        document.getElementById("divText_centered").innerHTML = document.getElementById("matText").value;
+                    document.getElementById("CustomTextRadioButtonsEdit").style.display = "block";
 
-                    } else {
-                        document.getElementById("TextLabelRadiobutton").style.display = "none";
+                    document.getElementById("divText_Edit_top-left").innerHTML = document.getElementById("matEditText").value;
+                    document.getElementById("divText_Edit_top-right").innerHTML = document.getElementById("matEditText").value;
+                    document.getElementById("divText_Edit_bottom-left").innerHTML = document.getElementById("matEditText").value;
+                    document.getElementById("divText_Edit_bottom-right").innerHTML = document.getElementById("matEditText").value;
+                    document.getElementById("divText_Edit_centered").innerHTML = document.getElementById("matEditText").value;
 
-                        document.getElementById("divText_top-left").innerHTML = '';
-                        document.getElementById("divText_top-right").innerHTML = '';
-                        document.getElementById("divText_bottom-left").innerHTML = '';
-                        document.getElementById("divText_bottom-right").innerHTML = '';
-                        document.getElementById("divText_centered").innerHTML = '';
-                    }
+                } else {
+                    document.getElementById("CustomTextRadioButtonsEdit").style.display = "none";
 
-                    codeModify(matText.id);
-                } else if (matText.id === 'matEditText') {
-                    console.log('matEditText');
-                    if (document.getElementById("matEditText").value.length > 0) {
-
-                        document.getElementById("CustomTextRadioButtonsEdit").style.display = "block";
-
-                        document.getElementById("divText_Edit_top-left").innerHTML = document.getElementById("matText").value;
-                        document.getElementById("divText_Edit_top-right").innerHTML = document.getElementById("matText").value;
-                        document.getElementById("divText_Edit_bottom-left").innerHTML = document.getElementById("matText").value;
-                        document.getElementById("divText_Edit_bottom-right").innerHTML = document.getElementById("matText").value;
-                        document.getElementById("divText_Edit_centered").innerHTML = document.getElementById("matText").value;
-
-                    } else {
-                        document.getElementById("CustomTextRadioButtonsEdit").style.display = "none";
-
-                        document.getElementById("divText_Edit_top-left").innerHTML = '';
-                        document.getElementById("divText_Edit_top-right").innerHTML = '';
-                        document.getElementById("divText_Edit_bottom-left").innerHTML = '';
-                        document.getElementById("divText_Edit_bottom-right").innerHTML = '';
-                        document.getElementById("divText_Edit_centered").innerHTML = '';
-                    }
-
-                    codeModify(matText.id);
+                    document.getElementById("divText_Edit_top-left").innerHTML = '';
+                    document.getElementById("divText_Edit_top-right").innerHTML = '';
+                    document.getElementById("divText_Edit_bottom-left").innerHTML = '';
+                    document.getElementById("divText_Edit_bottom-right").innerHTML = '';
+                    document.getElementById("divText_Edit_centered").innerHTML = '';
                 }
+
+                codeEditModify();
+            }
+
+            function customTextLabel() {
+
+                if (document.getElementById("matText").value.length > 0) {
+
+                    document.getElementById("TextLabelRadiobutton").style.display = "block";
+
+                    document.getElementById("divText_top-left").innerHTML = document.getElementById("matText").value;
+                    document.getElementById("divText_top-right").innerHTML = document.getElementById("matText").value;
+                    document.getElementById("divText_bottom-left").innerHTML = document.getElementById("matText").value;
+                    document.getElementById("divText_bottom-right").innerHTML = document.getElementById("matText").value;
+                    document.getElementById("divText_centered").innerHTML = document.getElementById("matText").value;
+
+                } else {
+                    document.getElementById("TextLabelRadiobutton").style.display = "none";
+
+                    document.getElementById("divText_top-left").innerHTML = '';
+                    document.getElementById("divText_top-right").innerHTML = '';
+                    document.getElementById("divText_bottom-left").innerHTML = '';
+                    document.getElementById("divText_bottom-right").innerHTML = '';
+                    document.getElementById("divText_centered").innerHTML = '';
+                }
+
+                codeModify();
             }
 
             function sl_OnChange(slComponent) {
-
                 if (slComponent.value === 'SC' || slComponent.value === 'SM') {
                     document.getElementById(slComponent.id.replace('select_', 'img_')).src = '';
                 } else {
                     document.getElementById(slComponent.id.replace('select_', 'img_')).src = slComponent.value;
                 }
-
-                codeModify('matText');
+                codeModify();
             }
 
-            function codeModify(idPost) {
-                if (idPost === 'matText') {
-                    let select_Background = document.getElementById('select_Background');
-                    let select_Frame = document.getElementById('select_Frame');
-                    let select_Logo = document.getElementById('select_Logo');
-
-                    if (document.getElementById('matText').value.length > 0) {
-                        document.getElementById('in_matCode').value = 'M-B' +
-                            select_Background[select_Background.selectedIndex].id +
-                            '-F' + select_Frame[select_Frame.selectedIndex].id +
-                            '-L' + select_Logo[select_Logo.selectedIndex].id +
-                            '-' + getCustomText();
-                    } else {
-                        document.getElementById('in_matCode').value = 'M-B' +
-                            select_Background[select_Background.selectedIndex].id +
-                            '-F' + select_Frame[select_Frame.selectedIndex].id +
-                            '-L' + select_Logo[select_Logo.selectedIndex].id;
-                    }
-
-                } else if (idPost === 'matEditText') {
-                    let select_Background = document.getElementById('select_Edit_Background');
-                    let select_Frame = document.getElementById('select_Edit_Frame');
-                    let select_Logo = document.getElementById('select_Edit_Logo');
-
-                    if (document.getElementById('matEditText').value.length > 0) {
-                        document.getElementById('in_Edit_matCode').value = 'M-B' +
-                            select_Background[select_Background.selectedIndex].id +
-                            '-F' + select_Frame[select_Frame.selectedIndex].id +
-                            '-L' + select_Logo[select_Logo.selectedIndex].id +
-                            '-' + getCustomText();
-                    } else {
-                        document.getElementById('in_Edit_matCode').value = 'M-B' +
-                            select_Background[select_Background.selectedIndex].id +
-                            '-F' + select_Frame[select_Frame.selectedIndex].id +
-                            '-L' + select_Logo[select_Logo.selectedIndex].id;
-                    }
+            function sl_OnChangeEdit(slComponent) {
+                if (slComponent.value === 'SC' || slComponent.value === 'SM') {
+                    document.getElementById(slComponent.id.replace('select_', 'img_')).src = '';
+                } else {
+                    document.getElementById(slComponent.id.replace('select_', 'img_')).src = slComponent.value;
                 }
+                codeEditModify();
+            }
 
+            function codeEditModify() {
+                let select_Background = document.getElementById('select_Edit_Background');
+                let select_Frame = document.getElementById('select_Edit_Frame');
+                let select_Logo = document.getElementById('select_Edit_Logo');
 
+                if (document.getElementById('matEditText').value.length > 0) {
+                    document.getElementById('in_Edit_matCode').value = 'M-B' +
+                        select_Background[select_Background.selectedIndex].id +
+                        '-F' + select_Frame[select_Frame.selectedIndex].id +
+                        '-L' + select_Logo[select_Logo.selectedIndex].id +
+                        '-' + getCustomEditText();
+                } else {
+                    document.getElementById('in_Edit_matCode').value = 'M-B' +
+                        select_Background[select_Background.selectedIndex].id +
+                        '-F' + select_Frame[select_Frame.selectedIndex].id +
+                        '-L' + select_Logo[select_Logo.selectedIndex].id;
+                }
+            }
+
+            function codeModify() {
+                let select_Background = document.getElementById('select_Background');
+                let select_Frame = document.getElementById('select_Frame');
+                let select_Logo = document.getElementById('select_Logo');
+
+                if (document.getElementById('matText').value.length > 0) {
+                    document.getElementById('in_matCode').value = 'M-B' +
+                        select_Background[select_Background.selectedIndex].id +
+                        '-F' + select_Frame[select_Frame.selectedIndex].id +
+                        '-L' + select_Logo[select_Logo.selectedIndex].id +
+                        '-' + getCustomText();
+                } else {
+                    document.getElementById('in_matCode').value = 'M-B' +
+                        select_Background[select_Background.selectedIndex].id +
+                        '-F' + select_Frame[select_Frame.selectedIndex].id +
+                        '-L' + select_Logo[select_Logo.selectedIndex].id;
+                }
             }
 
             function setSelectsByMatCode(obj) {
@@ -1442,12 +1440,14 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                 document.getElementById("in_matCode").value = obj['data']['matCode'];
 
-                customTextLabel('in_matCode');
+                customTextLabel();
 
             }
 
             function rbCustomTextPosition_Onchange(rbCustomText) {
 
+                console.log(rbCustomText.id);
+                console.log(rbCustomText.id.replace('rb_', ''));
                 document.getElementById("divText_top-left").style.display = "none";
                 document.getElementById("divText_top-right").style.display = "none";
                 document.getElementById("divText_bottom-left").style.display = "none";
@@ -1455,8 +1455,22 @@ $matComponents = matComponent::where('enable', 1)->get();
                 document.getElementById("divText_centered").style.display = "none";
 
                 document.getElementById("divText_" + rbCustomText.id.replace('rb_', '')).style.display = "block";
+                codeModify();
 
-                codeModify('matText');
+            }
+
+            function rbCustomEditTextPosition_Onchange(rbCustomText) {
+
+                console.log(rbCustomText.id);
+                console.log(rbCustomText.id.replace('rb_', ''));
+                document.getElementById("divText_Edit_top-left").style.display = "none";
+                document.getElementById("divText_Edit_top-right").style.display = "none";
+                document.getElementById("divText_Edit_bottom-left").style.display = "none";
+                document.getElementById("divText_Edit_bottom-right").style.display = "none";
+                document.getElementById("divText_Edit_centered").style.display = "none";
+
+                document.getElementById("divText_Edit_" + rbCustomText.id.replace('rb_Edit_', '')).style.display = "block";
+                codeEditModify();
 
             }
 
@@ -1487,6 +1501,8 @@ $matComponents = matComponent::where('enable', 1)->get();
                             '<small class="">Code:</small> <small class="text-muted">' + product['matCode'] + '</small><br>' +
                             '<small class="">Custom Text:</small> <small class="text-muted">' + product['customMessage'] + '</small><br> ' +
                             '<button id="btn_product_View' + product['id'] + '" onclick="shoppingCarView(this)" type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#ModalPreview"><i class="fas fa-eye"></i></button>' +
+                            /*TODO modificar para mandar solo el ID a las funciones*/
+                            /*'<button id="btn_product_View' + product['id'] + '" onclick="shoppingCarView(product['id'])" type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#ModalPreview"><i class="fas fa-eye"></i></button>' +*/
                             '<button id="btn_product_Edit' + product['id'] + '" onclick="shoppingCarEdit(this)" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#ModalModify"><i class="fas fa-pencil-alt"></i></button>' +
                             '<button id="btn_product_Delete' + product['id'] + '" onclick="shoppingCarDelete(this)" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></button>' +
                             '</div>' +
@@ -1563,52 +1579,54 @@ $matComponents = matComponent::where('enable', 1)->get();
             }
 
             function setPreview2Edit(obj) {
+                console.log(obj);
 
                 document.getElementById('img_Edit_Background').src = obj['data']['matComponnentBackground']['fileName'];
                 document.getElementById('img_Edit_Frame').src = obj['data']['matComponnentFrame']['fileName'];
                 document.getElementById('img_Edit_Logo').src = obj['data']['matComponnentLogo']['fileName'];
                 //code_preview
-                document.getElementById('code_preview').innerText = obj['data']['matCode'];
+                document.getElementById('in_Edit_matCode').innerText = obj['data']['matCode'];
 
                 $('#select_Edit_Background').val(obj['data']['matComponnentBackground']['fileName']);
                 $('#select_Edit_Frame').val(obj['data']['matComponnentFrame']['fileName']);
                 $('#select_Edit_Logo').val(obj['data']['matComponnentLogo']['fileName']);
 
-                sl_OnChange(document.getElementById('select_Edit_Background'));
-                sl_OnChange(document.getElementById('select_Edit_Frame'));
-                sl_OnChange(document.getElementById('select_Edit_Logo'));
+                sl_OnChangeEdit(document.getElementById('select_Edit_Background'));
+                sl_OnChangeEdit(document.getElementById('select_Edit_Frame'));
+                sl_OnChangeEdit(document.getElementById('select_Edit_Logo'));
 
                 document.getElementById("in_Edit_matCode").value = obj['data']['matCode'];
                 //$data['matMsgPosition'] = $separeCode[4];
                 document.getElementById("matEditText").value = '';
                 document.getElementById("CustomTextRadioButtonsEdit").style.display = "none";
                 if (obj['data']['CustomMsg'] != null) {
-
+                    document.getElementById("matEditText").value = obj['data']['CustomMsg'];
                     document.getElementById("CustomTextRadioButtonsEdit").style.display = "block";
-                    document.getElementById("matEditText").value = obj['data']['CustomMsg'];/*Works?*/
+
                     switch (obj['data']['matMsgPosition']) {
                         case 'TL':
                             document.getElementById("rb_Edit_top-left").checked = true;
-                            rbCustomTextPosition_Onchange(document.getElementById("rb_Edit_top-left"));
+                            rbCustomEditTextPosition_Onchange(document.getElementById("rb_Edit_top-left"));
                             break;
                         case 'TR':
                             document.getElementById("rb_Edit_top-right").checked = true;
-                            rbCustomTextPosition_Onchange(document.getElementById("rb_Edit_top-right"));
+                            rbCustomEditTextPosition_Onchange(document.getElementById("rb_Edit_top-right"));
                             break;
                         case 'BL':
                             document.getElementById("rb_Edit_bottom-left").checked = true;
-                            rbCustomTextPosition_Onchange(document.getElementById("rb_Edit_bottom-left"));
+                            rbCustomEditTextPosition_Onchange(document.getElementById("rb_Edit_bottom-left"));
                             break;
                         case 'BR':
                             document.getElementById("rb_Edit_bottom-right").checked = true;
-                            rbCustomTextPosition_Onchange(document.getElementById("rb_Edit_bottom-right"));
+                            rbCustomEditTextPosition_Onchange(document.getElementById("rb_Edit_bottom-right"));
                             break;
                         case 'C':
                             document.getElementById("rb_Edit_centered").checked = true;
-                            rbCustomTextPosition_Onchange(document.getElementById("rb_Edit_centered"));
+                            rbCustomEditTextPosition_Onchange(document.getElementById("rb_Edit_centered"));
                             break;
                     }
                 }
+                customEditTextLabel();
 
 
             }
