@@ -95,11 +95,11 @@
         <div class="carousel-inner">
             <div class="carousel-item active" data-interval="5000">
 
-                <div class="card text-center align-middle border-0">
+                <div class="card border-0 text-center align-middle ">
                     <div class="card-body banner text-white " style="height: 300px">
                         <div class="row h-100">
-                            <div class="col-sm-12 my-auto">
-                                <h1 class="animate__animated animate__fadeInDown"><img
+                            <div class="col-sm-12 my-auto ">
+                                <h1 class="animate__animated animate__fadeInDown d-flex justify-content-center"><img
                                             src="{{asset('assets/img/logo-white.svg')}}" class="img-fluid"
                                             style="height: 70px"></h1>
                                 <p class="lead animate__animated animate__fadeInDown animate__delay-1s">Hand-made game
@@ -114,7 +114,7 @@
                     <div class="card-body banner2 text-white " style="height: 300px">
                         <div class="row h-100">
                             <div class="col-sm-12 my-auto">
-                                <h1 class="animate__animated animate__fadeInDown"><img
+                                <h1 class="animate__animated animate__fadeInDown d-flex justify-content-center"><img
                                             src="{{asset('assets/img/logo-white.svg')}}" class="img-fluid"
                                             style="height: 70px"></h1>
                                 <p class="lead animate__animated animate__fadeInDown animate__delay-1s">Hand-made game
@@ -129,7 +129,7 @@
                     <div class="card-body banner3 text-white " style="height: 300px">
                         <div class="row h-100">
                             <div class="col-sm-12 my-auto">
-                                <h1 class="animate__animated animate__fadeInDown"><img
+                                <h1 class="animate__animated animate__fadeInDown d-flex justify-content-center"><img
                                             src="{{asset('assets/img/logo-white.svg')}}" class="img-fluid"
                                             style="height: 70px"></h1>
                                 <p class="lead animate__animated animate__fadeInDown animate__delay-1s">Hand-made game
