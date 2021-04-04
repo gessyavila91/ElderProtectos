@@ -28,7 +28,13 @@ Route::post('/product/addPromoCode',
     [\App\Http\Controllers\ProductController::class, 'addPromoCode']
 );
 Route::post('/product/removeProduct',
-    [\App\Http\Controllers\ProductController::class, 'removeProductFromshoppingCar']
+    [\App\Http\Controllers\ProductController::class, 'removeProductFromShoppingCar']
+);
+Route::post('/product/editProduct',
+    [\App\Http\Controllers\ProductController::class, 'editProductFromShoppingCar']
+);
+Route::post('/product/checkout',
+    [\App\Http\Controllers\ProductController::class, 'checkout']
 );
 Route::get('/product/initShoppingCar',
     [\App\Http\Controllers\ProductController::class, 'initShoppingCar']

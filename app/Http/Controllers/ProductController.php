@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
 
 class ProductController extends Controller {
 
@@ -142,7 +144,7 @@ class ProductController extends Controller {
         }
     }
 
-    public function removeProductFromshoppingCar (Request $request) {
+    public function removeProductFromShoppingCar (Request $request) {
 
         if (isset($_COOKIE['shoppingCar'])) {
 
@@ -179,6 +181,42 @@ class ProductController extends Controller {
         }
     }
 
+    public function editProductFromShoppingCar (Request $request) {
+
+        if (isset($_COOKIE['shoppingCar'])) {
+
+            $shoppingCar = json_decode($_COOKIE['shoppingCar'], true);
+            foreach ($shoppingCar as $k => $Product) {
+                if ($Product['id'] === $request->id) {
+                    $shoppingCar[$k]['matCode'] = $request->code;
+                }
+            }
+            $data['shoppingCar'] = $shoppingCar;
+            $data['idToEdit'] = $request->id;
+
+            $data['shoppingCarCountItems'] = count($data['shoppingCar']);
+            $data['shoppingCarTotalPrice'] = $this->calcCarTotalPrice($shoppingCar);
+
+            if (isset($_COOKIE['promoCode'])) {
+                $data['promoCode'] = (array)json_decode($_COOKIE['promoCode']);
+
+                if (isset($data['shoppingCarTotalPrice'])) {
+                    $data['shoppingCarTotalPrice'] = $this->calcCarTotalPrice($shoppingCar, $data['promoCode']);
+                }
+            }
+
+            $this->response['data'] = $data;
+            $this->response['msg'] = 'Product Edited';
+            $this->response['result'] = true;
+
+            $cookie = $this->OvenCooke('shoppingCar', null, $data['shoppingCar']);
+            return response()->json($this->response)->cookie($cookie);
+
+        } else {
+            return response()->json($this->response);
+        }
+    }
+
     public function preview (Request $request) {
 
         if (isset($_COOKIE['shoppingCar']) && isset($request->id)) {
@@ -197,6 +235,7 @@ class ProductController extends Controller {
                         $data['CustomMsg'] = $this->getCustomMessageFromRequest($Product['matCode']);
                         $data['matMsgPosition'] = $separeCode[4];
                     }
+                    $data['id'] = $Product['id'];
 
                 }
             }
@@ -357,7 +396,36 @@ class ProductController extends Controller {
         }
     }
 
-    /*NewMethods*/
+    public function checkout (Request $request,) {
+        if (isset($_COOKIE['shoppingCar'])) {
+            $data['shoppingCar'] = (array)json_decode($_COOKIE['shoppingCar']);
+            $data['shoppingCarCountItems'] = count($data['shoppingCar']);
+
+            $data['shoppingCarTotalPrice'] = $this->calcCarTotalPrice($data['shoppingCar']);
+        }
+
+        if (isset($_COOKIE['promoCode'])) {
+            /*CalculatePromoCode*/
+            $data['promoCode'] = (array)json_decode($_COOKIE['promoCode']);
+
+            if (isset($data['shoppingCarTotalPrice'])) {
+
+                $data['shoppingCarTotalPrice'] = $this->calcCarTotalPrice($data['shoppingCar'], $data['promoCode']);
+
+            }
+        }
+
+        $data['OrderID'] = uniqid();
+
+
+        $this->response['data'] = $data;
+        $this->response['msg'] = 'Order sended';
+        $this->response['result'] = true;
+
+        return response()->json($this->response);
+
+    }
+
     public function getShoppingCarFromCookie ($_CookieShoppingCar) {
         /*para remplazar codigo duplicado*/
         if (isset($_CookieShoppingCar)) {

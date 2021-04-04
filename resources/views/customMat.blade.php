@@ -463,17 +463,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                     </button>
                 </div>
 
-                <div class="d-flex justify-content-around" style="visibility: hidden">
-                    <button onclick="bt_ILikeIt_action()" type="button"
-                            class="btn btn-lg btn-success">
-                        modify!
-                    </button>
-                    <button onclick="bt_ILikeIt_action()" type="button"
-                            class="btn btn-lg btn-danger">
-                        cancel!
-                    </button>
-                </div>
-
                 {{--</form>--}}
             </div>
         </div>
@@ -492,7 +481,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                 <div class="col-md-4 order-md-2 mb-4">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Your cart</span>
-                        {{-- TODO Count CarItems --}}
+
                         <span id="span_itemsCarChopCount" class="badge badge-primary badge-pill">0</span>
 
                     </h4>
@@ -556,14 +545,16 @@ $matComponents = matComponent::where('enable', 1)->get();
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="firstName">First name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="Gessy"
+                                   required>
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="lastName">Last name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="A. Quezada"
+                                   required>
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
@@ -578,7 +569,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                                     <span class="input-group-text">@</span>
                                 </div>
                                 <input type="email" class="form-control" id="email" placeholder="you@example.com"
-                                       required>
+                                       value="gessyavila91@SomeMail.com">
                                 <div class="invalid-feedback" style="width: 100%;">
                                     Your username is required.
                                 </div>
@@ -587,7 +578,8 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                         <div class="col-md-6 mb-3">
                             <label for="phone">Phone <span class="text-muted">(Optional)</span></label>
-                            <input type="tel" class="form-control" id="phone" placeholder="1-(555)-555-5555">
+                            <input type="tel" class="form-control" id="phone" placeholder="+10-10-1000-1000"
+                                   value="+10-10-1000-1000">
                             <div class="invalid-feedback">
                                 Please enter a valid email address for shipping updates.
                             </div>
@@ -596,7 +588,8 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                     <div class="mb-3">
                         <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                        <input type="text" class="form-control" id="address" placeholder="1234 Main St"
+                               value="1234 Main St">
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
@@ -607,29 +600,29 @@ $matComponents = matComponent::where('enable', 1)->get();
                     <div class="row">
                         <div class="col-md-3 mb-6">
                             <label for="country">Country</label>
-                            <input type="text" class="form-control" id="country" placeholder="" required>
+                            <input id="country" type="text" class="form-control" placeholder="" value="Mexico">
                             <div class="invalid-feedback">
                                 Please provide a valid country.
                             </div>
                         </div>
                         <div class="col-md-3 mb-6">
                             <label for="state">State</label>
-                            <input type="text" class="form-control" id="state" placeholder="" required>
+                            <input id="state" type="text" class="form-control" placeholder="" value="Jalisco">
                             <div class="invalid-feedback">
                                 Please provide a valid state.
                             </div>
                         </div>
                         <div class="col-md-3 mb-6">
                             <label for="city">City</label>
-                            <input type="text" class="form-control" id="city" placeholder="" required>
+                            <input id="city" type="text" class="form-control" placeholder="" value="Guadalajara">
                             <div class="invalid-feedback">
                                 City required.
                             </div>
                         </div>
 
                         <div class="col-md-3 mb-6">
-                            <label for="zip">Zip</label>
-                            <input type="text" class="form-control" id="zip" placeholder="" required>
+                            <label for="zipCode">ZipCode</label>
+                            <input id="zipCode" type="text" class="form-control" placeholder="" value="44290">
                             <div class="invalid-feedback">
                                 Zip code required.
                             </div>
@@ -742,7 +735,9 @@ $matComponents = matComponent::where('enable', 1)->get();
                     </div>
 
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                    <button onclick="checkout()" class="btn btn-primary btn-lg btn-block" type="submit">Continue to
+                        checkout
+                    </button>
                     {{--</form>--}}
                 </div>
 
@@ -910,6 +905,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                                                             class="btn btn-outline-primary">
                                                         <i class="fas fa-search"></i></button>
                                                 </div>
+                                                <div id="productIDEdit" style="display: none;"></div>
                                                 {{--Code MatFinder/FasCreate--}}
                                             </div>
 
@@ -1013,7 +1009,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-success" onclick="sendEdit()">Save</button>
                     </div>
                 </div>
             </div>
@@ -1055,7 +1051,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                 }).then(function (response) {
                     return response.text();
                 }).then(function (payload) {
-                    //console.log("API response", payload);
                     var obj = JSON.parse(payload);
 
                     if (obj['result']) {
@@ -1088,7 +1083,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                 }).then(function (response) {
                     return response.text();
                 }).then(function (payload) {
-                    //console.log("API response", payload);
 
                     var obj = JSON.parse(payload);
                     if (obj.result) {
@@ -1140,7 +1134,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                 }).then(function (response) {
                     return response.text();
                 }).then(function (payload) {
-                    //console.log("API response", payload);
 
                     var obj = JSON.parse(payload);
 
@@ -1174,7 +1167,7 @@ $matComponents = matComponent::where('enable', 1)->get();
             }
 
             function shoppingCarDelete(button) {
-                //console.log('ShoppingCar Button Delete:' + button.id);
+
                 let product = {
                     id: button.id.replace('btn_product_Delete', '')
                 };
@@ -1221,7 +1214,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                 }).then(function (response) {
                     return response.text();
                 }).then(function (payload) {
-                    //console.log("API response", payload);
 
                     var obj = JSON.parse(payload);
 
@@ -1446,8 +1438,6 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             function rbCustomTextPosition_Onchange(rbCustomText) {
 
-                console.log(rbCustomText.id);
-                console.log(rbCustomText.id.replace('rb_', ''));
                 document.getElementById("divText_top-left").style.display = "none";
                 document.getElementById("divText_top-right").style.display = "none";
                 document.getElementById("divText_bottom-left").style.display = "none";
@@ -1461,8 +1451,6 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             function rbCustomEditTextPosition_Onchange(rbCustomText) {
 
-                console.log(rbCustomText.id);
-                console.log(rbCustomText.id.replace('rb_', ''));
                 document.getElementById("divText_Edit_top-left").style.display = "none";
                 document.getElementById("divText_Edit_top-right").style.display = "none";
                 document.getElementById("divText_Edit_bottom-left").style.display = "none";
@@ -1476,7 +1464,6 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             function setPromoCode(PromoCode) {
 
-                //console.log(PromoCode);
                 $('#li_promoCode').remove();
                 $('#ul_shoppingCar').append(
                     '<li id="li_promoCode" class="list-group-item d-flex justify-content-between bg-light">' +
@@ -1528,7 +1515,6 @@ $matComponents = matComponent::where('enable', 1)->get();
             }
 
             function shoppingCarView(button) {
-                //console.log('ShoppingCar Button View:' + button.id);
                 let product = {
                     id: button.id.replace('btn_product_View', '')
                 };
@@ -1544,7 +1530,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                     return response.text();
                 }).then(function (payload) {
 
-                    console.log("API response", payload);
                     var obj = JSON.parse(payload);
 
                     if (obj.result) {
@@ -1579,7 +1564,6 @@ $matComponents = matComponent::where('enable', 1)->get();
             }
 
             function setPreview2Edit(obj) {
-                console.log(obj);
 
                 document.getElementById('img_Edit_Background').src = obj['data']['matComponnentBackground']['fileName'];
                 document.getElementById('img_Edit_Frame').src = obj['data']['matComponnentFrame']['fileName'];
@@ -1599,6 +1583,9 @@ $matComponents = matComponent::where('enable', 1)->get();
                 //$data['matMsgPosition'] = $separeCode[4];
                 document.getElementById("matEditText").value = '';
                 document.getElementById("CustomTextRadioButtonsEdit").style.display = "none";
+                document.getElementById("productIDEdit").innerText = obj['data']['id'];
+
+
                 if (obj['data']['CustomMsg'] != null) {
                     document.getElementById("matEditText").value = obj['data']['CustomMsg'];
                     document.getElementById("CustomTextRadioButtonsEdit").style.display = "block";
@@ -1633,8 +1620,6 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             function shoppingCarEdit(button) {
 
-                console.log('ShoppingCar Button Edit:' + button.id);
-                //console.log('ShoppingCar Button View:' + button.id);
                 let product = {
                     id: button.id.replace('btn_product_Edit', '')
                 };
@@ -1650,7 +1635,6 @@ $matComponents = matComponent::where('enable', 1)->get();
                     return response.text();
                 }).then(function (payload) {
 
-                    //console.log("API response", payload);
                     var obj = JSON.parse(payload);
 
                     if (obj.result) {
@@ -1678,6 +1662,87 @@ $matComponents = matComponent::where('enable', 1)->get();
                 document.getElementById("checkout").scrollIntoView({
                     behavior: 'smooth'
                 });
+            }
+
+            function sendEdit() {
+
+                fetch('http://127.0.0.1:8000/api/product/editProduct', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
+                        credentials: 'include'
+                    },
+                    body: JSON.stringify(product)
+                }).then(function (response) {
+                    return response.text();
+                }).then(function (payload) {
+
+                    var obj = JSON.parse(payload);
+
+                    if (obj['result']) {
+                        modShoppingCar(obj);
+                    }
+                }).catch(function (err) {
+                    Swal.fire({
+                        title: 'Whoops!!',
+                        text: err,
+                        icon: 'error'
+                    })
+                });
+                return true;
+
+            }
+
+            function checkout() {
+
+                let userData = {
+                    firsName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    addres: document.getElementById('address').value,
+                    country: document.getElementById('country').value,
+                    state: document.getElementById('state').value,
+                    city: document.getElementById('city').value,
+                    zipCode: document.getElementById('zipCode').value,
+                    shippingMethod: document.getElementById('firstName').value,
+                    paymentMethod: document.getElementById('firstName').value,
+                };
+
+                console.log(userData);
+
+                fetch('/api/product/checkout', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
+                        credentials: 'include'
+                    },
+                }).then(function (response) {
+                    return response.text();
+                }).then(function (payload) {
+                    var obj = JSON.parse(payload);
+
+                    if (obj['result']) {
+                        location.replace("/success")
+                    }
+                }).catch(function (err) {
+                    Swal.fire({
+                        title: 'Whoops!!',
+                        text: err,
+                        icon: 'error'
+                    })
+                });
+                return true;
+            }
+
+
+            function formatPhoneNumber(phoneNumberString) {
+                var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+                var match = cleaned.match(/^(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3,4})([-\s\.]?[0-9]{3,4})$/);
+                if (match) {
+                    return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+                }
+                return null;
             }
 
         </script>
