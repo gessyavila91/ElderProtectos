@@ -100,6 +100,8 @@
                             <li class="nav-item"><a href="#" class="link-ftr">Home</a></li>
                             <li class="nav-item"><a href="#" class="link-ftr">Custom Shop</a></li>
                             <li class="nav-item"><a href="#" class="link-ftr">Pics</a></li>
+                            <li class="nav-item"><a href="#" class="link-ftr">Track Order</a></li>
+                            <li class="nav-item"><a href="#" class="link-ftr">Account</a></li>
                             <li class="nav-item"><a href="#" class="link-ftr">Legal</a></li>
                         </ul>
                     </div>
@@ -137,8 +139,8 @@
                         <small class="rights">Elder Protectors <span>&#174;</span> All Rights Reserved.</small>
                     </div>
                     <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-1 align-self-end ">
-                        <h6 class="mt-55 mt-2 bold-text"><b>Account</b></h6><small>
-                            <a href="#" class="link-ftr">Login</a>
+                        <h6 class="mt-55 mt-2 bold-text"><b>Elder Protectors</b></h6><small>
+                            <a href="#" class="link-ftr">About Us</a>
                         </small>
                     </div>
                     <div class="col-xl-2 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3 ">
