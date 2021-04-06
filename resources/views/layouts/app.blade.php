@@ -31,20 +31,24 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+
+
     </head>
 
     <body class="font-sans antialiased">
-        <div >
+
 
             @if(!Request::is('/'))
                 @include('components.headerbanner')
 
-                <div class="container">
+
                     @yield('content')
-                </div>
+
             @endif
 
-        </div>
+
     </body>
     @if(!Request::is('/'))
         @include('layouts.footer')

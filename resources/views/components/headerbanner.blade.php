@@ -58,34 +58,8 @@
         background: linear-gradient(90deg, #370063, #06132c, #252e63);
     }
 
-    .thumbs {
-        max-width: .30rem;
-        min-width: 90px;
-        height: auto;
-        border: 0;
-        padding: 0;
-        margin: 0;
-    }
 
-    .page-header {
-        z-index: -1;
-        width: 100%;
-        height: auto;
-        background-image: url();
-    }
 
-    .page-header:after {
-        animation: grain 8s steps(10) infinite;
-        background-image: url(1.png);
-        content: "";
-        height: 300%;
-        left: -50%;
-        opacity: 0.10;
-        position: fixed;
-        top: -110%;
-        width: 300%;
-        z-index: -1;
-    }
 
 </style>
 
@@ -101,7 +75,7 @@
                             <div class="col-sm-12 my-auto ">
                                 <h1 class="animate__animated animate__fadeInDown d-flex justify-content-center"><img
                                             src="{{asset('assets/img/logo-white.svg')}}" class="img-fluid"
-                                            style="height: 70px"></h1>
+                                            style="height: 3rem"></h1>
                                 <p class="lead animate__animated animate__fadeInDown animate__delay-1s">Hand-made game
                                     supplies.</p>
                             </div>
