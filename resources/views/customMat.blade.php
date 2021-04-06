@@ -1723,7 +1723,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                     var obj = JSON.parse(payload);
 
                     if (obj['result']) {
-                        location.replace("/success")
+                        window.location.href = "success";
                     }
                 }).catch(function (err) {
                     Swal.fire({
