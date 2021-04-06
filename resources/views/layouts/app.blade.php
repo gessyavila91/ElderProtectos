@@ -33,24 +33,21 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+
 </head>
 
 @if(!Request::is('/'))
     @include('components.headerbanner')
 @endif
 
-<body class="font-sans antialiased">
-<div>
-
     @if(!Request::is('/'))
         @yield('content')
     @endif
 
-</div>
-</body>
 @if(!Request::is('/'))
     @include('layouts.footer')
 @endif
 
 </html>
-

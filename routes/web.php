@@ -29,6 +29,10 @@ Route::get('/aurora', function () {
     return view('aurora');
 });
 
+Route::get('/pics', function () {
+    return view('pics');
+});
+
 Route::get('/orders', function () {
     return view('orders');
 });
