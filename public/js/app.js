@@ -3835,8 +3835,8 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
             window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
             /**
              * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
+             * for events that are broadcast by Laravel. Echo and event broadcasting
+             * allows your team to easily build robust real-time web applications.
              */
 // import Echo from 'laravel-echo';
 // window.Pusher = require('pusher-js');
@@ -12443,6 +12443,8 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
                 }
 
 
+
+
 // Multifunctional method to get and set values of a collection
 // The value/s can optionally be executed if it's a function
                 var access = function (elems, fn, key, value, chainable, emptyGet, raw) {
@@ -16904,6 +16906,8 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
                 });
 
 
+
+
 // Return jQuery for attributes-only inclusion
 
 
@@ -18415,6 +18419,8 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
                 });
 
 
+
+
 // Prevent auto-execution of scripts when no explicit dataType was provided (See gh-2432)
                 jQuery.ajaxPrefilter(function (s) {
                     if (s.crossDomain) {
@@ -18572,6 +18578,8 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
                         return "script";
                     }
                 });
+
+
 
 
 // Support: Safari 8 only
@@ -19026,6 +19034,8 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
                 );
 
 
+
+
 // Support: Android <=4.0 only
 // Make sure we trim BOM and NBSP
                 var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
@@ -19099,6 +19109,7 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
                 };
 
 
+
 // Register as a named AMD module, since jQuery can be concatenated with other
 // files that may use define, but not via a proper concatenation script that
 // understands anonymous AMD modules. A named AMD is safest and most robust
@@ -19163,15 +19174,15 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
             /* module decorator */
             module = __webpack_require__.nmd(module);
-var __WEBPACK_AMD_DEFINE_RESULT__;/**
- * @license
- * Lodash <https://lodash.com/>
- * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-;(function() {
+            var __WEBPACK_AMD_DEFINE_RESULT__;/**
+             * @license
+             * Lodash <https://lodash.com/>
+             * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+             * Released under MIT license <https://lodash.com/license>
+             * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+             * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+             */
+            ;(function () {
 
   /** Used as a safe reference for `undefined` in pre-ES5 environments. */
   var undefined;
@@ -36369,12 +36380,12 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 /***/ }),
 
 /***/ "./resources/sass/app.scss":
-/*!*********************************!*\
+        /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
   \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+        /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
+            "use strict";
             __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -36386,9 +36397,12 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
         /*!*******************************!*\
   !*** ./resources/css/app.css ***!
   \*******************************/
-        /***/ (() => {
+        /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-            throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/postcss-loader/dist/cjs.js):\nError: Failed to find 'variables'\n  in [\n    C:\\xampp\\htdocs\\www\\elderprotector\\resources\\css\n  ]\n    at C:\\xampp\\htdocs\\www\\elderprotector\\node_modules\\postcss-import\\lib\\resolve-id.js:35:13\n    at async LazyResult.runAsync (C:\\xampp\\htdocs\\www\\elderprotector\\node_modules\\postcss\\lib\\lazy-result.js:358:11)\n    at async Object.loader (C:\\xampp\\htdocs\\www\\elderprotector\\node_modules\\postcss-loader\\dist\\index.js:95:14)\n    at processResult (C:\\xampp\\htdocs\\www\\elderprotector\\node_modules\\webpack\\lib\\NormalModule.js:598:19)\n    at C:\\xampp\\htdocs\\www\\elderprotector\\node_modules\\webpack\\lib\\NormalModule.js:692:5\n    at C:\\xampp\\htdocs\\www\\elderprotector\\node_modules\\loader-runner\\lib\\LoaderRunner.js:399:11\n    at C:\\xampp\\htdocs\\www\\elderprotector\\node_modules\\loader-runner\\lib\\LoaderRunner.js:251:18\n    at context.callback (C:\\xampp\\htdocs\\www\\elderprotector\\node_modules\\loader-runner\\lib\\LoaderRunner.js:124:13)\n    at Object.loader (C:\\xampp\\htdocs\\www\\elderprotector\\node_modules\\postcss-loader\\dist\\index.js:104:7)");
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
             /***/
         }),
@@ -39028,14 +39042,14 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
             /***/
         }),
 
-/***/ "./node_modules/process/browser.js":
-/*!*****************************************!*\
+        /***/ "./node_modules/process/browser.js":
+        /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
   \*****************************************/
-/***/ ((module) => {
+        /***/ ((module) => {
 
 // shim for using process in browser
-var process = module.exports = {};
+            var process = module.exports = {};
 
 // cached from whatever global is present so that test runners that stub it
 // don't break things.  But we need to wrap it in a try catch in case it is
@@ -39217,36 +39231,49 @@ process.cwd = function () { return '/' };
 process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
-process.umask = function() { return 0; };
+            process.umask = function () {
+                return 0;
+            };
 
 
-/***/ })
+            /***/
+        })
 
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		if(__webpack_module_cache__[moduleId]) {
-/******/ 			return __webpack_module_cache__[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			id: moduleId,
-/******/ 			loaded: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
-/******/
-/******/ 		// Return the exports of the module
+        /******/
+    });
+    /************************************************************************/
+    /******/ 	// The module cache
+    /******/
+    var __webpack_module_cache__ = {};
+    /******/
+    /******/ 	// The require function
+    /******/
+    function __webpack_require__(moduleId) {
+        /******/ 		// Check if module is in cache
+        /******/
+        if (__webpack_module_cache__[moduleId]) {
+            /******/
+            return __webpack_module_cache__[moduleId].exports;
+            /******/
+        }
+        /******/ 		// Create a new module (and put it into the cache)
+        /******/
+        var module = __webpack_module_cache__[moduleId] = {
+            /******/            id: moduleId,
+            /******/            loaded: false,
+            /******/            exports: {}
+            /******/
+        };
+        /******/
+        /******/ 		// Execute the module function
+        /******/
+        __webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+        /******/
+        /******/ 		// Flag the module as loaded
+        /******/
+        module.loaded = true;
+        /******/
+        /******/ 		// Return the exports of the module
         /******/
         return module.exports;
         /******/
@@ -39303,16 +39330,21 @@ process.umask = function() { return 0; };
             }
             /******/
         })();
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
+        /******/
+    })();
+    /******/
+    /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+    /******/
+    (() => {
+        /******/
+        __webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+        /******/
+    })();
+    /******/
+    /******/ 	/* webpack/runtime/make namespace object */
+    /******/
+    (() => {
+        /******/ 		// define __esModule on exports
 /******/ 		__webpack_require__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
