@@ -78,16 +78,16 @@
   array (
     'providers' => 
     array (
-      0 => 'Laravel\\Breeze\\BreezeServiceProvider',
+        0 => 'Laravel\\Breeze\\BreezeServiceProvider',
     ),
   ),
-  'laravel/sail' => 
-  array (
-    'providers' => 
-    array (
-        0 => 'Laravel\\Sail\\SailServiceProvider',
-    ),
-  ),
+    'laravel/sail' =>
+        array(
+            'providers' =>
+                array(
+                    0 => 'Laravel\\Sail\\SailServiceProvider',
+                ),
+        ),
     'laravel/tinker' =>
         array(
             'providers' =>
@@ -112,8 +112,8 @@
     'nunomaduro/collision' =>
         array(
             'providers' =>
-    array (
-      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    ),
-  ),
+                array(
+                    0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+                ),
+        ),
 );

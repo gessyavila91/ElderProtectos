@@ -43,7 +43,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             }
 
-            .container1 {
+            .containerIMGPreview {
                 position: relative;
             }
 
@@ -331,7 +331,7 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                     <div class="card-body">
 
-                        <div class="container1">
+                        <div class="containerIMGPreview">
                             <block style="text-align: center;">
 
                                 <img class="background" id="img_Background"
@@ -803,7 +803,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                     </div>
                     <div class="modal-body">
                         <div class="card-body">
-                            <div class="container1">
+                            <div class="containerIMGPreview">
                                 <block style="text-align: center;">
                                     <img class="background" id="img_Background_preview"
                                          src="{{asset('assets/img/customMat/fondo1.png')}}"
@@ -864,7 +864,7 @@ $matComponents = matComponent::where('enable', 1)->get();
                                             <h4 class="my-0 fw-normal">Preview</h4>
                                         </div>
                                         <div class="card-body">
-                                            <div class="container1">
+                                            <div class="containerIMGPreview">
                                                 <block style="text-align: center;">
                                                     <img id="img_Edit_Background" class="fondo"
                                                          src="{{asset('assets/img/customMat/fondo1.png')}}" alt=""/>

@@ -50,4 +50,8 @@ Route::get('/dashboard', function () {
 
 require __DIR__ . '/auth.php';
 
-require __DIR__.'/product.php';
+require __DIR__ . '/product.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
