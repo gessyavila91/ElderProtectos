@@ -43,13 +43,18 @@ $matComponents = matComponent::where('enable', 1)->get();
 
             }
 
-            .containerIMGPreview {
+
+            .backgorundPreview {
                 position: relative;
+                top: 0;
+                width: 100%;
             }
 
-            .playmatPreview {
+            .playmatPreview{
                 position: absolute;
                 top: 0;
+                left: 0;
+                width: 100%;
             }
 
             .btn-xs {
@@ -307,15 +312,17 @@ $matComponents = matComponent::where('enable', 1)->get();
         </style>
 
         <body>
-
-        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+<div class="container">
+        <div class="py-5">
+            <div class="animate__animated animate__fadeInDown">
+                <div class="p-5 shadow-sm rounded bg-degraded-2 text-dark  text-center">
             <h1 class="display-4">Custom Playmat</h1>
             <p class="lead">Browse through the options we offer and choose the perfect combination.<br>
                 The possibilities are many, but if you want something even more unique send us a e-mail:
                 <a href="mailto:hi@elderprotectors.com">hi@elderprotectors.com</a></p>
+                </div>
+            </div>
         </div>
-
-        <hr class="featurette-divider">
 
         <div class="row featurette">
 
@@ -331,10 +338,10 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                     <div class="card-body">
 
-                        <div class="containerIMGPreview">
+                        <div class="backgorundPreview">
                             <block style="text-align: center;">
 
-                                <img class="background" id="img_Background"
+                                <img class="backgorundPreview" id="img_Background"
                                      src="{{asset('assets/img/customMat/fondo1.png')}}"
                                      alt=""/>
                                 <img class="playmatPreview" id="img_Frame"
@@ -463,6 +470,8 @@ $matComponents = matComponent::where('enable', 1)->get();
             </div>
         </div>
 
+</div>
+
         <hr class="featurette-divider">
 
         <div class="container">
@@ -495,24 +504,12 @@ $matComponents = matComponent::where('enable', 1)->get();
 
                     </ul>
 
-                    <ul>
-                        {{--Promo Code Input--}}
-                        <div>
-                            <div class="card p-2">
-                                <div class="input-group">
-                                    <input id="in_promoCode" type="text" class="form-control" placeholder="Promo code"
-                                           value="PROMOVALIDA2">
 
-                                    <div class="input-group-append">
-                                        <button onclick="addPromoCode()" type="submit" class="btn btn-secondary">Redeem
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{--Promo Code Input END--}}
+
+
 
                         {{--Gif Box Colapse--}}
+                    <ul class="list-group mb-3" id="ul_shoppingCar">
 
                         <li id="input-group" class="list-group-item d-flex justify-content-between">
                             <div class="custom-control custom-radio custom-control-inline">
@@ -529,9 +526,31 @@ $matComponents = matComponent::where('enable', 1)->get();
                                 <textarea id="giftText" type="text" class="form-control" maxlength="125"> With love from:</textarea>
                             </div>
                         </form>
+                    </ul>
 
                         {{--Gif Box Colapse END--}}
+
+
+                    {{--Promo Code Input--}}
+                    <ul class="list-group mb-3" id="ul_shoppingCar">
+                        {{--Promo Code Input--}}
+                        <div>
+                            <div class="card p-2">
+                                <div class="input-group">
+                                    <input id="in_promoCode" type="text" class="form-control" placeholder="Promo code"
+                                           value="PROMOVALIDA2">
+
+                                    <div class="input-group-append">
+                                        <button onclick="addPromoCode()" type="submit" class="btn btn-secondary">Redeem
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </ul>
+                    {{--Promo Code Input END--}}
+
+
 
                 </div>
 
