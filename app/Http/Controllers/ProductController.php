@@ -436,6 +436,10 @@ class ProductController extends Controller {
                 $products = (array)$ProductObj;
                 $data['shoppingCarTotalPrice'] = $data['shoppingCarTotalPrice'] + $products['price'];
             }
+
+
+
+
         }
     }
 
