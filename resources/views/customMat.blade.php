@@ -4,6 +4,70 @@ use App\Models\matComponent;
 
 $matComponents = matComponent::where('enable', 1)->get();
 
+
+
+
+/*
+	* Config for PayPal specific values
+*/
+
+// Urls
+if(isset($_SERVER['SERVER_NAME'])) {
+    $url = @($_SERVER["HTTPS"] != 'on') ? 'http://' . $_SERVER["SERVER_NAME"] : 'https://' . $_SERVER["SERVER_NAME"];
+    $url .= ($_SERVER["SERVER_PORT"] !== 80) ? ":" . $_SERVER["SERVER_PORT"] : "";
+    $url .= $_SERVER["REQUEST_URI"];
+}
+else {
+    $url = "";
+}
+
+define("URL", array(
+
+    "current" => $url,
+
+    "services" => array(
+        "orderCreate" => 'api/createOrder.php',
+        "orderGet" => 'api/getOrderDetails.php',
+		"orderPatch" => 'api/patchOrder.php',
+		"orderCapture" => 'api/captureOrder.php'
+    ),
+
+	"redirectUrls" => array(
+        "returnUrl" => 'pages/success.php',
+		"cancelUrl" => 'pages/cancel.php',
+    )
+));
+
+// PayPal Environment
+const PAYPAL_ENVIRONMENT = "sandbox";
+
+// PayPal REST API endpoints
+const PAYPAL_ENDPOINTS = array(
+    "sandbox" => "https://api.sandbox.paypal.com",
+    "production" => "https://api.paypal.com"
+);
+
+// PayPal REST App credentials
+const PAYPAL_CREDENTIALS = array(
+    "sandbox" => [
+        "client_id" => "ASCs3KIocN5MuYCn8l7xhrzmqmQxoTYSWZzHFxlFGnXokO4QSOAwtT6kD22RkX3cNfU_R20fBlF8NC_3",
+        "client_secret" => "EJLpMe688yrAeT8hzRt57ZfxBDqSm2GazThLKTiCE_XC5Y3pqI2IvoozLTQ5kQGu9JZ2n2A0xT-SIrg0"
+    ],
+    "production" => [
+        "client_id" => "",
+        "client_secret" => ""
+    ]
+);
+
+// PayPal REST API version
+const PAYPAL_REST_VERSION = "v2";
+
+// ButtonSource Tracker Code
+const SBN_CODE = "PP-DemoPortal-EC-Psdk-ORDv2-php";
+
+$baseUrl = str_replace("index.php", "", URL['current']);
+$rootPath = "";
+
 ?>
 
 <x-app-layout>
@@ -14,6 +78,9 @@ $matComponents = matComponent::where('enable', 1)->get();
 
         <head>
             <title>{{ config('app.name') }} - Custom Mat Maker</title>
+
+            <script src="https://www.paypal.com/sdk/js?client-id=sb&intent=capture&vault=false&commit=true<?php echo isset($_GET['buyer-country']) ? "&buyer-country=" . $_GET['buyer-country'] : "" ?>"></script>
+
         </head>
 
         <style>
@@ -738,6 +805,23 @@ $matComponents = matComponent::where('enable', 1)->get();
                     <button onclick="checkout()" class="btn btn-primary btn-lg btn-block" type="submit">Continue to
                         checkout
                     </button>
+
+                    <!-- Checkout Options -->
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-7">
+                            <!-- Container for PayPal Shortcut Checkout -->
+                            <div id="paypalCheckoutContainer"></div>
+
+                            <!-- Container for PayPal Mark Redirect -->
+                            {{--<div id="paypalMarkRedirect">
+                                <h4 class="text-center">OR</h4>
+                                <a class="btn btn-success btn-block" href="<?= $rootPath ?>pages/shipping.php" role="button">
+                                    <h4>Proceed to Checkout</h4>
+                                </a>
+                            </div>--}}
+                        </div>
+                    </div>
+
                     {{--</form>--}}
                 </div>
 
@@ -1744,6 +1828,74 @@ $matComponents = matComponent::where('enable', 1)->get();
                 }
                 return null;
             }
+
+
+
+            /////////////////////////////////////////////////////////////////
+            paypal.Buttons({
+
+                // Set your environment
+                env: 'sandbox',
+
+                // Set style of buttons
+                style: {
+                    layout: 'vertical',   // horizontal | vertical
+                    size:   'responsive',   // medium | large | responsive
+                    shape:  'pill',         // pill | rect
+                    color:  'gold',         // gold | blue | silver | black,
+                    fundingicons: false,    // true | false,
+                    tagline: false          // true | false,
+                },
+
+                // Wait for the PayPal button to be clicked
+                createOrder: function() {
+                    let formData = new FormData();
+                    formData.append('item_amt', document.getElementById("camera_amount").value);
+                    formData.append('tax_amt', document.getElementById("tax_amt").value);
+                    formData.append('handling_fee', document.getElementById("handling_fee").value);
+                    formData.append('insurance_fee', document.getElementById("insurance_fee").value);
+                    formData.append('shipping_amt', document.getElementById("shipping_amt").value);
+                    formData.append('shipping_discount', document.getElementById("shipping_discount").value);
+                    formData.append('total_amt', document.getElementById("total_amt").value);
+                    formData.append('currency', document.getElementById("currency_Code").value);
+                    formData.append('return_url',  '<?= $baseUrl.URL["redirectUrls"]["returnUrl"]?>' + '?commit=true');
+                    formData.append('cancel_url', '<?= $baseUrl.URL["redirectUrls"]["cancelUrl"]?>');
+
+                    return fetch(
+                        '<?= $rootPath.URL['services']['orderCreate']?>',
+                        {
+                            method: 'POST',
+                            body: formData
+                        }
+                    ).then(function(response) {
+                        return response.json();
+                    }).then(function(resJson) {
+                        console.log('Order ID: '+ resJson.data.id);
+                        return resJson.data.id;
+                    });
+                },
+
+                // Wait for the payment to be authorized by the customer
+                onApprove: function(data, actions) {
+                    return fetch(
+                        '<?= $rootPath.URL['services']['orderGet'] ?>',
+                        {
+                            method: 'GET'
+                        }
+                    ).then(function(res) {
+                        return res.json();
+                    }).then(function(res) {
+                        window.location.href = 'pages/success.php';
+                    });
+                }
+
+            }).render('#paypalCheckoutContainer');
+
+
+
+
+
+
 
         </script>
     @endsection
