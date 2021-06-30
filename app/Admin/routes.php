@@ -15,6 +15,7 @@ Route::group([
 
     $router->resource('/matComponent', MatComponentController::class);
     $router->resource('/promoCodes', PromoCodeController::class);
+    $router->resource('/config', ConfigController::class);
 
 
 });
