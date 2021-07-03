@@ -13,6 +13,63 @@ use Illuminate\Support\Facades\Route;
 
 class PaypalController extends Controller {
 
+    public function captureOrder(request $request) {
+        $paypalHelper = new PayPalHelper;
+
+        header('Content-Type: application/json');
+        return json_encode($paypalHelper->orderCapture());
+    }
+
+
+    public function patchOrder(request $request) {
+
+        $paypalHelper = new PaypalHelper();
+
+        $orderData = array();
+
+        if(array_key_exists('updated_shipping', $_POST)) {
+            $finalTotal = floatval($_POST['total_amt']) + (floatval($_POST['updated_shipping']) - floatval($_POST['current_shipping']));
+
+            $orderData = '[ {
+              "op" : "replace",
+              "path" : "/purchase_units/@reference_id==\'PU1\'/amount",
+              "value" : {
+                "currency_code" : "USD",
+                "value" : "320",
+                "breakdown" : {
+                  "item_total" : {
+                    "currency_code" : "USD",
+                    "value" : "300"
+                  },
+                  "shipping" : {
+                    "currency_code" : "USD",
+                    "value" : "0"
+                  },
+                  "tax_total" : {
+                    "currency_code" : "USD",
+                    "value" : "0"
+                  },
+                  "shipping_discount" : {
+                    "currency_code" : "USD",
+                    "value" : "0"
+                  },
+                  "handling" : {
+                    "currency_code" : "USD",
+                    "value" : "0"
+                  },
+                  "insurance" : {
+                    "currency_code" : "USD",
+                    "value" : "20"
+                  }
+                }
+              }       
+            }]';
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($paypalHelper->orderPatch($orderData));
+
+    }
 
     public function getOrderDetails(Request $request){
         $paypalHelper = new PayPalHelper;

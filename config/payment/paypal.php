@@ -26,7 +26,7 @@ return[
             'orderCreate' =>  'api/payment/paypal/createOrder',
             'orderGet' =>     'api/payment/paypal/getOrderDetails',
             'orderPatch' =>   'api/payment/paypal/patchOrder',
-            'orderCapture' => 'api/payment/paypal/captureOrderp'
+            'orderCapture' => 'api/payment/paypal/captureOrder'
         ],
         'redirectUrls' =>[
             'returnUrl' => '/success',

@@ -13,6 +13,10 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
-        "api/payment/paypal/createOrder"
+        "api/payment/paypal/createOrder",
+        "api/payment/paypal/getOrderDetails",
+        "api/payment/paypal/patchOrder",
+        "api/payment/paypal/captureOrder"
+
     ];
 }

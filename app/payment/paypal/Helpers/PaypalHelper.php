@@ -181,6 +181,7 @@ class PaypalHelper {
         }
         $returnData = $this->_createOrder($postData);
         $_SESSION['order_id'] = $returnData['id'];
+        //var_dump($_SESSION['order_id']);
 
         return array(
             "ack" => true,
