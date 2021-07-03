@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-curl": "*",
         "ext-json": "*",
         "encore/laravel-admin": "^1.8",
         "fideloper/proxy": "^4.4",
@@ -20,8 +21,7 @@
         "laravel-admin-ext/scheduling": "^1.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.2",
-        "ext-curl": "*"
+        "laravel/ui": "^3.2"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

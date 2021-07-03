@@ -1,72 +1,24 @@
 <?php
 
 use App\Models\matComponent;
+use App\Models\Config;
 
+session_start();
 $matComponents = matComponent::where('enable', 1)->get();
+$countryList = Config::where('ConfigName', 'countryList')->get();
 
 
+$urlCurrent = config('payment.paypal.URL.current');
 
-
-/*
-	* Config for PayPal specific values
-*/
-
-// Urls
-if(isset($_SERVER['SERVER_NAME'])) {
-    $url = @($_SERVER["HTTPS"] != 'on') ? 'http://' . $_SERVER["SERVER_NAME"] : 'https://' . $_SERVER["SERVER_NAME"];
-    $url .= ($_SERVER["SERVER_PORT"] !== 80) ? ":" . $_SERVER["SERVER_PORT"] : "";
-    $url .= $_SERVER["REQUEST_URI"];
-}
-else {
-    $url = "";
-}
-
-define("URL", array(
-
-    "current" => $url,
-
-    "services" => array(
-        "orderCreate" => 'api/createOrder.php',
-        "orderGet" => 'api/getOrderDetails.php',
-		"orderPatch" => 'api/patchOrder.php',
-		"orderCapture" => 'api/captureOrder.php'
-    ),
-
-	"redirectUrls" => array(
-        "returnUrl" => 'pages/success.php',
-		"cancelUrl" => 'pages/cancel.php',
-    )
-));
-
-// PayPal Environment
-const PAYPAL_ENVIRONMENT = "sandbox";
-
-// PayPal REST API endpoints
-const PAYPAL_ENDPOINTS = array(
-    "sandbox" => "https://api.sandbox.paypal.com",
-    "production" => "https://api.paypal.com"
-);
-
-// PayPal REST App credentials
-const PAYPAL_CREDENTIALS = array(
-    "sandbox" => [
-        "client_id" => "ASCs3KIocN5MuYCn8l7xhrzmqmQxoTYSWZzHFxlFGnXokO4QSOAwtT6kD22RkX3cNfU_R20fBlF8NC_3",
-        "client_secret" => "EJLpMe688yrAeT8hzRt57ZfxBDqSm2GazThLKTiCE_XC5Y3pqI2IvoozLTQ5kQGu9JZ2n2A0xT-SIrg0"
-    ],
-    "production" => [
-        "client_id" => "",
-        "client_secret" => ""
-    ]
-);
-
-// PayPal REST API version
-const PAYPAL_REST_VERSION = "v2";
-
-// ButtonSource Tracker Code
-const SBN_CODE = "PP-DemoPortal-EC-Psdk-ORDv2-php";
-
-$baseUrl = str_replace("index.php", "", URL['current']);
+$baseUrl = config('payment.paypal.URL.current');
 $rootPath = "";
+
+$return_url = config('payment.paypal.URL.redirectUrls.returnUrl');
+$cancel_url = config('payment.paypal.URL.redirectUrls.cancelUrl');
+
+$orderCreate = config('payment.paypal.URL.services.orderCreate');
+$orderGet = config('payment.paypal.URL.services.orderGet');
+
 
 ?>
 
@@ -79,8 +31,10 @@ $rootPath = "";
         <head>
             <title>{{ config('app.name') }} - Custom Mat Maker</title>
 
-            <script src="https://www.paypal.com/sdk/js?client-id=sb&intent=capture&vault=false&commit=true<?php echo isset($_GET['buyer-country']) ? "&buyer-country=" . $_GET['buyer-country'] : "" ?>"></script>
-
+            <script src="https://www.paypal.com/sdk/js?client-id=sb&intent=capture&vault=false&commit=true<?php echo isset($_GET['buyer-country']) ? "&buyer-country=".$_GET['buyer-country'] : "" ?>"></script>
+            <!-- paypal -->
+            <script src="{{asset('js/config.js')}}"></script>
+            <meta name="csrf-token" content="{{ csrf_token() }}">
         </head>
 
         <style>
@@ -92,9 +46,7 @@ $rootPath = "";
 
             .epFont {
                 font-family: elderfont;
-
             }
-
 
             .backgorundPreview {
                 position: relative;
@@ -102,7 +54,7 @@ $rootPath = "";
                 width: 100%;
             }
 
-            .playmatPreview{
+            .playmatPreview {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -364,165 +316,166 @@ $rootPath = "";
         </style>
 
         <body>
-<div class="container">
-        <div class="py-5">
-            <div class="animate__animated animate__fadeInDown">
-                <div class="p-5 shadow-sm rounded bg-degraded-2 text-dark  text-center">
-            <h1 class="display-4">Custom Playmat</h1>
-            <p class="lead">Browse through the options we offer and choose the perfect combination.<br>
-                The possibilities are many, but if you want something even more unique send us a e-mail:
-                <a href="mailto:hi@elderprotectors.com">hi@elderprotectors.com</a></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row featurette">
-
-
-            {{--Preview mat --}}
-            <div class="col col-md-7">
-                <div class="card mb-4 shadow-sm ">
-                    <div class="card-header d-flex justify-content-between">
-                        <h4 class="my-0 fw-normal">Preview</h4>
-                        <button class="btn btn-outline-dark" data-toggle="modal" data-target="#sharemodal"
-                                title="Share"><i class="fas fa-share-alt fa-lg"></i></button>
-                    </div>
-
-                    <div class="card-body">
-
-                        <div class="backgorundPreview">
-                            <block style="text-align: center;">
-
-                                <img class="backgorundPreview" id="img_Background"
-                                     src="{{asset('assets/img/customMat/fondo1.png')}}"
-                                     alt=""/>
-                                <img class="playmatPreview" id="img_Frame"
-                                     src="{{asset('assets/img/customMat/marco1.png')}}"
-                                     alt=""/>
-                                <img class="playmatPreview" id="img_Logo"
-                                     src="{{asset('assets/img/customMat/centro1.png')}}"
-                                     alt=""/>
-
-                                <div id="divText_top-left" class="top-left epFont" style="display: block"></div>
-                                <div id="divText_top-right" class="top-right epFont" style="display: none"></div>
-                                <div id="divText_bottom-left" class="bottom-left epFont"
-                                     style="display: none"></div>
-                                <div id="divText_bottom-right" class="bottom-right epFont"
-                                     style="display: none"></div>
-                                <div id="divText_centered" class="centered epFont" style="display: none"></div>
-
-                            </block>
-                        </div>
-
-                        <div class="input-group">
-                            {{--Code MatFinder/FasCreate--}}
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Code</span>
-                            </div>
-                            <input id="in_matCode" class="form-control" type="text"
-                                   placeholder="M-CXXX-FXXX-LXXX" required>
-                            <div class="input-group-append">
-                                <button onclick="matCodeFetch()" id="btn_matCodeCheck" type="button"
-                                        class="btn btn-outline-primary">
-                                    <i class="fas fa-search"></i></button>
-                            </div>
-                            {{--Code MatFinder/FasCreate--}}
-                        </div>
+        <div class="container">
+            <div class="py-5">
+                <div class="animate__animated animate__fadeInDown">
+                    <div class="p-5 shadow-sm rounded bg-degraded-2 text-dark  text-center">
+                        <h1 class="display-4">Custom Playmat</h1>
+                        <p class="lead">Browse through the options we offer and choose the perfect combination.<br>
+                            The possibilities are many, but if you want something even more unique send us a e-mail:
+                            <a href="mailto:hi@elderprotectors.com">hi@elderprotectors.com</a></p>
                     </div>
                 </div>
             </div>
-            {{--Preview mat End--}}
+
+            <div class="row featurette">
 
 
-            <div class="col-md-5 ">
-                {{--<form>--}}
+                {{--Preview mat --}}
+                <div class="col col-md-7">
+                    <div class="card mb-4 shadow-sm ">
+                        <div class="card-header d-flex justify-content-between">
+                            <h4 class="my-0 fw-normal">Preview</h4>
+                            <button class="btn btn-outline-dark" data-toggle="modal" data-target="#sharemodal"
+                                    title="Share"><i class="fas fa-share-alt fa-lg"></i></button>
+                        </div>
 
-                <label for="select_Background">Background</label>
-                <select id="select_Background" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
-                        name="selectBackground">
-                    <?php
-                    foreach ($matComponents->where('type', 'B') as $Component) {
-                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
-                    }
-                    ?>
-                </select>
-                <br>
+                        <div class="card-body">
 
-                <label for="select_Frame">Frame</label>
-                <select id="select_Frame" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
-                        name="selectFrame">
-                    <?php
-                    foreach ($matComponents->where('type', 'F') as $Component) {
-                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
-                    }
-                    ?>
-                    <option id='SM' value="SM">SM</option>
-                </select>
-                <br>
+                            <div class="backgorundPreview">
+                                {{--<block style="text-align: center;">--}}
 
-                <label for="select_Logo">Logo</label>
-                <select id="select_Logo" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
-                        name="selectLogo">
-                    <?php
-                    foreach ($matComponents->where('type', 'L') as $Component) {
-                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
-                    }
-                    ?>
-                    <option id='SC' value="SC">SC</option>
-                </select>
+                                    <img class="backgorundPreview" id="img_Background"
+                                         src="{{asset('assets/img/customMat/fondo1.png')}}"
+                                         alt=""/>
+                                    <img class="playmatPreview" id="img_Frame"
+                                         src="{{asset('assets/img/customMat/marco1.png')}}"
+                                         alt=""/>
+                                    <img class="playmatPreview" id="img_Logo"
+                                         src="{{asset('assets/img/customMat/centro1.png')}}"
+                                         alt=""/>
 
-                <div class="d-block my-3">
-                    <label for="matText">Mat Custom Text</label>
-                    <input id="matText" onkeyup="customTextLabel(this)" type="text" class="form-control" placeholder=""
-                           maxlength="25">
+                                    <div id="divText_top-left" class="top-left epFont" style="display: block"></div>
+                                    <div id="divText_top-right" class="top-right epFont" style="display: none"></div>
+                                    <div id="divText_bottom-left" class="bottom-left epFont"
+                                         style="display: none"></div>
+                                    <div id="divText_bottom-right" class="bottom-right epFont"
+                                         style="display: none"></div>
+                                    <div id="divText_centered" class="centered epFont" style="display: none"></div>
+
+                                {{--</block>--}}
+                            </div>
+
+                            <div class="input-group">
+                                {{--Code MatFinder/FasCreate--}}
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Code</span>
+                                </div>
+                                <label for="in_matCode"></label><input id="in_matCode" class="form-control" type="text"
+                                                                       placeholder="M-CXXX-FXXX-LXXX" required>
+                                <div class="input-group-append">
+                                    <button onclick="matCodeFetch()" id="btn_matCodeCheck" type="button"
+                                            class="btn btn-outline-primary">
+                                        <i class="fas fa-search"></i></button>
+                                </div>
+                                {{--Code MatFinder/FasCreate--}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                {{--Preview mat End--}}
 
-                <div id="TextLabelRadiobutton" style="display: none">
+
+                <div class="col-md-5 ">
+                    {{--<form>--}}
+
+                    <label for="select_Background">Background</label>
+                    <select id="select_Background" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
+                            name="selectBackground">
+                        <?php
+                        foreach($matComponents->where('type', 'B') as $Component) {
+                            echo '<option id='.$Component->code.' value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->description)).'</option>';
+                        }
+                        ?>
+                    </select>
+                    <br>
+
+                    <label for="select_Frame">Frame</label>
+                    <select id="select_Frame" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
+                            name="selectFrame">
+                        <?php
+                        foreach($matComponents->where('type', 'F') as $Component) {
+                            echo '<option id='.$Component->code.' value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->description)).'</option>';
+                        }
+                        ?>
+                        <option id='SM' value="SM">SM</option>
+                    </select>
+                    <br>
+
+                    <label for="select_Logo">Logo</label>
+                    <select id="select_Logo" class="custom-select d-block w-100" onchange="sl_OnChange(this)"
+                            name="selectLogo">
+                        <?php
+                        foreach($matComponents->where('type', 'L') as $Component) {
+                            echo '<option id='.$Component->code.' value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->description)).'</option>';
+                        }
+                        ?>
+                        <option id='SC' value="SC">SC</option>
+                    </select>
+
                     <div class="d-block my-3">
-
-                        <div class="form-check">
-                            <input id="rb_top-left" onchange="rbCustomTextPosition_Onchange(this)"
-                                   class="form-check-input" type="radio" name="textPosition" checked>
-                            <label class="form-check-label" for="rb_top-left">TopLeft</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="rb_top-right" onchange="rbCustomTextPosition_Onchange(this)"
-                                   class="form-check-input" type="radio" name="textPosition">
-                            <label class="form-check-label" for="rb_top-right">TopRight</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="rb_bottom-left" onchange="rbCustomTextPosition_Onchange(this)"
-                                   class="form-check-input" type="radio" name="textPosition">
-                            <label class="form-check-label" for="rb_bottom-left">BottomLeft</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="rb_bottom-right" onchange="rbCustomTextPosition_Onchange(this)"
-                                   class="form-check-input" type="radio" name="textPosition">
-                            <label class="form-check-label" for="rb_bottom-right">BottomRight</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="rb_centered" onchange="rbCustomTextPosition_Onchange(this)"
-                                   class="form-check-input" type="radio" name="textPosition">
-                            <label class="form-check-label" for="rb_centered">Center</label>
-                        </div>
-
+                        <label for="matText">Mat Custom Text</label>
+                        <input id="matText" onkeyup="customTextLabel(this)" type="text" class="form-control"
+                               placeholder=""
+                               maxlength="25">
                     </div>
+
+                    <div id="TextLabelRadiobutton" style="display: none">
+                        <div class="d-block my-3">
+
+                            <div class="form-check">
+                                <input id="rb_top-left" onchange="rbCustomTextPosition_Onchange(this)"
+                                       class="form-check-input" type="radio" name="textPosition" checked>
+                                <label class="form-check-label" for="rb_top-left">TopLeft</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="rb_top-right" onchange="rbCustomTextPosition_Onchange(this)"
+                                       class="form-check-input" type="radio" name="textPosition">
+                                <label class="form-check-label" for="rb_top-right">TopRight</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="rb_bottom-left" onchange="rbCustomTextPosition_Onchange(this)"
+                                       class="form-check-input" type="radio" name="textPosition">
+                                <label class="form-check-label" for="rb_bottom-left">BottomLeft</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="rb_bottom-right" onchange="rbCustomTextPosition_Onchange(this)"
+                                       class="form-check-input" type="radio" name="textPosition">
+                                <label class="form-check-label" for="rb_bottom-right">BottomRight</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="rb_centered" onchange="rbCustomTextPosition_Onchange(this)"
+                                       class="form-check-input" type="radio" name="textPosition">
+                                <label class="form-check-label" for="rb_centered">Center</label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <br><br>
+
+                    <div>
+                        <button onclick="bt_ILikeIt_action()" type="button"
+                                class="w-100 btn btn-lg btn-primary">
+                            i like it!
+                        </button>
+                    </div>
+
+                    {{--</form>--}}
                 </div>
-
-                <br><br>
-
-                <div>
-                    <button onclick="bt_ILikeIt_action()" type="button"
-                            class="w-100 btn btn-lg btn-primary">
-                        i like it!
-                    </button>
-                </div>
-
-                {{--</form>--}}
             </div>
-        </div>
 
-</div>
+        </div>
 
         <hr class="featurette-divider">
 
@@ -557,10 +510,7 @@ $rootPath = "";
                     </ul>
 
 
-
-
-
-                        {{--Gif Box Colapse--}}
+                    {{--Gif Box Colapse--}}
                     <ul class="list-group mb-3" id="ul_shoppingCar">
 
                         <li id="input-group" class="list-group-item d-flex justify-content-between">
@@ -573,14 +523,15 @@ $rootPath = "";
                             </div>
                             <span class="text-success d-flex justify-content-end"> FREE </span>
                         </li>
-                        <form class="list-group-item p-2">
+                        <li class="list-group-item p-2">
                             <div id="collapseGift" class="collapse" data-parent="#collapseGift">
-                                <textarea id="giftText" type="text" class="form-control" maxlength="125"> With love from:</textarea>
+                                <label for="giftText"></label><textarea id="giftText" type="text" class="form-control"
+                                                                        maxlength="125"> With love from:</textarea>
                             </div>
-                        </form>
+                        </li>
                     </ul>
 
-                        {{--Gif Box Colapse END--}}
+                    {{--Gif Box Colapse END--}}
 
 
                     {{--Promo Code Input--}}
@@ -589,8 +540,8 @@ $rootPath = "";
                         <div>
                             <div class="card p-2">
                                 <div class="input-group">
-                                    <input id="in_promoCode" type="text" class="form-control" placeholder="Promo code"
-                                           value="PROMOVALIDA2">
+                                    <label for="in_promoCode"></label><input id="in_promoCode" type="text" class="form-control" placeholder="Promo code"
+                                                                             value="PROMOVALIDA2">
 
                                     <div class="input-group-append">
                                         <button onclick="addPromoCode()" type="submit" class="btn btn-secondary">Redeem
@@ -601,7 +552,6 @@ $rootPath = "";
                         </div>
                     </ul>
                     {{--Promo Code Input END--}}
-
 
 
                 </div>
@@ -666,11 +616,14 @@ $rootPath = "";
                     {{-- TODO crea auto Metohd 4 fill it --}}
                     <div class="row">
                         <div class="col-md-3 mb-6">
-                            <label for="country">Country</label>
-                            <input id="country" type="text" class="form-control" placeholder="" value="Mexico">
-                            <div class="invalid-feedback">
-                                Please provide a valid country.
-                            </div>
+                            <label for="countrySelect">Country</label>
+                            <select id="countrySelect" class="form-control" name="countrySelect" >
+                                <?php
+                                foreach($countryList as $country) {
+                                    echo '<option value='.$country->value.' > '.$country->description.'</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
                         <div class="col-md-3 mb-6">
                             <label for="state">State</label>
@@ -864,8 +817,10 @@ $rootPath = "";
                                 <span class="input-group-text">Code</span>
                             </div>
 
-                            <input class="form-control" type="text"
-                                   placeholder="M-CXXX-FXXX-LXXX" required>
+                            <label>
+                                <input class="form-control" type="text"
+                                       placeholder="M-CXXX-FXXX-LXXX" required>
+                            </label>
                             <div class="input-group-append">
                                 <button onclick="copy" id="copy" type="button"
                                         class="btn btn-primary">
@@ -892,33 +847,33 @@ $rootPath = "";
                     <div class="modal-body">
                         <div class="card-body">
                             <div class="containerIMGPreview">
-                                <block style="text-align: center;">
-                                    <img class="background" id="img_Background_preview"
-                                         src="{{asset('assets/img/customMat/fondo1.png')}}"
-                                         alt=""/>
-                                    <img class="playmatPreview" id="img_Frame_preview"
-                                         src="{{asset('assets/img/customMat/marco1.png')}}"
-                                         alt=""/>
-                                    <img class="playmatPreview" id="img_Logo_preview"
-                                         src="{{asset('assets/img/customMat/centro1.png')}}"
-                                         alt=""/>
 
-                                    <div id="divText_top-left" class="top-left epFont"
-                                         style="display: block"></div>
-                                    <div id="divText_top-right" class="top-right epFont"
-                                         style="display: none"></div>
-                                    <div id="divText_bottom-left" class="bottom-left epFont"
-                                         style="display: none"></div>
-                                    <div id="divText_bottom-right" class="bottom-right epFont"
-                                         style="display: none"></div>
-                                    <div id="divText_centered" class="centered epFont"
-                                         style="display: none"></div>
+                                <img class="background" id="img_Background_preview"
+                                     src="{{asset('assets/img/customMat/fondo1.png')}}"
+                                     alt=""/>
+                                <img class="playmatPreview" id="img_Frame_preview"
+                                     src="{{asset('assets/img/customMat/marco1.png')}}"
+                                     alt=""/>
+                                <img class="playmatPreview" id="img_Logo_preview"
+                                     src="{{asset('assets/img/customMat/centro1.png')}}"
+                                     alt=""/>
 
-                                    <h6>
-                                        <span class="badge badge-primary">Code:</span>
-                                        <a id="code_preview">M-CXXX-FXXX-LXXX</a>
-                                    </h6>
-                                </block>
+                                <div id="divText_top-left" class="top-left epFont"
+                                     style="display: block"></div>
+                                <div id="divText_top-right" class="top-right epFont"
+                                     style="display: none"></div>
+                                <div id="divText_bottom-left" class="bottom-left epFont"
+                                     style="display: none"></div>
+                                <div id="divText_bottom-right" class="bottom-right epFont"
+                                     style="display: none"></div>
+                                <div id="divText_centered" class="centered epFont"
+                                     style="display: none"></div>
+
+                                <h6>
+                                    <span class="badge badge-primary">Code:</span>
+                                    <a id="code_preview">M-CXXX-FXXX-LXXX</a>
+                                </h6>
+
                             </div>
                         </div>
                     </div>
@@ -953,7 +908,7 @@ $rootPath = "";
                                         </div>
                                         <div class="card-body">
                                             <div class="containerIMGPreview">
-                                                <block style="text-align: center;">
+                                                {{--<block style="text-align: center;">--}}
                                                     <img id="img_Edit_Background" class="fondo"
                                                          src="{{asset('assets/img/customMat/fondo1.png')}}" alt=""/>
                                                     <img id="img_Edit_Frame" class="playmatPreview"
@@ -973,15 +928,18 @@ $rootPath = "";
                                                     <div id="divText_Edit_centered" class="centered epFont"
                                                          style="display: none"></div>
                                                     {{--Custom Text Edit End--}}
-                                                </block>
+                                                {{--</block>--}}
                                             </div>
                                             <div class="input-group">
                                                 {{--Code MatFinder/FasCreate--}}
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">Code</span>
                                                 </div>
-                                                <input id="in_Edit_matCode" class="form-control" type="text"
-                                                       placeholder="M-CXXX-FXXX-LXXX">
+
+                                                <label for="in_Edit_matCode"></label><input id="in_Edit_matCode"
+                                                                                            class="form-control"
+                                                                                            type="text"
+                                                                                            placeholder="M-CXXX-FXXX-LXXX">
                                                 <div class="input-group-append">
                                                     {{-- TODO agregar funcion de Fetch Solo para Editar --}}
                                                     <button onclick="matCodeFetch()" id="btn_Edit_matCodeCheck"
@@ -1007,8 +965,8 @@ $rootPath = "";
                                         onchange="sl_OnChangeEdit(this)"
                                         name="selectFondo">
                                     <?php
-                                    foreach ($matComponents->where('type', 'B') as $Component) {
-                                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
+                                    foreach($matComponents->where('type', 'B') as $Component) {
+                                        echo '<option id='.$Component->code.' value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->description)).'</option>';
                                     }
                                     ?>
                                 </select>
@@ -1019,8 +977,8 @@ $rootPath = "";
                                         onchange="sl_OnChangeEdit(this)"
                                         name="selectMarco">
                                     <?php
-                                    foreach ($matComponents->where('type', 'F') as $Component) {
-                                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
+                                    foreach($matComponents->where('type', 'F') as $Component) {
+                                        echo '<option id='.$Component->code.' value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->description)).'</option>';
                                     }
                                     ?>
                                     <option value="SM">SM</option>
@@ -1032,8 +990,8 @@ $rootPath = "";
                                         onchange="sl_OnChangeEdit(this)"
                                         name="selectCentro">
                                     <?php
-                                    foreach ($matComponents->where('type', 'L') as $Component) {
-                                        echo '<option id=' . $Component->code . ' value=' . $Component->fileName . '>' . str_replace(' ', '', ($Component->description)) . '</option>';
+                                    foreach($matComponents->where('type', 'L') as $Component) {
+                                        echo '<option id='.$Component->code.' value='.$Component->fileName.'>'.str_replace(' ', '', ($Component->description)).'</option>';
                                     }
                                     ?>
                                     <option value="SC">SC</option>
@@ -1135,7 +1093,7 @@ $rootPath = "";
                 }).then(function (response) {
                     return response.text();
                 }).then(function (payload) {
-                    var obj = JSON.parse(payload);
+                    let obj = JSON.parse(payload);
 
                     if (obj['result']) {
                         modShoppingCar(obj);
@@ -1168,7 +1126,7 @@ $rootPath = "";
                     return response.text();
                 }).then(function (payload) {
 
-                    var obj = JSON.parse(payload);
+                    let obj = JSON.parse(payload);
                     if (obj.result) {
                         setSelectsByMatCode(obj);
                         Swal.fire({
@@ -1219,7 +1177,7 @@ $rootPath = "";
                     return response.text();
                 }).then(function (payload) {
 
-                    var obj = JSON.parse(payload);
+                    let obj = JSON.parse(payload);
 
                     if (obj['result']) {
                         modShoppingCar(obj);
@@ -1267,7 +1225,7 @@ $rootPath = "";
                     return response.text();
                 }).then(function (payload) {
 
-                    var obj = JSON.parse(payload);
+                    let obj = JSON.parse(payload);
 
                     if (obj['result']) {
                         modShoppingCar(obj);
@@ -1283,7 +1241,6 @@ $rootPath = "";
             }
 
             function addPromoCode() {
-                var retCallBack = false;
 
                 let promoCode = {
                     promoCode: document.getElementById('in_promoCode').value,
@@ -1299,7 +1256,7 @@ $rootPath = "";
                     return response.text();
                 }).then(function (payload) {
 
-                    var obj = JSON.parse(payload);
+                    let obj = JSON.parse(payload);
 
                     if (obj['result']) {
                         modShoppingCar(obj);
@@ -1614,7 +1571,7 @@ $rootPath = "";
                     return response.text();
                 }).then(function (payload) {
 
-                    var obj = JSON.parse(payload);
+                    let obj = JSON.parse(payload);
 
                     if (obj.result) {
 
@@ -1719,7 +1676,7 @@ $rootPath = "";
                     return response.text();
                 }).then(function (payload) {
 
-                    var obj = JSON.parse(payload);
+                    let obj = JSON.parse(payload);
 
                     if (obj.result) {
 
@@ -1750,6 +1707,10 @@ $rootPath = "";
 
             function sendEdit() {
 
+                let product = {
+                    matCode: document.getElementById('in_matCode').value
+                };
+
                 fetch('http://127.0.0.1:8000/api/product/editProduct', {
                     method: 'POST',
                     headers: {
@@ -1761,7 +1722,7 @@ $rootPath = "";
                     return response.text();
                 }).then(function (payload) {
 
-                    var obj = JSON.parse(payload);
+                    let obj = JSON.parse(payload);
 
                     if (obj['result']) {
                         modShoppingCar(obj);
@@ -1804,7 +1765,7 @@ $rootPath = "";
                 }).then(function (response) {
                     return response.text();
                 }).then(function (payload) {
-                    var obj = JSON.parse(payload);
+                    let obj = JSON.parse(payload);
 
                     if (obj['result']) {
                         window.location.href = "success";
@@ -1821,8 +1782,8 @@ $rootPath = "";
 
 
             function formatPhoneNumber(phoneNumberString) {
-                var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
-                var match = cleaned.match(/^(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3,4})([-\s\.]?[0-9]{3,4})$/);
+                let cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+                let match = cleaned.match(/^(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s.]?[(]?[0-9]{1,3}[)]?([-\s.]?[0-9]{3,4})([-\s.]?[0-9]{3,4})$/);
                 if (match) {
                     return '(' + match[1] + ') ' + match[2] + '-' + match[3];
                 }
@@ -1830,71 +1791,74 @@ $rootPath = "";
             }
 
 
-
             /////////////////////////////////////////////////////////////////
             paypal.Buttons({
 
                 // Set your environment
-                env: 'sandbox',
+                env: '<?= config('payment.paypal.PAYPAL_ENVIRONMENT') ?>',
 
                 // Set style of buttons
                 style: {
                     layout: 'vertical',   // horizontal | vertical
-                    size:   'responsive',   // medium | large | responsive
-                    shape:  'pill',         // pill | rect
-                    color:  'gold',         // gold | blue | silver | black,
+                    size: 'responsive',   // medium | large | responsive
+                    shape: 'pill',         // pill | rect
+                    color: 'gold',         // gold | blue | silver | black,
                     fundingicons: false,    // true | false,
                     tagline: false          // true | false,
                 },
 
                 // Wait for the PayPal button to be clicked
-                createOrder: function() {
+                createOrder: function () {
                     let formData = new FormData();
-                    formData.append('item_amt', document.getElementById("camera_amount").value);
-                    formData.append('tax_amt', document.getElementById("tax_amt").value);
-                    formData.append('handling_fee', document.getElementById("handling_fee").value);
-                    formData.append('insurance_fee', document.getElementById("insurance_fee").value);
-                    formData.append('shipping_amt', document.getElementById("shipping_amt").value);
-                    formData.append('shipping_discount', document.getElementById("shipping_discount").value);
-                    formData.append('total_amt', document.getElementById("total_amt").value);
-                    formData.append('currency', document.getElementById("currency_Code").value);
-                    formData.append('return_url',  '<?= $baseUrl.URL["redirectUrls"]["returnUrl"]?>' + '?commit=true');
-                    formData.append('cancel_url', '<?= $baseUrl.URL["redirectUrls"]["cancelUrl"]?>');
+                    formData.append('code', 'CODIGODEPLAYMAT');
+                    formData.append('item_amt', '1');
+                    formData.append('tax_amt', '5');
+                    formData.append('handling_fee', '5');
+                    formData.append('insurance_fee', '10');
+                    formData.append('shipping_amt', '2');
+                    formData.append('shipping_discount', '2');
+                    formData.append('total_amt', '320');
+                    formData.append('currency', 'USD');
+
+                    formData.append('return_url', '<?= $baseUrl.$return_url ?>' + '?commit=true');
+                    formData.append('cancel_url', '<?= $baseUrl.$cancel_url ?>');
+
 
                     return fetch(
-                        '<?= $rootPath.URL['services']['orderCreate']?>',
-                        {
+                        //'http://localhost:8000/api/payment/paypal/createOrder', {
+                        '<?= $rootPath.$orderCreate ?>',{
                             method: 'POST',
                             body: formData
                         }
-                    ).then(function(response) {
+                    ).then(function (response) {
                         return response.json();
-                    }).then(function(resJson) {
-                        console.log('Order ID: '+ resJson.data.id);
+                    }).then(function (resJson) {
+                        console.log(resJson);
+                        console.log('Order ID: ' + resJson.data.id);
                         return resJson.data.id;
                     });
                 },
 
                 // Wait for the payment to be authorized by the customer
-                onApprove: function(data, actions) {
+                onApprove: function (data, actions) {
                     return fetch(
-                        '<?= $rootPath.URL['services']['orderGet'] ?>',
-                        {
+                        '<?= $rootPath.$orderGet ?>', {
                             method: 'GET'
                         }
-                    ).then(function(res) {
+                    ).then(function (res) {
                         return res.json();
-                    }).then(function(res) {
-                        window.location.href = 'pages/success.php';
+                    }).then(function (res) {
+                        window.location.href = '/success';
                     });
                 }
 
             }).render('#paypalCheckoutContainer');
 
-
-
-
-
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
 
         </script>

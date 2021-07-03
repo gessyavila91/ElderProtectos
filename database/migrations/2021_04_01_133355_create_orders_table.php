@@ -27,7 +27,7 @@ class CreateOrdersTable extends Migration {
             $table->string('trackNumber'); // numero de reastreo
 
             $table->string('paymentMethod'); //metodo de pago
-            $table->bool('paymentConfirmation'); // confirmacion dedl pago
+            $table->boolean('paymentConfirmation'); // confirmacion dedl pago
             $table->string('paymentData'); // informaicion del pago
             $table->dateTime('paymentConfirmDate'); //fecha de confirmacion del pago
 

@@ -3,10 +3,10 @@
 if(isset($_SERVER['SERVER_NAME'])) {
     $url = @($_SERVER["HTTPS"] != 'on') ? 'http://' . $_SERVER["SERVER_NAME"] : 'https://' . $_SERVER["SERVER_NAME"];
     $url .= ($_SERVER["SERVER_PORT"] !== 80) ? ":" . $_SERVER["SERVER_PORT"] : "";
-    $url .= $_SERVER["REQUEST_URI"];
+    //$url .= $_SERVER["REQUEST_URI"];
 }
 else {
-    $url = "localhost:8000";
+    $url = "";
 }
 
 return[
@@ -23,14 +23,14 @@ return[
         "current" => $url,
 
         'services' => [
-            'orderCreate' =>  'api/createOrder.php',
-            'orderGet' =>     'api/getOrderDetails.php',
-            'orderPatch' =>   'api/patchOrder.php',
-            'orderCapture' => 'api/captureOrder.php'
+            'orderCreate' =>  'api/payment/paypal/createOrder',
+            'orderGet' =>     'api/payment/paypal/getOrderDetails',
+            'orderPatch' =>   'api/payment/paypal/patchOrder',
+            'orderCapture' => 'api/payment/paypal/captureOrderp'
         ],
         'redirectUrls' =>[
-            'returnUrl' => 'pages/success.php',
-            'cancelUrl' => 'pages/cancel.php'
+            'returnUrl' => '/success',
+            'cancelUrl' => '/cancel'
         ]
     ],
 
@@ -64,8 +64,8 @@ return[
     */
     'PAYPAL_CREDENTIALS' =>[
         "sandbox" => [
-            "client_id" => env('CLIENT_ID_SANDBOX' ),
-            "client_secret" => env('CLIENT_SECRET_SANDBOX')
+            "client_id" => env('CLIENT_ID_SANDBOX','ASCs3KIocN5MuYCn8l7xhrzmqmQxoTYSWZzHFxlFGnXokO4QSOAwtT6kD22RkX3cNfU_R20fBlF8NC_3'),
+            "client_secret" => env('CLIENT_SECRET_SANDBOX','EJLpMe688yrAeT8hzRt57ZfxBDqSm2GazThLKTiCE_XC5Y3pqI2IvoozLTQ5kQGu9JZ2n2A0xT-SIrg0')
         ],
         "production" => [
             "client_id" => env('CLIENT_ID_PRODUCTION'),

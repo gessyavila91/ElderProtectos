@@ -14,7 +14,7 @@ class ExampleController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Example controller';
+    protected $title = 'Example Controllers';
 
     /**
      * Make a grid builder.

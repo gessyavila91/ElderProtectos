@@ -5,6 +5,7 @@
 	*	
 	* 	A class that provides a curl instance with default setup.
 */
+namespace App\payment\paypal\Helpers;
 
 class HttpHelper {
 	

@@ -2,12 +2,14 @@
 session_start();
 include_once('HttpHelper.php');
 
+
+
 /**
 	*	PayPal helper class for REST API requests.
 	*	
 */
 
-class PayPalHelper {
+class PayPalHelperOrigin {
 	
 	private $_http = null;
 	private $_apiUrl = null;
