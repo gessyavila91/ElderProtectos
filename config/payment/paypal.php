@@ -29,7 +29,7 @@ return[
             'orderCapture' => 'api/payment/paypal/captureOrder'
         ],
         'redirectUrls' =>[
-            'returnUrl' => '/success',
+            'returnUrl' => '/checkout',
             'cancelUrl' => '/cancel'
         ]
     ],

@@ -19,7 +19,6 @@ $cancel_url = config('payment.paypal.URL.redirectUrls.cancelUrl');
 $orderCreate = config('payment.paypal.URL.services.orderCreate');
 $orderGet = config('payment.paypal.URL.services.orderGet');
 
-
 ?>
 
 <x-app-layout>
@@ -345,23 +344,23 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                             <div class="backgorundPreview">
                                 {{--<block style="text-align: center;">--}}
 
-                                    <img class="backgorundPreview" id="img_Background"
-                                         src="{{asset('assets/img/customMat/fondo1.png')}}"
-                                         alt=""/>
-                                    <img class="playmatPreview" id="img_Frame"
-                                         src="{{asset('assets/img/customMat/marco1.png')}}"
-                                         alt=""/>
-                                    <img class="playmatPreview" id="img_Logo"
-                                         src="{{asset('assets/img/customMat/centro1.png')}}"
-                                         alt=""/>
+                                <img class="backgorundPreview" id="img_Background"
+                                     src="{{asset('assets/img/customMat/fondo1.png')}}"
+                                     alt=""/>
+                                <img class="playmatPreview" id="img_Frame"
+                                     src="{{asset('assets/img/customMat/marco1.png')}}"
+                                     alt=""/>
+                                <img class="playmatPreview" id="img_Logo"
+                                     src="{{asset('assets/img/customMat/centro1.png')}}"
+                                     alt=""/>
 
-                                    <div id="divText_top-left" class="top-left epFont" style="display: block"></div>
-                                    <div id="divText_top-right" class="top-right epFont" style="display: none"></div>
-                                    <div id="divText_bottom-left" class="bottom-left epFont"
-                                         style="display: none"></div>
-                                    <div id="divText_bottom-right" class="bottom-right epFont"
-                                         style="display: none"></div>
-                                    <div id="divText_centered" class="centered epFont" style="display: none"></div>
+                                <div id="divText_top-left" class="top-left epFont" style="display: block"></div>
+                                <div id="divText_top-right" class="top-right epFont" style="display: none"></div>
+                                <div id="divText_bottom-left" class="bottom-left epFont"
+                                     style="display: none"></div>
+                                <div id="divText_bottom-right" class="bottom-right epFont"
+                                     style="display: none"></div>
+                                <div id="divText_centered" class="centered epFont" style="display: none"></div>
 
                                 {{--</block>--}}
                             </div>
@@ -540,7 +539,9 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                         <div>
                             <div class="card p-2">
                                 <div class="input-group">
-                                    <label for="in_promoCode"></label><input id="in_promoCode" type="text" class="form-control" placeholder="Promo code"
+                                    <label for="in_promoCode"></label><input id="in_promoCode" type="text"
+                                                                             class="form-control"
+                                                                             placeholder="Promo code"
                                                                              value="PROMOVALIDA2">
 
                                     <div class="input-group-append">
@@ -615,7 +616,7 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                     <div class="row">
                         <div class="col-md-3 mb-6">
                             <label for="countrySelect">Country</label>
-                            <select id="countrySelect" class="form-control" name="countrySelect" >
+                            <select id="countrySelect" class="form-control" name="countrySelect">
                                 <?php
                                 foreach($countryList as $country) {
                                     echo '<option value='.$country->value.' > '.$country->description.'</option>';
@@ -765,7 +766,6 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                     <button onclick="checkout()" class="btn btn-primary btn-lg btn-block" type="submit">Continue to
                         checkout
                     </button>
-
                     {{--</form>--}}
                 </div>
 
@@ -900,25 +900,25 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                                         <div class="card-body">
                                             <div class="containerIMGPreview">
                                                 {{--<block style="text-align: center;">--}}
-                                                    <img id="img_Edit_Background" class="fondo"
-                                                         src="{{asset('assets/img/customMat/fondo1.png')}}" alt=""/>
-                                                    <img id="img_Edit_Frame" class="playmatPreview"
-                                                         src="{{asset('assets/img/customMat/marco1.png')}}" alt=""/>
-                                                    <img id="img_Edit_Logo" class="playmatPreview"
-                                                         src="{{asset('assets/img/customMat/centro1.png')}}" alt=""/>
+                                                <img id="img_Edit_Background" class="fondo"
+                                                     src="{{asset('assets/img/customMat/fondo1.png')}}" alt=""/>
+                                                <img id="img_Edit_Frame" class="playmatPreview"
+                                                     src="{{asset('assets/img/customMat/marco1.png')}}" alt=""/>
+                                                <img id="img_Edit_Logo" class="playmatPreview"
+                                                     src="{{asset('assets/img/customMat/centro1.png')}}" alt=""/>
 
-                                                    {{--Custom Text Edit--}}
-                                                    <div id="divText_Edit_top-left" class="top-left epFont"
-                                                         style="display: none"></div>
-                                                    <div id="divText_Edit_top-right" class="top-right epFont"
-                                                         style="display: none"></div>
-                                                    <div id="divText_Edit_bottom-left" class="bottom-left epFont"
-                                                         style="display: none"></div>
-                                                    <div id="divText_Edit_bottom-right" class="bottom-right epFont"
-                                                         style="display: none"></div>
-                                                    <div id="divText_Edit_centered" class="centered epFont"
-                                                         style="display: none"></div>
-                                                    {{--Custom Text Edit End--}}
+                                                {{--Custom Text Edit--}}
+                                                <div id="divText_Edit_top-left" class="top-left epFont"
+                                                     style="display: none"></div>
+                                                <div id="divText_Edit_top-right" class="top-right epFont"
+                                                     style="display: none"></div>
+                                                <div id="divText_Edit_bottom-left" class="bottom-left epFont"
+                                                     style="display: none"></div>
+                                                <div id="divText_Edit_bottom-right" class="bottom-right epFont"
+                                                     style="display: none"></div>
+                                                <div id="divText_Edit_centered" class="centered epFont"
+                                                     style="display: none"></div>
+                                                {{--Custom Text Edit End--}}
                                                 {{--</block>--}}
                                             </div>
                                             <div class="input-group">
@@ -1792,7 +1792,7 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                 style: {
                     layout: 'vertical',   // horizontal | vertical
                     size: 'responsive',   // medium | large | responsive
-                    shape: 'pill',         // pill | rect
+                    shape: 'rect',         // pill | rect
                     color: 'gold',         // gold | blue | silver | black,
                     fundingicons: false,    // true | false,
                     tagline: false          // true | false,
@@ -1816,15 +1816,13 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
 
 
                     return fetch(
-                        //'http://localhost:8000/api/payment/paypal/createOrder', {
-                        '<?= $rootPath.$orderCreate ?>',{
+                        '<?= $rootPath.$orderCreate ?>', {
                             method: 'POST',
                             body: formData
                         }
                     ).then(function (response) {
                         return response.json();
                     }).then(function (resJson) {
-                        console.log(resJson);
                         console.log('Order ID: ' + resJson.data.id);
                         return resJson.data.id;
                     });
@@ -1839,7 +1837,7 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                     ).then(function (res) {
                         return res.json();
                     }).then(function (res) {
-                        window.location.href = '/success';
+                        window.location.href = '<?= $baseUrl.$return_url ?>';
                     });
                 }
 

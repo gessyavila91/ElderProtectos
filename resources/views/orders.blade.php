@@ -6,27 +6,24 @@
         <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
         <head>
-            <title>{{ config('app.name') }} - Custom Mat Maker</title>
-
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-                  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-                  crossorigin="anonymous">
+            <title>{{ config('app.name') }} - Orders</title>
         </head>
 
         <div class="container">
             {{--<head>--}}
-            <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-                <h1 class="display-4">Look up orders</h1>
-                <p class="lead">Search your order, enter the code that we send you by mail,<br>
-                    if you have any problems please send us an e-mail:
-                    <a href="mailto:hi@elderprotectors.com">hi@elderprotectors.com</a></p>
+            <div class="py-5">
+                <div class="animate__animated animate__fadeInDown">
+                    <div class="p-5 shadow-sm rounded bg-degraded-2 text-dark  text-center">
+                        <h1 class="display-4">Look up orders</h1>
+                        <p class="lead">Search your order, enter the code that we send you by mail,<br>
+                            if you have any problems please send us an e-mail:
+                            <a href="mailto:hi@elderprotectors.com">hi@elderprotectors.com</a></p>
+                    </div>
+                </div>
             </div>
 
-            <hr class="featurette-divider">
-
-
             {{--<Search>--}}
-
+            <div class="animate__animated animate__fadeInUp">
             <div class="d-flex justify-content-center">
                 <div class="input-group w-50">
                     <div class="input-group-prepend">
@@ -40,6 +37,7 @@
                             <i class="fas fa-search"></i></button>
                     </div>
                 </div>
+            </div>
             </div>
 
 

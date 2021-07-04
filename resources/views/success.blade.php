@@ -1,301 +1,289 @@
-<?php
-
-use App\Models\matComponent;
-use App\Models\Config;
-use Illuminate\Support\Facades\Session;
-
-session_start();
-/*
-$matComponents = matComponent::where('enable', 1)->get();
-$countryList = Config::where('ConfigName', 'countryList')->get();
-
-
-$urlCurrent = config('payment.paypal.URL.current');
-
-$baseUrl = config('payment.paypal.URL.current');*/
-$rootPath = "";
-
-/*$return_url = config('payment.paypal.URL.redirectUrls.returnUrl');
-$cancel_url = config('payment.paypal.URL.redirectUrls.cancelUrl');
-
-$orderCreate = config('payment.paypal.URL.services.orderCreate');
-$orderGet = config('payment.paypal.URL.services.orderGet');*/
-/*if (isset($_SESSION['order_id']) ){
-    var_dump($_SESSION['order_id']);
-}*/
-
-
-
-
-?>
-
 <x-app-layout>
 
     @section('content')
+
+        <!DOCTYPE html>
+        <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
         <head>
-            <title>{{ config('app.name') }} - Custom Mat Maker</title>
+            <title>{{ config('app.name') }} - Check Out</title>
 
-            <script src="https://www.paypal.com/sdk/js?client-id=sb&intent=capture&vault=false&commit=true<?php echo isset($_GET['buyer-country']) ? "&buyer-country=".$_GET['buyer-country'] : "" ?>"></script>
-            <!-- paypal -->
-            <script src="{{asset('js/config.js')}}"></script>
-            <meta name="csrf-token" content="{{ csrf_token() }}">
         </head>
+        <body>
 
 
-
-        <!-- HTML Content -->
-            <div class="row-fluid">
-                <!-- Middle Section -->
-                <div class="col-sm-offset-3 col-md-4">
-                    <div id="loadingAlert"
-                         class="card"
-                         style="display: none;">
-                        <div class="card-body">
-                            <div class="alert alert-info block"
-                                 role="alert">
-                                Loading....
-                            </div>
-                        </div>
+        <div class="container">
+            {{--<head>--}}
+            <div class="py-5">
+                <div class="animate__animated animate__fadeInDown">
+                    <div class="p-5 shadow-sm rounded bg-degraded-2 text-dark  text-center">
+                        <h1>Check Out</h1>
                     </div>
-                    <form id="orderConfirm"
-                          class="form-horizontal"
-                          style="display: none;">
-                        <h3>Your payment is authorized.</h3>
-                        <h4>Confirm the order to execute</h4>
-                        <hr>
-                        <div class="form-group">
-                            <label class="col-sm-5 control-label">Shipping Information</label>
-                            <div class="col-sm-7">
-                                <p id="confirmRecipient"></p>
-                                <p id="confirmAddressLine1"></p>
-                                <p id="confirmAddressLine2"></p>
-                                <p>
-                                    <span id="confirmCity"></span>,
-                                    <span id="confirmState"></span> - <span id="confirmZip"></span>
-                                </p>
-                                <p id="confirmCountry"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="shippingMethod" class="col-sm-5 control-label">Shipping Type</label>
-                            <div class="col-sm-7">
-                                <select class="form-control" name="shippingMethod" id="shippingMethod">
-                                    <optgroup label="United Parcel Service" style="font-style:normal;">
-                                        <option value="8.00">
-                                            Worldwide Expedited - $8.00</option>
-                                        <option value="4.00">
-                                            Worldwide Express Saver - $4.00</option>
-                                    </optgroup>
-                                    <optgroup label="Flat Rate" style="font-style:normal;">
-                                        <option value="2.00" selected>
-                                            Fixed - $2.00</option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="form-group">
-                            <div class="col-sm-offset-5 col-sm-7">
-                                <label class="btn btn-primary" id="confirmButton">Complete Payment</label>
-                            </div>
-                        </div>
-                    </form>
-                    <form id="orderView"
-                          class="form-horizontal"
-                          style="display: none;">
-                        <h3>Your payment is complete</h3>
-                        <h4>
-                            <span id="viewFirstName"></span>
-                            <span id="viewLastName"></span>,
-                            Thank you for your Order
-                        </h4>
-                        <hr>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label class="col-sm-5 control-label">Shipping Details</label>
-                                <div class="col-sm-7">
-                                    <p id="viewRecipientName"></p>
-                                    <p id="viewAddressLine1"></p>
-                                    <p id="viewAddressLine2"></p>
-                                    <p>
-                                        <span id="viewCity"></span>,
-                                        <span id="viewState"></span> - <span id="viewPostalCode"></span>
-                                    </p>
-                                    <p id="confirmCountry"></p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-5 control-label">Transaction Details</label>
-                                <div class="col-sm-7">
-                                    <p>Transaction ID: <span id="viewTransactionID"></span></p>
-                                    <p>Payment Total Amount: <span id="viewFinalAmount"></span> </p>
-                                    <p>Currency Code: <span id="viewCurrency"></span></p>
-                                    <p>Payment Status: <span id="viewPaymentState"></span></p>
-                                    <p id="transactionType">Payment Type: <span id="viewTransactionType"></span> </p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <h3> Click <a href='../index.php'>here </a> to return to Home Page</h3>
-                    </form>
                 </div>
             </div>
 
-            <!-- PayPal In-Context Checkout script -->
-            <script type="text/javascript">
-                showDom('loadingAlert');
+            <div class="row gutters-sm px-3 py-3 pb-md-4 ">
+                <div class="col-md-4 mb-3">
 
-                document.onreadystatechange = function(){
 
-                    if (document.readyState === 'complete') {
-                        $.ajax({
-                            type: 'POST',
-                            url: 'api/payment/paypal/getOrderDetails',
-                            success: function (response) {
-                                let obj = JSON.parse(response);
-                                //console.log(obj.ack);
-                                hideDom('loadingAlert');
-                                if (obj.ack) {
-                                    //console.log(obj);
-                                    console.log(getUrlParams('commit'));
+                    <div class="card">
+                        <div class="card-header">Preview</div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-center">
+                                <img src="assets/img/customMat/fondo1.png" width="200rem" alt="Preview">
 
-                                    //showPaymentExecute(obj.data);
-                                    showPaymentGet(obj.data);
+                            </div>
+                        </div>
+                    </div>
 
-                                    /*if(getUrlParams('commit') === 'true') {
-                                        showPaymentExecute(response.data);
-                                    } else {
-                                        console.log(response);
-                                        showPaymentGet(response.data);
-                                    }*/
-                                } else {
-                                    alert('Something went wrong');
-                                }
-                            }
-                        });
-                    }
-                }
 
-                function showPaymentGet(res) {
-                    //console.log(res);
-                    let shipping = res.purchase_units[0].shipping;
-                    let shipping_address = shipping.address;
-                    //console.log('Get Order result' + JSON.stringify(res));
-                    //console.log('shipping add' + JSON.stringify(shipping));
-                    document.getElementById('confirmRecipient').innerText = shipping.name.full_name;
-                    document.getElementById('confirmAddressLine1').innerText = shipping_address.address_line_1;
-                    if(shipping_address.address_line_2)
-                        document.getElementById('confirmAddressLine2').innerText = shipping_address.address_line_1;
-                    else
-                        document.getElementById('confirmAddressLine2').innerText = "";
-                    document.getElementById('confirmCity').innerText = shipping_address.admin_area_2;
-                    document.getElementById('confirmState').innerText = shipping_address.admin_area_1;
-                    document.getElementById('confirmZip').innerText = shipping_address.postal_code;
-                    document.getElementById('confirmCountry').innerText = shipping_address.country_code;
+                    <div class="card mt-3">
+                        <div class="card-header">Shipping Info</div>
+                        <div class="card-body">
 
-                    showDom('orderConfirm');
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <i class="fas fa-signature"></i>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    Daniel De Haas
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <i class="far fa-envelope"></i>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    daniel.de.haas@hotmail.com
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    (239) 816-9029
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    3 Sweet Pea Drive PAKENHAM VIC 3810 Australia
 
-                    // Listen for click on confirm button
-                    document.querySelector('#confirmButton').addEventListener('click', function () {
-                        let shippingMethodSelect = document.getElementById("shippingMethod"),
-                            updatedShipping = shippingMethodSelect.options[shippingMethodSelect.selectedIndex].value,
-                            currentShipping = res.purchase_units[0].amount.breakdown.shipping.value;
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-header">Purchase</div>
+                        <div class="card-body">
+                            <table class="table table-hover text-sm text-muted">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Preview</th>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col" class="text-right">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-outline-primary" type="button" id="button-addon1"><i
+                                                    class="far fa-eye"></i></button>
+                                    </td>
+                                    <th scope="row">XXX-XXX-XXX</th>
+                                    <td>17/07/2020</td>
+                                    <td class="text-right">$230</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-outline-primary" type="button" id="button-addon1"><i
+                                                    class="far fa-eye"></i></button>
+                                    </td>
+                                    <th scope="row">XXX-XXX-XXX</th>
+                                    <td>25/03/2021</td>
+                                    <td class="text-right">$70</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <th scope="row"></th>
+                                    <td class="text-right text-sm ">Total Amount:</td>
+                                    <td class="text-right font-weight-bold ">$300</td>
+                                </tr>
 
-                        let postPatchOrderData = {
-                            "order_id": res.id,
-                            "item_amt": res.purchase_units[0].amount.breakdown.item_total.value,
-                            "tax_amt": res.purchase_units[0].amount.breakdown.tax_total.value,
-                            "handling_fee": res.purchase_units[0].amount.breakdown.handling.value,
-                            "insurance_fee": res.purchase_units[0].amount.breakdown.insurance.value,
-                            "shipping_discount": res.purchase_units[0].amount.breakdown.shipping_discount.value,
-                            "total_amt": res.purchase_units[0].amount.value,
-                            "currency": res.purchase_units[0].amount.currency_code,
-                            "updated_shipping": updatedShipping,
-                            "current_shipping": currentShipping
-                        };
 
-                        // console.log('patch data: '+ JSON.stringify(postPatchOrderData));
-                        // Execute the payment
-                        hideDom('confirmButton');
-                        showDom('loadingAlert');
+                                </tbody>
+                                <tfoot>
 
-                        //console.log('Current shipping '+ currentShipping + ' and updated shipping is '+ updatedShipping);
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
 
-                        if(currentShipping == updatedShipping) {
-                            return callPaymentCapture();
-                        } else {
-                            $.ajax({
-                                type: 'POST',
-                                url: 'api/payment/paypal/patchOrder',
-                                data: postPatchOrderData,
-                                success: function (response) {
-                                    let obj = JSON.parse(response);
-                                    console.log('Patch Order Response : '+ JSON.stringify( obj));
-                                    //console.log(obj.ack);
-                                    if (obj.ack)
-                                        return callPaymentCapture();
-                                    else
-                                        alert("Something went wrong");
-                                }
-                            });
-                        }
-                    });
-                }
 
-                function callPaymentCapture(){
-                    $.ajax({
-                        type: 'POST',
-                        url: 'api/payment/paypal/captureOrder',
-                        success: function (response) {
-                            let obj = JSON.parse(response);
-                            hideDom('orderConfirm');
-                            hideDom('loadingAlert');
-                            console.log('Capture Response : '+ JSON.stringify(obj));
-                            if (obj.ack)
-                                showPaymentExecute(obj.data);
-                            else
-                                alert("Something went wrong");
-                        }
-                    });
-                }
+                    <div class="row gutters-sm">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header bg-white">
+                                    <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
+                                        <!-- Credit card form tabs -->
+                                        <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
+                                            <li class="nav-item"><a data-toggle="pill" href="#paypal"
+                                                                    class="nav-link active "> <i
+                                                            class="fab fa-paypal mr-2"></i> Paypal </a></li>
+                                            <li class="nav-item"><a data-toggle="pill" href="#credit-card"
+                                                                    class="nav-link ">
+                                                    <i class="fas fa-credit-card mr-2"></i> Credit Card </a></li>
+                                            <li class="nav-item"><a data-toggle="pill" href="#net-banking"
+                                                                    class="nav-link "> <i
+                                                            class="fas fa-mobile-alt mr-2"></i> Net Banking </a></li>
+                                        </ul>
+                                    </div> <!-- End -->
+                                    <!-- Credit card form content -->
+                                    <div class="tab-content">
+                                        <!-- credit card info-->
+                                        <div id="paypal" class="tab-pane fade show active pt-3">
+                                            <h6 class="pb-2">Select your paypal account type</h6>
+                                            <div class="form-group "><label class="radio-inline"> <input type="radio"
+                                                                                                         name="optradio"
+                                                                                                         checked>
+                                                    Domestic
+                                                </label> <label class="radio-inline"> <input type="radio"
+                                                                                             name="optradio"
+                                                                                             class="ml-5">International
+                                                </label></div>
+                                            <div class="card-footer">
+                                                <button type="button"
+                                                        class="subscribe btn btn-primary btn-block shadow-sm">
+                                                    Confirm Payment
+                                                </button>
 
-                function showPaymentExecute(result) {
 
-                    let payerInfo = result.payer,
-                        shipping = result.purchase_units[0].shipping;
+                                            </div>
+                                        </div> <!-- End -->
+                                        <!-- Credit card form content -->
 
-                    document.getElementById('viewFirstName').textContent = payerInfo.name.given_name;
-                    document.getElementById('viewLastName').textContent = payerInfo.name.surname;
-                    document.getElementById('viewRecipientName').textContent = shipping.name.full_name;
-                    document.getElementById('viewAddressLine1').textContent = shipping.address.address_line_1;
-                    if(shipping.address.address_line_2)
-                        document.getElementById('viewAddressLine2').textContent = shipping.address.address_line_2;
-                    else
-                        document.getElementById('viewAddressLine2').textContent = "";
-                    document.getElementById('viewCity').textContent = shipping.address.admin_area_2;
-                    document.getElementById('viewState').textContent = shipping.address.admin_area_1;
-                    document.getElementById('viewPostalCode').innerHTML = shipping.address.postal_code;
-                    document.getElementById('viewTransactionID').textContent = result.id;
-                    if(result.purchase_units[0].payments && result.purchase_units[0].payments.captures) {
-                        document.getElementById('viewFinalAmount').textContent = result.purchase_units[0].payments.captures[0].amount.value;
-                        document.getElementById('viewCurrency').textContent = result.purchase_units[0].payments.captures[0].amount.currency_code;
-                    }else {
-                        document.getElementById('viewFinalAmount').textContent = result.purchase_units[0].amount.value;
-                        document.getElementById('viewCurrency').textContent = result.purchase_units[0].amount.currency_code;
-                    }
-                    document.getElementById('viewPaymentState').textContent = result.status;
-                    if(result.intent) {
-                        document.getElementById('viewTransactionType').textContent = result.intent;
-                        document.getElementById('transactionType').style.display='block';
-                    } else {
-                        document.getElementById('transactionType').style.display='none';
-                    }
-                    hideDom('orderConfirm');
-                    hideDom('loadingAlert');
-                    showDom('orderView');
-                }
+                                        <!-- credit card info-->
+                                        <div id="credit-card" class="tab-pane fade pt-3">
+                                            <form role="form" onsubmit="event.preventDefault()">
+                                                <div class="form-group"><label for="username">
+                                                        <h6>Card Owner</h6>
+                                                    </label> <input type="text" name="username"
+                                                                    placeholder="Card Owner Name" required
+                                                                    class="form-control "></div>
+                                                <div class="form-group"><label for="cardNumber">
+                                                        <h6>Card number</h6>
+                                                    </label>
+                                                    <div class="input-group"><input type="text" name="cardNumber"
+                                                                                    placeholder="Valid card number"
+                                                                                    class="form-control " required>
+                                                        <div class="input-group-append"><span
+                                                                    class="input-group-text text-muted"> <i
+                                                                        class="fab fa-cc-visa mx-1"></i> <i
+                                                                        class="fab fa-cc-mastercard mx-1"></i> <i
+                                                                        class="fab fa-cc-amex mx-1"></i> </span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                        <div class="form-group"><label><span class="hidden-xs">
+                                                    <h6>Expiration Date</h6>
+                                                </span></label>
+                                                            <div class="input-group"><input type="number"
+                                                                                            placeholder="MM" name=""
+                                                                                            class="form-control"
+                                                                                            required> <input
+                                                                        type="number" placeholder="YY" name=""
+                                                                        class="form-control" required></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group mb-4"><label data-toggle="tooltip"
+                                                                                            title="Three digit CV code on the back of your card">
+                                                                <h6>CVV <i class="fa fa-question-circle d-inline"></i>
+                                                                </h6>
+                                                            </label> <input type="text" required class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="form-group">
+                                                <p>
+                                                    <button type="button" class="btn btn-primary "><i
+                                                                class="fas fa-mobile-alt mr-2"></i> Proceed Payment
+                                                    </button>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- End -->
+                                        <!-- bank transfer info -->
+                                        <div id="net-banking" class="tab-pane fade pt-3">
+                                            <div class="form-group "><label for="Select Your Bank">
+                                                    <h6>Select your Bank</h6>
+                                                </label> <select class="form-control" id="ccmonth">
+                                                    <option value="" selected disabled>--Please select your Bank--
+                                                    </option>
+                                                    <option>Bank 1</option>
+                                                    <option>Bank 2</option>
+                                                    <option>Bank 3</option>
+                                                    <option>Bank 4</option>
+                                                    <option>Bank 5</option>
+                                                    <option>Bank 6</option>
+                                                    <option>Bank 7</option>
+                                                    <option>Bank 8</option>
+                                                    <option>Bank 9</option>
+                                                    <option>Bank 10</option>
+                                                </select></div>
+                                            <div class="form-group">
+                                                <p>
+                                                    <button type="button" class="btn btn-primary "><i
+                                                                class="fas fa-mobile-alt mr-2"></i> Proceed Payment
+                                                    </button>
+                                                </p>
+                                            </div>
+                                        </div> <!-- End -->
+                                        <!-- End -->
+                                    </div>
+                                    <br>
+                                    <p class="text-muted">Note: After clicking on the button, you will be directed
+                                        to a secure gateway for payment. After completing the payment process, you
+                                        will be redirected back to the website to view details of your order. </p>
+                                </div>
+                            </div>
+                        </div>
 
-            </script>
+
+                        {{--<Purchase>--}}
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+
+
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary btn-lg">Return</button>
+        </div>
+
+        </div>
+
+
+        </body>
+
+        </html>
 
     @endsection
 </x-app-layout>

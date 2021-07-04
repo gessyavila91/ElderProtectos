@@ -45,6 +45,11 @@ Route::get('/success', function () {
 Route::get('/terms', function () {
     return view('terms');
 });
+
+Route::get('/checkout', function () {
+    return view('checkout');
+});
+
 Route::get('/404', function () {
     return view('404');
 });
