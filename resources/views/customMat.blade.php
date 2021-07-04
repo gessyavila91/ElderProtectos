@@ -612,8 +612,6 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                         </div>
                     </div>
 
-
-                    {{-- TODO crea auto Metohd 4 fill it --}}
                     <div class="row">
                         <div class="col-md-3 mb-6">
                             <label for="countrySelect">Country</label>
@@ -755,25 +753,18 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                     </div>
 
                     <hr class="mb-4">
-                    <button onclick="checkout()" class="btn btn-primary btn-lg btn-block" type="submit">Continue to
-                        checkout
-                    </button>
 
                     <!-- Checkout Options -->
                     <div class="form-group">
                         <div class="col-sm-offset-5 col-sm-7">
                             <!-- Container for PayPal Shortcut Checkout -->
                             <div id="paypalCheckoutContainer"></div>
-
-                            <!-- Container for PayPal Mark Redirect -->
-                            {{--<div id="paypalMarkRedirect">
-                                <h4 class="text-center">OR</h4>
-                                <a class="btn btn-success btn-block" href="<?= $rootPath ?>pages/shipping.php" role="button">
-                                    <h4>Proceed to Checkout</h4>
-                                </a>
-                            </div>--}}
                         </div>
                     </div>
+
+                    <button onclick="checkout()" class="btn btn-primary btn-lg btn-block" type="submit">Continue to
+                        checkout
+                    </button>
 
                     {{--</form>--}}
                 </div>

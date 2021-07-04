@@ -214,7 +214,7 @@ $orderGet = config('payment.paypal.URL.services.orderGet');*/
                             "current_shipping": currentShipping
                         };
 
-                        //console.log('patch data: '+ JSON.stringify(postPatchOrderData));
+                        // console.log('patch data: '+ JSON.stringify(postPatchOrderData));
                         // Execute the payment
                         hideDom('confirmButton');
                         showDom('loadingAlert');
