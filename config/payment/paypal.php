@@ -64,8 +64,8 @@ return[
     */
     'PAYPAL_CREDENTIALS' =>[
         "sandbox" => [
-            "client_id" => env('CLIENT_ID_SANDBOX','ASCs3KIocN5MuYCn8l7xhrzmqmQxoTYSWZzHFxlFGnXokO4QSOAwtT6kD22RkX3cNfU_R20fBlF8NC_3'),
-            "client_secret" => env('CLIENT_SECRET_SANDBOX','EJLpMe688yrAeT8hzRt57ZfxBDqSm2GazThLKTiCE_XC5Y3pqI2IvoozLTQ5kQGu9JZ2n2A0xT-SIrg0')
+            "client_id" => env('CLIENT_ID_SANDBOX','AaWBJr8sPzgl9v7FPLJHb79O0MyT2KTCCkbrGNy-oe0cMYcY8CQgEmwkZ1QQaE_GWwdVVHxvl9tuWRm0'),
+            "client_secret" => env('CLIENT_SECRET_SANDBOX','EHHqnWH0r7xfwa8s6WSv7CyEXftl4oDqdeon-w97ksHuuWhEpeKITE3ZfEzkwZJiVgZDxUUf3EwD7ipd')
         ],
         "production" => [
             "client_id" => env('CLIENT_ID_PRODUCTION'),

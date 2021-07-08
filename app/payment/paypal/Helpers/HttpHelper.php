@@ -131,7 +131,9 @@ class HttpHelper {
 	*/
 	public function setBody($postData) {
 		if(is_array($postData)) {
+		    var_dump($postData);
 			$postData = json_encode($postData);
+            var_dump($postData);
 		}
 		curl_setopt($this->_curl, CURLOPT_POSTFIELDS, $postData);
 		curl_setopt($this->_curl, CURLOPT_POST, true);

@@ -5,6 +5,8 @@ namespace App\payment\paypal\Controllers;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\payment\paypal\Helpers\PaypalHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -139,11 +141,6 @@ class PaypalController extends Controller {
         ];*/
 
 
-        /*TODO Crear clase para manekar estos valores
-         | ITEMS que es un array
-         |
-        */
-
         $orderData = '{
             "intent" : "CAPTURE",
             "application_context" : {
@@ -201,7 +198,15 @@ class PaypalController extends Controller {
             ]
         }';
 
+
         //var_dump($orderData);
+
+        $PC = new ProductController();
+        $responce = $PC->checkout('Test');
+        $OC = new orderDataController();
+        $orderData = json_encode($OC->initializeOrderData($responce));
+
+        //var_dump(json_decode(json_encode($orderData)));
 
         if(array_key_exists('shipping_country_code', $_POST)) {
 

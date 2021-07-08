@@ -42,3 +42,8 @@ Route::get('/product/initShoppingCar',
 Route::post('/product/preview',
     [\App\Http\Controllers\ProductController::class, 'preview']
 );
+
+
+Route::post('/product/checkout',
+    [\App\Http\Controllers\ProductController::class, 'checkout']
+);

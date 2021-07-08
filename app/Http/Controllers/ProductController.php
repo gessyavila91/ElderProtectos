@@ -396,33 +396,42 @@ class ProductController extends Controller {
         }
     }
 
-    public function checkout (Request $request,) {
+    public function checkout ($request) {
+
         if (isset($_COOKIE['shoppingCar'])) {
+
+            $responce["intent"]     = "CAPTURE";
+
+            $responce["return_url"] = "/checkout";
+            $responce["cancel_url"] = "/cancel";
+
+            $responce["reference_id"]  = "EPU1";
+            $responce["currency_code"] = "USD";
+
+            $responce["name"]        = "Custom Playmat";
+            $responce["description"] = "Custom Playmat - Description";
+            $responce["sku"]         = "Custom Playmat sku";
+
             $data['shoppingCar'] = (array)json_decode($_COOKIE['shoppingCar']);
-            $data['shoppingCarCountItems'] = count($data['shoppingCar']);
 
-            $data['shoppingCarTotalPrice'] = $this->calcCarTotalPrice($data['shoppingCar']);
+            $responce["unit_amount_value"] = strval($this->calcCarTotalPrice($data['shoppingCar']));
+            $responce["items_quantity"] = strval(count($data['shoppingCar']));                       
+
+            $responce["items_category"] = "PHYSICAL_GOODS";
+
+            $responce["shipping_value"]          = "1";
+            $responce["tax_total_value"]         = "5";
+            $responce["handling_value"]          = "5";
+            $responce["shipping_discount_value"] = "5";
+            $responce["insurance_value"]         = "20";
+
         }
 
-        if (isset($_COOKIE['promoCode'])) {
-            /*CalculatePromoCode*/
-            $data['promoCode'] = (array)json_decode($_COOKIE['promoCode']);
+        return $responce;
 
-            if (isset($data['shoppingCarTotalPrice'])) {
+    }
+    public function carInfo4PP($request){
 
-                $data['shoppingCarTotalPrice'] = $this->calcCarTotalPrice($data['shoppingCar'], $data['promoCode']);
-
-            }
-        }
-
-        $data['OrderID'] = uniqid();
-
-
-        $this->response['data'] = $data;
-        $this->response['msg'] = 'Order sended';
-        $this->response['result'] = true;
-
-        return response()->json($this->response);
 
     }
 

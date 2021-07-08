@@ -553,7 +553,15 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                         </div>
                     </ul>
                     {{--Promo Code Input END--}}
+                    <div class="form-group">
 
+                        <!-- Container for PayPal Shortcut Checkout -->
+                        <div id="paypalCheckoutContainer"></div>
+                        <button onclick="checkout()" class="btn btn-primary btn-lg btn-block" type="submit">Continue to
+                            checkout
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -648,7 +656,7 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                         </div>
                     </div>
                     <hr class="mb-4">
-                    <h4 class="mb-3">Shipping method</h4>
+                    {{--<h4 class="mb-3">Shipping method</h4>
 
                     <div class="row">
                         <div class="form-group col-md-6">
@@ -671,7 +679,6 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                             </div>
                         </div>
                     </div>
-
 
                     <hr class="mb-4">
                     <h4 class="mb-3">Payment</h4>
@@ -751,24 +758,10 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
 
                     <hr class="mb-4">
-
-                    <!-- Checkout Options -->
-                    <div class="form-group">
-                        <div class="col-sm-offset-5 col-sm-7">
-                            <!-- Container for PayPal Shortcut Checkout -->
-                            <div id="paypalCheckoutContainer"></div>
-                        </div>
-                    </div>
-
-                    <button onclick="checkout()" class="btn btn-primary btn-lg btn-block" type="submit">Continue to
-                        checkout
-                    </button>
-                    {{--</form>--}}
                 </div>
-
             </div>
 
             <hr class="featurette-divider">
@@ -1790,35 +1783,21 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
 
                 // Set style of buttons
                 style: {
-                    layout: 'vertical',   // horizontal | vertical
-                    size: 'responsive',   // medium | large | responsive
-                    shape: 'rect',         // pill | rect
-                    color: 'gold',         // gold | blue | silver | black,
-                    fundingicons: false,    // true | false,
-                    tagline: false          // true | false,
+                    layout: 'vertical',  // horizontal | vertical
+                    size: 'responsive',  // medium | large | responsive
+                    shape: 'rect',       // pill | rect
+                    color: 'gold',       // gold | blue | silver | black,
+                    fundingicons: false, // true | false,
+                    tagline: false       // true | false,
                 },
 
                 // Wait for the PayPal button to be clicked
                 createOrder: function () {
-                    let formData = new FormData();
-                    formData.append('code', 'CODIGODEPLAYMAT');
-                    formData.append('item_amt', '1');
-                    formData.append('tax_amt', '5');
-                    formData.append('handling_fee', '5');
-                    formData.append('insurance_fee', '10');
-                    formData.append('shipping_amt', '2');
-                    formData.append('shipping_discount', '2');
-                    formData.append('total_amt', '320');
-                    formData.append('currency', 'USD');
-
-                    formData.append('return_url', '<?= $baseUrl.$return_url ?>' + '?commit=true');
-                    formData.append('cancel_url', '<?= $baseUrl.$cancel_url ?>');
-
 
                     return fetch(
                         '<?= $rootPath.$orderCreate ?>', {
                             method: 'POST',
-                            body: formData
+                            //body: formData
                         }
                     ).then(function (response) {
                         return response.json();
