@@ -419,11 +419,11 @@ class ProductController extends Controller {
 
             $responce["items_category"] = "PHYSICAL_GOODS";
 
-            $responce["shipping_value"]          = "1";
-            $responce["tax_total_value"]         = "5";
-            $responce["handling_value"]          = "5";
-            $responce["shipping_discount_value"] = "5";
-            $responce["insurance_value"]         = "20";
+            $responce["shipping_value"]          = "0";
+            $responce["tax_total_value"]         = "0";
+            $responce["handling_value"]          = "0";
+            $responce["shipping_discount_value"] = "0";
+            $responce["insurance_value"]         = "0";
 
         }
 

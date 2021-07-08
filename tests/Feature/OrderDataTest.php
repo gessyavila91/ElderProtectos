@@ -70,6 +70,7 @@ class OrderDataTest extends TestCase {
         ];
 
         $this->assertSame($orderData_assertion, $orderData->initializeOrderData($data));
+        $this->assert();
     }
     //"breakdown" => $this->getBreakdown($data)
 

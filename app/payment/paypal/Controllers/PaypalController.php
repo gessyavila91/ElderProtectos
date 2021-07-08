@@ -32,6 +32,7 @@ class PaypalController extends Controller {
         if(array_key_exists('updated_shipping', $_POST)) {
             $finalTotal = floatval($_POST['total_amt']) + (floatval($_POST['updated_shipping']) - floatval($_POST['current_shipping']));
 
+            //TODO Tira esto al pagar REFERENCE_ID_NOT_FOUND
             $orderData = '[ {
               "op" : "replace",
               "path" : "/purchase_units/@reference_id==\'PU1\'/amount",
@@ -232,3 +233,4 @@ class PaypalController extends Controller {
 
 
 }
+
