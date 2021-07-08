@@ -20,7 +20,7 @@ class orderDataController {
             "purchase_units" => array([
                 "reference_id" => $data["reference_id"],
                 "description" => "Elder Protectors - Custom Shop",//env app name
-                "invoice_id" => "INV-Elder Protectors",
+                "invoice_id" => "INV-Elder Protectors".strval($randNo),
                 "custom_id" => "CUST-Elder Protectors",
                 "amount" => [
                     "currency_code" => $data["currency_code"],

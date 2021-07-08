@@ -199,14 +199,16 @@ class PaypalController extends Controller {
         }';
 
 
-        //var_dump($orderData);
+
 
         $PC = new ProductController();
         $responce = $PC->checkout('Test');
         $OC = new orderDataController();
         $orderData = json_encode($OC->initializeOrderData($responce));
 
-        //var_dump(json_decode(json_encode($orderData)));
+
+
+        $orderData = json_decode(json_encode($orderData));
 
         if(array_key_exists('shipping_country_code', $_POST)) {
 
