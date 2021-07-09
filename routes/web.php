@@ -39,6 +39,12 @@ Route::get('/orders', function () {
 Route::get('/myprofile', function () {
     return view('myprofile');
 });
+Route::get('/pics', function () {
+    return view('pics');
+});
+Route::get('/checkout', function () {
+    return view('checkout');
+});
 Route::get('/success', function () {
     return view('success');
 });
