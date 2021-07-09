@@ -17,8 +17,8 @@
 
     .banner3 {
         background: #000000;
-        background: -webkit-linear-gradient(90deg, #370063, #06132c, #252e63);
-        background: linear-gradient(90deg, #370063, #06132c, #252e63);
+        background: -webkit-linear-gradient(90deg, #0c0018, #06132c, #252e63);
+        background: linear-gradient(90deg, #1a002d, #06132c, #252e63);
     }
 
 
@@ -28,7 +28,7 @@
 
     }
 
-    .link-ftr {
+    a {
         color: white;
         position: relative;
         text-decoration: none;
@@ -37,19 +37,19 @@
 
     }
 
-    .link-ftr:hover {
+    a:hover {
         text-decoration: none;
         color: #b8d6ff;
         right: 0;
 
     }
 
-    .link-ftr:hover:after {
+    a:hover:after {
         border-color: #5a09b7;
         right: 0;
     }
 
-    .link-ftr:after {
+    a:after {
         border-radius: 10px;
         border-top: .2em solid #5a09b7;
         content: "";

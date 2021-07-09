@@ -27,9 +27,9 @@
                 <ul class="navbar-nav">
                     <li class="nav-item"><a href="#" title="Home" class="nav-link">Home</a></li>
 
-                    <li class="nav-item dropdown"><a title="Shops" class="nav-link dropdown-toggle"
+                    <li class="nav-item dropdown"><a title="Shops" class="nav-link"
                                                      data-toggle="dropdown" role="button"
-                                                     aria-expanded="false">Shops</a>
+                                                     aria-expanded="false">Shops <i class="fas fa-caret-down"></i></a>
                         <ul class="dropdown-menu">
                             <li class="nav-item"><a href="/custom" title="Custom" class="nav-link">Custom
                                     Shop</a></li>
