@@ -150,17 +150,17 @@ class PaypalController extends Controller {
             },
             "purchase_units" : [ 
                 {
-                    "reference_id" : "PU1",
-                    "description" : "Camera Shop",
-                    "invoice_id" : "INV-CameraShop-'.$randNo.'",
-                    "custom_id" : "CUST-CameraShop",
+                    "reference_id" : "CSEP",
+                    "description" : "Elder Protectors",
+                    "invoice_id" : "IEP-'.$randNo.'",
+                    "custom_id" : "EP-'.$randNo.'",
                     "amount" : {
                         "currency_code" : "USD",
-                        "value" : "320",
+                        "value" : "89",
                         "breakdown" : {
                             "item_total" : {
                                 "currency_code" : "USD",
-                                "value" : "300"
+                                "value" : "70"
                             },
                             "shipping" : {
                                 "currency_code" : "USD",
@@ -181,35 +181,56 @@ class PaypalController extends Controller {
                             "insurance" : {
                                 "currency_code" : "USD",
                                 "value" : "20"
+                            },
+                            "discount" : {
+                                "currency_code" : "USD",
+                                "value" : "1"
                             }
                         }
                     },
-                    "items" : [{
-                        "name" : "DSLR Camera",
-                        "description" : "Black Camera - Digital SLR",
+                    "items" : [
+                      {
+                        "name" : "Custom Mat",
+                        "description" : "Custom Mat - sku01",
                         "sku" : "sku01",
                         "unit_amount" : {
                             "currency_code" : "USD",
-                            "value" : "300"
+                            "value":"70"
                         },
                         "quantity" : "1",
                         "category" : "PHYSICAL_GOODS"
-                    }]
+                      },{
+                        "name" : "Custom Mat",
+                        "description" : "Custom Mat - sku02",
+                        "sku" : "sku02",
+                        "unit_amount" : {
+                            "currency_code" : "USD",
+                            "value":"70"
+                        },
+                        "quantity" : "1",
+                        "category" : "PHYSICAL_GOODS"
+                      },{
+                        "name" : "Custom Mat",
+                        "description" : "Custom Mat - sku02",
+                        "sku" : "sku02",
+                        "unit_amount" : {
+                            "currency_code" : "USD",
+                            "value":"70"
+                        },
+                        "quantity" : "1",
+                        "category" : "PHYSICAL_GOODS"
+                      }
+                    ]
                 }
             ]
         }';
-
-
-
 
         $PC = new ProductController();
         $responce = $PC->checkout('Test');
         $OC = new orderDataController();
         $orderData = json_encode($OC->initializeOrderData($responce));
-
-
-
         $orderData = json_decode(json_encode($orderData));
+
 
         if(array_key_exists('shipping_country_code', $_POST)) {
 

@@ -13,7 +13,7 @@ class OrderDataTest extends TestCase {
      *
      * @return void
      */
-    public function testBasicTest() {
+    public function testCreateObjectOrderData() {
         $orderData = new orderDataController();
 
         $data["intent"]     = "CAPTURE";
@@ -24,11 +24,9 @@ class OrderDataTest extends TestCase {
         $data["reference_id"]  = "EPU1";
         $data["currency_code"] = "USD";
 
-        $data["name"]        = "Custom Playmat";
-        $data["description"] = "Custom Playmat - Description";
-        $data["sku"]         = "Custom Playmat sku";
 
-        $data["unit_amount_value"] = "70";
+
+        $data["invoice_id"] = "INV-Elder Protectors".rand(10000, 20000);
 
         $data["items_quantity"] = "1";
         $data["items_category"] = "PHYSICAL_GOODS";
@@ -39,6 +37,25 @@ class OrderDataTest extends TestCase {
         $data["shipping_discount_value"] = "5";
         $data["insurance_value"]         = "20";
 
+        $data["item"] = [
+            [
+                "name"              => "Custom Playmat 1",
+                "description"       => "Custom Playmat - Description 1",
+                "sku"               => "sku-1",
+                "unit_amount_value" => "70",
+                "items_category"    => "PHYSICAL_GOODS",
+                "items_quantity"    => "1"
+            ],
+            [
+                "name"              => "Custom Playmat 2",
+                "description"       => "Custom Playmat - Description 2",
+                "sku"               => "sku-2",
+                "unit_amount_value" => "70",
+                "items_category"    => "PHYSICAL_GOODS",
+                "items_quantity"    => "1"
+            ]
+        ];
+
         $orderData_assertion = [
             "intent" => $data["intent"],//"CAPTURE", // CAPTURE * | AUTHORIZE
             "application_context" => [
@@ -48,31 +65,19 @@ class OrderDataTest extends TestCase {
             "purchase_units" => array([
                 "reference_id" => $data["reference_id"],
                 "description" => "Elder Protectors - Custom Shop",//env app name
-                "invoice_id"  => "INV-Elder Protectors",
+                "invoice_id"  => $data["invoice_id"],
                 "custom_id"   => "CUST-Elder Protectors",
                 "amount" => [
                     "currency_code" => $data["currency_code"],
                     "value" => $orderData->getPurchasedUnitAmount($data),
                     "breakdown" => $orderData->getBreakdown($data)
                 ],
-                "items" => array([
-                "name" => $data["name"] ,
-                "description" => $data["description"],
-                "sku" => $data["sku"],
-                    "unit_amount" => [ //Required
-                        "currency_code" => $data["currency_code"],
-                    "value" => $data["unit_amount_value"]
-                ],
-                "quantity" => $data["items_quantity"],
-                    "category" => $data["items_category"]  //DIGITAL_GOODS | PHYSICAL_GOODS
-                ])
+                "items" => $orderData->getItems($data)
             ])
         ];
 
         $this->assertSame($orderData_assertion, $orderData->initializeOrderData($data));
-        $this->assert();
     }
-    //"breakdown" => $this->getBreakdown($data)
 
     public function testbreakdownTest() {
         $orderData = new orderDataController();
@@ -85,6 +90,9 @@ class OrderDataTest extends TestCase {
         $data["handling_value"] = "0";
         $data["shipping_discount_value"] = "0";
         $data["insurance_value"] = "0";
+        $data["unit_amount_value"] = "0";
+        $data["items_quantity"] = "0";
+        $data["discount"] = "0";
 
         $breakdownAssert = [
             "item_total" => [
@@ -110,7 +118,12 @@ class OrderDataTest extends TestCase {
             "insurance" => [
                 "currency_code" => "USD",
                 "value" => "0"
+            ],
+            "discount" => [
+                "currency_code" => "USD",
+                "value" => "0"
             ]
+
         ];
 
         $this->assertSame($breakdownAssert, $orderData->getBreakdown($data));

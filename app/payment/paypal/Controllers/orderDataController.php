@@ -8,10 +8,7 @@ class orderDataController {
 
     public function initializeOrderData($data): array {
 
-        $randNo = (string)rand(10000, 20000);
-
-        $orderData_Original = [
-
+        $array = [
             "intent" => $data["intent"], // CAPTURE * | AUTHORIZE
             "application_context" => [
                 "return_url" => "",
@@ -20,39 +17,28 @@ class orderDataController {
             "purchase_units" => array([
                 "reference_id" => $data["reference_id"],
                 "description" => "Elder Protectors - Custom Shop",//env app name
-                "invoice_id" => "INV-Elder Protectors".strval($randNo),
+                "invoice_id" => $data["invoice_id"],
                 "custom_id" => "CUST-Elder Protectors",
                 "amount" => [
                     "currency_code" => $data["currency_code"],
                     "value" => $this->getPurchasedUnitAmount($data),
                     "breakdown" => $this->getBreakdown($data)
                 ],
-                "items" => array([
-                    "name" => $data["name"],
-                    "description" => $data["description"],
-                    "sku" => $data["sku"],
-                    "unit_amount" => [ //Required
-                        "currency_code" => $data["currency_code"],
-                        "value" => $data["unit_amount_value"]
-                    ],
-                    "quantity" => $data["items_quantity"],
-                    "category" => $data["items_category"]  //DIGITAL_GOODS | PHYSICAL_GOODS
-                ])
+                "items" => $this->getItems($data)
             ])
         ];
 
-        /*var_dump($orderData_Original);
-        echo "\n";*/
-        return $orderData_Original;
-    }
+        //var_dump($array);
 
+        return $array;
+    }
 
     public function getPurchasedUnitAmount($data){
 
         $PurchasedUnitAmount = 0.00;
 
-        if (isset($data["unit_amount_value"])){
-            $PurchasedUnitAmount += ($data["unit_amount_value"] * $data["items_quantity"]);
+        if (isset($data["item"])){
+            $PurchasedUnitAmount += $this->getUnit_amount_value($data);
         }
         if (isset($data["shipping_value"])){
             $PurchasedUnitAmount += $data["shipping_value"];
@@ -63,25 +49,36 @@ class orderDataController {
         if (isset($data["handling_value"])){
             $PurchasedUnitAmount += $data["handling_value"];
         }
-        if (isset($data["shipping_discount_value"])){
-            $PurchasedUnitAmount -= $data["shipping_discount_value"];
-        }
         if (isset($data["insurance_value"])){
             $PurchasedUnitAmount += $data["insurance_value"];
         }
+        if (isset($data["shipping_discount_value"])){
+            $PurchasedUnitAmount -= $data["shipping_discount_value"];
+        }
+        if (isset($data["discount_value"])){
+            $PurchasedUnitAmount -= $data["discount_value"];
+        }
 
         return strval($PurchasedUnitAmount);
-
     }
+
+    public function getUnit_amount_value($data) {
+        $amount_value = 0;
+        foreach($data["item"] as $item) {
+            $amount_value += $item["items_quantity"] * $item["unit_amount_value"];
+        }
+        return $amount_value;
+    }
+
 
     public function getBreakdown($data): array {
 
         $breakdown = [];
 
-        if (isset($data["unit_amount_value"])){
+        if (isset($data["item"])){
             $breakdown["item_total"] = [
                 "currency_code" => $data["currency_code"],
-                "value" => strval(($data["unit_amount_value"] * $data["items_quantity"]))
+                "value" => strval($this->getUnit_amount_value($data))
             ];
         }
         if (isset($data["shipping_value"])){
@@ -114,12 +111,37 @@ class orderDataController {
                 "value" => $data["insurance_value"]
             ];
         }
+        if (isset($data["discount_value"])){
+            $breakdown["discount"] = [
+                "currency_code" => $data["currency_code"],
+                "value" => $data["discount_value"]
+            ];
+        }
 
         return $breakdown;
     }
 
-    public function getItems($data){
+    public function getItems($data) {
 
+        $array = [];
+
+        foreach($data["item"] as $item) {
+            array_push($array,
+                [
+                    "name" => $item["name"],
+                    "description" => $item["description"],
+                    "sku" => $item["sku"],
+                    "unit_amount" => [ //Required
+                        "currency_code" => $data["currency_code"],
+                        "value" => strval($item["unit_amount_value"])
+                    ],
+                    "quantity" => strval($item["items_quantity"]),
+                    "category" => $item["items_category"]
+                ]
+
+            );
+        }
+        return $array;
     }
 
 }

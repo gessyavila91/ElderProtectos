@@ -38,7 +38,7 @@ class CreateOrdersTable extends Migration {
 
             $table->string('indications')->nullable(); // indicacion especiales del productop
 
-            $table->json('products'); // lista de productos
+            $table->string('products'); // lista de productos
 
             $table->double('total',10,4); // total delpedido
 

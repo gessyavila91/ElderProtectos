@@ -131,8 +131,8 @@ class ProductTest extends TestCase {
             'msg' => 'Mat Code Fine'
         ]);
 
-        /*$response->assertCookie('shoppingCar');
-        $response->assertCookieNotExpired('shoppingCar');*/
+        $response->assertCookie('shoppingCar');
+        $response->assertCookieNotExpired('shoppingCar');
         $response->dump();
     }
 

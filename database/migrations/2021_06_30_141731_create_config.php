@@ -17,6 +17,7 @@ class CreateConfig extends Migration
             $table->string('configName');
             $table->string('description');
             $table->string('value');
+            $table->boolean('enabled')->default('1');
 
             $table->timestamps();
         });
