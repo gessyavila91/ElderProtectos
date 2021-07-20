@@ -8,11 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 
 class OrderDataTest extends TestCase {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+
     public function testCreateObjectOrderData() {
         $orderData = new orderDataController();
 
@@ -92,12 +88,30 @@ class OrderDataTest extends TestCase {
         $data["insurance_value"] = "0";
         $data["unit_amount_value"] = "0";
         $data["items_quantity"] = "0";
-        $data["discount"] = "0";
+        $data["discount_value"] = "0";
+        $data["item"] = [
+            [
+                "name"              => "Custom Playmat 1",
+                "description"       => "Custom Playmat - Description 1",
+                "sku"               => "sku-1",
+                "unit_amount_value" => "70",
+                "items_category"    => "PHYSICAL_GOODS",
+                "items_quantity"    => "1"
+            ],
+            [
+                "name"              => "Custom Playmat 2",
+                "description"       => "Custom Playmat - Description 2",
+                "sku"               => "sku-2",
+                "unit_amount_value" => "70",
+                "items_category"    => "PHYSICAL_GOODS",
+                "items_quantity"    => "1"
+            ]
+        ];
 
         $breakdownAssert = [
             "item_total" => [
                 "currency_code" => "USD",
-                "value" => "0"
+                "value" => "140"
             ],
             "shipping" => [
                 "currency_code" => "USD",

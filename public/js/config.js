@@ -53,6 +53,7 @@ ready = function (fn) {
     }
 }
 
+/*
 select_country_dropdown = function () {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -203,4 +204,4 @@ select_country_dropdown = function () {
     }
 }
 
-ready(select_country_dropdown);
+ready(select_country_dropdown);*/

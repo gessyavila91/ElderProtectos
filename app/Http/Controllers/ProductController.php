@@ -384,8 +384,6 @@ class ProductController extends Controller {
                     }
                     return cookie('shoppingCar', json_encode($carCookie, JSON_FORCE_OBJECT));
                 }
-                return cookie('shoppingCar', json_encode($oldCookie, JSON_FORCE_OBJECT));
-
             case 'promoCode':
                 $promoCodeC = new PromoCodeController();
                 $promo = $promoCodeC->information($request->promoCode);
@@ -395,9 +393,10 @@ class ProductController extends Controller {
         }
     }
 
-    public function checkout ($request = null): array {
+    public function checkout (Request $request = null): array {
 
         if (isset($_COOKIE['shoppingCar'])) {
+
 
             $responce["intent"]     = "CAPTURE";
 
@@ -407,7 +406,9 @@ class ProductController extends Controller {
             $responce["reference_id"]  = "CSEP";
             $responce["currency_code"] = "USD";
 
-            $responce["invoice_id"] = "IEP-".rand(10000, 20000);
+            $randNo = (string)rand(10000, 20000);
+            $responce["invoice_id"] = "IEP-".$randNo;
+            $responce["custom_id"] = "EP-".$randNo;
 
             $data['shoppingCar'] = (array)json_decode($_COOKIE['shoppingCar']);
 
@@ -420,6 +421,15 @@ class ProductController extends Controller {
                 $responce["discount_value"]      = $this->getDiscountAmount();
             }
             $responce["item"] = $this->shoppingCarItem();
+            if (isset($request->shipping_country_code)){
+
+                $responce['address_line_1'] = $request->shipping_line1;
+                $responce['address_line_2'] = $request->shipping_line2;
+                $responce['admin_area_2']   = $request->shipping_city;
+                $responce['admin_area_1']   = $request->shipping_state;
+                $responce['postal_code']    = $request->shipping_postal_code;
+                $responce['country_code']   = $request->shipping_country_code;
+            }
 
         }
 
@@ -454,8 +464,6 @@ class ProductController extends Controller {
 
     public function shoppingCarItem(): array {
         $array = [];
-
-
 
         if (isset($_COOKIE['shoppingCar'])) {
             $shoppingCar = json_decode($_COOKIE['shoppingCar'], true);

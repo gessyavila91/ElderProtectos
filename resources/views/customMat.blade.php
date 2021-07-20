@@ -7,7 +7,6 @@ session_start();
 $matComponents = matComponent::where('enable', 1)->get();
 $countryList = Config::where('ConfigName', 'countryList')->get();
 
-
 $urlCurrent = config('payment.paypal.URL.current');
 
 $baseUrl = config('payment.paypal.URL.current');
@@ -570,16 +569,16 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                     {{--<form class="needs-validation" novalidate>--}}
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="firstName">First name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="Gessy"
+                            <label for="shipping_firstName">First name</label>
+                            <input type="text" class="form-control" id="shipping_firstName" placeholder="" value="Gessy"
                                    required>
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="lastName">Last name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="A. Quezada"
+                            <label for="shipping_lastName">Last name</label>
+                            <input type="text" class="form-control" id="shipping_lastName" placeholder="" value="A. Quezada"
                                    required>
                             <div class="invalid-feedback">
                                 Valid last name is required.
@@ -589,12 +588,12 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="email">Email</label>
+                            <label for="shipping_email">Email</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">@</span>
                                 </div>
-                                <input type="email" class="form-control" id="email" placeholder="you@example.com"
+                                <input type="email" class="form-control" id="shipping_email" placeholder="you@example.com"
                                        value="gessyavila91@SomeMail.com">
                                 <div class="invalid-feedback" style="width: 100%;">
                                     Your username is required.
@@ -603,19 +602,27 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="phone">Phone <span class="text-muted">(Optional)</span></label>
-                            <input type="tel" class="form-control" id="phone" placeholder="+10-10-1000-1000"
+                            <label for="shipping_phone">Phone <span class="text-muted">(Optional)</span></label>
+                            <input type="tel" class="form-control" id="shipping_phone" placeholder="+10-10-1000-1000"
                                    value="+10-10-1000-1000">
                             <div class="invalid-feedback">
-                                Please enter a valid email address for shipping updates.
+                                Please enter a valid phone number
                             </div>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St"
-                               value="1234 Main St">
+                        <label for="shipping_line1">Address line 1</label>
+                        <input type="text" class="form-control" id="shipping_line1" placeholder="1234 Main St"
+                               value="Revolucion 1500">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="shipping_line2">Address line 2</label>
+                        <input type="text" class="form-control" id="shipping_line2" placeholder="1234 Main St av"
+                               value="Av Boulevar 400 Biblioteca QCI">
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
@@ -623,8 +630,8 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
 
                     <div class="row">
                         <div class="col-md-3 mb-6">
-                            <label for="countrySelect">Country</label>
-                            <select id="countrySelect" class="form-control" name="countrySelect">
+                            <label for="shipping_country_code">Country</label>
+                            <select id="shipping_country_code" class="form-control" name="countrySelect">
                                 <?php
                                 foreach($countryList as $country) {
                                     echo '<option value='.$country->value.' > '.$country->description.'</option>';
@@ -633,23 +640,23 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                             </select>
                         </div>
                         <div class="col-md-3 mb-6">
-                            <label for="state">State</label>
-                            <input id="state" type="text" class="form-control" placeholder="" value="Jalisco">
+                            <label for="shipping_state">State</label>
+                            <input id="shipping_state" type="text" class="form-control" placeholder="" value="Jalisco">
                             <div class="invalid-feedback">
                                 Please provide a valid state.
                             </div>
                         </div>
                         <div class="col-md-3 mb-6">
-                            <label for="city">City</label>
-                            <input id="city" type="text" class="form-control" placeholder="" value="Guadalajara">
+                            <label for="shipping_city">City</label>
+                            <input id="shipping_city" type="text" class="form-control" placeholder="" value="Guadalajara">
                             <div class="invalid-feedback">
                                 City required.
                             </div>
                         </div>
 
                         <div class="col-md-3 mb-6">
-                            <label for="zipCode">ZipCode</label>
-                            <input id="zipCode" type="text" class="form-control" placeholder="" value="44290">
+                            <label for="shipping_postal_code">ZipCode</label>
+                            <input id="shipping_postal_code" type="text" class="form-control" placeholder="" value="44290">
                             <div class="invalid-feedback">
                                 Zip code required.
                             </div>
@@ -1794,10 +1801,26 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                 // Wait for the PayPal button to be clicked
                 createOrder: function () {
 
+                    let shippingInformation = {
+
+                        shipping_line1        : document.getElementById('shipping_line1').value,
+                        shipping_line2        : document.getElementById('shipping_line2').value,
+                        shipping_city         : document.getElementById('shipping_city').value,
+                        shipping_state        : document.getElementById('shipping_state').value,
+                        shipping_postal_code  : document.getElementById('shipping_postal_code').value,
+                        shipping_country_code : document.getElementById('shipping_country_code').value,
+
+                        shipping_firsName     : document.getElementById('shipping_firstName').value,
+                        shipping_lastName     : document.getElementById('shipping_lastName').value,
+                        shipping_email        : document.getElementById('shipping_email').value,
+                        shipping_phone        : document.getElementById('shipping_phone').value,
+                    };
+
+                    //console.log(shippingInformation);
                     return fetch(
                         '<?= $rootPath.$orderCreate ?>', {
                             method: 'POST',
-                            //body: formData
+                            body: shippingInformation
                         }
                     ).then(function (response) {
                         return response.json();
@@ -1831,4 +1854,8 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
 
         </script>
     @endsection
+
 </x-app-layout>
+
+
+
