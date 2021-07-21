@@ -72,30 +72,23 @@
                         </div>
                     </div>
                     <!-- End -->
-
-
                     <hr class="featurette-divider">
                     <div class="row">
-
                         <!-- item-->
                         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                             <div class="rounded shadow-sm p-2">
                                 <div class="container-rotate">
                                     <div class="parent" id="parent1">
-
-
                                         <div class="childA">
                                             <img src="assets/img/colors/blue.png"
                                                  class="card-img" alt="...">
                                             <div class="card-img-overlay">
                                                 <h1 class="card-title">Blue</h1>
-                                                <a id="example" style="top:0; right: 0"
-                                                   class="position-absolute badge badge-dark invisible-on-pc"
+                                                <a style="top:0; right: 0"
+                                                   class="position-absolute badge badge-dark stretched-link"
                                                    role="button"
                                                    onclick="document.querySelector('#parent1').classList.toggle('hover');">Example
-                                                    <i
-                                                            class="fas fa-angle-right"></i></a>
-
+                                                    <i class="fas fa-angle-right"></i></a>
                                                 <div style="bottom:0; right: 0"
                                                      class="position-absolute d-flex align-items-center justify-content-between rounded-pill bg-light p-1 m-2">
                                                     <p class="small mb-0 text-success"><i
@@ -104,25 +97,19 @@
                                                     <div class="bg-success text-white px-2 rounded-circle ml-2">
                                                         <span class="font-weight-bold">2</span>
                                                     </div>
-
                                                 </div>
-
                                             </div>
                                         </div>
-
-
                                         <div class="childB">
                                             <img src="assets/img/colors/blue2.png" class="card-img">
-
                                             <div class="card-img-overlay">
                                                 <p style="top:0" class="text-left position-absolute">Example</p>
-                                                <a id="example" style="top:0; right: 0;"
-                                                   class="position-absolute badge badge-dark invisible-on-pc"
+                                                <a style="top:0; right: 0;"
+                                                   class="position-absolute badge badge-dark stretched-link"
                                                    role="button"
                                                    onclick="document.querySelector('#parent1').classList.toggle('hover');"><i
                                                             class="fas fa-angle-left">
                                                         Return</i></a>
-
                                             </div>
                                         </div>
 
@@ -137,19 +124,16 @@
                             <div class="rounded shadow-sm p-2">
                                 <div class="container-rotate">
                                     <div class="parent" id="parent2">
-
-
                                         <div class="childA">
                                             <img src="assets/img/colors/dark-brick.png"
                                                  class="card-img" alt="...">
                                             <div class="card-img-overlay">
                                                 <h1 class="card-title">Dark Brick</h1>
-                                                <a id="example" style="top:0; right: 0"
+                                                <a style="top:0; right: 0"
                                                    class="position-absolute badge badge-dark invisible-on-pc"
                                                    role="button"
                                                    onclick="document.querySelector('#parent2').classList.toggle('hover');">Example
                                                     <i class="fas fa-angle-right"></i></a>
-
                                                 <div style="bottom:0; right: 0"
                                                      class="position-absolute d-flex align-items-center justify-content-between rounded-pill bg-light p-1 m-2">
                                                     <p class="small mb-0 text-success"><i
@@ -158,54 +142,41 @@
                                                     <div class="bg-success text-white px-2 rounded-circle ml-2">
                                                         <span class="font-weight-bold">5</span>
                                                     </div>
-
                                                 </div>
-
                                             </div>
                                         </div>
-
-
                                         <div class="childB">
                                             <img src="assets/img/colors/dark-brick2.png" class="card-img">
-
                                             <div class="card-img-overlay">
                                                 <p style="top:0" class="text-left position-absolute">Example</p>
-                                                <a id="example" style="top:0; right: 0;"
+                                                <a style="top:0; right: 0;"
                                                    class="position-absolute badge badge-dark invisible-on-pc"
                                                    role="button"
                                                    onclick="document.querySelector('#parent2').classList.toggle('hover');"><i
                                                             class="fas fa-angle-left">
                                                         Return</i></a>
-
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end item -->
-
-
                         <!-- item-->
                         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                             <div class="rounded shadow-sm p-2">
                                 <div class="container-rotate">
                                     <div class="parent" id="parent3">
-
-
                                         <div class="childA">
                                             <img src="assets/img/colors/mustard.png"
                                                  class="card-img" alt="...">
                                             <div class="card-img-overlay">
                                                 <h1 class="card-title">Mustard</h1>
-                                                <a id="example" style="top:0; right: 0"
+                                                <a style="top:0; right: 0"
                                                    class="position-absolute badge badge-dark invisible-on-pc"
                                                    role="button"
                                                    onclick="document.querySelector('#parent3').classList.toggle('hover');">Example
-                                                    <i
-                                                            class="fas fa-angle-right"></i></a>
-
+                                                    <i class="fas fa-angle-right"></i></a>
                                                 <div style="bottom:0; right: 0"
                                                      class="position-absolute d-flex align-items-center justify-content-between rounded-pill bg-light p-1 m-2">
                                                     <p class="small mb-0 text-success"><i
@@ -214,52 +185,41 @@
                                                     <div class="bg-success text-white px-2 rounded-circle ml-2">
                                                         <span class="font-weight-bold">2</span>
                                                     </div>
-
                                                 </div>
-
                                             </div>
                                         </div>
-
-
                                         <div class="childB">
                                             <img src="assets/img/colors/mustard2.png" class="card-img">
-
                                             <div class="card-img-overlay">
                                                 <p style="top:0" class="text-left position-absolute">Example</p>
-                                                <a id="example" style="top:0; right: 0;"
+                                                <a style="top:0; right: 0;"
                                                    class="position-absolute badge badge-dark invisible-on-pc"
                                                    role="button"
                                                    onclick="document.querySelector('#parent3').classList.toggle('hover');"><i
                                                             class="fas fa-angle-left">
                                                         Return</i></a>
-
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end item -->
-
                         <!-- item-->
                         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                             <div class="rounded shadow-sm p-2">
                                 <div class="container-rotate">
                                     <div class="parent" id="parent4">
-
-
                                         <div class="childA">
                                             <img src="assets/img/colors/tan.png"
                                                  class="card-img" alt="...">
                                             <div class="card-img-overlay">
                                                 <h1 class="card-title">Tan</h1>
-                                                <a id="example" style="top:0; right: 0"
+                                                <a style="top:0; right: 0"
                                                    class="position-absolute badge badge-dark invisible-on-pc"
                                                    role="button"
                                                    onclick="document.querySelector('#parent4').classList.toggle('hover');">Example
                                                     <i class="fas fa-angle-right"></i></a>
-
                                                 <div style="bottom:0; right: 0"
                                                      class="position-absolute d-flex align-items-center justify-content-between rounded-pill bg-light p-1 m-2">
                                                     <p class="small mb-0 text-success"><i
@@ -268,52 +228,40 @@
                                                     <div class="bg-success text-white px-2 rounded-circle ml-2">
                                                         <span class="font-weight-bold">3</span>
                                                     </div>
-
                                                 </div>
-
                                             </div>
                                         </div>
-
-
                                         <div class="childB">
                                             <img src="assets/img/colors/tan2.png" class="card-img">
-
                                             <div class="card-img-overlay">
                                                 <p style="top:0" class="text-left position-absolute">Example</p>
-                                                <a id="example" style="top:0; right: 0;"
+                                                <a style="top:0; right: 0;"
                                                    class="position-absolute badge badge-dark invisible-on-pc"
                                                    role="button"
                                                    onclick="document.querySelector('#parent4').classList.toggle('hover');"><i
-                                                            class="fas fa-angle-left">
-                                                        Return</i></a>
-
+                                                            class="fas fa-angle-left">Return</i></a>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end item -->
-
                         <!-- item-->
                         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                             <div class="rounded shadow-sm p-2">
                                 <div class="container-rotate">
                                     <div class="parent" id="parent5">
-
-
                                         <div class="childA">
                                             <img src="assets/img/colors/tobacco.png"
                                                  class="card-img" alt="...">
                                             <div class="card-img-overlay">
                                                 <h1 class="card-title">Tobacco</h1>
-                                                <a id="example" style="top:0; right: 0"
+                                                <a style="top:0; right: 0"
                                                    class="position-absolute badge badge-dark invisible-on-pc"
                                                    role="button"
                                                    onclick="document.querySelector('#parent5').classList.toggle('hover');">Example
                                                     <i class="fas fa-angle-right"></i></a>
-
                                                 <div style="bottom:0; right: 0"
                                                      class="position-absolute d-flex align-items-center justify-content-between rounded-pill bg-light p-1 m-2">
                                                     <p class="small mb-0 text-success"><i
@@ -322,45 +270,35 @@
                                                     <div class="bg-success text-white px-2 rounded-circle ml-2">
                                                         <span class="font-weight-bold">4</span>
                                                     </div>
-
                                                 </div>
-
                                             </div>
                                         </div>
-
-
                                         <div class="childB">
                                             <img src="assets/img/colors/tobacco2.png" class="card-img">
-
                                             <div class="card-img-overlay">
                                                 <p style="top:0" class="text-left position-absolute">Example</p>
-                                                <a id="example" style="top:0; right: 0;"
+                                                <a style="top:0; right: 0;"
                                                    class="position-absolute badge badge-dark invisible-on-pc"
                                                    role="button"
                                                    onclick="document.querySelector('#parent5').classList.toggle('hover');"><i
-                                                            class="fas fa-angle-left">
-                                                        Return</i></a>
-
+                                                            class="fas fa-angle-left">Return</i></a>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end item -->
-
                     </div>
                 </div>
         </div>
-
         </body>
-
         <div class="alert alert-danger text-center" role="alert">
             *Colors may vary on each screen or monitor.
         </div>
         <hr class="featurette-divider">
 
+        </html>
 
     @endsection
 </x-app-layout>
