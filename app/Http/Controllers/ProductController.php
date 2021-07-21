@@ -398,42 +398,42 @@ class ProductController extends Controller {
         if (isset($_COOKIE['shoppingCar'])) {
 
 
-            $responce["intent"]     = "CAPTURE";
+            $response["intent"]     = "CAPTURE";
 
-            $responce["return_url"] = "/checkout";
-            $responce["cancel_url"] = "/cancel";
+            $response["return_url"] = "/checkout";
+            $response["cancel_url"] = "/cancel";
 
-            $responce["reference_id"]  = "CSEP";
-            $responce["currency_code"] = "USD";
+            $response["reference_id"]  = "CSEP";
+            $response["currency_code"] = "USD";
 
             $randNo = (string)rand(10000, 20000);
-            $responce["invoice_id"] = "IEP-".$randNo;
-            $responce["custom_id"] = "EP-".$randNo;
+            $response["invoice_id"] = "IEP-".$randNo;
+            $response["custom_id"] = "EP-".$randNo;
 
             $data['shoppingCar'] = (array)json_decode($_COOKIE['shoppingCar']);
 
-            $responce["shipping_value"]          = "0";
-            $responce["tax_total_value"]         = "0";
-            $responce["handling_value"]          = "0";
-            $responce["shipping_discount_value"] = "0";
-            $responce["insurance_value"]         = "0";
+            $response["shipping_value"]          = "0";
+            $response["tax_total_value"]         = "0";
+            $response["handling_value"]          = "0";
+            $response["shipping_discount_value"] = "0";
+            $response["insurance_value"]         = "0";
             if (isset($_COOKIE['promoCode'])){
-                $responce["discount_value"]      = $this->getDiscountAmount();
+                $response["discount_value"]      = $this->getDiscountAmount();
             }
-            $responce["item"] = $this->shoppingCarItem();
+            $response["item"] = $this->shoppingCarItem();
             if (isset($request->shipping_country_code)){
 
-                $responce['address_line_1'] = $request->shipping_line1;
-                $responce['address_line_2'] = $request->shipping_line2;
-                $responce['admin_area_2']   = $request->shipping_city;
-                $responce['admin_area_1']   = $request->shipping_state;
-                $responce['postal_code']    = $request->shipping_postal_code;
-                $responce['country_code']   = $request->shipping_country_code;
+                $response['address_line_1'] = $request->shipping_line1;
+                $response['address_line_2'] = $request->shipping_line2;
+                $response['admin_area_2']   = $request->shipping_city;
+                $response['admin_area_1']   = $request->shipping_state;
+                $response['postal_code']    = $request->shipping_postal_code;
+                $response['country_code']   = $request->shipping_country_code;
             }
 
         }
 
-        return $responce;
+        return $response;
     }
 
     public function getDiscountAmount(){

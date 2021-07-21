@@ -15,12 +15,6 @@ class CreateMatComponentsTable extends Migration {
             $table->string('fileName')->unique();
             $table->string('description');
             $table->string('type');
-
-            $table->integer('stock')->default(0);
-            $table->boolean('stockEable')->default(0);
-            $table->string('exampleFileName')->default('assets/img/customMat/tan.png');
-
-
             $table->timestamps();
         });
     }

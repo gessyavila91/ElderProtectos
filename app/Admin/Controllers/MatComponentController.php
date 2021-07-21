@@ -44,7 +44,21 @@ class MatComponentController extends AdminController {
                     return '<a class="label label-warning"><i class="fa fa-ban"></i></a>';
                 }
             });
-        $grid->column('fileName', __('FileName'))->display(function ($logo) {
+        $grid->column('fileName', 'FileName')->display(function ($logo) {
+            return "<img height='25px' src=".env('APP_URL')."/".$this->assetPath.$logo .">";
+        });
+        $grid->column('stockEable', 'stockEable')
+            /*->switch($states)*/
+            ->display(function () {
+                if ($this->stockEable == 1){
+                    return '<a class="label label-success"><i class="fa fa-check"></i></a>';
+                }else{
+                    return '<a class="label label-warning"><i class="fa fa-ban"></i></a>';
+                }
+            });
+        $grid->column('stock', 'Stock')
+            ->editable();
+        $grid->column('exampleFileName','exampleFileName')->display(function ($logo) {
             return "<img height='25px' src=".env('APP_URL')."/".$this->assetPath.$logo .">";
         });
         
@@ -82,6 +96,17 @@ class MatComponentController extends AdminController {
 
         $show->field('fileName', __('FileName'))->image();
         $show->field('description', __('Description'));
+
+        $show->field('exampleFileName', __('exampleFileName'))->image();
+        $show->label('stockEable', 'stockEable')->as(function ($content) {
+            if ($content == 1){
+                return '<i class="fa fa-check"></i>';
+            }else{
+                return '<i class="fa fa-ban"></i>';
+            }
+        })->label();
+        $show->field('stock', __('Stock'));
+
         $show->field('type', 'Type')
             ->using(['B' => 'Background', 'F' => 'Frame', 'L' => 'Logo'])
             ->label();
@@ -122,6 +147,15 @@ class MatComponentController extends AdminController {
             'min'   => 'Code can not be less than 3 characters.',
             'max'   => 'The Code may not be greater than 255 characters.',
         ]);
+
+        $form->image('exampleFileName', 'ExampleFileName')
+            ->thumbnail('small', $width = 300, $height = 300)
+            ->move($this->assetPath)
+            ->removable();
+
+        $form->switch('stockEable', 'stockEable')->states($states);
+        $form->number('stock', __('Stock'))->rules('min:0');;
+
 
         $form->radio('type', 'Type')
             ->options([
