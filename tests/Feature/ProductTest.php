@@ -43,7 +43,8 @@ class ProductTest extends TestCase {
                     "description" => "Standar Brown",
                     "type" => "B",
                     "created_at" => "2021-03-12 13:33:59",
-                    "updated_at" => "2021-03-14 20:09:33"
+                    "updated_at" => "2021-03-14 20:09:33",
+
                 ],
                 "matComponnentFrame" => [
                     "id" => 3,

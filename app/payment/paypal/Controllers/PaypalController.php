@@ -96,16 +96,16 @@ class PaypalController extends Controller {
             "purchase_units" : [ 
                 {
                     "reference_id" : "CSEP",
-                    "description" : "Elder Protectors",
+                    "description" : "Elder Protectors - Custom Shop",
                     "invoice_id" : "IEP-'.$randNo.'",
                     "custom_id" : "EP-'.$randNo.'",
                     "amount" : {
                         "currency_code" : "USD",
-                        "value" : "229",
+                        "value" : "159",
                         "breakdown" : {
                             "item_total" : {
                                 "currency_code" : "USD",
-                                "value" : "210"
+                                "value" : "140"
                             },
                             "shipping" : {
                                 "currency_code" : "USD",
@@ -154,16 +154,6 @@ class PaypalController extends Controller {
                           },
                           "quantity" : "1",
                           "category" : "PHYSICAL_GOODS"
-                        },{
-                          "name" : "Custom Mat",
-                          "description" : "Custom Mat - sku02",
-                          "sku" : "sku02",
-                          "unit_amount" : {
-                              "currency_code" : "USD",
-                              "value":"70"
-                          },
-                          "quantity" : "1",
-                          "category" : "PHYSICAL_GOODS"
                         }
                     ],
                     "shipping":{
@@ -184,9 +174,9 @@ class PaypalController extends Controller {
         $responce = $PC->checkout($request);
         $OC = new orderDataController();
         $orderData = json_encode($OC->initializeOrderData($responce));
-        $orderData = json_decode(json_encode($orderData));
+        $orderData = json_decode(json_encode($orderData));*/
 
-        var_dump($orderData);*/
+        //var_dump($orderData);
 
 
         header('Content-Type: application/json');

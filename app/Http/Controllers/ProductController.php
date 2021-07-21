@@ -155,10 +155,12 @@ class ProductController extends Controller {
                 }
             }
             $data['shoppingCar'] = $shoppingCar;
-            $data['idToRemove'] = $request->id;
+            $data['idToRemove']  = $request->id;
 
             $data['shoppingCarCountItems'] = count($data['shoppingCar']);
             $data['shoppingCarTotalPrice'] = $this->calcCarTotalPrice($shoppingCar);
+
+
 
             if (isset($_COOKIE['promoCode'])) {
                 $data['promoCode'] = (array)json_decode($_COOKIE['promoCode']);
@@ -384,6 +386,7 @@ class ProductController extends Controller {
                     }
                     return cookie('shoppingCar', json_encode($carCookie, JSON_FORCE_OBJECT));
                 }
+                break;
             case 'promoCode':
                 $promoCodeC = new PromoCodeController();
                 $promo = $promoCodeC->information($request->promoCode);

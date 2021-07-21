@@ -366,7 +366,6 @@ $matComponents = matComponent::where('enable', 1)
 
                     <?php
                     foreach($matComponents->where('type', 'B') as $Component) {
-
                         echo '
                         <!-- item-->
                         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
@@ -379,7 +378,7 @@ $matComponents = matComponent::where('enable', 1)
                                             <div class="card-img-overlay">
                                                 <h1 class="card-title">'.$Component->description.'</h1>
 
-                                                <a id="example" style="top:0; right: 0"
+                                                <a style="top:0; right: 0"
                                                    class="position-absolute badge badge-dark invisible-on-pc"
                                                    role="button">Example
                                                 <i class="fas fa-angle-right"></i></a>
@@ -400,7 +399,7 @@ $matComponents = matComponent::where('enable', 1)
                                             <img src="'.$Component->exampleFileName.'" class="card-img">
                                             <div class="card-img-overlay">
                                                 <p style="top:0" class="text-left position-absolute">Example</p>
-                                                <a id="example" style="top:0; right: 0;"
+                                                <a style="top:0; right: 0;"
                                                    class="position-absolute badge badge-dark invisible-on-pc"
                                                    role="button">
                                                 <i class="fas fa-angle-left"> Return</i></a>
