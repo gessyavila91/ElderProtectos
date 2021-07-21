@@ -20,39 +20,29 @@
                 border-radius: 3px;
                 color: white;
             }
-
             .parent {
                 transition: transform 1s cubic-bezier(.55, -.62, .27, 1.2);
                 transform-style: preserve-3d;
             }
 
-            .container-rotate:hover .parent {
-                transform: rotateY(180deg);
-            }
-
             .childA, .childB {
+                -webkit-perspective: 0;
+                -webkit-backface-visibility: hidden;
+                -webkit-transform: translate3d(0,0,0);
+                visibility:visible;
                 backface-visibility: hidden;
                 top: 0;
                 left: 0;
             }
-
             .childA {
                 position: absolute;
             }
-
             .childB {
                 transform: rotateY(180deg);
             }
-
             .hover {
                 transform: rotateY(180deg);
                 height: 100%;
-            }
-
-            @media screen and (min-width: 1279px) {
-                .invisible-on-pc {
-                    display: none;
-                }
             }
         </style>
 
