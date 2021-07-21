@@ -22,12 +22,6 @@
     }
 
 
-    .footer {
-        position: relative;
-        bottom: -50px;
-
-    }
-
     a {
         color: white;
         position: relative;
@@ -64,15 +58,15 @@
 </style>
 
 <!--footer-->
-<div class="footer container-fluid pb-0 mb-0 justify-content-center text-light banner3 shadow-lg">
+<div class="container-fluid pb-0 mb-0 text-light banner3 shadow-lg position-absolute">
     <footer>
         <div class="row my-5 justify-content-center py-5">
             <div class="col-11">
                 <div class="row ">
-                    <div class="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto a">
-                        <h3 class="mb-md-0 mb-5 font-weight-bold"><img src="{{asset('assets/img/logo-white.svg')}}"
-                                                                       alt="logoSVG" class="img-fluid"
-                                                                       style="height: 40px"></h3>
+                    <div class="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto">
+                        <h3 class="mb-md-0 mb-5 font-weight-bold">
+                            <img src="assets/img/logo-white.svg" alt="logoSVG" class="img-fluid" style="height: 40px">
+                        </h3>
                         <p class="p-0 m-0">Hand-Made Game Supplies</p>
                     </div>
                     <div class="col-xl-2 col-md-4 col-sm-4 col-12">
@@ -133,7 +127,5 @@
         </div>
         <div class="page-header"></div>
     </footer>
-
 </div>
 <!--footer end-->
-
