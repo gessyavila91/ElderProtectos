@@ -39,6 +39,9 @@ Route::get('/orders', function () {
 Route::get('/myprofile', function () {
     return view('myprofile');
 });
+Route::get('/colors', function () {
+    return view('colors');
+});
 Route::get('/pics', function () {
     return view('pics');
 });
