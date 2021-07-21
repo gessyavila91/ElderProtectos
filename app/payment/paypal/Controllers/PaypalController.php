@@ -101,11 +101,11 @@ class PaypalController extends Controller {
                     "custom_id" : "EP-'.$randNo.'",
                     "amount" : {
                         "currency_code" : "USD",
-                        "value" : "89",
+                        "value" : "229",
                         "breakdown" : {
                             "item_total" : {
                                 "currency_code" : "USD",
-                                "value" : "70"
+                                "value" : "210"
                             },
                             "shipping" : {
                                 "currency_code" : "USD",
@@ -134,47 +134,59 @@ class PaypalController extends Controller {
                         }
                     },
                     "items" : [
-                      {
-                        "name" : "Custom Mat",
-                        "description" : "Custom Mat - sku01",
-                        "sku" : "sku01",
-                        "unit_amount" : {
-                            "currency_code" : "USD",
-                            "value":"70"
-                        },
-                        "quantity" : "1",
-                        "category" : "PHYSICAL_GOODS"
-                      },{
-                        "name" : "Custom Mat",
-                        "description" : "Custom Mat - sku02",
-                        "sku" : "sku02",
-                        "unit_amount" : {
-                            "currency_code" : "USD",
-                            "value":"70"
-                        },
-                        "quantity" : "1",
-                        "category" : "PHYSICAL_GOODS"
-                      },{
-                        "name" : "Custom Mat",
-                        "description" : "Custom Mat - sku02",
-                        "sku" : "sku02",
-                        "unit_amount" : {
-                            "currency_code" : "USD",
-                            "value":"70"
-                        },
-                        "quantity" : "1",
-                        "category" : "PHYSICAL_GOODS"
-                      }
-                    ]
+                        {
+                          "name" : "Custom Mat",
+                          "description" : "Custom Mat - sku01",
+                          "sku" : "sku01",
+                          "unit_amount" : {
+                              "currency_code" : "USD",
+                              "value":"70"
+                          },
+                          "quantity" : "1",
+                          "category" : "PHYSICAL_GOODS"
+                        },{
+                          "name" : "Custom Mat",
+                          "description" : "Custom Mat - sku02",
+                          "sku" : "sku02",
+                          "unit_amount" : {
+                              "currency_code" : "USD",
+                              "value":"70"
+                          },
+                          "quantity" : "1",
+                          "category" : "PHYSICAL_GOODS"
+                        },{
+                          "name" : "Custom Mat",
+                          "description" : "Custom Mat - sku02",
+                          "sku" : "sku02",
+                          "unit_amount" : {
+                              "currency_code" : "USD",
+                              "value":"70"
+                          },
+                          "quantity" : "1",
+                          "category" : "PHYSICAL_GOODS"
+                        }
+                    ],
+                    "shipping":{
+                       "address":{
+                          "address_line_1":"Revolucion 1500",
+                          "address_line_2":"Boulevar 400",
+                          "admin_area_1":"Jalisco",
+                          "admin_area_2":"Guadalajara",
+                          "postal_code":"44290",
+                          "country_code":"MX"
+                       }
+                    }
                 }
             ]
         }';
 
-        $PC = new ProductController();
+        /*$PC = new ProductController();
         $responce = $PC->checkout($request);
         $OC = new orderDataController();
         $orderData = json_encode($OC->initializeOrderData($responce));
         $orderData = json_decode(json_encode($orderData));
+
+        var_dump($orderData);*/
 
 
         header('Content-Type: application/json');

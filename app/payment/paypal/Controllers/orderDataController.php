@@ -31,8 +31,6 @@ class orderDataController {
             ])
         ];
 
-        var_dump($array);
-
         return $array;
     }
 
