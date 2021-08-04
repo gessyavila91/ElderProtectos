@@ -73,7 +73,7 @@ class PaypalController extends Controller {
 
     }
 
-    public function getOrderDetails(Request $request){
+    public function getOrderDetails(Request $request) {
         $paypalHelper = new PayPalHelper;
 
         header('Content-Type: application/json');
@@ -81,6 +81,7 @@ class PaypalController extends Controller {
     }
 
     public function createOrder(Request $request) {
+
         $paypalHelper = new PaypalHelper();
 
         $randNo = (string)rand(10000, 20000);
@@ -101,11 +102,11 @@ class PaypalController extends Controller {
                     "custom_id" : "EP-'.$randNo.'",
                     "amount" : {
                         "currency_code" : "USD",
-                        "value" : "159",
+                        "value":"200",
                         "breakdown" : {
                             "item_total" : {
                                 "currency_code" : "USD",
-                                "value" : "140"
+                                "value" : "210"
                             },
                             "shipping" : {
                                 "currency_code" : "USD",
@@ -125,59 +126,83 @@ class PaypalController extends Controller {
                             },
                             "insurance" : {
                                 "currency_code" : "USD",
-                                "value" : "20"
+                                "value" : "0"
                             },
                             "discount" : {
                                 "currency_code" : "USD",
-                                "value" : "1"
+                                "value" : "10"
                             }
                         }
                     },
                     "items" : [
                         {
-                          "name" : "Custom Mat",
-                          "description" : "Custom Mat - sku01",
-                          "sku" : "sku01",
-                          "unit_amount" : {
-                              "currency_code" : "USD",
-                              "value":"70"
-                          },
-                          "quantity" : "1",
-                          "category" : "PHYSICAL_GOODS"
-                        },{
-                          "name" : "Custom Mat",
-                          "description" : "Custom Mat - sku02",
-                          "sku" : "sku02",
-                          "unit_amount" : {
-                              "currency_code" : "USD",
-                              "value":"70"
-                          },
-                          "quantity" : "1",
-                          "category" : "PHYSICAL_GOODS"
+                            "name":"Custom Playmat",
+                            "description":"M-BBRW-FELD-LCHDRG Custom Text TL-This is a Message 4 you",
+                            "sku":"M-BBRW-FELD-LCHDRG",
+                            "unit_amount":{
+                               "currency_code":"USD",
+                               "value":"70"
+                            },
+                            "quantity":"1",
+                            "category":"PHYSICAL_GOODS"
+                        },
+                        {
+                            "name":"Custom Playmat",
+                            "description":"Custom Playmat M-BBRW-FELD-LPWELD",
+                            "sku":"M-BBRW-FELD-LPWELD",
+                            "unit_amount" : {
+                                "currency_code" : "USD",
+                                "value":"70"
+                            },
+                            "quantity" : "1",
+                            "category" : "PHYSICAL_GOODS"
+                        },
+                        {
+                            "name":"Custom Playmat",
+                            "description":"Custom Playmat M-BBRW-FELD-LCHDRG",
+                            "sku":"M-BBRW-FELD-LCHDRG",
+                            "unit_amount" : {
+                                "currency_code" : "USD",
+                                "value":"70"
+                            },
+                            "quantity" : "1",
+                            "category" : "PHYSICAL_GOODS"
+                        },
+                        {
+                            "name":"Its a Gif",
+                            "description":"With love to: Gessy",
+                            "sku":"GIFT-NOTE",
+                            "unit_amount" : {
+                                "currency_code" : "USD",
+                                "value":"0"
+                            },
+                            "quantity" : "1",
+                            "category" : "PHYSICAL_GOODS"
                         }
                     ],
-                    "shipping":{
-                       "address":{
-                          "address_line_1":"Revolucion 1500",
-                          "address_line_2":"Boulevar 400",
-                          "admin_area_1":"Jalisco",
-                          "admin_area_2":"Guadalajara",
-                          "postal_code":"44290",
-                          "country_code":"MX"
-                       }
+                    "shipping" : {
+                        "address" : {
+                            "address_line_1":"Revolucion 1500",
+                            "address_line_2":"Boulevar 400",
+                            "admin_area_1":"Jalisco",
+                            "admin_area_2":"Guadalajara",
+                            "postal_code":"44290",
+                            "country_code":"MX",
+                            "email_address" : "gessyavila91@gmail.com"
+                        }
+                    },
+                    "payer" : {
+                        "email_address" : "gessyavila91@gmail.com"
                     }
                 }
             ]
         }';
 
-        /*$PC = new ProductController();
-        $responce = $PC->checkout($request);
+        $PC = new ProductController();
+        $response = $PC->checkout($request);
         $OC = new orderDataController();
-        $orderData = json_encode($OC->initializeOrderData($responce));
-        $orderData = json_decode(json_encode($orderData));*/
-
-        //var_dump($orderData);
-
+        $orderData = json_encode($OC->initializeOrderData($response));
+        $orderData = json_decode(json_encode($orderData));
 
         header('Content-Type: application/json');
         return json_encode($paypalHelper->orderCreate($orderData));
