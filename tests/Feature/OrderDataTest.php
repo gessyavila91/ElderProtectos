@@ -8,58 +8,78 @@ use PHPUnit\Framework\TestCase;
 
 class OrderDataTest extends TestCase {
 
-    public function testCreateObjectOrderData() {
-        $orderData = new orderDataController();
+    private $data;
 
-        $data["intent"] = "CAPTURE";
+    protected function setUp() : void{
 
-        $data["return_url"] = "/checkout";
-        $data["cancel_url"] = "/cancel";
+        $this->data["intent"] = "CAPTURE";
 
-        $data["reference_id"] = "EPU1";
-        $data["currency_code"] = "USD";
+        $this->data["return_url"] = "/checkout";
+        $this->data["cancel_url"] = "/cancel";
 
+        $this->data["reference_id"] = "EPU1";
+        $this->data["currency_code"] = "USD";
 
-        $data["invoice_id"] = "INV-Elder Protectors".rand(10000, 20000);
-        $data["custom_id"] = "CUST-Elder Protectors";
+        $this->data["shipping_value"] = "1";
+        $this->data["handling_value"] = "5";
+        $this->data["tax_total_value"] = "5";
+        $this->data["insurance_value"] = "20";
+        $this->data["shipping_discount_value"] = "5";
+        $this->data["discount_value"] = "0";
 
-        $data["items_quantity"] = "1";
-        $data["items_category"] = "PHYSICAL_GOODS";
+        $this->data["invoice_id"] = "INV-Elder Protectors".rand(10000, 20000);
+        $this->data["custom_id"] = "CUST-Elder Protectors";
 
-        $data["shipping_value"] = "1";
-        $data["tax_total_value"] = "5";
-        $data["handling_value"] = "5";
-        $data["shipping_discount_value"] = "5";
-        $data["insurance_value"] = "20";
+        $this->data["full_name"] = "Gessy Avila";
 
-        $data["shipping_line1"] = 'Revolucion 1500';
-        $data["shipping_line2"] = 'Boulevar 400';
-        $data["shipping_city"] = 'Jalisco';
-        $data["shipping_state"] = 'Guadalajara';
-        $data["shipping_postal_code"] = '44290';
-        $data["shipping_country_code"] = 'MX';
+        $this->data["address_line_1"] = 'Revolucion 1500';
+        $this->data["address_line_2"] = 'Boulevar 400';
+        $this->data["admin_area_1"] = 'Jalisco';
+        $this->data["admin_area_2"] = 'Guadalajara';
+        $this->data["postal_code"] = '44290';
+        $this->data["country_code"] = 'MX';
 
-        $data["item"] = [
+        $this->data["item"] = [
             [
-                "name" => "Custom Playmat 1",
-                "description" => "Custom Playmat - Description 1",
-                "sku" => "sku-1",
+                "name" => "Custom Playmat",
+                "description" => "M-BBRW-FELD-LCHDRG Custom Text TL-This is a Message 4 you",
+                "sku" => "M-BBRW-FELD-LCHDRG",
                 "unit_amount_value" => "70",
                 "items_category" => "PHYSICAL_GOODS",
                 "items_quantity" => "1"
             ],
             [
-                "name" => "Custom Playmat 2",
-                "description" => "Custom Playmat - Description 2",
-                "sku" => "sku-2",
+                "name" => "Custom Playmat",
+                "description" => "Custom Playmat M-BBRW-FELD-LPWELD",
+                "sku" => "M-BBRW-FELD-LPWELD",
                 "unit_amount_value" => "70",
+                "items_category" => "PHYSICAL_GOODS",
+                "items_quantity" => "1"
+            ],
+            [
+                "name" => "Custom Playmat",
+                "description" => "Custom Playmat M-BBRW-FELD-LCHDRG",
+                "sku" => "M-BBRW-FELD-LCHDRG",
+                "unit_amount_value" => "70",
+                "items_category" => "PHYSICAL_GOODS",
+                "items_quantity" => "1"
+            ],
+            [
+                "name" => "Its a Gif",
+                "description" => "With love to: Gessy",
+                "sku" => "GIFT-NOTE",
+                "unit_amount_value" => "0",
                 "items_category" => "PHYSICAL_GOODS",
                 "items_quantity" => "1"
             ]
         ];
+    }
+
+    public function testCreateObjectOrderData() {
+        $orderData = new orderDataController();
 
         $orderData_assertion = [
-            "intent" => $data["intent"],//"CAPTURE", // CAPTURE * | AUTHORIZE
+            "intent" => $this->data["intent"],//"CAPTURE", // CAPTURE * | AUTHORIZE
             "application_context" => [
                 "return_url" => "",
                 "cancel_url" => "",
@@ -67,115 +87,81 @@ class OrderDataTest extends TestCase {
                 'user_action' => 'PAY_NOW'
             ],
             "purchase_units" => array([
-                "reference_id" => $data["reference_id"],
-                "description" => "Elder Protectors - Custom Shop",//env app name
-                "invoice_id" => $data["invoice_id"],
-                "custom_id" => "CUST-Elder Protectors",
+                "reference_id" => $this->data["reference_id"],
                 "amount" => [
-                    "currency_code" => $data["currency_code"],
-                    "value" => $orderData->getPurchasedUnitAmount($data),
-                    "breakdown" => $orderData->getBreakdown($data)
+                    "currency_code" => $this->data["currency_code"],
+                    "value" => $orderData->getPurchasedUnitAmount($this->data),
+                    "breakdown" => $orderData->getBreakdown($this->data)
                 ],
-                "items" => $orderData->getItems($data),
-                "shipping" => $orderData->getShipping($data)
+                "description" => "Elder Protectors - Custom Shop",//env app name
+                "invoice_id" => $this->data["invoice_id"],
+                "custom_id" => "CUST-Elder Protectors",
+
+                "items" => $orderData->getItems($this->data),
+                "shipping" => $orderData->getShipping($this->data),
             ])
         ];
 
-        $this->assertSame($orderData_assertion, $orderData->initializeOrderData($data));
+        $this->assertSame($orderData_assertion, $orderData->initializeOrderData($this->data));
     }
 
-    public function testbreakdownTest() {
+    public function testBreakdownTest() {
         $orderData = new orderDataController();
-
-        $data["currency_code"] = "USD";
-
-        $data["item_total_value"] = "0";
-        $data["shipping_value"] = "0";
-        $data["tax_total_value"] = "0";
-        $data["handling_value"] = "0";
-        $data["shipping_discount_value"] = "0";
-        $data["insurance_value"] = "0";
-        $data["unit_amount_value"] = "0";
-        $data["items_quantity"] = "0";
-        $data["discount_value"] = "0";
-        $data["item"] = [
-            [
-                "name" => "Custom Playmat 1",
-                "description" => "Custom Playmat - Description 1",
-                "sku" => "sku-1",
-                "unit_amount_value" => "70",
-                "items_category" => "PHYSICAL_GOODS",
-                "items_quantity" => "1"
-            ],
-            [
-                "name" => "Custom Playmat 2",
-                "description" => "Custom Playmat - Description 2",
-                "sku" => "sku-2",
-                "unit_amount_value" => "70",
-                "items_category" => "PHYSICAL_GOODS",
-                "items_quantity" => "1"
-            ]
-        ];
 
         $breakdownAssert = [
             "item_total" => [
-                "currency_code" => "USD",
-                "value" => "140"
+                "currency_code" => $this->data["currency_code"],
+                "value" => strval($orderData->getUnit_amount_value($this->data))
             ],
             "shipping" => [
-                "currency_code" => "USD",
-                "value" => "0"
-            ],
-            "tax_total" => [
-                "currency_code" => "USD",
-                "value" => "0"
+                "currency_code" => $this->data["currency_code"],
+                "value" => $this->data["shipping_value"]
             ],
             "handling" => [
-                "currency_code" => "USD",
-                "value" => "0"
+                "currency_code" => $this->data["currency_code"],
+                "value" => $this->data["handling_value"]
             ],
-            "shipping_discount" => [
-                "currency_code" => "USD",
-                "value" => "0"
+            "tax_total" => [
+                "currency_code" => $this->data["currency_code"],
+                "value" => $this->data["tax_total_value"]
             ],
             "insurance" => [
-                "currency_code" => "USD",
-                "value" => "0"
+                "currency_code" => $this->data["currency_code"],
+                "value" => $this->data["insurance_value"]
+            ],
+            "shipping_discount" => [
+                "currency_code" => $this->data["currency_code"],
+                "value" => $this->data["shipping_discount_value"]
             ],
             "discount" => [
-                "currency_code" => "USD",
-                "value" => "0"
+                "currency_code" => $this->data["currency_code"],
+                "value" => $this->data["discount_value"]
             ]
 
         ];
 
-        $this->assertSame($breakdownAssert, $orderData->getBreakdown($data));
+        $this->assertSame($breakdownAssert, $orderData->getBreakdown($this->data));
     }
 
     public function testShipping() {
         $orderData = new orderDataController();
 
-        $data["shipping_line1"] = 'Revolucion 1500';
-        $data["shipping_line2"] = 'Boulevar 400';
-        $data["shipping_city"] = 'Jalisco';
-        $data["shipping_state"] = 'Guadalajara';
-        $data["shipping_postal_code"] = '44290';
-        $data["shipping_country_code"] = 'MX';
-
-
         $shippinAssert = [
+            "name" => [
+                "full_name" => $this->data["full_name"]
+            ],
             "address" => [
-                "address_line_1" => "Revolucion 1500",
-                "address_line_2" => "Boulevar 400",
-                "admin_area_1" => "Guadalajara",
-                "admin_area_2" => "Jalisco",
-                "postal_code" => "44290",
-                "country_code" => "MX"
+                "address_line_1" => $this->data["address_line_1"],
+                "address_line_2" => $this->data["address_line_2"],
+                "admin_area_1" => $this->data["admin_area_1"],
+                "admin_area_2" => $this->data["admin_area_2"],
+                "postal_code" => $this->data["postal_code"],
+                "country_code" => $this->data["country_code"]
             ]
         ];
 
 
-        $this->assertSame($shippinAssert, $orderData->getShipping($data));
+        $this->assertSame($shippinAssert, $orderData->getShipping($this->data));
 
 
     }

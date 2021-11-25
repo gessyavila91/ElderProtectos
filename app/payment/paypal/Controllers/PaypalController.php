@@ -93,13 +93,10 @@ class PaypalController extends Controller {
                 "cancel_url" : "",
                 "shipping_preference":"SET_PROVIDED_ADDRESS",
                 "user_action":"PAY_NOW"
-            },
+            }, 
             "purchase_units" : [ 
                 {
                     "reference_id" : "CSEP",
-                    "description" : "Elder Protectors - Custom Shop",
-                    "invoice_id" : "IEP-'.$randNo.'",
-                    "custom_id" : "EP-'.$randNo.'",
                     "amount" : {
                         "currency_code" : "USD",
                         "value":"200",
@@ -112,15 +109,11 @@ class PaypalController extends Controller {
                                 "currency_code" : "USD",
                                 "value" : "0"
                             },
-                            "tax_total" : {
-                                "currency_code" : "USD",
-                                "value" : "0"
-                            },
                             "handling" : {
                                 "currency_code" : "USD",
                                 "value" : "0"
                             },
-                            "shipping_discount" : {
+                            "tax_total" : {
                                 "currency_code" : "USD",
                                 "value" : "0"
                             },
@@ -128,12 +121,19 @@ class PaypalController extends Controller {
                                 "currency_code" : "USD",
                                 "value" : "0"
                             },
+                            "shipping_discount" : {
+                                "currency_code" : "USD",
+                                "value" : "0"
+                            },                            
                             "discount" : {
                                 "currency_code" : "USD",
                                 "value" : "10"
                             }
                         }
                     },
+                    "description" : "Elder Protectors - Custom Shop",
+                    "custom_id" : "EP-'.$randNo.'",
+                    "invoice_id" : "IEP-'.$randNo.'",
                     "items" : [
                         {
                             "name":"Custom Playmat",
@@ -181,18 +181,17 @@ class PaypalController extends Controller {
                         }
                     ],
                     "shipping" : {
+                        "name" : {
+                            "full_name": "getse getsito"
+                        },
                         "address" : {
                             "address_line_1":"Revolucion 1500",
                             "address_line_2":"Boulevar 400",
                             "admin_area_1":"Jalisco",
                             "admin_area_2":"Guadalajara",
                             "postal_code":"44290",
-                            "country_code":"MX",
-                            "email_address" : "gessyavila91@gmail.com"
+                            "country_code":"MX"
                         }
-                    },
-                    "payer" : {
-                        "email_address" : "gessyavila91@gmail.com"
                     }
                 }
             ]

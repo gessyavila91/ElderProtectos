@@ -43,8 +43,8 @@ const PAYPAL_ENDPOINTS = array(
 // PayPal REST App credentials
 const PAYPAL_CREDENTIALS = array(
     "sandbox" => [
-        "client_id" => "ASCs3KIocN5MuYCn8l7xhrzmqmQxoTYSWZzHFxlFGnXokO4QSOAwtT6kD22RkX3cNfU_R20fBlF8NC_3",
-        "client_secret" => "EJLpMe688yrAeT8hzRt57ZfxBDqSm2GazThLKTiCE_XC5Y3pqI2IvoozLTQ5kQGu9JZ2n2A0xT-SIrg0"
+        "client_id" => "AaeDQIrTD6UJlu6knvGY10EyYIdoOzXVq9hc7llSXGg8ErbobOVagypMv11SABvHUVzJhWg27RIk-iD3",
+        "client_secret" => "ENRplOAW9S33wSRyQfqIH2vJ08pcno5vt5ph0OZUyOrhJ6oiXx2VMyfi25qrvHx3hRR8OrZ8PxBlMIDg"
     ],
     "production" => [
         "client_id" => "",
