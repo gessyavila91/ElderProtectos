@@ -1818,6 +1818,7 @@ $orderGet = config('payment.paypal.URL.services.orderGet');
                         shipping_lastName: document.getElementById('shipping_lastName').value,
                         shipping_email: document.getElementById('shipping_email').value,
                         shipping_phone: document.getElementById('shipping_phone').value,
+                        shipping_full_name: document.getElementById('shipping_firstName').value + ' ' +document.getElementById('shipping_lastName').value,
                     };
 
                     return fetch(

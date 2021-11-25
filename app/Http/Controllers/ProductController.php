@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Route;
 
 class ProductController extends Controller {
 
@@ -16,7 +14,7 @@ class ProductController extends Controller {
     ];
 
     /*API Method's*/
-    public function InitShoppingCar(Request $request) {
+    public function InitShoppingCar() {
 
         if(isset($_COOKIE['shoppingCar'])) {
             $data['shoppingCar'] = (array)json_decode($_COOKIE['shoppingCar']);
@@ -364,7 +362,7 @@ class ProductController extends Controller {
     }
 
     public function OvenCooke($type, Request $request = null, $oldCookie = null) {
-
+        $cookie = null;
         switch($type) {
             case 'shoppingCar':
                 if(isset($request)) {
@@ -383,27 +381,23 @@ class ProductController extends Controller {
                         $carCookie = ((array)json_decode($oldCookie));
                         array_push($carCookie, $produc);
                     }
-                    return cookie('shoppingCar', json_encode($carCookie, JSON_FORCE_OBJECT));
+                    $cookie = cookie('shoppingCar', json_encode($carCookie, JSON_FORCE_OBJECT));
                 }
                 break;
             case 'promoCode':
                 $promoCodeC = new PromoCodeController();
                 $promo = $promoCodeC->information($request->promoCode);
-
-                return cookie('promoCode', json_encode($promo, JSON_FORCE_OBJECT));
-
+                $cookie = cookie('promoCode', json_encode($promo, JSON_FORCE_OBJECT));
         }
+        return $cookie;
+
     }
 
     public function checkout(Request $request = null): array {
-
+        $response = [];
         if(isset($_COOKIE['shoppingCar'])) {
 
-
             $response["intent"] = "CAPTURE";
-
-            $response["return_url"] = "/checkout";
-            $response["cancel_url"] = "/cancel";
 
             $response["reference_id"] = "CSEP";
             $response["currency_code"] = "USD";
@@ -411,8 +405,6 @@ class ProductController extends Controller {
             $randNo = (string)rand(10000, 20000);
             $response["invoice_id"] = "IEP-".$randNo;
             $response["custom_id"] = "EP-".$randNo;
-
-            $data['shoppingCar'] = (array)json_decode($_COOKIE['shoppingCar']);
 
             $response["shipping_value"] = "0";
             $response["tax_total_value"] = "0";
@@ -424,7 +416,6 @@ class ProductController extends Controller {
             }
             $response["item"] = $this->shoppingCarItem();
 
-
             $response['address_line_1'] = $request->shipping_line1;
             $response['address_line_2'] = $request->shipping_line2;
             $response['admin_area_2'] = $request->shipping_city;
@@ -432,8 +423,11 @@ class ProductController extends Controller {
             $response['postal_code'] = $request->shipping_postal_code;
             $response['country_code'] = $request->shipping_country_code;
 
-            return $response;
+            $response['full_name'] = $request->shipping_full_name;
+
+
         }
+        return $response;
     }
 
     private function validShippingRequest(Request $request) {
